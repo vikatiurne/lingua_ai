@@ -1,0 +1,583 @@
+{
+  "level": "A2",
+  "version": "1.0",
+  "description": "Не-глагольные слоты для шаблонов уровня A2.",
+  "usage": "В шаблоне укажите: { \"$ref\": \"slots_nouns_a2#/slots/common/subjects\" }",
+  "slots": {
+    "common": {
+      "subjects": {
+        "basic": ["I", "you", "we", "they", "he", "she", "it"],
+        "intermediate": [
+          "my brother", "my sister", "my friend", "my colleague",
+          "my parents", "my neighbour", "the teacher", "the manager"
+        ],
+        "advanced": [
+          "my best friend from school", "the manager of our office",
+          "the students in my class", "my older brother",
+          "one of my colleagues"
+        ]
+      },
+      "places": {
+        "basic": [
+          "at home", "at school", "at work", "in the park",
+          "in the city", "at the shop", "in the office"
+        ],
+        "intermediate": [
+          "in the city centre", "in a small café near the office",
+          "in the garden", "near the railway station",
+          "at my friend's place", "in the classroom"
+        ],
+        "advanced": [
+          "in a co-working space downtown", "at the local gym",
+          "in a small office in the city centre",
+          "in a quiet residential area"
+        ]
+      },
+      "times": {
+        "basic": [
+          "today", "now", "yesterday", "tomorrow", "every day",
+          "in the morning", "in the evening", "at night",
+          "at the weekend"
+        ],
+        "intermediate": [
+          "three times a week", "before breakfast", "after work",
+          "last week", "next week", "two weeks ago", "tonight",
+          "at 7 o'clock", "in July", "this Friday afternoon"
+        ],
+        "advanced": [
+          "whenever I have free time", "at least twice a month",
+          "for the first time this year", "as soon as I can",
+          "during the summer holidays"
+        ]
+      },
+      "reasons": {
+        "basic": [
+          "because it's nice", "because I am tired",
+          "because we are happy", "because it's too early",
+          "because I am busy", "because it's important"
+        ],
+        "intermediate": [
+          "because I prefer tea", "because they are tired",
+          "because it's difficult", "because I was ill",
+          "because it was raining", "because we were busy",
+          "because the weather is nice", "because I want to improve"
+        ],
+        "advanced": [
+          "because it's important for my career",
+          "because we haven't seen each other for a long time",
+          "because the deadline is very close",
+          "because I want to feel more confident",
+          "because it could help me in the future"
+        ]
+      },
+      "results": {
+        "basic": [
+          "and it is very nice", "so I am happy",
+          "and we had a good time", "and they liked it a lot",
+          "so we can relax"
+        ],
+        "intermediate": [
+          "and it has changed my routine", "so I feel much better now",
+          "and I have made new friends", "so everything went well",
+          "and it was a nice surprise", "so I feel more confident"
+        ],
+        "advanced": [
+          "so I feel much more confident now",
+          "and it has become an important part of my life",
+          "and it has opened up new opportunities",
+          "so I can now do it without any problems"
+        ]
+      },
+      "contrasts": {
+        "basic": [
+          "but my sister is", "but my parents are",
+          "but we are ready", "but I am from Italy",
+          "but my friend has"
+        ],
+        "intermediate": [
+          "but now I am at work", "but now she is at home",
+          "but usually I work from home", "but normally she lives in Kyiv",
+          "but we have a bike", "but they are at the office"
+        ],
+        "advanced": [
+          "but it still has its advantages", "but it works well for me",
+          "but we can manage it", "but I can if I want to",
+          "but it depends on many factors"
+        ]
+      },
+      "conditions": {
+        "basic": [
+          "if it rains", "if you want", "if I have time",
+          "if we go", "if you need help"
+        ],
+        "intermediate": [
+          "if I have enough time", "if you remind me",
+          "if you need any support", "if the weather is good",
+          "if everything goes well", "if the manager agrees"
+        ],
+        "advanced": [
+          "if you want to feel more confident",
+          "if we want to finish on time",
+          "if you want to avoid problems",
+          "if the situation becomes more difficult"
+        ]
+      },
+      "people": {
+        "basic": ["me", "you", "us", "them", "him", "her"],
+        "intermediate": [
+          "my friend", "my colleague", "my manager",
+          "my teacher", "my neighbour", "one of my friends"
+        ],
+        "advanced": [
+          "my best friend from school", "the head of the department",
+          "one of my colleagues", "my old classmate",
+          "the project manager"
+        ]
+      },
+      "agents": {
+        "basic": [
+          "by a famous author", "by millions of people",
+          "by the whole team", "by a group of engineers"
+        ],
+        "intermediate": [
+          "by a team of experts", "by the research department",
+          "by local craftsmen", "by a well-known director",
+          "by the marketing team", "by a popular singer"
+        ],
+        "advanced": [
+          "by an international panel of judges",
+          "by the board of directors", "by the committee",
+          "by a leading specialist in the field"
+        ]
+      }
+    },
+    "topics": {
+      "daily_life": {
+        "complex_objects": {
+          "basic": [
+            "coffee", "tea", "breakfast", "dinner", "a book",
+            "a film", "music", "TV", "a walk", "a cup of tea"
+          ],
+          "intermediate": [
+            "a cup of coffee in the morning", "a nice dinner at home",
+            "an interesting book about history", "a good film",
+            "the morning news", "a short break after work",
+            "a walk in the park"
+          ],
+          "advanced": [
+            "a quiet evening with a good book",
+            "a documentary about space",
+            "a small dinner for close friends",
+            "a long walk in the park after dinner"
+          ]
+        }
+      },
+      "family_friends": {
+        "complex_objects": {
+          "basic": [
+            "my mother", "my father", "my brother", "my sister",
+            "my friend", "my family", "my dog", "my cat"
+          ],
+          "intermediate": [
+            "my best friend from school", "my older brother",
+            "my younger sister", "my grandparents",
+            "my closest friend", "my parents' neighbours"
+          ],
+          "advanced": [
+            "my best friend from university days",
+            "my relatives in another city",
+            "a family gathering that brought everyone together"
+          ]
+        }
+      },
+      "work_career": {
+        "complex_objects": {
+          "basic": [
+            "a job", "an office", "a meeting", "a project", "a report"
+          ],
+          "intermediate": [
+            "weekly team meetings", "a small project",
+            "an important client", "a business lunch",
+            "a report for the manager", "a project with international colleagues"
+          ],
+          "advanced": [
+            "a presentation for tomorrow's meeting",
+            "a project that needs to be finished by Friday",
+            "a new course on digital marketing",
+            "a long-term plan for the company's development"
+          ]
+        }
+      },
+      "education": {
+        "complex_objects": {
+          "basic": [
+            "English", "maths", "history", "books", "homework",
+            "a new word", "a lesson"
+          ],
+          "intermediate": [
+            "English classes", "my homework", "a new language",
+            "an important exam", "the main idea", "a difficult task",
+            "a course on digital marketing"
+          ],
+          "advanced": [
+            "a new online course on digital marketing",
+            "a book about time management",
+            "a language course in the city centre",
+            "a postgraduate course in international relations"
+          ]
+        }
+      },
+      "travel": {
+        "complex_objects": {
+          "basic": [
+            "London", "Italy", "the park", "the beach",
+            "the mountains", "the city centre", "a trip"
+          ],
+          "intermediate": [
+            "several countries in Europe", "a trip to the mountains",
+            "a small town near the sea", "a tourist destination",
+            "a short trip abroad", "a trip to the seaside"
+          ],
+          "advanced": [
+            "to new countries with a small backpack",
+            "an interesting place to live",
+            "a cultural trip to Italy",
+            "a road trip across the whole country"
+          ]
+        }
+      },
+      "food_shopping": {
+        "complex_objects": {
+          "basic": [
+            "apples", "bread", "milk", "water", "coffee", "tea",
+            "a new phone", "a new book"
+          ],
+          "intermediate": [
+            "some apples from the shop", "a bottle of milk",
+            "a cup of tea", "a ticket for the concert",
+            "a nice gift", "a table for two"
+          ],
+          "advanced": [
+            "a table for two by the window",
+            "a room with a view",
+            "a small present for my friend",
+            "a fresh loaf of bread"
+          ]
+        }
+      },
+      "health_sport": {
+        "complex_objects": {
+          "basic": [
+            "football", "the gym", "a walk", "the park",
+            "healthy food", "a short break"
+          ],
+          "intermediate": [
+            "the local gym three times a week",
+            "a short break after work", "a long walk in the park",
+            "a healthy breakfast", "a balanced diet"
+          ],
+          "advanced": [
+            "a sustainable exercise routine",
+            "a balanced diet and regular exercise",
+            "a walk in the park after dinner"
+          ]
+        }
+      },
+      "media_leisure": {
+        "complex_objects": {
+          "basic": [
+            "a film", "music", "a book", "TV", "a game"
+          ],
+          "intermediate": [
+            "a good film", "this book three times",
+            "a live concert", "my favourite song",
+            "a football match", "a documentary about space"
+          ],
+          "advanced": [
+            "a live concert of my favourite band",
+            "an interesting documentary about history",
+            "a book about history and culture",
+            "a podcast about personal development"
+          ]
+        }
+      },
+      "environment_tech": {
+        "complex_objects": {
+          "basic": [
+            "a new phone", "a new laptop", "a car", "the environment"
+          ],
+          "intermediate": [
+            "a new online course on digital marketing",
+            "a new laptop for work", "the new company policy",
+            "the idea of working from home"
+          ],
+          "advanced": [
+            "a sustainable solution to reduce pollution",
+            "an innovative technology",
+            "a new AI tool that could help at work"
+          ]
+        }
+      }
+    },
+    "speech": {
+      "wh_words": ["where", "when", "why", "how", "what"],
+      "time_place_changes": {
+        "basic": ["yesterday", "last week", "at home", "here"],
+        "intermediate": [
+          "the day before", "the following week",
+          "at that moment", "from the office", "the next day"
+        ],
+        "advanced": [
+          "at that particular moment",
+          "from the office",
+          "the following Monday"
+        ]
+      },
+      "additional_info": {
+        "basic": [
+          "and it was very nice", "and we had a good time",
+          "and they liked it a lot"
+        ],
+        "intermediate": [
+          "and I will never forget it",
+          "and I often recommend it to others",
+          "and it was a nice surprise",
+          "and I liked it very much"
+        ],
+        "advanced": [
+          "and it has become an important part of my life",
+          "and I still remember it very well",
+          "and it was one of the best days of my life"
+        ]
+      }
+    },
+    "misc": {
+      "adjectives": {
+        "basic": [
+          "big", "small", "nice", "old", "new", "good", "bad",
+          "happy", "sad", "tired", "hungry", "busy"
+        ],
+        "intermediate": [
+          "interesting", "difficult", "easy", "expensive", "cheap",
+          "important", "beautiful", "cold", "warm", "ready",
+          "exciting", "boring", "useful"
+        ],
+        "advanced": [
+          "really interesting", "quite difficult",
+          "very important", "extremely useful", "surprisingly easy"
+        ]
+      },
+      "comparative_adjectives": {
+        "basic": [
+          "better", "worse", "bigger", "smaller", "older", "newer",
+          "faster", "slower", "cheaper", "more expensive"
+        ],
+        "intermediate": [
+          "much better", "far more interesting",
+          "a bit more expensive", "significantly faster",
+          "less stressful", "more effective"
+        ],
+        "advanced": [
+          "significantly more effective", "far less complicated",
+          "genuinely more interesting", "much more useful"
+        ]
+      },
+      "superlative_adjectives": {
+        "basic": [
+          "best", "worst", "biggest", "smallest", "oldest", "newest",
+          "most expensive", "most interesting"
+        ],
+        "intermediate": [
+          "the most useful", "the most expensive",
+          "the most interesting", "the best in the city",
+          "the biggest in the country"
+        ],
+        "advanced": [
+          "the most useful in my life",
+          "the most experienced in our team",
+          "the best option available"
+        ]
+      },
+      "nouns": {
+        "basic": [
+          "car", "house", "book", "phone", "cat", "dog", "bag",
+          "apple", "chair", "table", "school", "shop"
+        ],
+        "intermediate": [
+          "brother", "sister", "friend", "teacher", "office",
+          "garden", "classroom", "birthday", "holiday", "opportunity"
+        ],
+        "advanced": [
+          "neighbour", "classmate", "colleague", "manager",
+          "community", "project", "experience", "achievement"
+        ]
+      },
+      "singular_nouns": {
+        "basic": [
+          "cat", "book", "car", "phone", "apple", "umbrella",
+          "chair", "bag", "pen", "table"
+        ],
+        "intermediate": [
+          "interesting book", "new phone", "small car",
+          "nice present", "old chair", "useful app"
+        ],
+        "advanced": [
+          "interesting book about history", "new phone for work",
+          "small present for my friend"
+        ]
+      },
+      "plural_nouns": {
+        "basic": ["books", "cats", "apples", "students", "chairs", "boxes"],
+        "intermediate": [
+          "interesting books", "new phones", "small cars",
+          "nice presents", "old chairs", "useful apps"
+        ],
+        "advanced": [
+          "interesting books about history", "new phones for work",
+          "small presents for friends"
+        ]
+      },
+      "irregular_plurals": {
+        "basic": ["men", "women", "children", "feet", "teeth", "people"],
+        "intermediate": [
+          "young men", "old women", "small children", "many people"
+        ],
+        "advanced": [
+          "young people from different countries",
+          "small children at school"
+        ]
+      },
+      "prepositions_place": {
+        "basic": ["in", "on", "at", "under", "next to", "behind", "in front of"],
+        "intermediate": [
+          "in the room", "on the table", "at home",
+          "under the sofa", "next to the door", "behind the house"
+        ],
+        "advanced": [
+          "in the city centre", "on the table near the window",
+          "next to my house", "behind the main building"
+        ]
+      },
+      "time_expressions": {
+        "basic": [
+          "in the morning", "on Monday", "at 7 o'clock",
+          "in July", "on my birthday", "at the weekend"
+        ],
+        "intermediate": [
+          "in the morning before work", "on Monday afternoon",
+          "at 9 o'clock in the evening", "in July last year",
+          "on my birthday this year", "this Friday afternoon"
+        ],
+        "advanced": [
+          "in the morning before breakfast",
+          "on Monday afternoon after work",
+          "at 9 o'clock sharp"
+        ]
+      },
+      "countable_nouns": {
+        "basic": ["apples", "books", "eggs", "chairs", "bottles"],
+        "intermediate": [
+          "red apples", "new books", "fresh eggs",
+          "old chairs", "small bottles", "interesting articles"
+        ],
+        "advanced": [
+          "fresh apples from the market",
+          "interesting books about history"
+        ]
+      },
+      "uncountable_nouns": {
+        "basic": ["water", "milk", "bread", "money", "time"],
+        "intermediate": [
+          "cold water", "fresh milk", "warm bread",
+          "free time", "useful information"
+        ],
+        "advanced": [
+          "cold water from the fridge",
+          "fresh milk from the shop",
+          "useful information about the course"
+        ]
+      },
+      "numbers": {
+        "basic": ["two", "three", "four", "five", "many", "a lot of"],
+        "intermediate": [
+          "two or three", "five or six", "many", "a lot of",
+          "a few", "several"
+        ],
+        "advanced": [
+          "several", "a few", "quite a lot of", "hardly any"
+        ]
+      },
+      "demonstratives": {
+        "basic": ["This", "That", "These", "Those"],
+        "intermediate": [
+          "This book", "That car", "These books", "Those shoes"
+        ],
+        "advanced": [
+          "This interesting book", "That old car",
+          "These new shoes"
+        ]
+      },
+      "possessive_adjectives": {
+        "basic": ["my", "your", "his", "her", "our", "their"],
+        "intermediate": [
+          "my new", "your old", "his favourite", "her small",
+          "our big", "their nice"
+        ],
+        "advanced": [
+          "my new phone", "her favourite book", "their small house"
+        ]
+      },
+      "adverbs_frequency": {
+        "basic": ["always", "usually", "often", "sometimes", "never"],
+        "intermediate": [
+          "always in the morning", "usually at the weekend",
+          "often after work", "sometimes in the evening",
+          "never on Sundays", "hardly ever"
+        ],
+        "advanced": [
+          "almost always", "quite often", "hardly ever",
+          "at least once a week"
+        ]
+      },
+      "adverbs_manner": {
+        "basic": [
+          "quickly", "slowly", "well", "badly", "carefully",
+          "easily", "loudly", "quietly"
+        ],
+        "intermediate": [
+          "very carefully", "quite quickly", "really well",
+          "rather slowly", "extremely carefully"
+        ],
+        "advanced": [
+          "as carefully as possible", "much more slowly than usual",
+          "surprisingly well"
+        ]
+      },
+      "question_words": {
+        "basic": ["today", "now", "here", "with you"],
+        "intermediate": [
+          "at the moment", "at the weekend", "with friends",
+          "in the city", "at home", "on Sunday"
+        ],
+        "advanced": [
+          "at the moment", "in the city centre",
+          "on Sunday morning", "before the meeting"
+        ]
+      },
+      "objects_ability": {
+        "basic": [
+          "English", "the piano", "a car", "very well", "a little"
+        ],
+        "intermediate": [
+          "three foreign languages", "the guitar",
+          "the main idea in simple words", "your laptop for a few minutes"
+        ],
+        "advanced": [
+          "three foreign languages fluently",
+          "the main idea in simple words",
+          "complex problems quickly"
+        ]
+      }
+    }
+  }
+}

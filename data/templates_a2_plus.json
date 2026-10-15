@@ -1,0 +1,338 @@
+{
+  "level": "A2+",
+  "version": "1.0",
+  "slots_ref": ["slots_a2_plus.json", "slots_nouns_a2_plus.json"],
+  "generation_rules": {
+    "min_words": 7,
+    "max_words": 16,
+    "avoid": ["предложения из 3-4 слов", "только базовые слова без контекста"],
+    "require": [
+      "хотя бы одно обстоятельство (времени, места, причины или образа действия)",
+      "естественная лексика уровня A2+",
+      "контекст, который делает предложение осмысленным"
+    ],
+    "default_slot_level": "intermediate"
+  },
+  "topics": [
+    {
+      "topic": "Present Perfect",
+      "subtopics": [
+        {
+          "name": "Experience (ever/never)",
+          "patterns": [
+            {
+              "id": "pp_01",
+              "pattern": "[S] + have/has + ever/never + [V3] + [object] + [optional: but + desire]",
+              "generation_hint": "Используй Present Perfect для опыта. Добавь контраст с желанием.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a2_plus#/slots/common/subjects" },
+                "V3": { "$ref": "slots_a2_plus#/slots/present_perfect/affirmative/V3" },
+                "object": { "$ref": "slots_nouns_a2_plus#/slots/topics/travel/complex_objects" },
+                "but + desire": ["but I have always wanted to try it", "but he hopes to do it next year", "but they are planning to do it soon", "but she has been dreaming about it for years"]
+              },
+              "examples": [
+                "I have never been to Japan, but I have always wanted to visit it.",
+                "She has never tried Japanese food, but she hopes to try it next month.",
+                "They have never seen a live concert, but they are planning to do it soon."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Recent Actions (just/already/yet)",
+          "patterns": [
+            {
+              "id": "pp_02",
+              "pattern": "[S] + have/has + just/already + [V3] + [object] + [optional: result]",
+              "generation_hint": "Используй Present Perfect для недавних действий. Добавь результат.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a2_plus#/slots/common/subjects" },
+                "V3": { "$ref": "slots_a2_plus#/slots/present_perfect/affirmative/V3" },
+                "object": { "$ref": "slots_nouns_a2_plus#/slots/topics/work_career/complex_objects" },
+                "result": { "$ref": "slots_nouns_a2_plus#/slots/common/results" }
+              },
+              "examples": [
+                "I have just finished my report and I feel quite confident.",
+                "She has already organized the meeting, so everything is ready.",
+                "They have just moved to a new apartment and they like it a lot."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Duration (for/since)",
+          "patterns": [
+            {
+              "id": "pp_03",
+              "pattern": "[S] + have/has + [V3] + [object] + for/since + [time] + [optional: result]",
+              "generation_hint": "Используй Present Perfect для действий, которые длятся. Добавь результат.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a2_plus#/slots/common/subjects" },
+                "V3": { "$ref": "slots_a2_plus#/slots/present_perfect/affirmative/V3" },
+                "object": { "$ref": "slots_nouns_a2_plus#/slots/topics/education/complex_objects" },
+                "for/since + time": { "$ref": "slots_nouns_a2_plus#/slots/common/times" },
+                "result": { "$ref": "slots_nouns_a2_plus#/slots/common/results" }
+              },
+              "examples": [
+                "I have studied English for more than five years and I feel more confident now.",
+                "She has worked at this company since 2020 and she has learned a lot.",
+                "They have lived in this city for three years and they love it."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Past Continuous",
+      "subtopics": [
+        {
+          "name": "Interrupted Action",
+          "patterns": [
+            {
+              "id": "pastc_01",
+              "pattern": "[S] + was/were + [V-ing] + [object] + when + [S] + [V2] + [optional: reaction]",
+              "generation_hint": "Опиши фоновое действие и прерывающее событие.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a2_plus#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_a2_plus#/slots/past_continuous/affirmative/V-ing" },
+                "object": { "$ref": "slots_nouns_a2_plus#/slots/topics/daily_life/complex_objects" },
+                "when + S + V2": ["when the phone rang", "when the lights went out", "when my friend called me", "when it started to rain", "when the guests arrived"],
+                "reaction": { "$ref": "slots_nouns_a2_plus#/slots/common/results" }
+              },
+              "examples": [
+                "I was cooking dinner when the phone rang, so I had to stop.",
+                "They were watching a film when the lights went out, and everything became chaotic.",
+                "She was reading a book when her friend called her."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Used to",
+      "subtopics": [
+        {
+          "name": "Past Habits",
+          "patterns": [
+            {
+              "id": "used_to_01",
+              "pattern": "[S] + used to + [V1] + [object] + [optional: but now + contrast]",
+              "generation_hint": "Опиши привычку в прошлом, которой больше нет. Добавь контраст с настоящим.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a2_plus#/slots/common/subjects" },
+                "used to": ["used to"],
+                "V1": { "$ref": "slots_a2_plus#/slots/used_to/affirmative/V1" },
+                "object": { "$ref": "slots_nouns_a2_plus#/slots/topics/daily_life/complex_objects" },
+                "but now + contrast": { "$ref": "slots_nouns_a2_plus#/slots/common/contrasts" }
+              },
+              "examples": [
+                "I used to play football every weekend, but now I don't have time.",
+                "She used to live in a small town, but now she lives in the city centre.",
+                "They used to visit their grandparents every summer, but now they live far away."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Passive Voice",
+      "subtopics": [
+        {
+          "name": "Present Simple Passive",
+          "patterns": [
+            {
+              "id": "pass_01",
+              "pattern": "[S] + am/is/are + [V3] + [optional: by + agent] + [optional: place/time]",
+              "generation_hint": "Опиши общеизвестные факты или процессы.",
+              "slots": {
+                "S": ["the book", "English", "these products", "the results", "the reports"],
+                "am/is/are": ["is", "are"],
+                "V3": { "$ref": "slots_a2_plus#/slots/passive/present_simple/V3" },
+                "by + agent": { "$ref": "slots_nouns_a2_plus#/slots/common/agents" },
+                "place/time": { "$ref": "slots_nouns_a2_plus#/slots/common/times" }
+              },
+              "examples": [
+                "English is spoken by millions of people all over the world.",
+                "The reports are prepared by the research department every month.",
+                "These products are made in Italy."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Past Simple Passive",
+          "patterns": [
+            {
+              "id": "pass_02",
+              "pattern": "[S] + was/were + [V3] + [optional: by + agent] + [optional: time/place]",
+              "generation_hint": "Опиши исторические события или завершённые процессы.",
+              "slots": {
+                "S": ["the book", "the house", "the film", "the bridge", "the song"],
+                "was/were": ["was", "were"],
+                "V3": { "$ref": "slots_a2_plus#/slots/passive/past_simple/V3" },
+                "by + agent": { "$ref": "slots_nouns_a2_plus#/slots/common/agents" },
+                "time/place": { "$ref": "slots_nouns_a2_plus#/slots/common/times" }
+              },
+              "examples": [
+                "The bridge was designed by a famous architect in 1920.",
+                "The song was recorded by a popular singer in 1995.",
+                "The film was made by a well-known director last year."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Conditionals",
+      "subtopics": [
+        {
+          "name": "First Conditional",
+          "patterns": [
+            {
+              "id": "cond_01",
+              "pattern": "If + [S] + [Present Simple] + [object], [S] + will + [V1] + [object] + [optional: result]",
+              "generation_hint": "Опиши реальную будущую ситуацию.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a2_plus#/slots/common/subjects" },
+                "Present Simple": { "$ref": "slots_a2_plus#/slots/conditionals_first/present_simple/V1" },
+                "object (condition)": { "$ref": "slots_nouns_a2_plus#/slots/topics/work_career/complex_objects" },
+                "will": { "$ref": "slots_a2_plus#/slots/conditionals_first/will/V1" },
+                "object (result)": { "$ref": "slots_nouns_a2_plus#/slots/topics/travel/complex_objects" },
+                "result": { "$ref": "slots_nouns_a2_plus#/slots/common/results" }
+              },
+              "examples": [
+                "If I finish this project on time, I will celebrate with my friends.",
+                "If we save enough money, we will travel to Italy for two weeks.",
+                "If she passes her exams, she will start a new course in September."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Second Conditional",
+          "patterns": [
+            {
+              "id": "cond_02",
+              "pattern": "If + [S] + [Past Simple] + [object], [S] + would + [V1] + [object] + [optional: reason/result]",
+              "generation_hint": "Опиши гипотетическую ситуацию.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a2_plus#/slots/common/subjects" },
+                "Past Simple": { "$ref": "slots_a2_plus#/slots/conditionals_second/past_simple/V2" },
+                "object (condition)": ["more free time during the week", "closer to the city centre", "a million dollars in the lottery", "in a different city"],
+                "would": { "$ref": "slots_a2_plus#/slots/conditionals_second/would/V1" },
+                "object (result)": { "$ref": "slots_nouns_a2_plus#/slots/topics/travel/complex_objects" },
+                "reason/result": { "$ref": "slots_nouns_a2_plus#/slots/common/results" }
+              },
+              "examples": [
+                "If I had more free time, I would travel around the world.",
+                "If she lived closer to the city centre, she would walk to work every morning.",
+                "If I had a million dollars, I would buy a house near the sea."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Modal Verbs",
+      "subtopics": [
+        {
+          "name": "Obligation (must/have to)",
+          "patterns": [
+            {
+              "id": "mod_01",
+              "pattern": "[S] + must/have to/has to + [V1] + [object] + [optional: time/reason]",
+              "generation_hint": "Используй must для личных обязательств, have to — для внешних.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a2_plus#/slots/common/subjects" },
+                "must/have to/has to": ["must", "have to", "has to"],
+                "V1": { "$ref": "slots_a2_plus#/slots/modals/obligation/V1" },
+                "object": { "$ref": "slots_nouns_a2_plus#/slots/topics/work_career/complex_objects" },
+                "time/reason": { "$ref": "slots_nouns_a2_plus#/slots/common/reasons" }
+              },
+              "examples": [
+                "I must finish this report before the end of the day.",
+                "My colleague has to attend weekly meetings every Monday morning.",
+                "We have to submit the documents before the deadline because it's required."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Advice (should)",
+          "patterns": [
+            {
+              "id": "mod_02",
+              "pattern": "[S] + should + [V1] + [object] + [optional: if + condition]",
+              "generation_hint": "Используй should для советов и рекомендаций.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a2_plus#/slots/common/subjects" },
+                "V1": { "$ref": "slots_a2_plus#/slots/modals/advice/V1" },
+                "object": { "$ref": "slots_nouns_a2_plus#/slots/topics/health_sport/complex_objects" },
+                "if + condition": { "$ref": "slots_nouns_a2_plus#/slots/common/conditions" }
+              },
+              "examples": [
+                "You should take a short break after work if you feel tired.",
+                "People should eat more vegetables and exercise regularly.",
+                "She should consider this opportunity if she wants to grow professionally."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Probability (may/might)",
+          "patterns": [
+            {
+              "id": "mod_03",
+              "pattern": "[S] + may/might + [V1] + [object] + [optional: but + uncertainty]",
+              "generation_hint": "Используй may/might для вероятности.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a2_plus#/slots/common/subjects" },
+                "may/might": ["may", "might"],
+                "V1": { "$ref": "slots_a2_plus#/slots/modals/probability/V1" },
+                "object": { "$ref": "slots_nouns_a2_plus#/slots/topics/work_career/complex_objects" },
+                "but + uncertainty": { "$ref": "slots_nouns_a2_plus#/slots/common/contrasts" }
+              },
+              "examples": [
+                "I might be late for the meeting, but I'm not sure yet.",
+                "They may change their plans, but it depends on many factors.",
+                "She may attend the conference next week, but she hasn't decided yet."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Gerunds and Infinitives",
+      "subtopics": [
+        {
+          "name": "Gerunds (V-ing)",
+          "patterns": [
+            {
+              "id": "ger_01",
+              "pattern": "[S] + enjoy/like/love/hate + [V-ing] + [object] + [optional: time/place]",
+              "generation_hint": "Используй герундий после глаголов предпочтения.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a2_plus#/slots/common/subjects" },
+                "enjoy/like/love/hate": ["enjoy", "like", "love", "hate"],
+                "V-ing": { "$ref": "slots_a2_plus#/slots/gerunds/affirmative/V-ing" },
+                "object": { "$ref": "slots_nouns_a2_plus#/slots/topics/media_leisure/complex_objects" },
+                "time/place": { "$ref": "slots_nouns_a2_plus#/slots/common/times" }
+              },
+              "examples": [
+                "I enjoy reading interesting books in the evening after work.",
+                "My friend loves traveling to new countries during the summer holidays.",
+                "They hate cooking dinner at the weekend."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

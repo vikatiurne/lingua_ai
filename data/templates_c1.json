@@ -1,0 +1,557 @@
+{
+  "level": "C1",
+  "version": "1.0",
+  "slots_ref": ["slots_c1.json", "slots_nouns_c1.json"],
+  "generation_rules": {
+    "min_words": 14,
+    "max_words": 32,
+    "avoid": [
+      "короткие простые предложения",
+      "только базовые времена без нюансов",
+      "однообразная структура",
+      "лексика ниже upper-intermediate"
+    ],
+    "require": [
+      "хотя бы два сложных элемента: придаточное, причастный оборот, инверсия, cleft, эллипсис",
+      "естественная лексика уровня C1",
+      "связность через продвинутые linking words и discourse markers",
+      "чёткая стилистическая цель (эмфаза, дистанцирование, вежливость, критика)"
+    ],
+    "default_slot_level": "advanced"
+  },
+  "topics": [
+    {
+      "topic": "Inversion (Advanced)",
+      "subtopics": [
+        {
+          "name": "So / Such inversion",
+          "patterns": [
+            {
+              "id": "inv_so_01",
+              "pattern": "So + [adjective] + was/were + [S] + that + [S] + [V2] + [complex object]",
+              "generation_hint": "Используй so/such inversion для эмфазы. Порядок: so + adj + aux + subject + that...",
+              "slots": {
+                "adjective": [
+                  "impressive", "overwhelming", "compelling",
+                  "profound", "far-reaching", "transformative"
+                ],
+                "was/were": ["was", "were"],
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V2": { "$ref": "slots_b1_plus#/slots/past_perfect/affirmative/V3" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" }
+              },
+              "examples": [
+                "So impressive was the strategic initiative that the board immediately approved a substantial budget increase.",
+                "So overwhelming was the response from stakeholders that the company decided to accelerate the entire rollout.",
+                "Such was the impact of the restructuring plan that the industry had to rethink its approach."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Only when / No sooner / Hardly",
+          "patterns": [
+            {
+              "id": "inv_only_01",
+              "pattern": "Only when + [S] + [V2] + [complex object] + did + [S] + [V1] + [complex object]",
+              "generation_hint": "Используй 'Only when' для эмфазы условия. Инверсия в главной части.",
+              "slots": {
+                "S (first)": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V2": { "$ref": "slots_b1_plus#/slots/past_perfect/affirmative/V3" },
+                "complex object (first)": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "did": ["did"],
+                "S (second)": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_c1#/slots/inversion_advanced/only_when/V1" },
+                "complex object (second)": { "$ref": "slots_nouns_c1#/slots/topics/education/complex_objects" }
+              },
+              "examples": [
+                "Only when the client had approved the proposal did the team realize how much work still lay ahead.",
+                "Only when we had fully understood the complexity of the situation did we appreciate the true scale of the challenge.",
+                "Only when the audit had been completed did the board acknowledge the extent of the problem."
+              ]
+            },
+            {
+              "id": "inv_hardly_01",
+              "pattern": "Hardly had + [S] + [V3] + when + [S] + [V2] + [complex object]",
+              "generation_hint": "Используй 'Hardly had... when' для двух быстро следующих событий.",
+              "slots": {
+                "had": ["had"],
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V3": { "$ref": "slots_b1_plus#/slots/past_perfect/affirmative/V3" },
+                "when": ["when"],
+                "V2": { "$ref": "slots_b1_plus#/slots/past_simple/affirmative/V2" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" }
+              },
+              "examples": [
+                "Hardly had she completed the certification when she was offered a significantly more challenging role.",
+                "Hardly had the team implemented the new system when the first signs of improvement became apparent.",
+                "Hardly had the board approved the plan when the market conditions changed dramatically."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Subjunctive (Advanced)",
+      "subtopics": [
+        {
+          "name": "Mandative Subjunctive",
+          "patterns": [
+            {
+              "id": "subj_adv_01",
+              "pattern": "[S] + insist/demand/propose/recommend + that + [S] + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй subjunctive после формальных глаголов требования и рекомендации.",
+              "slots": {
+                "S (first)": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "insist/demand/propose/recommend": [
+                  "insist", "demand", "propose", "recommend"
+                ],
+                "S (second)": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_c1#/slots/subjunctive_advanced/mandative/V1" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_c1#/slots/common/reasons" }
+              },
+              "examples": [
+                "The board insists that the senior management team implement the strategic initiative without delay.",
+                "The committee recommends that the client's representative attend every high-stakes meeting, given the complexity of the situation.",
+                "She demanded that the stakeholders be informed immediately, because the decision could have far-reaching consequences."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Formulaic Subjunctive",
+          "patterns": [
+            {
+              "id": "subj_form_01",
+              "pattern": "[Long live / Come what may / Be that as it may / Suffice it to say] + [S] + [V1] + [complex object]",
+              "generation_hint": "Используй формульный subjunctive для формальных и устойчивых выражений.",
+              "slots": {
+                "formula": [
+                  "Long live", "Come what may", "Be that as it may",
+                  "Suffice it to say", "Far be it from me to"
+                ],
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_c1#/slots/subjunctive_advanced/formulaic/V1" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" }
+              },
+              "examples": [
+                "Suffice it to say that the strategic initiative has fundamentally transformed the way we operate.",
+                "Be that as it may, we must still prioritize long-term strategy over short-term gains.",
+                "Far be it from me to criticize the decision, but the underlying issues remain unresolved."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Mixed Conditionals",
+      "subtopics": [
+        {
+          "name": "Past condition → Present result",
+          "patterns": [
+            {
+              "id": "mixed_past_pres_01",
+              "pattern": "If + [S] + had + [V3] + [complex object], [S] + would + [V1] + [complex object] + now",
+              "generation_hint": "Смешанный conditional: условие в прошлом, результат в настоящем.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "had + V3": { "$ref": "slots_c1#/slots/mixed_conditionals/past_present/had_V3/V3" },
+                "complex object (past)": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "would + V1": { "$ref": "slots_c1#/slots/mixed_conditionals/past_present/would_V1/V1" },
+                "complex object (present)": { "$ref": "slots_nouns_c1#/slots/topics/education/complex_objects" }
+              },
+              "examples": [
+                "If I had implemented the strategic initiative last year, I would be in a completely different position now.",
+                "If she had prioritized long-term strategy over short-term gains, she would manage a much more successful team today.",
+                "If they had anticipated the market shift, they would be leading the industry instead of playing catch-up."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Present condition → Past result",
+          "patterns": [
+            {
+              "id": "mixed_pres_past_01",
+              "pattern": "If + [S] + were + [V-ing] + [complex object], [S] + would have + [V3] + [complex object]",
+              "generation_hint": "Смешанный conditional: условие в настоящем, результат в прошлом.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "were + V-ing": { "$ref": "slots_c1#/slots/mixed_conditionals/present_past/were_V-ing/V-ing" },
+                "complex object (present)": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "would have + V3": { "$ref": "slots_c1#/slots/mixed_conditionals/present_past/would_have_V3/V3" },
+                "complex object (past)": { "$ref": "slots_nouns_c1#/slots/topics/education/complex_objects" }
+              },
+              "examples": [
+                "If she were more open to feedback, she would have handled the situation much more effectively last quarter.",
+                "If they were genuinely committed to innovation, they would have invested in the technology years ago.",
+                "If I were better at delegating, I would have avoided the burnout I experienced last year."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Hedging and Distancing",
+      "subtopics": [
+        {
+          "name": "Tentative Language",
+          "patterns": [
+            {
+              "id": "hedge_01",
+              "pattern": "[It could be argued / It might be suggested / One could contend] + that + [S] + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй hedging для дистанцирования и вежливости в академическом и деловом стиле.",
+              "slots": {
+                "hedge": [
+                  "It could be argued", "It might be suggested",
+                  "One could contend", "It would appear",
+                  "It seems reasonable to assume"
+                ],
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_c1#/slots/hedging/tentative/V1" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_c1#/slots/common/reasons" }
+              },
+              "examples": [
+                "It could be argued that the senior management team underestimated the complexity of the situation, given the recent developments.",
+                "It might be suggested that we prioritize long-term strategy over short-term gains, because the latter often proves unsustainable.",
+                "One could contend that the policy-makers responsible failed to anticipate the far-reaching consequences of their decision."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Nominalization",
+      "subtopics": [
+        {
+          "name": "Turning verbs into nouns",
+          "patterns": [
+            {
+              "id": "nom_01",
+              "pattern": "The + [nominalized noun] + of + [object] + [V] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй nominalization для формального академического стиля.",
+              "slots": {
+                "nominalized noun": [
+                  "implementation", "coordination", "prioritization",
+                  "optimization", "facilitation", "orchestration",
+                  "transformation", "integration"
+                ],
+                "object": [
+                  "the strategic initiative", "the comprehensive framework",
+                  "the restructuring plan", "the long-term strategy"
+                ],
+                "V": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_c1#/slots/common/reasons" }
+              },
+              "examples": [
+                "The implementation of the strategic initiative requires a comprehensive framework that aligns with our long-term objectives.",
+                "The coordination of cross-functional teams demands a level of trust that takes years to build.",
+                "The prioritization of long-term strategy over short-term gains often requires considerable courage from leadership."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Advanced Modals",
+      "subtopics": [
+        {
+          "name": "Past Criticism (should/could/might have + V3)",
+          "patterns": [
+            {
+              "id": "mod_crit_01",
+              "pattern": "[S] + should/could/might + have + [V3] + [complex object] + [optional: but + criticism]",
+              "generation_hint": "Используй модальные перфекты для критики или сожаления о прошлом.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "should/could/might": ["should", "could", "might"],
+                "have + V3": { "$ref": "slots_c1#/slots/advanced_modals/past_criticism/have_V3" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "but + criticism": { "$ref": "slots_nouns_c1#/slots/common/contrasts" }
+              },
+              "examples": [
+                "The management should have informed the stakeholders before making such a decision, but transparency was clearly not a priority.",
+                "She could have anticipated the market shift, but she was too focused on short-term results.",
+                "They might have avoided the crisis altogether, but they ignored the early warning signs."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Unfulfilled Obligation (needn't have + V3)",
+          "patterns": [
+            {
+              "id": "mod_unfulfilled_01",
+              "pattern": "[S] + needn't have + [V3] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй needn't have + V3 для действий, которые были выполнены, но не были необходимы.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "needn't have + V3": { "$ref": "slots_c1#/slots/advanced_modals/unfulfilled_obligation/have_V3" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_c1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I needn't have prepared such a comprehensive presentation, because the meeting was postponed at the last minute.",
+                "She needn't have implemented the entire system so quickly, because the deadline had been extended.",
+                "They needn't have orchestrated such a complex rollout, because the market was not ready for it."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Participle Clauses (Advanced)",
+      "subtopics": [
+        {
+          "name": "Perfect Participle (Having + V3)",
+          "patterns": [
+            {
+              "id": "part_perf_adv_01",
+              "pattern": "Having + [V3] + [complex object], [S] + [V1] + [complex object] + [optional: result]",
+              "generation_hint": "Используй perfect participle для действия, завершённого до другого. Формальный стиль.",
+              "slots": {
+                "Having + V3": { "$ref": "slots_c1#/slots/participle_clauses_advanced/perfect_participle/having_V3" },
+                "complex object (participle)": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (main)": { "$ref": "slots_nouns_c1#/slots/topics/education/complex_objects" },
+                "result": { "$ref": "slots_nouns_c1#/slots/common/results" }
+              },
+              "examples": [
+                "Having orchestrated the entire strategic initiative, the team focused on developing a comprehensive framework for long-term growth.",
+                "Having reviewed all the applications, the committee recommended three candidates for the next stage.",
+                "Having coordinated the high-stakes negotiation, she decided to take on an even more challenging role."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Reduced Relative Clauses",
+          "patterns": [
+            {
+              "id": "part_reduced_01",
+              "pattern": "The + [noun] + [V-ing] + [complex object] + [V] + [complex object] + [optional: result]",
+              "generation_hint": "Используй reduced relative clauses для сжатости формального стиля.",
+              "slots": {
+                "noun": [
+                  "initiative", "strategy", "framework", "approach",
+                  "programme", "policy"
+                ],
+                "V-ing": { "$ref": "slots_c1#/slots/participle_clauses_advanced/reduced_relative/V-ing" },
+                "complex object (participle)": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "V (main)": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (main)": { "$ref": "slots_nouns_c1#/slots/topics/education/complex_objects" },
+                "result": { "$ref": "slots_nouns_c1#/slots/common/results" }
+              },
+              "examples": [
+                "The strategy orchestrating the entire transformation requires a level of coordination that few organizations can sustain.",
+                "The initiative spearheading the industry's shift towards sustainability demands considerable investment in new technology.",
+                "The framework facilitating cross-functional collaboration has fundamentally changed the way we approach projects."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Cleft Sentences (Advanced)",
+      "subtopics": [
+        {
+          "name": "Reversed Wh-cleft",
+          "patterns": [
+            {
+              "id": "cleft_rev_01",
+              "pattern": "[Focus] + is + what + [S] + [V] + [optional: reason]",
+              "generation_hint": "Используй reversed wh-cleft для эмфазы. Фокус в начале.",
+              "slots": {
+                "Focus": [
+                  "A comprehensive strategy", "Long-term commitment",
+                  "Genuine collaboration", "Continuous improvement",
+                  "A collaborative mindset"
+                ],
+                "is": ["is"],
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V": { "$ref": "slots_c1#/slots/cleft_advanced/reversed_wh_cleft/V" },
+                "reason": { "$ref": "slots_nouns_c1#/slots/common/reasons" }
+              },
+              "examples": [
+                "A comprehensive strategy is what we need, because the old approach is no longer sustainable.",
+                "Long-term commitment is what distinguishes successful companies from those that fade away.",
+                "Genuine collaboration is what makes a cross-functional team truly effective."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "It-cleft with emphasis",
+          "patterns": [
+            {
+              "id": "cleft_it_adv_01",
+              "pattern": "It is/was + [focus] + that + [S] + [V] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй it-cleft для выделения ключевого элемента.",
+              "slots": {
+                "is/was": ["is", "was"],
+                "focus": [
+                  "the strategic initiative", "this decision",
+                  "the mentorship programme", "the long-term plan",
+                  "her leadership", "their commitment"
+                ],
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V": { "$ref": "slots_c1#/slots/cleft_advanced/it_cleft/V" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_c1#/slots/common/reasons" }
+              },
+              "examples": [
+                "It was the strategic initiative that fundamentally transformed the way we approach our work.",
+                "It is her leadership that has inspired the whole team to achieve outstanding results.",
+                "It was their commitment that made the difference between failure and success."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Idiomatic and Colloquial",
+      "subtopics": [
+        {
+          "name": "Idioms in context",
+          "patterns": [
+            {
+              "id": "idiom_01",
+              "pattern": "[S] + [idiom] + [complex object] + [optional: because + reason]",
+              "generation_hint": "Используй идиомы уровня C1 в естественном контексте.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "idiom": { "$ref": "slots_nouns_c1#/slots/misc/idioms" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "because + reason": { "$ref": "slots_nouns_c1#/slots/common/reasons" }
+              },
+              "examples": [
+                "The team shed light on the underlying issues, and the whole approach had to be reconsidered.",
+                "She took stock of the situation before making any decisions, which proved to be remarkably wise.",
+                "They went the extra mile to ensure the project's success, and it certainly bore fruit in the end."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Collocations",
+          "patterns": [
+            {
+              "id": "colloc_01",
+              "pattern": "[S] + [collocation] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй устойчивые коллокации уровня C1.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "collocation": { "$ref": "slots_nouns_c1#/slots/misc/collocations" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_c1#/slots/common/reasons" }
+              },
+              "examples": [
+                "The board drew a clear distinction between short-term tactics and long-term strategy.",
+                "They reached a consensus on the comprehensive restructuring plan after lengthy discussions.",
+                "The consultant made a compelling case for investing in new technology, given the competitive landscape."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Discourse and Cohesion",
+      "subtopics": [
+        {
+          "name": "Advanced Linking",
+          "patterns": [
+            {
+              "id": "link_adv_01",
+              "pattern": "[S] + [V1] + [complex object]. Nevertheless/Consequently/Notwithstanding, + [S] + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй продвинутые linking words для академического стиля.",
+              "slots": {
+                "S (first)": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V1 (first)": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (first)": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "Nevertheless/Consequently/Notwithstanding": [
+                  "Nevertheless", "Consequently", "Notwithstanding",
+                  "By contrast", "Above all", "In much the same way"
+                ],
+                "V1 (second)": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (second)": { "$ref": "slots_nouns_c1#/slots/topics/education/complex_objects" },
+                "reason": { "$ref": "slots_nouns_c1#/slots/common/reasons" }
+              },
+              "examples": [
+                "Our team has implemented a comprehensive strategic initiative. Nevertheless, we still need to address several long-term challenges.",
+                "The company invested heavily in new technology. Consequently, it developed innovative solutions that transformed the market.",
+                "She completed the certification in project management. Furthermore, she has developed a completely new training programme."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Discourse markers",
+          "patterns": [
+            {
+              "id": "disc_01",
+              "pattern": "[Discourse marker], + [S] + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй дискурсивные маркеры для связности и естественности.",
+              "slots": {
+                "Discourse marker": [
+                  "To put it another way", "Needless to say",
+                  "It goes without saying", "Strictly speaking",
+                  "In essence", "To all intents and purposes",
+                  "In the final analysis", "All things considered"
+                ],
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_c1#/slots/common/reasons" }
+              },
+              "examples": [
+                "To put it another way, the strategic initiative has fundamentally transformed the way we operate.",
+                "Strictly speaking, the results are preliminary and require further validation before any conclusions can be drawn.",
+                "All things considered, the decision was the right one, despite the short-term costs involved."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Ellipsis and Substitution (Advanced)",
+      "subtopics": [
+        {
+          "name": "Ellipsis in formal writing",
+          "patterns": [
+            {
+              "id": "ellipsis_adv_01",
+              "pattern": "[S] + [V] + [complex object] + and + [S (omitted)] + [aux] + [optional: too/either/so/neither]",
+              "generation_hint": "Используй эллипсис для сжатости и естественности в формальной речи.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c1#/slots/common/subjects" },
+                "V": { "$ref": "slots_c1#/slots/ellipsis_substitution_advanced/affirmative/V" },
+                "complex object": { "$ref": "slots_nouns_c1#/slots/topics/work_career/complex_objects" },
+                "aux": ["do", "have", "can", "will", "would", "should"],
+                "too/either/so/neither": ["too", "either", "so", "neither"]
+              },
+              "examples": [
+                "I can implement this strategy, and so can she.",
+                "We have completed the certification, and they have too.",
+                "She doesn't want to attend the conference, and neither do I."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

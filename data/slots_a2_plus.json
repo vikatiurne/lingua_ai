@@ -1,0 +1,114 @@
+{
+  "level": "A2+",
+  "version": "1.0",
+  "description": "Глагольные слоты для шаблонов уровня A2+.",
+  "slots": {
+    "present_perfect": {
+      "affirmative": {
+        "V3": {
+          "basic": ["finished", "seen", "done", "been", "written", "read", "visited", "tried", "learned"],
+          "intermediate": ["completed", "achieved", "organized", "prepared", "developed", "improved", "started", "changed", "created", "discovered"],
+          "advanced": ["implemented", "coordinated", "contributed", "collaborated", "recommended", "facilitated"]
+        }
+      }
+    },
+    "past_continuous": {
+      "affirmative": {
+        "V-ing": {
+          "basic": ["reading", "cooking", "driving", "watching", "playing", "walking", "talking", "listening"],
+          "intermediate": ["preparing", "working", "discussing", "organizing", "traveling", "visiting", "practicing"],
+          "advanced": ["coordinating", "facilitating", "collaborating", "contributing"]
+        }
+      }
+    },
+    "used_to": {
+      "affirmative": {
+        "V1": {
+          "basic": ["play", "live", "work", "study", "go", "have", "read", "watch"],
+          "intermediate": ["travel", "exercise", "practice", "organize", "attend", "manage", "teach", "learn"],
+          "advanced": ["volunteer", "contribute", "collaborate", "coordinate", "mentor"]
+        }
+      }
+    },
+    "passive": {
+      "present_simple": {
+        "V3": {
+          "basic": ["written", "sent", "built", "spoken", "made", "done", "taken", "given", "seen"],
+          "intermediate": ["organized", "prepared", "developed", "improved", "created", "discovered", "discussed", "reviewed"],
+          "advanced": ["implemented", "facilitated", "coordinated", "delegated", "optimized"]
+        }
+      },
+      "past_simple": {
+        "V3": {
+          "basic": ["written", "sent", "built", "made", "sung", "done", "taken", "given", "seen"],
+          "intermediate": ["organized", "prepared", "developed", "improved", "created", "discovered", "discussed", "reviewed"],
+          "advanced": ["implemented", "facilitated", "coordinated", "delegated", "optimized"]
+        }
+      }
+    },
+    "gerunds": {
+      "affirmative": {
+        "V-ing": {
+          "basic": ["reading", "swimming", "cooking", "traveling", "learning", "playing", "watching"],
+          "intermediate": ["exercising", "practicing", "teaching", "cleaning", "shopping", "driving", "cycling"],
+          "advanced": ["volunteering", "facilitating", "coordinating", "delegating", "optimizing"]
+        }
+      }
+    },
+    "conditionals_first": {
+      "present_simple": {
+        "V1": {
+          "basic": ["study", "go", "have", "rain", "come", "finish", "pass", "save", "find"],
+          "intermediate": ["complete", "prepare", "attend", "receive", "improve", "develop", "manage", "coordinate"],
+          "advanced": ["implement", "facilitate", "coordinate", "delegate", "optimize", "negotiate"]
+        }
+      },
+      "will": {
+        "V1": {
+          "basic": ["pass", "be", "help", "stay", "call", "go", "come", "buy", "make"],
+          "intermediate": ["celebrate", "organize", "prepare", "discuss", "review", "support", "share", "visit"],
+          "advanced": ["implement", "facilitate", "delegate", "optimize", "spearhead", "orchestrate"]
+        }
+      }
+    },
+    "conditionals_second": {
+      "past_simple": {
+        "V2": {
+          "basic": ["had", "lived", "knew", "were", "won", "went", "saw", "did"],
+          "intermediate": ["worked", "studied", "traveled", "visited", "organized", "prepared", "discussed", "managed"],
+          "advanced": ["implemented", "facilitated", "coordinated", "delegated", "optimized"]
+        }
+      },
+      "would": {
+        "V1": {
+          "basic": ["buy", "travel", "tell", "be", "help", "go", "come", "make"],
+          "intermediate": ["celebrate", "organize", "prepare", "discuss", "review", "support", "share", "visit"],
+          "advanced": ["implement", "facilitate", "delegate", "optimize", "spearhead", "orchestrate"]
+        }
+      }
+    },
+    "modals": {
+      "obligation": {
+        "V1": {
+          "basic": ["go", "study", "finish", "help", "be", "work", "wake up", "wear"],
+          "intermediate": ["complete", "prepare", "attend", "submit", "follow", "organize", "review", "discuss"],
+          "advanced": ["implement", "facilitate", "coordinate", "delegate", "optimize", "prioritize"]
+        }
+      },
+      "advice": {
+        "V1": {
+          "basic": ["rest", "see", "study", "talk", "drink", "eat", "sleep", "go"],
+          "intermediate": ["consider", "discuss", "review", "prepare", "organize", "attend", "support", "improve"],
+          "advanced": ["prioritize", "recommend", "advocate", "negotiate", "compromise", "implement"]
+        }
+      },
+      "probability": {
+        "V1": {
+          "basic": ["be", "come", "rain", "know", "arrive", "go", "help", "need"],
+          "intermediate": ["change", "decide", "attend", "manage", "finish", "return", "leave", "start"],
+          "advanced": ["implement", "negotiate", "prioritize", "compromise", "advocate", "contribute"]
+        }
+      }
+    }
+  }
+}

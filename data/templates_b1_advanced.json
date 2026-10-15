@@ -1,0 +1,1111 @@
+{
+  "level": "B1",
+  "version": "3.0",
+  "slots_ref": ["slots_b1.json", "slots_nouns_b1.json"],
+  "generation_rules": {
+    "min_words": 8,
+    "max_words": 20,
+    "avoid": ["простые предложения из 3-4 слов", "только базовые слова без контекста"],
+    "require": [
+      "хотя бы одно обстоятельство (времени, места, причины или образа действия)",
+      "естественная лексика уровня B1",
+      "контекст, который делает предложение осмысленным"
+    ],
+    "default_slot_level": "intermediate"
+  },
+  "topics": [
+    {
+      "topic": "Present Tenses",
+      "subtopics": [
+        {
+          "name": "Present Simple",
+          "patterns": [
+            {
+              "id": "ps_01",
+              "pattern": "[S] + [V1] + [complex object] + [optional: adverbial of time/place/frequency]",
+              "generation_hint": "Используй глаголы привычек и рутины. Добавь обстоятельство, которое объясняет, когда/где/как часто это происходит.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/present_simple/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" },
+                "adverbial of time/place/frequency": { "$ref": "slots_nouns_b1#/slots/common/times" }
+              },
+              "examples": [
+                "My brother commutes to work by train three times a week.",
+                "She teaches English literature at university and also volunteers at a local library.",
+                "Most people in my neighbourhood organize community events whenever they have free time."
+              ]
+            },
+            {
+              "id": "ps_02",
+              "pattern": "[S] + do/does + not + [V1] + [complex object] + [optional: because + reason]",
+              "generation_hint": "Добавь причину, почему действие не происходит.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/present_simple/negative/V1" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" },
+                "because + reason": { "$ref": "slots_nouns_b1#/slots/common/reasons" }
+              },
+              "examples": [
+                "My colleague doesn't support the new company policy because it doesn't fit our schedule.",
+                "They don't like the idea of working from home because they prefer face-to-face communication."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Present Continuous",
+          "patterns": [
+            {
+              "id": "pc_01",
+              "pattern": "[S] + am/is/are + [V-ing] + [complex object] + [optional: while + parallel action]",
+              "generation_hint": "Опиши действие сейчас и добавь параллельное действие.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_b1#/slots/present_continuous/affirmative/V-ing" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" },
+                "while + parallel action": [
+                  "while listening to music",
+                  "while their children are playing outside",
+                  "while waiting for a client call",
+                  "while having lunch",
+                  "while checking emails"
+                ]
+              },
+              "examples": [
+                "My sister is preparing a presentation for tomorrow's meeting while listening to music.",
+                "The team is discussing a project that needs to be finished by Friday."
+              ]
+            },
+            {
+              "id": "pc_02",
+              "pattern": "[S] + am/is/are + [V-ing] + [place] + [optional: but + contrast]",
+              "generation_hint": "Опиши временную ситуацию и добавь контраст.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_b1#/slots/present_continuous/affirmative/V-ing" },
+                "place": { "$ref": "slots_nouns_b1#/slots/common/places" },
+                "but + contrast": { "$ref": "slots_nouns_b1#/slots/common/contrasts" }
+              },
+              "examples": [
+                "I am staying at my friend's place this week, but usually I work from home.",
+                "They are living with their grandparents for the summer, but they usually spend summers at the seaside."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Present Perfect",
+          "patterns": [
+            {
+              "id": "pp_01",
+              "pattern": "[S] + have/has + [V3] + [complex object] + [since/for + time] + [optional: result]",
+              "generation_hint": "Добавь временной период и результат.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V3": { "$ref": "slots_b1#/slots/present_perfect/affirmative/V3" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/travel/complex_objects" },
+                "since/for + time": { "$ref": "slots_nouns_b1#/slots/common/times" },
+                "result": { "$ref": "slots_nouns_b1#/slots/common/results" }
+              },
+              "examples": [
+                "I have been to several countries in Europe since I finished university, so I feel much more confident now.",
+                "She has learned a new language for three months and it has changed her daily routine completely."
+              ]
+            },
+            {
+              "id": "pp_02",
+              "pattern": "[S] + have/has + never/ever + [V3] + [complex object] + [optional: but + desire]",
+              "generation_hint": "Используй never/ever для опыта. Добавь контраст.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V3": { "$ref": "slots_b1#/slots/present_perfect/questions/V3" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/media_leisure/complex_objects" },
+                "but + desire": [
+                  "but I have always wanted to try it",
+                  "but he hopes to go there next year",
+                  "but they are planning to do it soon",
+                  "but she has been dreaming about it for years"
+                ]
+              },
+              "examples": [
+                "I have never tried Japanese food, but I have always wanted to try it.",
+                "They have never seen a live concert of their favourite band, but they are planning to do it soon."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Present Perfect Continuous",
+          "patterns": [
+            {
+              "id": "ppc_01",
+              "pattern": "[S] + have/has + been + [V-ing] + [complex object] + [for/since + time] + [optional: result/feeling]",
+              "generation_hint": "Подчеркни длительность и результат.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_b1#/slots/present_perfect_continuous/affirmative/V-ing" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" },
+                "for/since + time": { "$ref": "slots_nouns_b1#/slots/common/times" },
+                "result/feeling": { "$ref": "slots_nouns_b1#/slots/common/results" }
+              },
+              "examples": [
+                "I have been working on a new project for the marketing department since last Monday, and I think I am making progress.",
+                "She has been studying English grammar for more than two hours, so she needs a short break."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Past Tenses",
+      "subtopics": [
+        {
+          "name": "Past Simple",
+          "patterns": [
+            {
+              "id": "past_01",
+              "pattern": "[S] + [V2] + [complex object] + [time/place] + [optional: because + reason]",
+              "generation_hint": "Добавь обстоятельство времени и причину.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V2": { "$ref": "slots_b1#/slots/past_simple/affirmative/V2" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/travel/complex_objects" },
+                "time/place": { "$ref": "slots_nouns_b1#/slots/common/times" },
+                "because + reason": { "$ref": "slots_nouns_b1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I visited a small exhibition of local artists last weekend because I needed a break from work.",
+                "They organized a surprise party for our colleague on Friday evening because she was leaving the company."
+              ]
+            },
+            {
+              "id": "past_02",
+              "pattern": "[S] + did + not + [V1] + [complex object] + [optional: although + contrast]",
+              "generation_hint": "Добавь контраст или причину.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/past_simple/negative_questions/V1" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/media_leisure/complex_objects" },
+                "although + contrast": [
+                  "although I had planned to do it",
+                  "although she really wanted to",
+                  "although they had enough time",
+                  "although we had discussed it before"
+                ]
+              },
+              "examples": [
+                "I didn't watch the film that everyone was talking about, although I had planned to do it.",
+                "They didn't finish the report on time, although they had enough time."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Past Continuous",
+          "patterns": [
+            {
+              "id": "pastc_01",
+              "pattern": "[S] + was/were + [V-ing] + [complex object] + when + [S] + [V2] + [optional: reaction]",
+              "generation_hint": "Опиши фоновое действие и прерывающее событие.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_b1#/slots/past_continuous/affirmative/V-ing" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/daily_life/complex_objects" },
+                "when + S + V2": [
+                  "when the phone rang",
+                  "when the lights went out",
+                  "when my friend called me",
+                  "when the guests arrived",
+                  "when it started to rain"
+                ],
+                "reaction": { "$ref": "slots_nouns_b1#/slots/common/results" }
+              },
+              "examples": [
+                "I was cooking dinner for the whole family when the phone rang, so I had to stop and answer.",
+                "They were preparing a presentation for the next day when the lights went out, and everything became chaotic for a moment."
+              ]
+            },
+            {
+              "id": "pastc_02",
+              "pattern": "While + [S] + was/were + [V-ing], [S] + [V2] + [complex object] + [optional: reason]",
+              "generation_hint": "Опиши два одновременных или последовательных действия в прошлом.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_b1#/slots/past_continuous/affirmative/V-ing" },
+                "V2": { "$ref": "slots_b1#/slots/past_simple/affirmative/V2" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_b1#/slots/common/reasons" }
+              },
+              "examples": [
+                "While I was driving home, I realized that we had made a mistake, so I called my colleagues immediately.",
+                "While she was talking to an important client, she decided to change our strategy because the situation had changed."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Past Perfect",
+          "patterns": [
+            {
+              "id": "pastp_01",
+              "pattern": "[S] + had + [V3] + [complex object] + before + [S] + [V2] + [optional: result]",
+              "generation_hint": "Подчеркни хронологию: одно действие раньше другого.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V3": { "$ref": "slots_b1#/slots/past_perfect/affirmative/V3" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" },
+                "before + S + V2": [
+                  "before the deadline arrived",
+                  "before my boss asked me about it",
+                  "before we left for the airport",
+                  "before the meeting started",
+                  "before everyone else noticed"
+                ],
+                "result": { "$ref": "slots_nouns_b1#/slots/common/results" }
+              },
+              "examples": [
+                "I had finished my part of the project before the deadline arrived, so I felt quite confident.",
+                "They had booked the tickets for the concert before we left for the airport, so everything went smoothly."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Future Forms",
+      "subtopics": [
+        {
+          "name": "Will",
+          "patterns": [
+            {
+              "id": "will_01",
+              "pattern": "[S] + will + [V1] + [complex object] + [optional: if + condition] + [optional: reason]",
+              "generation_hint": "Используй will для решений, обещаний и предсказаний.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/future_will/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" },
+                "if + condition": { "$ref": "slots_nouns_b1#/slots/common/conditions" },
+                "reason": { "$ref": "slots_nouns_b1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I will help you with your presentation if I have enough time because I want to support you.",
+                "We will send all the necessary documents by Friday if everything goes according to plan."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Going to",
+          "patterns": [
+            {
+              "id": "going_01",
+              "pattern": "[S] + am/is/are + going to + [V1] + [complex object] + [optional: because + reason]",
+              "generation_hint": "Используй going to для планов и намерений.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/going_to/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/education/complex_objects" },
+                "because + reason": { "$ref": "slots_nouns_b1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I am going to start a new online course on digital marketing because I want to improve my career prospects.",
+                "We are going to visit my relatives in another city because we haven't seen each other for a long time."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Present Continuous for Future",
+          "patterns": [
+            {
+              "id": "pcf_01",
+              "pattern": "[S] + am/is/are + [V-ing] + [complex object] + [future time] + [optional: with + person]",
+              "generation_hint": "Используй для запланированных встреч и договорённостей.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_b1#/slots/present_continuous_future/affirmative/V-ing" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" },
+                "future time": { "$ref": "slots_nouns_b1#/slots/common/times" },
+                "with + person": { "$ref": "slots_nouns_b1#/slots/common/people" }
+              },
+              "examples": [
+                "I am meeting an important client tomorrow at 10 am with our marketing team.",
+                "They are attending a conference on innovation next Thursday with a potential investor."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Modal Verbs",
+      "subtopics": [
+        {
+          "name": "Obligation and Necessity (must, have to, should)",
+          "patterns": [
+            {
+              "id": "mod_01",
+              "pattern": "[S] + must + [V1] + [complex object] + [optional: time/reason]",
+              "generation_hint": "Используй must для сильных личных обязательств.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/modals_obligation/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" },
+                "time/reason": { "$ref": "slots_nouns_b1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I must finish this report before the end of the day because the deadline is very close.",
+                "Every employee must follow the safety instructions carefully because it's required by law."
+              ]
+            },
+            {
+              "id": "mod_02",
+              "pattern": "[S] + have to/has to + [V1] + [complex object] + [optional: frequency/time]",
+              "generation_hint": "Используй have to для внешних обязательств.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/modals_obligation/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" },
+                "frequency/time": { "$ref": "slots_nouns_b1#/slots/common/times" }
+              },
+              "examples": [
+                "My colleague has to attend weekly team meetings every Monday morning.",
+                "We have to submit financial reports every month before the 5th."
+              ]
+            },
+            {
+              "id": "mod_03",
+              "pattern": "[S] + should + [V1] + [complex object] + [optional: if + condition]",
+              "generation_hint": "Используй should для советов и рекомендаций.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/modals_obligation/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/health_sport/complex_objects" },
+                "if + condition": { "$ref": "slots_nouns_b1#/slots/common/conditions" }
+              },
+              "examples": [
+                "You should consider this opportunity seriously if you want to grow professionally.",
+                "People should take a short break after work if they feel stressed or tired."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Permission and Probability (can, could, may, might)",
+          "patterns": [
+            {
+              "id": "mod_04",
+              "pattern": "[S] + can/could + [V1] + [complex object] + [optional: if + condition]",
+              "generation_hint": "Используй can для способности и разрешения, could — для вежливых просьб.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/modals_permission/affirmative/V1" },
+                "complex object": [
+                  "you with this task",
+                  "three foreign languages",
+                  "your laptop for a few minutes",
+                  "our online meeting",
+                  "the main idea in simple words"
+                ],
+                "if + condition": { "$ref": "slots_nouns_b1#/slots/common/conditions" }
+              },
+              "examples": [
+                "I can help you with this task if you need any support.",
+                "She could explain the main idea in simple words if you have any questions."
+              ]
+            },
+            {
+              "id": "mod_05",
+              "pattern": "[S] + may/might + [V1] + [complex object] + [optional: but + uncertainty]",
+              "generation_hint": "Используй may/might для вероятности.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/modals_permission/affirmative/V1" },
+                "complex object": [
+                  "late for the meeting",
+                  "in the next few days",
+                  "earlier than expected",
+                  "more time than we thought",
+                  "a different direction"
+                ],
+                "but + uncertainty": { "$ref": "slots_nouns_b1#/slots/common/contrasts" }
+              },
+              "examples": [
+                "I might be late for the meeting, but I'm not sure yet.",
+                "The situation may change in the next few days, but it depends on many factors."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Prohibition and Lack of Necessity (mustn't, don't have to)",
+          "patterns": [
+            {
+              "id": "mod_06",
+              "pattern": "[S] + mustn't + [V1] + [complex object] + [optional: because + reason]",
+              "generation_hint": "Используй mustn't для строгих запретов.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/modals_prohibition/affirmative/V1" },
+                "complex object": [
+                  "in this area",
+                  "the equipment without permission",
+                  "late for important meetings",
+                  "here without a special pass",
+                  "mobile phones during the exam"
+                ],
+                "because + reason": { "$ref": "slots_nouns_b1#/slots/common/reasons" }
+              },
+              "examples": [
+                "You mustn't touch the equipment without permission because it can be dangerous.",
+                "Visitors mustn't use mobile phones during the exam because it disturbs other people."
+              ]
+            },
+            {
+              "id": "mod_07",
+              "pattern": "[S] + don't/doesn't + have to + [V1] + [complex object] + [optional: but + alternative]",
+              "generation_hint": "Используй don't have to для отсутствия необходимости.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/modals_prohibition/affirmative/V1" },
+                "complex object": [
+                  "to the office every day",
+                  "for the extra materials",
+                  "early on weekends",
+                  "the meeting in person",
+                  "a long presentation"
+                ],
+                "but + alternative": { "$ref": "slots_nouns_b1#/slots/common/contrasts" }
+              },
+              "examples": [
+                "I don't have to come to the office every day, but I can if I want to.",
+                "She doesn't have to prepare a long presentation, but it's still a good idea to be ready."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Conditionals",
+      "subtopics": [
+        {
+          "name": "First Conditional",
+          "patterns": [
+            {
+              "id": "cond_01",
+              "pattern": "If + [S] + [Present Simple] + [complex object], [S] + will + [V1] + [complex object] + [optional: result]",
+              "generation_hint": "Опиши реальную будущую ситуацию.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "Present Simple": { "$ref": "slots_b1#/slots/conditionals_first/present_simple/V1" },
+                "complex object (condition)": [
+                  "this project on time",
+                  "all my exams successfully",
+                  "enough money for the trip",
+                  "a better solution to this problem",
+                  "the event properly"
+                ],
+                "V1": { "$ref": "slots_b1#/slots/conditionals_first/will/V1" },
+                "complex object (result)": [
+                  "with my closest friends",
+                  "to Italy for two weeks",
+                  "a new laptop for work",
+                  "a new course in September",
+                  "all our colleagues to the party"
+                ],
+                "result": { "$ref": "slots_nouns_b1#/slots/common/results" }
+              },
+              "examples": [
+                "If I finish this project on time, I will celebrate with my closest friends, so it will be a great end of the year.",
+                "If we save enough money for the trip, we will go to Italy for two weeks and we will finally relax."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Second Conditional",
+          "patterns": [
+            {
+              "id": "cond_02",
+              "pattern": "If + [S] + [Past Simple] + [complex object], [S] + would + [V1] + [complex object] + [optional: reason/result]",
+              "generation_hint": "Опиши гипотетическую ситуацию.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "Past Simple": { "$ref": "slots_b1#/slots/conditionals_second/past_simple/V2" },
+                "complex object (condition)": [
+                  "more free time during the week",
+                  "closer to the city centre",
+                  "how to solve this problem",
+                  "a million dollars in the lottery",
+                  "in a different company"
+                ],
+                "V1": { "$ref": "slots_b1#/slots/conditionals_second/would/V1" },
+                "complex object (result)": [
+                  "around the world for a year",
+                  "to work every morning",
+                  "my colleagues with their tasks",
+                  "a house near the sea",
+                  "my whole career completely"
+                ],
+                "reason/result": { "$ref": "slots_nouns_b1#/slots/common/results" }
+              },
+              "examples": [
+                "If I had more free time during the week, I would travel around the world for a year because it would be a dream come true.",
+                "If she lived closer to the city centre, she would walk to work every morning because it would save her a lot of time."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Passive Voice",
+      "subtopics": [
+        {
+          "name": "Present Simple Passive",
+          "patterns": [
+            {
+              "id": "pass_01",
+              "pattern": "[S] + am/is/are + [V3] + [optional: by + agent] + [optional: place/time]",
+              "generation_hint": "Опиши общеизвестные факты или процессы.",
+              "slots": {
+                "S": [
+                  "the book", "English", "these products",
+                  "the results", "the reports"
+                ],
+                "V3": { "$ref": "slots_b1#/slots/passive/present_simple/V3" },
+                "by + agent": { "$ref": "slots_nouns_b1#/slots/common/agents" },
+                "place/time": { "$ref": "slots_nouns_b1#/slots/common/times" }
+              },
+              "examples": [
+                "English is spoken by millions of people all over the world.",
+                "The reports are prepared by the research department at the end of each quarter."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Past Simple Passive",
+          "patterns": [
+            {
+              "id": "pass_02",
+              "pattern": "[S] + was/were + [V3] + [optional: by + agent] + [optional: time/place]",
+              "generation_hint": "Опиши исторические события или завершённые процессы.",
+              "slots": {
+                "S": [
+                  "the book", "the house", "the film",
+                  "the bridge", "the song"
+                ],
+                "V3": { "$ref": "slots_b1#/slots/passive/past_simple/V3" },
+                "by + agent": { "$ref": "slots_nouns_b1#/slots/common/agents" },
+                "time/place": { "$ref": "slots_nouns_b1#/slots/common/times" }
+              },
+              "examples": [
+                "The bridge was designed by a famous architect at the end of the 19th century.",
+                "The song was recorded by a popular singer in 1995."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Reported Speech",
+      "subtopics": [
+        {
+          "name": "Reported Statements",
+          "patterns": [
+            {
+              "id": "rep_01",
+              "pattern": "[S] + said (that) + [S] + [V2] + [complex object] + [optional: time/place change]",
+              "generation_hint": "Передай чужую речь с изменением времён.",
+              "slots": {
+                "S": ["he", "she", "they"],
+                "V2": { "$ref": "slots_b1#/slots/reported_speech/statements/V2" },
+                "complex object": [
+                  "very tired after the trip",
+                  "to the conference in Berlin",
+                  "the new project idea",
+                  "a lot of work to do",
+                  "come back the next day"
+                ],
+                "time/place change": { "$ref": "slots_nouns_b1#/slots/speech/time_place_changes" }
+              },
+              "examples": [
+                "He said that he was very tired after the trip the day before.",
+                "She said she would come back the following week because she had a lot of work to do."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Gerunds and Infinitives",
+      "subtopics": [
+        {
+          "name": "Gerunds (V-ing)",
+          "patterns": [
+            {
+              "id": "ger_01",
+              "pattern": "[S] + enjoy/like/love/hate + [V-ing] + [complex object] + [optional: time/place]",
+              "generation_hint": "Используй герундий после глаголов предпочтения.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_b1#/slots/gerunds/affirmative/V-ing" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/media_leisure/complex_objects" },
+                "time/place": { "$ref": "slots_nouns_b1#/slots/common/times" }
+              },
+              "examples": [
+                "I enjoy reading books about history and culture in the evening after work.",
+                "My friend loves traveling to new countries with a small backpack during the summer holidays."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Infinitives (to + V1)",
+          "patterns": [
+            {
+              "id": "inf_01",
+              "pattern": "[S] + decide/want/hope/plan + to + [V1] + [complex object] + [optional: reason/time]",
+              "generation_hint": "Используй инфинитив после глаголов решения и намерения.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "to + V1": { "$ref": "slots_b1#/slots/infinitives/affirmative/to_V1" },
+                "complex object": { "$ref": "slots_nouns_b1#/slots/topics/education/complex_objects" },
+                "reason/time": { "$ref": "slots_nouns_b1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I have decided to improve my English for career purposes because I want to feel more confident.",
+                "She hopes to visit her relatives in another country next summer."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Relative Clauses",
+      "subtopics": [
+        {
+          "name": "Defining Relative Clauses",
+          "patterns": [
+            {
+              "id": "rel_01",
+              "pattern": "[S] + who/which/that + [V] + [complex object] + [optional: additional info]",
+              "generation_hint": "Объедини два предложения в одно с помощью relative clause.",
+              "slots": {
+                "S": ["the person", "the book", "the city", "the project"],
+                "who/which/that": ["who", "which", "that"],
+                "V": { "$ref": "slots_b1#/slots/relative_clauses/affirmative/V" },
+                "complex object": [
+                  "me the most in my career",
+                  "my way of thinking",
+                  "everyone at the meeting",
+                  "me to start something new"
+                ],
+                "additional info": { "$ref": "slots_nouns_b1#/slots/speech/additional_info" }
+              },
+              "examples": [
+                "The person who helped me the most in my career was my first manager, and I will never forget it.",
+                "The book which changed my way of thinking is called 'Atomic Habits', and I often recommend it to others."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Present Simple vs Present Continuous",
+      "subtopics": [
+        {
+          "name": "Contrast: Habit vs Action Now",
+          "patterns": [
+            {
+              "id": "ps_pc_01",
+              "pattern": "[S] + usually + [V1] + [complex object], but + right now + [S] + am/is/are + [V-ing] + [complex object]",
+              "generation_hint": "Сравни привычное действие с тем, что происходит прямо сейчас.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/present_simple/affirmative/V1" },
+                "complex object (habit)": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" },
+                "V-ing": { "$ref": "slots_b1#/slots/present_continuous/affirmative/V-ing" },
+                "complex object (now)": { "$ref": "slots_nouns_b1#/slots/topics/daily_life/complex_objects" }
+              },
+              "examples": [
+                "I usually work from the office in the city centre, but right now I am working from a small café near my house.",
+                "She usually commutes by public transport, but right now she is driving to a meeting outside the city."
+              ]
+            },
+            {
+              "id": "ps_pc_02",
+              "pattern": "[S] + [V1] + [complex object] + [frequency], but this week + [S] + am/is/are + [V-ing] + [complex object]",
+              "generation_hint": "Сравни обычную рутину с временным изменением.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1#/slots/present_simple/affirmative/V1" },
+                "complex object (routine)": { "$ref": "slots_nouns_b1#/slots/topics/daily_life/complex_objects" },
+                "frequency": { "$ref": "slots_nouns_b1#/slots/common/times" },
+                "V-ing": { "$ref": "slots_b1#/slots/present_continuous/affirmative/V-ing" },
+                "complex object (temporary)": { "$ref": "slots_nouns_b1#/slots/topics/work_career/complex_objects" }
+              },
+              "examples": [
+                "I go to the gym every Monday and Wednesday, but this week I am going to a different gym near my new apartment.",
+                "They usually have lunch with colleagues every day, but this week they are having lunch alone because everyone is on holiday."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Present Perfect vs Past Simple",
+      "subtopics": [
+        {
+          "name": "Contrast: Result vs Finished Time",
+          "patterns": [
+            {
+              "id": "pp_past_01",
+              "pattern": "[S] + have/has + [V3] + [complex object] + [optional: result], and + [S] + [V2] + [complex object] + [finished time]",
+              "generation_hint": "Покажи разницу: Present Perfect — результат важен сейчас, Past Simple — конкретное время.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V3": { "$ref": "slots_b1#/slots/present_perfect/affirmative/V3" },
+                "complex object (PP)": { "$ref": "slots_nouns_b1#/slots/topics/media_leisure/complex_objects" },
+                "result": { "$ref": "slots_nouns_b1#/slots/common/results" },
+                "V2": { "$ref": "slots_b1#/slots/past_simple/affirmative/V2" },
+                "complex object (PS)": { "$ref": "slots_nouns_b1#/slots/topics/media_leisure/complex_objects" },
+                "finished time": { "$ref": "slots_nouns_b1#/slots/common/times" }
+              },
+              "examples": [
+                "I have read this book about productivity and it has changed my daily routine, but I didn't really understand it when I read the same book last year.",
+                "She has visited several countries in Asia and has learned a lot from them, but the experience was completely different when she visited Japan in 2019."
+              ]
+            },
+            {
+              "id": "pp_past_02",
+              "pattern": "Have/Has + [S] + ever + [V3] + [complex object]? — Yes, [S] + [V2] + [complex object] + [finished time]",
+              "generation_hint": "Задай вопрос об опыте и дай ответ с конкретным временем.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V3": { "$ref": "slots_b1#/slots/present_perfect/questions/V3" },
+                "complex object (question)": { "$ref": "slots_nouns_b1#/slots/topics/travel/complex_objects" },
+                "V2": { "$ref": "slots_b1#/slots/past_simple/affirmative/V2" },
+                "complex object (answer)": { "$ref": "slots_nouns_b1#/slots/topics/travel/complex_objects" },
+                "finished time": { "$ref": "slots_nouns_b1#/slots/common/times" }
+              },
+              "examples": [
+                "Have you ever been to an English-speaking country? — Yes, I went to London when I was a student.",
+                "Has your sister ever tried sushi? — Yes, she tried sushi for the first time during our trip in 2021."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Future Forms (Present Simple for Schedules)",
+      "subtopics": [
+        {
+          "name": "Present Simple for Timetables and Schedules",
+          "patterns": [
+            {
+              "id": "ps_future_01",
+              "pattern": "[S] + [V1] + [time] + [optional: according to schedule] + [optional: so + plan]",
+              "generation_hint": "Используй Present Simple для расписаний (поезда, самолёты, встречи по графику).",
+              "slots": {
+                "S": ["the train", "my flight", "the meeting", "the film", "the conference"],
+                "V1": { "$ref": "slots_b1#/slots/present_simple/affirmative/V1" },
+                "time": { "$ref": "slots_nouns_b1#/slots/common/times" },
+                "according to schedule": [
+                  "according to the timetable",
+                  "as planned",
+                  "according to the official schedule",
+                  "as usual"
+                ],
+                "plan": { "$ref": "slots_nouns_b1#/slots/common/results" }
+              },
+              "examples": [
+                "The train leaves at 7:30 in the morning according to the timetable, so I need to leave home early.",
+                "The conference takes place at the end of the month as planned, so I need to book my tickets today."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Reported Speech (Questions and Commands)",
+      "subtopics": [
+        {
+          "name": "Reported Questions (Yes/No and Wh-)",
+          "patterns": [
+            {
+              "id": "rep_q_01",
+              "pattern": "[S] + asked + [object] + if/whether + [S] + [V2] + [complex object]",
+              "generation_hint": "Передай общий вопрос (yes/no) в косвенной речи.",
+              "slots": {
+                "S": ["he", "she", "my colleague"],
+                "object": { "$ref": "slots_nouns_b1#/slots/common/people" },
+                "S (reported)": ["I", "we", "they"],
+                "V2": { "$ref": "slots_b1#/slots/reported_speech/questions/V2" },
+                "complex object": [
+                  "available for a short call",
+                  "finished the report by Friday",
+                  "help with the presentation",
+                  "come to the meeting in person",
+                  "more time to complete the task"
+                ]
+              },
+              "examples": [
+                "He asked me if I was available for a short call.",
+                "My colleague asked his manager whether they needed more time to complete the task."
+              ]
+            },
+            {
+              "id": "rep_q_02",
+              "pattern": "[S] + asked + [object] + [wh-word] + [S] + [V2] + [complex object]",
+              "generation_hint": "Передай специальный вопрос (what/where/when/why/how).",
+              "slots": {
+                "S": ["she", "they", "the client"],
+                "object": { "$ref": "slots_nouns_b1#/slots/common/people" },
+                "wh-word": { "$ref": "slots_nouns_b1#/slots/speech/wh_words" },
+                "S (reported)": ["I", "we", "they"],
+                "V2": { "$ref": "slots_b1#/slots/reported_speech/questions/V2" },
+                "complex object": [
+                  "before moving to this city",
+                  "on the new project",
+                  "to change the strategy",
+                  "to travel next summer",
+                  "to organize the event"
+                ]
+              },
+              "examples": [
+                "She asked me where I lived before moving to this city.",
+                "The client asked us how we planned to organize the event."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Reported Commands and Requests",
+          "patterns": [
+            {
+              "id": "rep_cmd_01",
+              "pattern": "[S] + told/asked + [object] + to + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Передай просьбу или приказ.",
+              "slots": {
+                "S": ["he", "she", "the manager"],
+                "object": { "$ref": "slots_nouns_b1#/slots/common/people" },
+                "V1": { "$ref": "slots_b1#/slots/reported_speech/commands/V1" },
+                "complex object": [
+                  "the documents by the end of the day",
+                  "the presentation before the meeting",
+                  "all the details carefully",
+                  "the client as soon as possible",
+                  "the report by Friday"
+                ],
+                "reason": { "$ref": "slots_nouns_b1#/slots/common/reasons" }
+              },
+              "examples": [
+                "The manager told me to send the documents by the end of the day because the deadline was close.",
+                "She asked her colleague to check all the details carefully because the client was waiting."
+              ]
+            },
+            {
+              "id": "rep_cmd_02",
+              "pattern": "[S] + told/asked + [object] + not to + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Передай отрицательную просьбу или запрет.",
+              "slots": {
+                "S": ["he", "she", "my parents"],
+                "object": { "$ref": "slots_nouns_b1#/slots/common/people" },
+                "V1": { "$ref": "slots_b1#/slots/reported_speech/commands/V1" },
+                "complex object": [
+                  "late for the meeting",
+                  "to the office on Friday",
+                  "mobile phones during the presentation",
+                  "the equipment without permission",
+                  "the door open"
+                ],
+                "reason": { "$ref": "slots_nouns_b1#/slots/common/reasons" }
+              },
+              "examples": [
+                "He told me not to be late for the meeting because it was against the rules.",
+                "My parents asked us not to leave the door open because the security system was on."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Complex Comparatives",
+      "subtopics": [
+        {
+          "name": "The more... the better / less than",
+          "patterns": [
+            {
+              "id": "comp_complex_01",
+              "pattern": "The more + [S] + [V1] + [complex object], the more + [S] + [V1] + [complex object]",
+              "generation_hint": "Используй конструкцию 'the more... the more' для пропорциональной зависимости.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1#/slots/common/subjects" },
+                "V1 (first)": { "$ref": "slots_b1#/slots/complex_comparatives/affirmative/V1" },
+                "complex object (first)": [
+                  "a foreign language",
+                  "books about different cultures",
+                  "to new places",
+                  "with native speakers",
+                  "new skills"
+                ],
+                "V1 (second)": { "$ref": "slots_b1#/slots/complex_comparatives/affirmative/V1" },
+                "complex object (second)": [
+                  "confident in real conversations",
+                  "more open-minded",
+                  "the world around you",
+                  "better results",
+                  "your chances in the job market"
+                ]
+              },
+              "examples": [
+                "The more you practice a foreign language, the more confident you become in real conversations.",
+                "The more we travel to new places, the more open-minded we feel."
+              ]
+            },
+            {
+              "id": "comp_complex_02",
+              "pattern": "[S] + is + less + [adjective] + than + [object] + [optional: but + contrast]",
+              "generation_hint": "Используй 'less than' для сравнения в обратную сторону.",
+              "slots": {
+                "S": ["this option", "the new system", "my current job", "this approach"],
+                "adjective": [
+                  "expensive", "complicated", "effective",
+                  "time-consuming", "stressful"
+                ],
+                "object": [
+                  "the previous one",
+                  "what I expected",
+                  "the traditional method",
+                  "the alternative solution"
+                ],
+                "but + contrast": { "$ref": "slots_nouns_b1#/slots/common/contrasts" }
+              },
+              "examples": [
+                "This option is less expensive than the previous one, but it still has its advantages.",
+                "The new system is less complicated than what I expected, but it requires more attention."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Passive Voice (Extended)",
+      "subtopics": [
+        {
+          "name": "Present Perfect Passive",
+          "patterns": [
+            {
+              "id": "pass_pp_01",
+              "pattern": "[S] + have/has + been + [V3] + [optional: by + agent] + [optional: time/place]",
+              "generation_hint": "Используй Present Perfect Passive для результата, который важен сейчас.",
+              "slots": {
+                "S": [
+                  "the project", "all the documents",
+                  "the new bridge", "the results", "the decision"
+                ],
+                "V3": { "$ref": "slots_b1#/slots/passive/present_perfect/V3" },
+                "by + agent": { "$ref": "slots_nouns_b1#/slots/common/agents" },
+                "time/place": { "$ref": "slots_nouns_b1#/slots/common/times" }
+              },
+              "examples": [
+                "The project has been completed by the whole team recently.",
+                "All the documents have been signed by the director this month."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Future Passive (will be + V3)",
+          "patterns": [
+            {
+              "id": "pass_future_01",
+              "pattern": "[S] + will be + [V3] + [optional: by + agent] + [optional: time/place]",
+              "generation_hint": "Используй Future Passive для будущих событий, где важно действие, а не исполнитель.",
+              "slots": {
+                "S": [
+                  "the new office", "the results", "the presentation",
+                  "all the materials", "the event"
+                ],
+                "V3": { "$ref": "slots_b1#/slots/passive/future/V3" },
+                "by + agent": { "$ref": "slots_nouns_b1#/slots/common/agents" },
+                "time/place": { "$ref": "slots_nouns_b1#/slots/common/times" }
+              },
+              "examples": [
+                "The new office will be opened by the CEO next month.",
+                "The results will be announced by the marketing team at the end of the year."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Relative Clauses (Extended)",
+      "subtopics": [
+        {
+          "name": "Relative Clauses with where and whose",
+          "patterns": [
+            {
+              "id": "rel_where_01",
+              "pattern": "[S] + [V] + [place] + where + [S] + [V] + [complex object]",
+              "generation_hint": "Используй 'where' для описания места.",
+              "slots": {
+                "S (first)": ["the city", "the office", "the café", "the country"],
+                "V (first)": { "$ref": "slots_b1#/slots/relative_clauses/affirmative/V" },
+                "place": { "$ref": "slots_nouns_b1#/slots/common/places" },
+                "S (second)": ["I", "we", "many people", "my colleagues"],
+                "V (second)": { "$ref": "slots_b1#/slots/relative_clauses/affirmative/V" },
+                "complex object": [
+                  "my childhood", "on a daily basis",
+                  "to relax after work", "on holiday"
+                ]
+              },
+              "examples": [
+                "The city where I spent my childhood has become a popular tourist destination.",
+                "The café where we meet to relax after work is my favourite spot in the city."
+              ]
+            },
+            {
+              "id": "rel_whose_01",
+              "pattern": "[S] + whose + [noun] + [V] + [complex object] + [optional: additional info]",
+              "generation_hint": "Используй 'whose' для принадлежности.",
+              "slots": {
+                "S": ["the colleague", "the writer", "the manager", "the student"],
+                "whose + noun": ["advice", "books", "decisions", "project"],
+                "V": { "$ref": "slots_b1#/slots/relative_clauses/affirmative/V" },
+                "complex object": [
+                  "me a lot in my career",
+                  "my way of thinking",
+                  "the whole team",
+                  "everyone at the conference"
+                ],
+                "additional info": { "$ref": "slots_nouns_b1#/slots/speech/additional_info" }
+              },
+              "examples": [
+                "The colleague whose advice helped me a lot in my career is now my closest friend, and I will always be grateful to him.",
+                "The writer whose books changed my way of thinking is called Haruki Murakami, and I often recommend them to my friends."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

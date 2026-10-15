@@ -1,0 +1,312 @@
+{
+  "level": "B2",
+  "version": "1.0",
+  "description": "Глагольные слоты для шаблонов уровня B2.",
+  "usage": "В шаблоне: { \"$ref\": \"slots_b2#/slots/<category>/<subcategory>/<slot>\" }",
+  "slots": {
+    "perfect_continuous": {
+      "past_perfect_continuous": {
+        "V-ing": {
+          "basic": [
+            "working", "studying", "waiting", "reading", "walking",
+            "talking", "watching", "cooking", "playing", "cleaning"
+          ],
+          "intermediate": [
+            "preparing", "organizing", "practicing", "exercising",
+            "traveling", "visiting", "planning", "discussing",
+            "reviewing", "attending", "managing", "coordinating"
+          ],
+          "advanced": [
+            "implementing", "streamlining", "facilitating", "delegating",
+            "optimizing", "spearheading", "orchestrating", "integrating",
+            "strategizing", "negotiating", "prioritizing"
+          ]
+        }
+      },
+      "future_perfect_continuous": {
+        "V-ing": {
+          "basic": [
+            "working", "studying", "traveling", "reading", "waiting"
+          ],
+          "intermediate": [
+            "preparing", "organizing", "practicing", "discussing",
+            "reviewing", "attending", "managing"
+          ],
+          "advanced": [
+            "implementing", "facilitating", "coordinating", "optimizing",
+            "spearheading", "orchestrating", "integrating"
+          ]
+        }
+      }
+    },
+    "passive_advanced": {
+      "all_tenses": {
+        "V3": {
+          "basic": [
+            "written", "made", "done", "taken", "given", "sent",
+            "built", "seen", "read", "bought", "sold", "paid"
+          ],
+          "intermediate": [
+            "completed", "achieved", "organized", "developed",
+            "improved", "created", "discussed", "reviewed",
+            "planned", "arranged", "approved", "confirmed",
+            "published", "produced", "examined", "analysed"
+          ],
+          "advanced": [
+            "implemented", "streamlined", "facilitated", "coordinated",
+            "delegated", "optimized", "spearheaded", "integrated",
+            "prioritized", "negotiated", "advocated", "compromised"
+          ]
+        }
+      },
+      "reporting_passive": {
+        "V3": {
+          "basic": [
+            "said", "believed", "thought", "known", "reported"
+          ],
+          "intermediate": [
+            "considered", "expected", "estimated", "assumed",
+            "claimed", "argued", "acknowledged", "recognized"
+          ],
+          "advanced": [
+            "alleged", "perceived", "presumed", "postulated",
+            "stipulated", "attributed", "ascertained"
+          ]
+        }
+      }
+    },
+    "inversion": {
+      "negative_adverbials": {
+        "V1": {
+          "basic": [
+            "seen", "heard", "known", "met", "understood"
+          ],
+          "intermediate": [
+            "realized", "considered", "imagined", "expected",
+            "experienced", "witnessed", "encountered"
+          ],
+          "advanced": [
+            "anticipated", "comprehended", "acknowledged",
+            "appreciated", "envisioned", "foreseen"
+          ]
+        }
+      },
+      "conditionals_inverted": {
+        "V3": {
+          "basic": [
+            "known", "seen", "gone", "taken", "made", "said"
+          ],
+          "intermediate": [
+            "understood", "realized", "decided", "prepared",
+            "discussed", "organized", "planned"
+          ],
+          "advanced": [
+            "implemented", "coordinated", "prioritized", "negotiated",
+            "advocated", "compromised", "streamlined"
+          ]
+        }
+      }
+    },
+    "cleft_sentences": {
+      "it_cleft": {
+        "V": {
+          "basic": [
+            "changed", "helped", "made", "gave", "took", "saw"
+          ],
+          "intermediate": [
+            "influenced", "motivated", "encouraged", "supported",
+            "developed", "created", "organized", "improved"
+          ],
+          "advanced": [
+            "implemented", "facilitated", "coordinated",
+            "spearheaded", "transformed", "revolutionized"
+          ]
+        }
+      },
+      "wh_cleft": {
+        "V": {
+          "basic": [
+            "need", "want", "like", "have", "know", "see"
+          ],
+          "intermediate": [
+            "require", "appreciate", "consider", "understand",
+            "recommend", "suggest", "prefer"
+          ],
+          "advanced": [
+            "advocate", "prioritize", "emphasize",
+            "acknowledge", "recognize", "value"
+          ]
+        }
+      }
+    },
+    "participle_clauses": {
+      "present_participle": {
+        "V-ing": {
+          "basic": [
+            "having", "being", "seeing", "knowing", "feeling"
+          ],
+          "intermediate": [
+            "realizing", "understanding", "considering",
+            "recognizing", "noticing", "expecting"
+          ],
+          "advanced": [
+            "acknowledging", "anticipating", "comprehending",
+            "appreciating", "envisioning", "foreseeing"
+          ]
+        }
+      },
+      "perfect_participle": {
+        "having_V3": {
+          "basic": [
+            "having finished", "having done", "having seen",
+            "having made", "having taken", "having read"
+          ],
+          "intermediate": [
+            "having completed", "having achieved", "having organized",
+            "having developed", "having discussed", "having reviewed"
+          ],
+          "advanced": [
+            "having implemented", "having facilitated",
+            "having coordinated", "having optimized",
+            "having spearheaded", "having negotiated"
+          ]
+        }
+      }
+    },
+    "subjunctive": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "be", "go", "come", "do", "have", "take", "make"
+          ],
+          "intermediate": [
+            "attend", "complete", "prepare", "submit",
+            "review", "consider", "recommend"
+          ],
+          "advanced": [
+            "implement", "facilitate", "prioritize",
+            "negotiate", "advocate", "compromise"
+          ]
+        }
+      }
+    },
+    "future_in_past": {
+      "was_going_to": {
+        "V1": {
+          "basic": [
+            "go", "do", "make", "take", "see", "visit", "call"
+          ],
+          "intermediate": [
+            "travel", "organize", "prepare", "discuss",
+            "attend", "manage", "coordinate"
+          ],
+          "advanced": [
+            "implement", "facilitate", "delegate",
+            "optimize", "spearhead", "orchestrate"
+          ]
+        }
+      },
+      "was_to": {
+        "V1": {
+          "basic": [
+            "be", "go", "come", "meet", "arrive", "leave"
+          ],
+          "intermediate": [
+            "attend", "complete", "submit", "present",
+            "review", "discuss", "prepare"
+          ],
+          "advanced": [
+            "implement", "negotiate", "prioritize",
+            "facilitate", "advocate"
+          ]
+        }
+      }
+    },
+    "gerunds_infinitives_advanced": {
+      "perfect_gerund": {
+        "having_V3": {
+          "basic": [
+            "having done", "having seen", "having read",
+            "having made", "having taken"
+          ],
+          "intermediate": [
+            "having completed", "having achieved",
+            "having organized", "having discussed",
+            "having reviewed"
+          ],
+          "advanced": [
+            "having implemented", "having facilitated",
+            "having coordinated", "having optimized",
+            "having negotiated"
+          ]
+        }
+      },
+      "passive_infinitive": {
+        "to_be_V3": {
+          "basic": [
+            "to be done", "to be made", "to be seen",
+            "to be taken", "to be given"
+          ],
+          "intermediate": [
+            "to be completed", "to be organized",
+            "to be prepared", "to be discussed",
+            "to be reviewed", "to be approved"
+          ],
+          "advanced": [
+            "to be implemented", "to be facilitated",
+            "to be coordinated", "to be optimized",
+            "to be prioritized"
+          ]
+        }
+      }
+    },
+    "advanced_comparatives": {
+      "the_more": {
+        "V1": {
+          "basic": [
+            "practice", "read", "travel", "learn", "study"
+          ],
+          "intermediate": [
+            "communicate", "collaborate", "exercise",
+            "organize", "prepare", "discuss"
+          ],
+          "advanced": [
+            "implement", "facilitate", "coordinate",
+            "optimize", "negotiate", "prioritize"
+          ]
+        }
+      }
+    },
+    "ellipsis_substitution": {
+      "affirmative": {
+        "V": {
+          "basic": ["do", "have", "be", "can", "will"],
+          "intermediate": [
+            "would", "should", "might", "could", "must"
+          ],
+          "advanced": [
+            "would have", "should have", "might have",
+            "could have", "must have"
+          ]
+        }
+      }
+    },
+    "emphatic_do": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "like", "want", "need", "believe", "know", "think"
+          ],
+          "intermediate": [
+            "appreciate", "recommend", "support",
+            "understand", "consider", "recognize"
+          ],
+          "advanced": [
+            "advocate", "prioritize", "emphasize",
+            "acknowledge", "value", "endorse"
+          ]
+        }
+      }
+    }
+  }
+}

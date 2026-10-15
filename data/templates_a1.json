@@ -1,0 +1,1135 @@
+{
+  "level": "A1",
+  "version": "3.0",
+  "slots_ref": ["slots_a1.json", "slots_nouns_a1.json"],
+  "generation_rules": {
+    "min_words": 5,
+    "max_words": 12,
+    "avoid": ["предложения из 2-3 слов", "только базовые слова без контекста"],
+    "require": [
+      "хотя бы одно обстоятельство (времени, места или образа действия)",
+      "естественная лексика уровня A1",
+      "контекст, который делает предложение осмысленным"
+    ],
+    "default_slot_level": "intermediate"
+  },
+  "topics": [
+    {
+      "topic": "Verb to be (am/is/are)",
+      "subtopics": [
+        {
+          "name": "Affirmative",
+          "patterns": [
+            {
+              "id": "be_01",
+              "pattern": "[S] + am/is/are + [noun/adjective/place] + [optional: adverbial]",
+              "generation_hint": "Опиши человека, предмет или место. Добавь обстоятельство времени или места.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "noun/adjective/place": {
+                  "basic": ["a student", "happy", "at home", "a doctor"],
+                  "intermediate": ["a teacher at my school", "very tired today", "at work now", "from Ukraine"],
+                  "advanced": ["a student at the local university", "really happy about the news", "at the office until 6 pm"]
+                },
+                "adverbial": { "$ref": "slots_nouns_a1#/slots/common/times" }
+              },
+              "examples": [
+                "My friend is a teacher at my school.",
+                "She is very tired today because she worked a lot.",
+                "We are at the office until 6 pm."
+              ]
+            },
+            {
+              "id": "be_02",
+              "pattern": "[S] + am/is/are + [adjective] + [optional: because + reason]",
+              "generation_hint": "Опиши состояние или чувство. Добавь причину.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "adjective": {
+                  "basic": ["happy", "tired", "hungry", "busy", "excited"],
+                  "intermediate": ["very happy", "very tired", "quite hungry", "really busy", "very excited"],
+                  "advanced": ["really happy about the news", "very tired after work", "quite busy today"]
+                },
+                "because + reason": { "$ref": "slots_nouns_a1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I am happy because it's my birthday today.",
+                "My sister is tired because she walked a lot.",
+                "The children are hungry because they played football all morning."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Negative",
+          "patterns": [
+            {
+              "id": "be_03",
+              "pattern": "[S] + am/is/are + not + [noun/adjective/place] + [optional: but + contrast]",
+              "generation_hint": "Опиши отрицание. Добавь контраст.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "noun/adjective/place": {
+                  "basic": ["a doctor", "at home", "ready", "from Spain", "busy"],
+                  "intermediate": ["a teacher", "in the office", "very happy", "from Canada", "tired"],
+                  "advanced": ["a student at this school", "at work today", "ready for the trip"]
+                },
+                "but + contrast": { "$ref": "slots_nouns_a1#/slots/common/contrasts" }
+              },
+              "examples": [
+                "I am not a doctor, but my sister is.",
+                "They are not at home, but we are ready to wait.",
+                "He is not from Spain, but I am from Italy."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Questions",
+          "patterns": [
+            {
+              "id": "be_04",
+              "pattern": "Am/Is/Are + [S] + [noun/adjective/place] + [optional: question word]?",
+              "generation_hint": "Задай вопрос о человеке или предмете.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "noun/adjective/place": {
+                  "basic": ["a student", "at home", "from Ukraine", "ready", "busy"],
+                  "intermediate": ["a teacher at this school", "in the office", "from Canada", "happy", "tired"],
+                  "advanced": ["a student at the local university", "at work now", "from London"]
+                },
+                "question word": { "$ref": "slots_nouns_a1#/slots/misc/question_words" }
+              },
+              "examples": [
+                "Are you a student at this school?",
+                "Is she at home now?",
+                "Are they from Canada?"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Subject Pronouns and Possessive Adjectives",
+      "subtopics": [
+        {
+          "name": "Subject Pronouns",
+          "patterns": [
+            {
+              "id": "pron_01",
+              "pattern": "[Subject pronoun] + [V] + [object] + [optional: adverbial]",
+              "generation_hint": "Используй местоимения вместо имён. Добавь обстоятельство.",
+              "slots": {
+                "Subject pronoun": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V": { "$ref": "slots_a1#/slots/present_simple/affirmative/V1" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "adverbial": { "$ref": "slots_nouns_a1#/slots/common/times" }
+              },
+              "examples": [
+                "I like coffee in the morning.",
+                "She has a big family and they live in Kyiv.",
+                "We want a new phone every year."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Possessive Adjectives",
+          "patterns": [
+            {
+              "id": "poss_01",
+              "pattern": "[Possessive adjective] + [noun] + is/are + [adjective/place] + [optional: adverbial]",
+              "generation_hint": "Опиши принадлежность. Добавь деталь о предмете.",
+              "slots": {
+                "Possessive adjective": { "$ref": "slots_nouns_a1#/slots/misc/possessive_adjectives" },
+                "noun": { "$ref": "slots_nouns_a1#/slots/misc/nouns" },
+                "adjective/place": {
+                  "basic": ["big", "in the city centre", "very nice", "new", "at home"],
+                  "intermediate": ["very big", "in the city centre", "really nice", "quite new", "at home now"],
+                  "advanced": ["very big and comfortable", "in the city centre near the park", "really nice and modern"]
+                },
+                "adverbial": { "$ref": "slots_nouns_a1#/slots/common/places" }
+              },
+              "examples": [
+                "My house is big and it is near the park.",
+                "Her car is new and very nice.",
+                "Their dog is at home now."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Articles (a/an/the)",
+      "subtopics": [
+        {
+          "name": "Indefinite Article (a/an)",
+          "patterns": [
+            {
+              "id": "art_01",
+              "pattern": "[S] + [V] + a/an + [singular noun] + [optional: adverbial]",
+              "generation_hint": "Используй a/an для первого упоминания предмета.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V": { "$ref": "slots_a1#/slots/present_simple/affirmative/V1" },
+                "singular noun": { "$ref": "slots_nouns_a1#/slots/misc/singular_nouns" },
+                "adverbial": { "$ref": "slots_nouns_a1#/slots/common/places" }
+              },
+              "examples": [
+                "I have a cat and it sleeps on my bed.",
+                "She wants a new phone from the shop.",
+                "We need an umbrella because it's raining."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Definite Article (the)",
+          "patterns": [
+            {
+              "id": "art_02",
+              "pattern": "[S] + [V] + the + [noun] + [optional: adverbial/relative clause]",
+              "generation_hint": "Используй the для конкретного предмета, уже известного.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V": { "$ref": "slots_a1#/slots/present_simple/affirmative/V1" },
+                "noun": [
+                  "book on the table", "car in the garage",
+                  "man next to me", "city where I live"
+                ],
+                "adverbial/relative clause": { "$ref": "slots_nouns_a1#/slots/common/places" }
+              },
+              "examples": [
+                "I like the book on the table very much.",
+                "He knows the man next to me from work.",
+                "They like the city where they live."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Plural Nouns",
+      "subtopics": [
+        {
+          "name": "Regular Plurals (s/es)",
+          "patterns": [
+            {
+              "id": "pl_01",
+              "pattern": "There are + [number] + [plural noun] + [optional: place/adverbial]",
+              "generation_hint": "Используй множественное число. Добавь количество и место.",
+              "slots": {
+                "number": { "$ref": "slots_nouns_a1#/slots/misc/numbers" },
+                "plural noun": { "$ref": "slots_nouns_a1#/slots/misc/plural_nouns" },
+                "place/adverbial": { "$ref": "slots_nouns_a1#/slots/common/places" }
+              },
+              "examples": [
+                "There are three books on the table.",
+                "There are many students in the classroom.",
+                "There are five apples in my bag."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Irregular Plurals",
+          "patterns": [
+            {
+              "id": "pl_02",
+              "pattern": "[S] + [V] + [number] + [irregular plural] + [optional: adverbial]",
+              "generation_hint": "Используй исключения: man→men, woman→women, child→children, foot→feet, tooth→teeth.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V": { "$ref": "slots_a1#/slots/present_simple/affirmative/V1" },
+                "number": { "$ref": "slots_nouns_a1#/slots/misc/numbers" },
+                "irregular plural": { "$ref": "slots_nouns_a1#/slots/misc/irregular_plurals" },
+                "adverbial": { "$ref": "slots_nouns_a1#/slots/common/places" }
+              },
+              "examples": [
+                "I see two men in the park.",
+                "We know many people in this city.",
+                "They have three children at school."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "This / That / These / Those",
+      "subtopics": [
+        {
+          "name": "Demonstratives",
+          "patterns": [
+            {
+              "id": "dem_01",
+              "pattern": "This/That/These/Those + [noun] + is/are + [adjective/place] + [optional: adverbial]",
+              "generation_hint": "Укажи на предмет рядом (this/these) или далеко (that/those).",
+              "slots": {
+                "This/That/These/Those": { "$ref": "slots_nouns_a1#/slots/misc/demonstratives" },
+                "noun": { "$ref": "slots_nouns_a1#/slots/misc/nouns" },
+                "adjective/place": {
+                  "basic": ["very good", "old", "new", "expensive", "on the table"],
+                  "intermediate": ["really good", "quite old", "very new", "very expensive", "on the table"],
+                  "advanced": ["very good and interesting", "quite old but nice", "really new and modern"]
+                },
+                "adverbial": { "$ref": "slots_nouns_a1#/slots/common/places" }
+              },
+              "examples": [
+                "This book is very good and it is in my bag.",
+                "Those shoes are expensive and they are near the door.",
+                "That car is old but very nice."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Have got / Has got",
+      "subtopics": [
+        {
+          "name": "Possession",
+          "patterns": [
+            {
+              "id": "havegot_01",
+              "pattern": "[S] + have got/has got + [noun] + [optional: adjective/adverbial]",
+              "generation_hint": "Используй have got для принадлежности. Добавь описание предмета.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "have got/has got": ["have got", "has got"],
+                "noun": [
+                  "a new phone", "a big house", "two brothers",
+                  "a cat", "a nice car", "a small dog"
+                ],
+                "adjective/adverbial": {
+                  "basic": ["very good", "in the city centre", "at home", "from Japan"],
+                  "intermediate": ["really good", "in the city centre", "at home now", "from Italy"],
+                  "advanced": ["very good and modern", "in the city centre near the park"]
+                }
+              },
+              "examples": [
+                "I have got a new phone and it is very good.",
+                "She has got a big house in the city centre.",
+                "They have got two brothers and a cat."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Negative and Questions",
+          "patterns": [
+            {
+              "id": "havegot_02",
+              "pattern": "[S] + haven't got/hasn't got + [noun] + [optional: but + contrast]",
+              "generation_hint": "Опиши отсутствие чего-то. Добавь контраст.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "haven't got/hasn't got": ["haven't got", "hasn't got"],
+                "noun": ["a car", "a dog", "a big house", "money", "time"],
+                "but + contrast": { "$ref": "slots_nouns_a1#/slots/common/contrasts" }
+              },
+              "examples": [
+                "I haven't got a car, but my friend has.",
+                "He hasn't got a dog, but she has a cat.",
+                "We haven't got a big house, but we have a nice flat."
+              ]
+            },
+            {
+              "id": "havegot_03",
+              "pattern": "Have/Has + [S] + got + [noun] + [optional: question word]?",
+              "generation_hint": "Задай вопрос о принадлежности.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "noun": ["a phone", "a brother", "a car", "a pet", "time"],
+                "question word": { "$ref": "slots_nouns_a1#/slots/misc/question_words" }
+              },
+              "examples": [
+                "Have you got a phone with you?",
+                "Has she got a brother at home?",
+                "Have they got time now?"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "There is / There are",
+      "subtopics": [
+        {
+          "name": "Affirmative",
+          "patterns": [
+            {
+              "id": "there_01",
+              "pattern": "There is/are + [noun] + [place] + [optional: adjective]",
+              "generation_hint": "Опиши, что находится в комнате, городе или другом месте.",
+              "slots": {
+                "There is/are": ["There is", "There are"],
+                "noun": { "$ref": "slots_nouns_a1#/slots/misc/singular_nouns" },
+                "place": { "$ref": "slots_nouns_a1#/slots/common/places" },
+                "adjective": { "$ref": "slots_nouns_a1#/slots/misc/adjectives" }
+              },
+              "examples": [
+                "There is a book on the table and it is very interesting.",
+                "There are two chairs in the room.",
+                "There are many people in the park today."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Negative and Questions",
+          "patterns": [
+            {
+              "id": "there_02",
+              "pattern": "There isn't/aren't + [noun] + [place] + [optional: but + contrast]",
+              "generation_hint": "Опиши отсутствие. Добавь контраст.",
+              "slots": {
+                "There isn't/aren't": ["There isn't", "There aren't"],
+                "noun": ["a shop", "any milk", "many cars", "a park", "any people"],
+                "place": { "$ref": "slots_nouns_a1#/slots/common/places" },
+                "but + contrast": { "$ref": "slots_nouns_a1#/slots/common/contrasts" }
+              },
+              "examples": [
+                "There isn't a shop in my street, but there is a café.",
+                "There aren't many cars near here, but there are two restaurants.",
+                "There isn't any milk in the fridge, but there is juice."
+              ]
+            },
+            {
+              "id": "there_03",
+              "pattern": "Is/Are + there + [noun] + [place] + [optional: question word]?",
+              "generation_hint": "Задай вопрос о наличии чего-то.",
+              "slots": {
+                "Is/Are + there": ["Is there", "Are there"],
+                "noun": ["a bank", "any shops", "a park", "many people", "a bus stop"],
+                "place": { "$ref": "slots_nouns_a1#/slots/common/places" },
+                "question word": { "$ref": "slots_nouns_a1#/slots/misc/question_words" }
+              },
+              "examples": [
+                "Is there a bank near here?",
+                "Are there any shops on this street?",
+                "Is there a bus stop near the station?"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Present Simple",
+      "subtopics": [
+        {
+          "name": "Affirmative",
+          "patterns": [
+            {
+              "id": "ps_01",
+              "pattern": "[S] + [V1] + [object] + [adverbial of frequency/time]",
+              "generation_hint": "Опиши привычку или рутину. Обязательно добавь обстоятельство частоты или времени.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_a1#/slots/present_simple/affirmative/V1" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "adverbial of frequency/time": { "$ref": "slots_nouns_a1#/slots/common/times" }
+              },
+              "examples": [
+                "I work in an office every day.",
+                "My brother plays football on Mondays.",
+                "She reads books in the evening."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Negative",
+          "patterns": [
+            {
+              "id": "ps_02",
+              "pattern": "[S] + don't/doesn't + [V1] + [object] + [optional: because + reason]",
+              "generation_hint": "Опиши, что не происходит. Добавь причину.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "don't/doesn't": ["don't", "doesn't"],
+                "V1": { "$ref": "slots_a1#/slots/present_simple/negative/V1" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "because + reason": { "$ref": "slots_nouns_a1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I don't like coffee because I prefer tea.",
+                "He doesn't go to the gym on Sundays because he is tired.",
+                "My friends don't study English at night because it's difficult."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Questions",
+          "patterns": [
+            {
+              "id": "ps_03",
+              "pattern": "Do/Does + [S] + [V1] + [object] + [optional: question word]?",
+              "generation_hint": "Задай вопрос о привычке или факте.",
+              "slots": {
+                "Do/Does": ["Do", "Does"],
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_a1#/slots/present_simple/questions/V1" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "question word": { "$ref": "slots_nouns_a1#/slots/misc/question_words" }
+              },
+              "examples": [
+                "Do you speak English every day?",
+                "Does she work in a big city?",
+                "Do they play football at the weekend?"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Present Continuous",
+      "subtopics": [
+        {
+          "name": "Affirmative",
+          "patterns": [
+            {
+              "id": "pc_01",
+              "pattern": "[S] + am/is/are + [V-ing] + [object/place] + [optional: now]",
+              "generation_hint": "Опиши, что происходит прямо сейчас.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "am/is/are": ["am", "is", "are"],
+                "V-ing": { "$ref": "slots_a1#/slots/present_continuous/affirmative/V-ing" },
+                "object/place": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "now": ["now", "at the moment", "right now"]
+              },
+              "examples": [
+                "I am reading a book now.",
+                "She is watching TV at the moment.",
+                "They are playing in the garden right now."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Negative and Questions",
+          "patterns": [
+            {
+              "id": "pc_02",
+              "pattern": "[S] + am/is/are + not + [V-ing] + [object] + [optional: because + reason]",
+              "generation_hint": "Опиши, что не происходит сейчас. Добавь причину.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "am/is/are + not": ["am not", "is not", "are not"],
+                "V-ing": { "$ref": "slots_a1#/slots/present_continuous/negative/V-ing" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "because + reason": { "$ref": "slots_nouns_a1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I am not sleeping now because it's a holiday.",
+                "He is not working at the moment because he is on a break.",
+                "We are not studying because we are tired."
+              ]
+            },
+            {
+              "id": "pc_03",
+              "pattern": "Am/Is/Are + [S] + [V-ing] + [object] + [optional: question word]?",
+              "generation_hint": "Задай вопрос о действии сейчас.",
+              "slots": {
+                "Am/Is/Are": ["Am", "Is", "Are"],
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_a1#/slots/present_continuous/questions/V-ing" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "question word": { "$ref": "slots_nouns_a1#/slots/misc/question_words" }
+              },
+              "examples": [
+                "Are you reading a book now?",
+                "Is she watching TV at the moment?",
+                "Are they waiting for a bus?"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Present Simple vs Present Continuous",
+      "subtopics": [
+        {
+          "name": "Contrast",
+          "patterns": [
+            {
+              "id": "ps_pc_01",
+              "pattern": "[S] + usually + [V1] + [object], but + now + [S] + am/is/are + [V-ing] + [object]",
+              "generation_hint": "Сравни привычку и действие сейчас. Используй usually и now.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_a1#/slots/present_simple/affirmative/V1" },
+                "object (habit)": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "V-ing": { "$ref": "slots_a1#/slots/present_continuous/affirmative/V-ing" },
+                "object (now)": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" }
+              },
+              "examples": [
+                "I usually go to school, but now I am going to the park.",
+                "She usually drinks coffee, but now she is drinking tea.",
+                "They usually play football, but now they are playing in the garden."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Can / Can't (Ability and Permission)",
+      "subtopics": [
+        {
+          "name": "Ability",
+          "patterns": [
+            {
+              "id": "can_01",
+              "pattern": "[S] + can + [V1] + [object] + [optional: very well/a little]",
+              "generation_hint": "Опиши умение. Добавь оценку или контекст.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_a1#/slots/can_cant/ability/V1" },
+                "object": [
+                  "English", "the piano", "a car", "very well", "a little"
+                ],
+                "optional": { "$ref": "slots_nouns_a1#/slots/misc/adjectives_ability" }
+              },
+              "examples": [
+                "I can swim very well.",
+                "She can speak English but not very well.",
+                "My brother can play the piano and he is very good at it."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Permission and Requests",
+          "patterns": [
+            {
+              "id": "can_02",
+              "pattern": "Can + [S] + [V1] + [object] + [optional: please]?",
+              "generation_hint": "Попроси разрешение или вежливо попроси что-то.",
+              "slots": {
+                "Can": ["Can"],
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_a1#/slots/can_cant/permission_requests/V1" },
+                "object": [
+                  "to the park", "some water", "your phone",
+                  "the window", "here"
+                ],
+                "please": ["please", "please?"]
+              },
+              "examples": [
+                "Can I go to the park, please?",
+                "Can you open the window, please?",
+                "Can we have some water, please?"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Negative (can't)",
+          "patterns": [
+            {
+              "id": "can_03",
+              "pattern": "[S] + can't + [V1] + [object] + [optional: because + reason]",
+              "generation_hint": "Опиши невозможность или запрет. Добавь причину.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "can't": ["can't"],
+                "V1": { "$ref": "slots_a1#/slots/can_cant/negative/V1" },
+                "object": ["today", "very well", "to the party", "now", "with this"],
+                "because + reason": { "$ref": "slots_nouns_a1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I can't come today because I am busy.",
+                "He can't swim very well because he is afraid of water.",
+                "They can't go to the party because they are at work."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Imperatives",
+      "subtopics": [
+        {
+          "name": "Positive and Negative Imperatives",
+          "patterns": [
+            {
+              "id": "imp_01",
+              "pattern": "[V1] + [object] + [optional: please] / Don't + [V1] + [object] + [optional: please]",
+              "generation_hint": "Дай команду, инструкцию или совет. Добавь please для вежливости.",
+              "slots": {
+                "V1 (positive)": { "$ref": "slots_a1#/slots/imperatives/positive/V1" },
+                "object (positive)": ["the door", "the window", "here", "your book", "to me"],
+                "V1 (negative)": { "$ref": "slots_a1#/slots/imperatives/negative/V1" },
+                "object (negative)": [
+                  "open the window", "be late", "touch this",
+                  "run here", "forget your bag"
+                ],
+                "please": ["please", "please."]
+              },
+              "examples": [
+                "Open the door, please.",
+                "Don't be late, please.",
+                "Close the window, please."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Possessive 's",
+      "subtopics": [
+        {
+          "name": "Possessive 's",
+          "patterns": [
+            {
+              "id": "poss_s_01",
+              "pattern": "[Person] + 's + [noun] + is/are + [adjective/place] + [optional: adverbial]",
+              "generation_hint": "Опиши принадлежность через 's. Добавь описание предмета.",
+              "slots": {
+                "Person": ["My mother", "My brother", "Anna", "My friend", "The teacher"],
+                "noun": { "$ref": "slots_nouns_a1#/slots/misc/nouns" },
+                "adjective/place": {
+                  "basic": ["new", "very nice", "in the city centre", "big", "old"],
+                  "intermediate": ["quite new", "really nice", "in the city centre", "very big", "quite old"],
+                  "advanced": ["very new and modern", "really nice and comfortable", "in the city centre near the park"]
+                },
+                "adverbial": { "$ref": "slots_nouns_a1#/slots/common/places" }
+              },
+              "examples": [
+                "My mother's car is new and it is in the city centre.",
+                "Anna's bag is very nice.",
+                "The teacher's book is on the table."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Prepositions of Place",
+      "subtopics": [
+        {
+          "name": "In, on, at, under, next to, behind, in front of",
+          "patterns": [
+            {
+              "id": "prep_place_01",
+              "pattern": "[S] + is/are + [preposition] + [noun/place] + [optional: adjective]",
+              "generation_hint": "Опиши местоположение предмета. Добавь описание.",
+              "slots": {
+                "S": ["The book", "The cat", "My phone", "The keys", "The bag"],
+                "is/are": ["is", "are"],
+                "preposition": { "$ref": "slots_nouns_a1#/slots/misc/prepositions_place" },
+                "noun/place": ["the table", "the sofa", "the box", "the door", "the chair", "the window"],
+                "adjective": { "$ref": "slots_nouns_a1#/slots/misc/adjectives" }
+              },
+              "examples": [
+                "The book is on the table and it is very old.",
+                "The cat is under the sofa.",
+                "My phone is next to the door."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Prepositions of Time",
+      "subtopics": [
+        {
+          "name": "In, on, at (time)",
+          "patterns": [
+            {
+              "id": "prep_time_01",
+              "pattern": "[S] + [V1] + [object] + in/on/at + [time expression]",
+              "generation_hint": "Используй in (месяцы, годы, части дня), on (дни), at (время, праздники).",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_a1#/slots/present_simple/affirmative/V1" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "in/on/at + time expression": { "$ref": "slots_nouns_a1#/slots/misc/time_expressions" }
+              },
+              "examples": [
+                "I go to school in the morning.",
+                "She has English classes on Monday.",
+                "We start work at 9 o'clock."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Past Simple (was/were)",
+      "subtopics": [
+        {
+          "name": "Was/Were",
+          "patterns": [
+            {
+              "id": "was_were_01",
+              "pattern": "[S] + was/were + [adjective/place] + [time expression] + [optional: but + contrast]",
+              "generation_hint": "Опиши состояние или место в прошлом. Добавь время и контраст.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "was/were": ["was", "were"],
+                "adjective/place": {
+                  "basic": ["at home", "very tired", "in the park", "happy", "at school"],
+                  "intermediate": ["at home", "really tired", "in the park", "very happy", "at school"],
+                  "advanced": ["at home all day", "really tired after work", "in the park with friends"]
+                },
+                "time expression": { "$ref": "slots_nouns_a1#/slots/common/times" },
+                "but + contrast": { "$ref": "slots_nouns_a1#/slots/common/contrasts" }
+              },
+              "examples": [
+                "I was at home yesterday, but now I am at work.",
+                "She was very tired last night, but now she is at home.",
+                "They were in the park two days ago."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Was/Were — Negative and Questions",
+          "patterns": [
+            {
+              "id": "was_were_02",
+              "pattern": "[S] + wasn't/weren't + [adjective/place] + [time] + [optional: because + reason]",
+              "generation_hint": "Опиши отсутствие в прошлом. Добавь причину.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "wasn't/weren't": ["wasn't", "weren't"],
+                "adjective/place": {
+                  "basic": ["at home", "at school", "happy", "in the office", "ready"],
+                  "intermediate": ["at home", "at school", "very happy", "in the office", "ready"],
+                  "advanced": ["at home yesterday", "at school last week", "in the office all day"]
+                },
+                "time": { "$ref": "slots_nouns_a1#/slots/common/times" },
+                "because + reason": { "$ref": "slots_nouns_a1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I wasn't at home yesterday because I was ill.",
+                "He wasn't at school last Monday because he was on holiday.",
+                "We weren't ready two days ago because we were busy."
+              ]
+            },
+            {
+              "id": "was_were_03",
+              "pattern": "Was/Were + [S] + [adjective/place] + [time] + [optional: question word]?",
+              "generation_hint": "Задай вопрос о прошлом.",
+              "slots": {
+                "Was/Were": ["Was", "Were"],
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "adjective/place": {
+                  "basic": ["at home", "at school", "happy", "in the park", "tired"],
+                  "intermediate": ["at home", "at school", "very happy", "in the park", "very tired"],
+                  "advanced": ["at home yesterday", "at school last week", "in the park with friends"]
+                },
+                "time": { "$ref": "slots_nouns_a1#/slots/common/times" },
+                "question word": { "$ref": "slots_nouns_a1#/slots/misc/question_words" }
+              },
+              "examples": [
+                "Were you at home yesterday?",
+                "Was she happy at the party?",
+                "Were they at work last week?"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Past Simple (Regular Verbs)",
+      "subtopics": [
+        {
+          "name": "Affirmative",
+          "patterns": [
+            {
+              "id": "past_reg_01",
+              "pattern": "[S] + [V2] + [object] + [time expression]",
+              "generation_hint": "Опиши завершённое действие в прошлом. Обязательно добавь время.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V2": { "$ref": "slots_a1#/slots/past_simple_regular/affirmative/V2" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "time expression": { "$ref": "slots_nouns_a1#/slots/common/times" }
+              },
+              "examples": [
+                "I worked in the garden yesterday.",
+                "She watched a film last night.",
+                "We visited my grandmother two days ago."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Negative and Questions",
+          "patterns": [
+            {
+              "id": "past_reg_02",
+              "pattern": "[S] + didn't + [V1] + [object] + [time] + [optional: because + reason]",
+              "generation_hint": "Опиши, что не произошло в прошлом. Добавь причину.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "didn't": ["didn't"],
+                "V1": { "$ref": "slots_a1#/slots/past_simple_regular/negative_questions/V1" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "time": { "$ref": "slots_nouns_a1#/slots/common/times" },
+                "because + reason": { "$ref": "slots_nouns_a1#/slots/common/reasons" }
+              },
+              "examples": [
+                "I didn't work yesterday because I was tired.",
+                "He didn't play football last week because it was raining.",
+                "They didn't visit their friends on Sunday because they were busy."
+              ]
+            },
+            {
+              "id": "past_reg_03",
+              "pattern": "Did + [S] + [V1] + [object] + [time] + [optional: question word]?",
+              "generation_hint": "Задай вопрос о прошлом.",
+              "slots": {
+                "Did": ["Did"],
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V1": { "$ref": "slots_a1#/slots/past_simple_regular/negative_questions/V1" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "time": { "$ref": "slots_nouns_a1#/slots/common/times" }
+              },
+              "examples": [
+                "Did you work yesterday?",
+                "Did she watch the film last week?",
+                "Did they visit their friends on Sunday?"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Past Simple (Irregular Verbs)",
+      "subtopics": [
+        {
+          "name": "Common Irregular Verbs",
+          "patterns": [
+            {
+              "id": "past_irr_01",
+              "pattern": "[S] + [V2] + [object] + [time expression] + [optional: additional info]",
+              "generation_hint": "Используй неправильные глаголы: go→went, see→saw, have→had, do→did, make→made, take→took, get→got, come→came.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V2": { "$ref": "slots_a1#/slots/past_simple_irregular/affirmative/V2" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/media_leisure/complex_objects" },
+                "time expression": { "$ref": "slots_nouns_a1#/slots/common/times" },
+                "additional info": { "$ref": "slots_nouns_a1#/slots/speech/additional_info" }
+              },
+              "examples": [
+                "I went to the cinema yesterday and it was very nice.",
+                "She made a cake last week and we had a good time.",
+                "They took a lot of photos on Sunday and they liked it a lot."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Countable and Uncountable Nouns",
+      "subtopics": [
+        {
+          "name": "Countable vs Uncountable",
+          "patterns": [
+            {
+              "id": "count_01",
+              "pattern": "[S] + [V] + [number] + [countable noun] / [S] + [V] + [amount] + [uncountable noun]",
+              "generation_hint": "Используй числа с исчисляемыми и слова like some/much/a lot of с неисчисляемыми.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V": { "$ref": "slots_a1#/slots/present_simple/affirmative/V1" },
+                "countable noun": { "$ref": "slots_nouns_a1#/slots/misc/countable_nouns" },
+                "uncountable noun": { "$ref": "slots_nouns_a1#/slots/misc/uncountable_nouns" },
+                "amount": ["some", "a lot of", "much", "a little"]
+              },
+              "examples": [
+                "I have three apples and some water.",
+                "We need a lot of bread and two bottles of milk.",
+                "They want some money and a little time."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Some / Any",
+      "subtopics": [
+        {
+          "name": "Some and Any",
+          "patterns": [
+            {
+              "id": "some_any_01",
+              "pattern": "[S] + [V] + some/any + [noun] + [optional: place]",
+              "generation_hint": "Используй some в утверждениях, any в вопросах и отрицаниях.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V": { "$ref": "slots_a1#/slots/present_simple/affirmative/V1" },
+                "some/any": ["some", "any"],
+                "noun": { "$ref": "slots_nouns_a1#/slots/topics/food_shopping/complex_objects" },
+                "place": { "$ref": "slots_nouns_a1#/slots/common/places" }
+              },
+              "examples": [
+                "I have some apples in the fridge.",
+                "We don't need any milk at home.",
+                "Do you have any bread on the table?"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Much / Many / A lot of",
+      "subtopics": [
+        {
+          "name": "Quantifiers",
+          "patterns": [
+            {
+              "id": "much_many_01",
+              "pattern": "[S] + [V] + much/many/a lot of + [noun] + [optional: place]",
+              "generation_hint": "Используй many с исчисляемыми, much с неисчисляемыми, a lot of с обоими.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "V": { "$ref": "slots_a1#/slots/present_simple/affirmative/V1" },
+                "much/many/a lot of": ["much", "many", "a lot of"],
+                "noun": { "$ref": "slots_nouns_a1#/slots/misc/plural_nouns" },
+                "place": { "$ref": "slots_nouns_a1#/slots/common/places" }
+              },
+              "examples": [
+                "I have many books at home.",
+                "She doesn't have much time today.",
+                "They have a lot of friends in the city."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Adverbs of Frequency",
+      "subtopics": [
+        {
+          "name": "Always, usually, often, sometimes, never",
+          "patterns": [
+            {
+              "id": "adv_freq_01",
+              "pattern": "[S] + [adverb of frequency] + [V1] + [object] + [optional: time/place]",
+              "generation_hint": "Поставь наречие частоты перед основным глаголом. Добавь контекст.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "adverb of frequency": { "$ref": "slots_nouns_a1#/slots/misc/adverbs_frequency" },
+                "V1": { "$ref": "slots_a1#/slots/present_simple/affirmative/V1" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "time/place": { "$ref": "slots_nouns_a1#/slots/common/times" }
+              },
+              "examples": [
+                "I always drink coffee in the morning.",
+                "She usually reads books in the evening.",
+                "They never watch TV after work."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Like + V-ing",
+      "subtopics": [
+        {
+          "name": "Like, love, hate + V-ing",
+          "patterns": [
+            {
+              "id": "like_ing_01",
+              "pattern": "[S] + like/love/hate + [V-ing] + [object] + [optional: time/place]",
+              "generation_hint": "Используй герундий после like/love/hate. Добавь контекст.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "like/love/hate": ["like", "love", "hate"],
+                "V-ing": { "$ref": "slots_a1#/slots/like_ing/affirmative/V-ing" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/media_leisure/complex_objects" },
+                "time/place": { "$ref": "slots_nouns_a1#/slots/common/times" }
+              },
+              "examples": [
+                "I like swimming in the sea in summer.",
+                "She loves reading books in the evening.",
+                "They hate cooking dinner at the weekend."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Would like",
+      "subtopics": [
+        {
+          "name": "Would like + noun / to + V1",
+          "patterns": [
+            {
+              "id": "would_like_01",
+              "pattern": "[S] + would like + [noun] / to + [V1] + [optional: please]",
+              "generation_hint": "Используй would like для вежливых желаний и просьб.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "would like": ["would like"],
+                "noun": { "$ref": "slots_a1#/slots/would_like/affirmative/noun" },
+                "to + V1": { "$ref": "slots_a1#/slots/would_like/affirmative/to + V1" },
+                "please": ["please", "please."]
+              },
+              "examples": [
+                "I would like a cup of tea, please.",
+                "She would like to go to the park.",
+                "We would like to visit our friends."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Going to (Future Plans)",
+      "subtopics": [
+        {
+          "name": "Be going to",
+          "patterns": [
+            {
+              "id": "going_to_01",
+              "pattern": "[S] + am/is/are + going to + [V1] + [object] + [optional: time]",
+              "generation_hint": "Используй going to для планов. Добавь время или место.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_a1#/slots/common/subjects" },
+                "am/is/are": ["am", "is", "are"],
+                "V1": { "$ref": "slots_a1#/slots/going_to/affirmative/V1" },
+                "object": { "$ref": "slots_nouns_a1#/slots/topics/daily_life/complex_objects" },
+                "time": { "$ref": "slots_nouns_a1#/slots/common/times" }
+              },
+              "examples": [
+                "I am going to visit my grandmother tomorrow.",
+                "She is going to buy a new phone next week.",
+                "They are going to watch a film tonight."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

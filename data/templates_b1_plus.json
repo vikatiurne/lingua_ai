@@ -1,0 +1,525 @@
+{
+  "level": "B1+",
+  "version": "1.0",
+  "slots_ref": ["slots_b1_plus.json", "slots_nouns_b1_plus.json"],
+  "generation_rules": {
+    "min_words": 10,
+    "max_words": 22,
+    "avoid": [
+      "простые предложения из 5-6 слов",
+      "только базовые времена без контекста",
+      "однообразная структура"
+    ],
+    "require": [
+      "хотя бы два обстоятельства или одно сложное придаточное",
+      "естественная лексика уровня B1+",
+      "чёткая причинно-следственная или хронологическая связь",
+      "использование linking words где уместно"
+    ],
+    "default_slot_level": "intermediate"
+  },
+  "topics": [
+    {
+      "topic": "Present Perfect Continuous",
+      "subtopics": [
+        {
+          "name": "Duration with Result",
+          "patterns": [
+            {
+              "id": "ppc_01",
+              "pattern": "[S] + have/has been + [V-ing] + [complex object] + for/since + [time] + [optional: result]",
+              "generation_hint": "Подчеркни длительность и результат. Используй for/since для точности.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_b1_plus#/slots/present_perfect_continuous/affirmative/V-ing" },
+                "complex object": { "$ref": "slots_nouns_b1_plus#/slots/topics/work_career/complex_objects" },
+                "for/since + time": { "$ref": "slots_nouns_b1_plus#/slots/common/times" },
+                "result": { "$ref": "slots_nouns_b1_plus#/slots/common/results" }
+              },
+              "examples": [
+                "I have been working on a strategic initiative for the marketing department since last Monday, and I think I am finally making progress.",
+                "She has been studying English for more than five years, so she feels much more confident in real conversations now."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Past Perfect vs Past Perfect Continuous",
+      "subtopics": [
+        {
+          "name": "Contrast",
+          "patterns": [
+            {
+              "id": "pastp_ppc_01",
+              "pattern": "[S] + had + [V3] + [complex object] + before + [S] + [V2], but + [S] + had been + [V-ing] + for + [time]",
+              "generation_hint": "Покажи разницу: Past Perfect — завершённое действие до другого, Past Perfect Continuous — длительность до момента.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "V3": { "$ref": "slots_b1_plus#/slots/past_perfect/affirmative/V3" },
+                "complex object": { "$ref": "slots_nouns_b1_plus#/slots/topics/work_career/complex_objects" },
+                "before + S + V2": [
+                  "before the deadline arrived",
+                  "before the meeting started",
+                  "before the client called",
+                  "before we left the office"
+                ],
+                "V-ing": { "$ref": "slots_b1_plus#/slots/past_perfect_continuous/affirmative/V-ing" },
+                "for + time": { "$ref": "slots_nouns_b1_plus#/slots/common/times" }
+              },
+              "examples": [
+                "I had finished the strategic plan before the client called, but I had been working on it for more than two weeks.",
+                "She had completed the report before the meeting started, but she had been preparing it since Monday morning."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Future Continuous and Future Perfect",
+      "subtopics": [
+        {
+          "name": "Future Continuous (will be + V-ing)",
+          "patterns": [
+            {
+              "id": "futc_01",
+              "pattern": "This time next week, [S] + will be + [V-ing] + [complex object] + [optional: place]",
+              "generation_hint": "Используй Future Continuous для действий в процессе в конкретный момент будущего.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_b1_plus#/slots/future_continuous/affirmative/V-ing" },
+                "complex object": { "$ref": "slots_nouns_b1_plus#/slots/topics/travel/complex_objects" },
+                "place": { "$ref": "slots_nouns_b1_plus#/slots/common/places" }
+              },
+              "examples": [
+                "This time next week, I will be travelling through South-East Asia.",
+                "This time next month, she will be working on a new project at the company's main office.",
+                "This time tomorrow, they will be attending an international conference in Berlin."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Future Perfect (will have + V3)",
+          "patterns": [
+            {
+              "id": "futp_01",
+              "pattern": "By + [future time], [S] + will have + [V3] + [complex object] + [optional: result]",
+              "generation_hint": "Используй Future Perfect для действий, которые завершатся к определённому моменту.",
+              "slots": {
+                "future time": ["next Friday", "the end of the month", "the end of the year", "2027", "next summer"],
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "V3": { "$ref": "slots_b1_plus#/slots/future_perfect/affirmative/V3" },
+                "complex object": { "$ref": "slots_nouns_b1_plus#/slots/topics/education/complex_objects" },
+                "result": { "$ref": "slots_nouns_b1_plus#/slots/common/results" }
+              },
+              "examples": [
+                "By next Friday, I will have completed all the assignments for the certification in project management.",
+                "By the end of the year, she will have finished her postgraduate course and opened up new opportunities for herself.",
+                "By 2027, they will have implemented the long-term plan for the company's development."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Modals of Deduction",
+      "subtopics": [
+        {
+          "name": "must have / might have / can't have + V3",
+          "patterns": [
+            {
+              "id": "deduct_01",
+              "pattern": "[S] + must/might/can't have + [V3] + [complex object] + [optional: because + reason]",
+              "generation_hint": "Используй модальные перфекты для догадок о прошлом. must — уверен, might — возможно, can't — не может быть.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "must/might/can't have": ["must have", "might have", "can't have"],
+                "V3": { "$ref": "slots_b1_plus#/slots/modals_deduction/affirmative/have_V3" },
+                "complex object": [
+                  "the wrong decision",
+                  "the client's message",
+                  "the meeting details",
+                  "the deadline"
+                ],
+                "because + reason": { "$ref": "slots_nouns_b1_plus#/slots/common/reasons" }
+              },
+              "examples": [
+                "She must have misunderstood the client's message because she sent the wrong document.",
+                "They can't have received the meeting details because they arrived completely unprepared.",
+                "He might have forgotten the deadline because he looked very stressed when I asked him."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Causative (have/get something done)",
+      "subtopics": [
+        {
+          "name": "Have / Get + object + V3",
+          "patterns": [
+            {
+              "id": "caus_01",
+              "pattern": "[S] + had/got + [object] + [V3] + [optional: by + agent] + [optional: time]",
+              "generation_hint": "Используй causative, когда действие выполняет кто-то другой, а не сам субъект.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "had/got": ["had", "got"],
+                "object": [
+                  "my laptop", "the office", "my CV", "the report",
+                  "my car", "the website"
+                ],
+                "V3": { "$ref": "slots_b1_plus#/slots/causative/affirmative/V3" },
+                "by + agent": { "$ref": "slots_nouns_b1_plus#/slots/common/agents" },
+                "time": { "$ref": "slots_nouns_b1_plus#/slots/common/times" }
+              },
+              "examples": [
+                "I had my CV reviewed by a professional consultant before applying for the job.",
+                "She got the office renovated by a team of local craftsmen last month.",
+                "They had the website redesigned because the old version was too complicated."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Third Conditional and Mixed Conditionals",
+      "subtopics": [
+        {
+          "name": "Third Conditional",
+          "patterns": [
+            {
+              "id": "cond_3rd_01",
+              "pattern": "If + [S] + had + [V3] + [complex object], [S] + would have + [V3] + [complex object] + [optional: result]",
+              "generation_hint": "Опиши нереальную ситуацию в прошлом и её гипотетический результат.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "had + V3": { "$ref": "slots_b1_plus#/slots/third_conditional/had_V3/V3" },
+                "complex object (condition)": [
+                  "the client's requirements carefully",
+                  "my priorities right",
+                  "about the deadline earlier",
+                  "the offer when it was on the table"
+                ],
+                "would have + V3": { "$ref": "slots_b1_plus#/slots/third_conditional/would_have_V3/V3" },
+                "complex object (result)": [
+                  "the whole project on time",
+                  "the contract with the investor",
+                  "all the issues we had",
+                  "a completely different outcome"
+                ],
+                "result": { "$ref": "slots_nouns_b1_plus#/slots/common/results" }
+              },
+              "examples": [
+                "If I had read the client's requirements carefully, I would have avoided all the issues we had.",
+                "If she had got her priorities right, she would have completed the whole project on time and everything would have gone smoothly.",
+                "If they had acted on the offer when it was on the table, they would have got the contract with the investor."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mixed Conditional (Past → Present)",
+          "patterns": [
+            {
+              "id": "cond_mixed_01",
+              "pattern": "If + [S] + had + [V3] + [complex object], [S] + would + [V1] + [complex object] + now",
+              "generation_hint": "Смешанный conditional: условие в прошлом, результат в настоящем.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "had + V3": { "$ref": "slots_b1_plus#/slots/third_conditional/had_V3/V3" },
+                "complex object (past)": [
+                  "the certification in project management",
+                  "the opportunity to work abroad",
+                  "the language course last year",
+                  "the job offer"
+                ],
+                "would + V1": { "$ref": "slots_b1_plus#/slots/conditionals_second/would/V1" },
+                "complex object (present)": [
+                  "a much higher salary",
+                  "in a completely different role",
+                  "with international clients fluently",
+                  "a much more interesting career"
+                ]
+              },
+              "examples": [
+                "If I had got the certification in project management, I would have a much higher salary now.",
+                "If she had taken the opportunity to work abroad, she would be working in a completely different role now.",
+                "If they had done the language course last year, they would communicate with international clients fluently now."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Wish / If only",
+      "subtopics": [
+        {
+          "name": "Wish + Past Simple (present)",
+          "patterns": [
+            {
+              "id": "wish_01",
+              "pattern": "[S] + wish + [S] + [Past Simple] + [complex object] + [optional: but + contrast]",
+              "generation_hint": "Используй wish + Past Simple для сожалений о настоящем.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "wish": ["wish"],
+                "Past Simple": { "$ref": "slots_b1_plus#/slots/wish_if_only/past_simple/V2" },
+                "complex object": [
+                  "more free time during the week",
+                  "how to solve this problem",
+                  "a better work-life balance",
+                  "a bigger flat in the city centre"
+                ],
+                "but + contrast": { "$ref": "slots_nouns_b1_plus#/slots/common/contrasts" }
+              },
+              "examples": [
+                "I wish I had more free time during the week, but my schedule is completely full.",
+                "She wishes she knew how to solve this problem, but it's more complicated than she expected.",
+                "They wish they had a better work-life balance, but their jobs are very demanding."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Wish + Past Perfect (past regrets)",
+          "patterns": [
+            {
+              "id": "wish_02",
+              "pattern": "[S] + wish + [S] + had + [V3] + [complex object] + [optional: result]",
+              "generation_hint": "Используй wish + Past Perfect для сожалений о прошлом.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "wish": ["wish"],
+                "had + V3": { "$ref": "slots_b1_plus#/slots/wish_if_only/past_perfect/had_V3" },
+                "complex object": [
+                  "the offer when I had the chance",
+                  "the language course last year",
+                  "the client's requirements more carefully",
+                  "the decision more slowly"
+                ],
+                "result": { "$ref": "slots_nouns_b1_plus#/slots/common/results" }
+              },
+              "examples": [
+                "I wish I had taken the offer when I had the chance, but I was too afraid of change.",
+                "She wishes she had done the language course last year, because now she feels less confident at work.",
+                "They wish they had read the client's requirements more carefully, because they lost the contract."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Passive Voice (Advanced)",
+      "subtopics": [
+        {
+          "name": "Present Perfect Passive",
+          "patterns": [
+            {
+              "id": "pass_pp_01",
+              "pattern": "[S] + have/has been + [V3] + [optional: by + agent] + [optional: time/place]",
+              "generation_hint": "Используй Present Perfect Passive для результата, важного сейчас.",
+              "slots": {
+                "S": [
+                  "the project", "all the documents", "the new system",
+                  "the results", "the decision"
+                ],
+                "have/has been": ["have been", "has been"],
+                "V3": { "$ref": "slots_b1_plus#/slots/passive_advanced/present_perfect/V3" },
+                "by + agent": { "$ref": "slots_nouns_b1_plus#/slots/common/agents" },
+                "time/place": { "$ref": "slots_nouns_b1_plus#/slots/common/times" }
+              },
+              "examples": [
+                "The project has been implemented by the whole team recently, and the first results look promising.",
+                "All the documents have been reviewed by the research department, so we are ready for the audit.",
+                "The new system has been streamlined by a team of experts this month."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Future Passive",
+          "patterns": [
+            {
+              "id": "pass_future_01",
+              "pattern": "[S] + will be + [V3] + [optional: by + agent] + [optional: time/place]",
+              "generation_hint": "Используй Future Passive для будущих событий, где важен процесс.",
+              "slots": {
+                "S": [
+                  "the new office", "the results", "the presentation",
+                  "all the materials", "the event"
+                ],
+                "will be": ["will be"],
+                "V3": { "$ref": "slots_b1_plus#/slots/passive_advanced/future/V3" },
+                "by + agent": { "$ref": "slots_nouns_b1_plus#/slots/common/agents" },
+                "time/place": { "$ref": "slots_nouns_b1_plus#/slots/common/times" }
+              },
+              "examples": [
+                "The new office will be opened by the board of directors next month.",
+                "The results will be announced by the committee responsible for the project at the end of the year.",
+                "The presentation will be prepared by the marketing team before the conference."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Modal Passive",
+          "patterns": [
+            {
+              "id": "pass_modal_01",
+              "pattern": "[S] + should/can/must + be + [V3] + [optional: by + agent] + [optional: reason]",
+              "generation_hint": "Используй модальный пассив для рекомендаций, возможностей и обязательств.",
+              "slots": {
+                "S": [
+                  "the proposal", "all the applications", "the documents",
+                  "the presentation", "the report"
+                ],
+                "should/can/must": ["should", "can", "must"],
+                "be + V3": { "$ref": "slots_b1_plus#/slots/passive_advanced/modals/be_V3" },
+                "by + agent": { "$ref": "slots_nouns_b1_plus#/slots/common/agents" },
+                "reason": { "$ref": "slots_nouns_b1_plus#/slots/common/reasons" }
+              },
+              "examples": [
+                "The proposal should be reviewed by the committee before we make a final decision.",
+                "All the applications must be submitted by the end of the week because the deadline is strict.",
+                "The report can be prepared by the research department without any additional support."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Reported Speech (Advanced)",
+      "subtopics": [
+        {
+          "name": "Reporting Verbs",
+          "patterns": [
+            {
+              "id": "rep_adv_01",
+              "pattern": "[S] + [reporting verb] + (that) + [S] + [V2] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй разные reporting verbs для передачи чужой речи.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "reporting verb": { "$ref": "slots_b1_plus#/slots/reporting_advanced/verbs" },
+                "V2": { "$ref": "slots_b1_plus#/slots/past_perfect/affirmative/V3" },
+                "complex object": { "$ref": "slots_nouns_b1_plus#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_b1_plus#/slots/common/reasons" }
+              },
+              "examples": [
+                "He explained that he had completed the strategic plan before the deadline because the client was waiting.",
+                "She admitted that she had misunderstood the client's requirements, and promised to fix everything.",
+                "The manager emphasized that we had done a great job on the international project."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Relative Clauses (Advanced)",
+      "subtopics": [
+        {
+          "name": "Non-defining Relative Clauses",
+          "patterns": [
+            {
+              "id": "rel_nondef_01",
+              "pattern": "[S], who/which + [V] + [complex object], + [optional: additional info]",
+              "generation_hint": "Используй non-defining relative clauses для дополнительной информации. Запятые обязательны.",
+              "slots": {
+                "S": [
+                  "my manager", "this book", "the project",
+                  "the city", "the colleague"
+                ],
+                "who/which": ["who", "which"],
+                "V": { "$ref": "slots_b1_plus#/slots/relative_clauses_advanced/affirmative/V" },
+                "complex object": [
+                  "me the most in my career",
+                  "my way of thinking",
+                  "everyone at the meeting",
+                  "the whole team's approach"
+                ],
+                "additional info": { "$ref": "slots_nouns_b1_plus#/slots/speech/additional_info" }
+              },
+              "examples": [
+                "My manager, who supported me the most in my career, has become one of my closest mentors, and I will always be grateful to him.",
+                "This book, which changed my way of thinking, is called 'Atomic Habits', and I often recommend it to others.",
+                "The project, which impressed everyone at the meeting, has become a turning point for our company."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Linking Words and Cohesion",
+      "subtopics": [
+        {
+          "name": "Contrast and Consequence",
+          "patterns": [
+            {
+              "id": "link_01",
+              "pattern": "[S] + [V1] + [complex object]. However/Therefore, + [S] + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй linking words для связи идей в тексте: however, therefore, nevertheless, consequently.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b1_plus#/slots/common/subjects" },
+                "V1 (first)": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (first)": { "$ref": "slots_nouns_b1_plus#/slots/topics/work_career/complex_objects" },
+                "However/Therefore": ["However", "Therefore", "Nevertheless", "Consequently"],
+                "V1 (second)": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (second)": { "$ref": "slots_nouns_b1_plus#/slots/topics/education/complex_objects" },
+                "reason": { "$ref": "slots_nouns_b1_plus#/slots/common/reasons" }
+              },
+              "examples": [
+                "Our team works on several international projects. However, we still need to improve our communication with the client because the deadlines are getting tighter.",
+                "The company invests in new technology. Therefore, it develops innovative solutions for the market.",
+                "She studies hard and practices every day. Nevertheless, she still needs more confidence in real conversations."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Linking Verbs",
+      "subtopics": [
+        {
+          "name": "Linking Verbs (seem, appear, become, turn out)",
+          "patterns": [
+            {
+              "id": "linkv_01",
+              "pattern": "[S] + [linking verb] + [adjective/noun phrase] + [optional: reason/time]",
+              "generation_hint": "Используй linking verbs для описания состояний и изменений.",
+              "slots": {
+                "S": [
+                  "this approach", "the new system", "the situation",
+                  "the project", "the results"
+                ],
+                "linking verb": { "$ref": "slots_b1_plus#/slots/linking_verbs/affirmative/V" },
+                "adjective/noun phrase": [
+                  "very effective", "quite complicated",
+                  "the best option", "more interesting than expected",
+                  "a real breakthrough"
+                ],
+                "reason/time": { "$ref": "slots_nouns_b1_plus#/slots/common/reasons" }
+              },
+              "examples": [
+                "This approach seems very effective because it saves us a lot of time.",
+                "The new system appears quite complicated, but it turns out to be very useful in practice.",
+                "The situation remains challenging, but the results have become a real breakthrough for the team."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

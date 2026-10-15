@@ -1,0 +1,389 @@
+{
+  "level": "C2",
+  "version": "1.0",
+  "slots_ref": ["slots_c2.json", "slots_nouns_c2.json"],
+  "generation_rules": {
+    "min_words": 16,
+    "max_words": 35,
+    "avoid": [
+      "короткие простые предложения",
+      "только базовые времена без стилистической цели",
+      "однообразная структура",
+      "лексика ниже upper-intermediate",
+      "клишированные фразы из учебников B1-B2"
+    ],
+    "require": [
+      "хотя бы два-три сложных элемента: литературная инверсия, absolute construction, participle clause, cleft, эллипсис",
+      "естественная лексика уровня C2 (proficiency)",
+      "стилистическая цель: эмфаза, ирония, understatement, дистанцирование, риторика",
+      "связность через продвинутые discourse markers",
+      "естественность, а не искусственность"
+    ],
+    "default_slot_level": "advanced"
+  },
+  "topics": [
+    {
+      "topic": "Literary Inversion",
+      "subtopics": [
+        {
+          "name": "Fronted Adverbials with Inversion",
+          "patterns": [
+            {
+              "id": "lit_inv_01",
+              "pattern": "[Adverbial] + [aux] + [S] + [V1] + [complex object] + [optional: result]",
+              "generation_hint": "Используй литературную инверсию с fronted adverbial. Порядок: adverbial + aux + subject + verb.",
+              "slots": {
+                "Adverbial": [
+                  "Down the corridor", "Into the room",
+                  "Out of the shadows", "Across the hall",
+                  "Through the window", "Beyond the horizon"
+                ],
+                "aux": ["came", "walked", "stepped", "emerged", "appeared", "stood"],
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_c2#/slots/literary_inversion/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_c2#/slots/topics/work_career/complex_objects" },
+                "result": { "$ref": "slots_nouns_c2#/slots/common/results" }
+              },
+              "examples": [
+                "Into the room walked the CEO, and the entire board fell silent.",
+                "Across the hall emerged the architect of the controversial policy, and the press descended upon her.",
+                "Beyond the horizon stood the ruins of a once-glorious empire."
+              ]
+            },
+            {
+              "id": "lit_inv_02",
+              "pattern": "[Negative adverbial] + [aux] + [S] + [V3] + [complex object] + [optional: result]",
+              "generation_hint": "Используй литературную инверсию с negative adverbial для драматического эффекта.",
+              "slots": {
+                "Negative adverbial": [
+                  "Never before", "Rarely", "Not once", "Nowhere",
+                  "Seldom", "Little", "Not until much later"
+                ],
+                "aux": ["had", "have", "did", "was"],
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "V3": { "$ref": "slots_b1_plus#/slots/past_perfect/affirmative/V3" },
+                "complex object": { "$ref": "slots_nouns_c2#/slots/topics/work_career/complex_objects" },
+                "result": { "$ref": "slots_nouns_c2#/slots/common/results" }
+              },
+              "examples": [
+                "Never before had she witnessed such a bold reimagining of our corporate ethos.",
+                "Rarely had the board encountered a more compelling case for change.",
+                "Not once did he question the moral imperative that underpinned the whole initiative."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Archaic and Formal Registers",
+      "subtopics": [
+        {
+          "name": "Formal Subjunctive and Formulaic Structures",
+          "patterns": [
+            {
+              "id": "arch_form_01",
+              "pattern": "[Formulaic phrase] + [S] + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй архаичные и формальные структуры для высокого регистра.",
+              "slots": {
+                "Formulaic phrase": [
+                  "Long live", "Come what may", "Be that as it may",
+                  "Suffice it to say", "Far be it from me to",
+                  "Perish the thought that", "God forbid that"
+                ],
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_c2#/slots/archaic_formal/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_c2#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_c2#/slots/common/reasons" }
+              },
+              "examples": [
+                "Suffice it to say that the collective conscience of the industry has been profoundly shaken.",
+                "Be that as it may, we must still deliberate on the moral imperative that underlies the whole initiative.",
+                "Far be it from me to adjudicate on such matters, but the evidence seems incontrovertible."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Absolute Constructions and Participle Clauses",
+      "subtopics": [
+        {
+          "name": "Absolute Construction (with no conjunction)",
+          "patterns": [
+            {
+              "id": "abs_01",
+              "pattern": "[Subject] + [V-ing] + [complex object], [S] + [V1] + [complex object] + [optional: result]",
+              "generation_hint": "Используй absolute construction для сжатости и литературного эффекта.",
+              "slots": {
+                "Subject": [
+                  "The deliberations concluded",
+                  "The dust having settled",
+                  "The dust having been settled",
+                  "The dust now settled",
+                  "The evidence having been reviewed",
+                  "The clock having struck midnight"
+                ],
+                "V-ing": { "$ref": "slots_c2#/slots/absolute_constructions/affirmative/V-ing" },
+                "complex object (participle)": { "$ref": "slots_nouns_c2#/slots/topics/work_career/complex_objects" },
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (main)": { "$ref": "slots_nouns_c2#/slots/topics/education/complex_objects" },
+                "result": { "$ref": "slots_nouns_c2#/slots/common/results" }
+              },
+              "examples": [
+                "The dust having settled, the committee focused on developing a comprehensive framework for the future.",
+                "The evidence having been reviewed, the board concluded that radical change was not merely desirable but inevitable.",
+                "The clock having struck midnight, the delegates finally reached a consensus on the contentious issue."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Perfect Participle in Literary Style",
+          "patterns": [
+            {
+              "id": "part_perf_c2_01",
+              "pattern": "Having + [V3] + [complex object], [S] + [V1] + [complex object] + [optional: result]",
+              "generation_hint": "Используй perfect participle для действия, завершённого до другого, в высоком стиле.",
+              "slots": {
+                "Having + V3": { "$ref": "slots_c2#/slots/participle_absolute/perfect_participle/having_V3" },
+                "complex object (participle)": { "$ref": "slots_nouns_c2#/slots/topics/work_career/complex_objects" },
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (main)": { "$ref": "slots_nouns_c2#/slots/topics/society_culture/complex_objects" },
+                "result": { "$ref": "slots_nouns_c2#/slots/common/results" }
+              },
+              "examples": [
+                "Having deliberated at length, the committee promulgated a set of guidelines that would shape the industry for decades.",
+                "Having adjudicated the dispute, the panel turned its attention to the broader implications of the ruling.",
+                "Having surmised the true nature of the challenge, she set about dismantling the prevailing orthodoxy."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Rhetorical Devices",
+      "subtopics": [
+        {
+          "name": "Anaphora (repetition at beginning)",
+          "patterns": [
+            {
+              "id": "rhet_anaph_01",
+              "pattern": "[Word/phrase], + [S] + [V1] + [complex object]; [same word/phrase], + [S] + [V1] + [complex object]; [same word/phrase], + [S] + [V1] + [complex object]",
+              "generation_hint": "Используй анафору для риторического эффекта. Повторение в начале каждой части.",
+              "slots": {
+                "Word/phrase": [
+                  "We shall", "They will", "It is", "Ours is",
+                  "Such is", "So great is"
+                ],
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_c2#/slots/rhetorical_devices/anaphora/V1" },
+                "complex object": { "$ref": "slots_nouns_c2#/slots/topics/work_career/complex_objects" }
+              },
+              "examples": [
+                "We shall comprehend the complexity of the situation; we shall acknowledge our collective failures; we shall, at long last, act.",
+                "Such is the magnitude of the challenge; such is the depth of our commitment; such is the promise of what lies ahead.",
+                "They will recognize the moral imperative; they will appreciate the gravity of the moment; they will rise to the occasion."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chiasmus (AB / BA structure)",
+          "patterns": [
+            {
+              "id": "rhet_chiasm_01",
+              "pattern": "[S] + [V1] + [object A], not + [object B]; [S] + [V1] + [object B], not + [object A]",
+              "generation_hint": "Используй хиазм: обратный порядок элементов во второй части.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_c2#/slots/rhetorical_devices/chiasmus/V1" },
+                "object A": [
+                  "the question of how, not the question of why",
+                  "the means, not the ends",
+                  "the form, not the substance",
+                  "the letter of the law, not its spirit"
+                ],
+                "object B": [
+                  "the question of why, not the question of how",
+                  "the ends, not the means",
+                  "the substance, not the form",
+                  "the spirit of the law, not its letter"
+                ]
+              },
+              "examples": [
+                "We deliberate the question of how, not the question of why; we deliberate the question of why, not the question of how.",
+                "They value the means, not the ends; they value the ends, not the means.",
+                "She upholds the letter of the law, not its spirit; she upholds the spirit of the law, not its letter."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Litotes (understatement via negation)",
+          "patterns": [
+            {
+              "id": "rhet_litotes_01",
+              "pattern": "[S] + [V1] + not + [adjective] + [optional: reason]",
+              "generation_hint": "Используй litotes: understatement через двойное отрицание или отрицание противоположного.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "adjective": [
+                  "unimpressive", "without merit", "lacking in subtlety",
+                  "devoid of nuance", "wanting in rigour",
+                  "unworthy of our attention"
+                ],
+                "reason": { "$ref": "slots_nouns_c2#/slots/common/reasons" }
+              },
+              "examples": [
+                "The proposal is not without merit, though it leaves much to be desired.",
+                "Her argument is not unimpressive, but it fails to address the deeper questions.",
+                "The report is not devoid of nuance, though it remains curiously silent on certain matters."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Advanced Modals and Speculation",
+      "subtopics": [
+        {
+          "name": "Hypothetical Past (needn't have / might have / could have)",
+          "patterns": [
+            {
+              "id": "mod_hyp_past_01",
+              "pattern": "[S] + needn't/might/could + have + [V3] + [complex object] + [optional: but + consequence]",
+              "generation_hint": "Используй модальные перфекты для гипотетических ситуаций в прошлом.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "needn't/might/could": ["needn't", "might", "could"],
+                "have + V3": { "$ref": "slots_c2#/slots/advanced_modals_literary/hypothetical_past/have_V3" },
+                "complex object": { "$ref": "slots_nouns_c2#/slots/topics/work_career/complex_objects" },
+                "but + consequence": { "$ref": "slots_nouns_c2#/slots/common/contrasts" }
+              },
+              "examples": [
+                "They needn't have promulgated such sweeping reforms, but the political climate demanded nothing less.",
+                "She might have adjudicated the matter differently, but she was bound by precedent.",
+                "We could have surmised the true extent of the problem, but we chose to look the other way."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Idioms and High-Register Lexis",
+      "subtopics": [
+        {
+          "name": "Idioms in literary context",
+          "patterns": [
+            {
+              "id": "idiom_lit_01",
+              "pattern": "[S] + [idiom] + [complex object] + [optional: and + consequence]",
+              "generation_hint": "Используй идиомы в литературном контексте, но осторожно и уместно.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "idiom": { "$ref": "slots_nouns_c2#/slots/misc/idioms" },
+                "complex object": { "$ref": "slots_nouns_c2#/slots/topics/work_career/complex_objects" },
+                "and + consequence": { "$ref": "slots_nouns_c2#/slots/common/results" }
+              },
+              "examples": [
+                "The CEO burnt the midnight oil over the proposal, and the result was a document of remarkable clarity.",
+                "She bit off more than she could chew with the restructuring plan, and the consequences were felt for years.",
+                "They let the cat out of the bag about the merger, and the markets reacted accordingly."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Collocations of high register",
+          "patterns": [
+            {
+              "id": "colloc_high_01",
+              "pattern": "[S] + [collocation] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй устойчивые коллокации высокого регистра.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "collocation": { "$ref": "slots_nouns_c2#/slots/misc/collocations" },
+                "complex object": { "$ref": "slots_nouns_c2#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_c2#/slots/common/reasons" }
+              },
+              "examples": [
+                "The board lent credence to the consultant's argument, and the strategy was revised accordingly.",
+                "The report gave rise to considerable speculation about the company's long-term future.",
+                "Her remarks commanded respect from all quarters, and the debate was elevated accordingly."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Discourse and Cohesion (Literary)",
+      "subtopics": [
+        {
+          "name": "Advanced Linking and Digression",
+          "patterns": [
+            {
+              "id": "disc_lit_01",
+              "pattern": "[Discourse marker], + [S] + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй дискурсивные маркеры высшего регистра.",
+              "slots": {
+                "Discourse marker": [
+                  "By way of digression", "In parenthesis",
+                  "For the avoidance of doubt", "To put it another way",
+                  "Needless to say", "It goes without saying",
+                  "Strictly speaking", "In essence",
+                  "To all intents and purposes", "In the final analysis",
+                  "All things considered"
+                ],
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_c2#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_c2#/slots/common/reasons" }
+              },
+              "examples": [
+                "By way of digression, the strategic initiative has fundamentally transformed the way we operate.",
+                "For the avoidance of doubt, the decision was the right one, despite the short-term costs involved.",
+                "All things considered, the collective conscience of the industry has been profoundly shaken."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Ellipsis and Substitution (Literary)",
+      "subtopics": [
+        {
+          "name": "Literary ellipsis",
+          "patterns": [
+            {
+              "id": "ellipsis_lit_01",
+              "pattern": "[S] + [V] + [complex object] + and + [S (omitted)] + [aux] + [optional: too/either/so/neither]",
+              "generation_hint": "Используй эллипсис для сжатости и литературного ритма.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_c2#/slots/common/subjects" },
+                "V": { "$ref": "slots_c2#/slots/ellipsis_literary/affirmative/V" },
+                "complex object": { "$ref": "slots_nouns_c2#/slots/topics/work_career/complex_objects" },
+                "aux": ["do", "have", "can", "will", "would", "should", "might"],
+                "too/either/so/neither": ["too", "either", "so", "neither"]
+              },
+              "examples": [
+                "She would countenance no compromise, and neither would the board.",
+                "They have deliberated at length, and so have we.",
+                "I can envisage a brighter future, and so, I believe, can the younger generation."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

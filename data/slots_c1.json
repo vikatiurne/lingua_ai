@@ -1,0 +1,394 @@
+{
+  "level": "C1",
+  "version": "1.0",
+  "description": "Глагольные слоты для шаблонов уровня C1. Включает продвинутую инверсию, subjunctive, mixed conditionals, hedging, nominalization.",
+  "usage": "В шаблоне: { \"$ref\": \"slots_c1#/slots/<category>/<subcategory>/<slot>\" }",
+  "slots": {
+    "inversion_advanced": {
+      "negative_adverbials": {
+        "V1": {
+          "basic": [
+            "seen", "heard", "known", "met", "understood", "realized"
+          ],
+          "intermediate": [
+            "witnessed", "encountered", "experienced", "anticipated",
+            "acknowledged", "appreciated", "envisioned"
+          ],
+          "advanced": [
+            "comprehended", "foreseen", "postulated", "stipulated",
+            "extrapolated", "conceptualized", "internalized"
+          ]
+        }
+      },
+      "so_such": {
+        "V1": {
+          "basic": ["be", "have", "do", "make", "take"],
+          "intermediate": [
+            "achieve", "accomplish", "demonstrate", "establish",
+            "generate", "produce", "develop"
+          ],
+          "advanced": [
+            "implement", "orchestrate", "spearhead", "revolutionize",
+            "transform", "redefine", "pioneer"
+          ]
+        }
+      },
+      "only_when": {
+        "V1": {
+          "basic": ["realize", "understand", "see", "know"],
+          "intermediate": [
+            "appreciate", "recognize", "acknowledge", "consider",
+            "reflect", "evaluate"
+          ],
+          "advanced": [
+            "comprehend", "internalize", "assimilate", "synthesize",
+            "extrapolate", "conceptualize"
+          ]
+        }
+      }
+    },
+    "subjunctive_advanced": {
+      "mandative": {
+        "V1": {
+          "basic": [
+            "be", "go", "come", "do", "have", "take", "make"
+          ],
+          "intermediate": [
+            "attend", "complete", "prepare", "submit", "review",
+            "consider", "recommend", "propose"
+          ],
+          "advanced": [
+            "implement", "facilitate", "prioritize", "negotiate",
+            "advocate", "compromise", "streamline", "orchestrate"
+          ]
+        }
+      },
+      "formulaic": {
+        "V1": {
+          "basic": [
+            "be", "come", "go", "live", "prosper", "succeed"
+          ],
+          "intermediate": [
+            "succeed", "prosper", "flourish", "thrive", "prevail",
+            "endure", "persevere"
+          ],
+          "advanced": [
+            "transcend", "revolutionize", "redefine", "pioneer",
+            "transform", "transcend", "orchestrate"
+          ]
+        }
+      }
+    },
+    "mixed_conditionals": {
+      "past_present": {
+        "had_V3": {
+          "V3": {
+            "basic": [
+              "known", "seen", "gone", "taken", "made", "left", "said"
+            ],
+            "intermediate": [
+              "understood", "realized", "decided", "prepared",
+              "discussed", "organized", "planned", "noticed"
+            ],
+            "advanced": [
+              "implemented", "coordinated", "prioritized", "negotiated",
+              "advocated", "compromised", "streamlined", "orchestrated"
+            ]
+          }
+        },
+        "would_V1": {
+          "V1": {
+            "basic": [
+              "be", "have", "know", "live", "work", "do", "speak"
+            ],
+            "intermediate": [
+              "manage", "coordinate", "lead", "organize",
+              "develop", "create", "improve"
+            ],
+            "advanced": [
+              "implement", "facilitate", "orchestrate",
+              "spearhead", "revolutionize", "transform"
+            ]
+          }
+        }
+      },
+      "present_past": {
+        "were_V-ing": {
+          "V-ing": {
+            "basic": [
+              "working", "studying", "living", "reading", "talking"
+            ],
+            "intermediate": [
+              "preparing", "organizing", "practicing", "attending",
+              "managing", "coordinating"
+            ],
+            "advanced": [
+              "implementing", "facilitating", "orchestrating",
+              "spearheading", "transforming", "pioneering"
+            ]
+          }
+        },
+        "would_have_V3": {
+          "V3": {
+            "basic": [
+              "gone", "done", "made", "taken", "seen", "said"
+            ],
+            "intermediate": [
+              "completed", "achieved", "organized", "prepared",
+              "decided", "discussed", "planned"
+            ],
+            "advanced": [
+              "implemented", "coordinated", "prioritized", "negotiated",
+              "advocated", "streamlined", "orchestrated"
+            ]
+          }
+        }
+      }
+    },
+    "hedging": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "seem", "appear", "suggest", "indicate", "tend"
+          ],
+          "intermediate": [
+            "imply", "presume", "assume", "speculate", "hypothesize",
+            "postulate", "estimate"
+          ],
+          "advanced": [
+            "extrapolate", "conjecture", "surmise", "posit",
+            "stipulate", "presuppose", "extrapolate"
+          ]
+        }
+      },
+      "tentative": {
+        "V1": {
+          "basic": [
+            "be", "have", "do", "make", "take", "say"
+          ],
+          "intermediate": [
+            "consider", "suggest", "propose", "recommend",
+            "argue", "maintain", "contend"
+          ],
+          "advanced": [
+            "posit", "postulate", "stipulate", "advocate",
+            "propound", "expound", "elucidate"
+          ]
+        }
+      }
+    },
+    "nominalization": {
+      "affirmative": {
+        "V3": {
+          "basic": [
+            "made", "done", "taken", "given", "seen", "known"
+          ],
+          "intermediate": [
+            "implemented", "organized", "prepared", "developed",
+            "improved", "created", "discussed"
+          ],
+          "advanced": [
+            "orchestrated", "spearheaded", "revolutionized",
+            "transformed", "redefined", "pioneered", "synthesized"
+          ]
+        }
+      }
+    },
+    "advanced_modals": {
+      "past_deduction": {
+        "have_V3": {
+          "basic": [
+            "have gone", "have left", "have forgotten", "have missed",
+            "have taken", "have made"
+          ],
+          "intermediate": [
+            "have decided", "have changed", "have misunderstood",
+            "have overlooked", "have underestimated", "have noticed"
+          ],
+          "advanced": [
+            "have anticipated", "have extrapolated", "have postulated",
+            "have conceptualized", "have synthesized", "have orchestrated"
+          ]
+        }
+      },
+      "past_criticism": {
+        "have_V3": {
+          "basic": [
+            "have told", "have asked", "have said", "have done"
+          ],
+          "intermediate": [
+            "have informed", "have warned", "have reminded",
+            "have clarified", "have emphasized"
+          ],
+          "advanced": [
+            "have stipulated", "have postulated", "have elucidated",
+            "have expounded", "have advocated"
+          ]
+        }
+      },
+      "unfulfilled_obligation": {
+        "have_V3": {
+          "basic": [
+            "have gone", "have done", "have made", "have taken"
+          ],
+          "intermediate": [
+            "have completed", "have submitted", "have prepared",
+            "have reviewed", "have discussed"
+          ],
+          "advanced": [
+            "have implemented", "have orchestrated", "have facilitated",
+            "have streamlined", "have prioritized"
+          ]
+        }
+      }
+    },
+    "participle_clauses_advanced": {
+      "perfect_participle": {
+        "having_V3": {
+          "basic": [
+            "having finished", "having done", "having seen",
+            "having made", "having taken", "having read"
+          ],
+          "intermediate": [
+            "having completed", "having achieved", "having organized",
+            "having developed", "having discussed", "having reviewed"
+          ],
+          "advanced": [
+            "having orchestrated", "having spearheaded",
+            "having revolutionized", "having transformed",
+            "having pioneered", "having synthesized"
+          ]
+        }
+      },
+      "reduced_relative": {
+        "V-ing": {
+          "basic": [
+            "working", "studying", "living", "reading", "talking"
+          ],
+          "intermediate": [
+            "preparing", "organizing", "practicing", "attending",
+            "managing", "coordinating"
+          ],
+          "advanced": [
+            "orchestrating", "spearheading", "revolutionizing",
+            "transforming", "pioneering", "synthesizing"
+          ]
+        }
+      }
+    },
+    "cleft_advanced": {
+      "it_cleft": {
+        "V": {
+          "basic": [
+            "changed", "helped", "made", "gave", "took", "saw"
+          ],
+          "intermediate": [
+            "influenced", "motivated", "encouraged", "supported",
+            "developed", "created", "organized", "improved"
+          ],
+          "advanced": [
+            "orchestrated", "spearheaded", "revolutionized",
+            "transformed", "redefined", "pioneered"
+          ]
+        }
+      },
+      "wh_cleft": {
+        "V": {
+          "basic": [
+            "need", "want", "like", "have", "know", "see"
+          ],
+          "intermediate": [
+            "require", "appreciate", "consider", "understand",
+            "recommend", "suggest", "prefer"
+          ],
+          "advanced": [
+            "advocate", "prioritize", "emphasize", "acknowledge",
+            "recognize", "value", "champion"
+          ]
+        }
+      },
+      "reversed_wh_cleft": {
+        "V": {
+          "basic": ["be", "have", "do", "make", "take"],
+          "intermediate": [
+            "represent", "constitute", "embody", "symbolize",
+            "reflect", "illustrate"
+          ],
+          "advanced": [
+            "epitomize", "personify", "exemplify", "encapsulate",
+            "manifest", "characterize"
+          ]
+        }
+      }
+    },
+    "ellipsis_substitution_advanced": {
+      "affirmative": {
+        "V": {
+          "basic": ["do", "have", "be", "can", "will"],
+          "intermediate": [
+            "would", "should", "might", "could", "must", "need"
+          ],
+          "advanced": [
+            "would have", "should have", "might have",
+            "could have", "must have", "needn't have"
+          ]
+        }
+      }
+    },
+    "reporting_verbs_advanced": {
+      "affirmative": {
+        "V": {
+          "basic": [
+            "said", "told", "asked", "answered", "replied", "added"
+          ],
+          "intermediate": [
+            "explained", "mentioned", "promised", "admitted", "insisted",
+            "suggested", "recommended", "warned", "reminded"
+          ],
+          "advanced": [
+            "acknowledged", "emphasized", "highlighted", "clarified",
+            "confirmed", "denied", "pointed out", "argued", "claimed",
+            "stipulated", "postulated", "elucidated", "expounded",
+            "advocated", "conceded", "contended", "maintained"
+          ]
+        }
+      }
+    },
+    "idiomatic_verbs": {
+      "phrasal_advanced": {
+        "V": {
+          "basic": [
+            "give up", "put off", "look after", "take off", "turn down"
+          ],
+          "intermediate": [
+            "come up with", "put up with", "get away with",
+            "look forward to", "run out of", "bring about",
+            "carry out", "break down"
+          ],
+          "advanced": [
+            "bow to pressure", "take its toll", "bear fruit",
+            "set the stage", "pave the way", "shed light on",
+            "come to terms with", "take stock of", "weigh up"
+          ]
+        }
+      }
+    },
+    "emphatic_structures": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "like", "want", "need", "believe", "know", "think"
+          ],
+          "intermediate": [
+            "appreciate", "recommend", "support", "understand",
+            "consider", "recognize"
+          ],
+          "advanced": [
+            "advocate", "prioritize", "emphasize", "acknowledge",
+            "value", "endorse", "champion"
+          ]
+        }
+      }
+    }
+  }
+}

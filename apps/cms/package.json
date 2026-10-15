@@ -1,0 +1,10 @@
+{
+  "name": "cms",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "develop": "echo 'Strapi will be installed in task 02'",
+    "build": "echo 'noop'",
+    "typecheck": "echo 'noop'"
+  }
+}

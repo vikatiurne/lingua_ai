@@ -1,0 +1,145 @@
+{
+  "level": "A2+",
+  "version": "1.0",
+  "description": "Не-глагольные слоты для шаблонов уровня A2+.",
+  "slots": {
+    "common": {
+      "subjects": {
+        "basic": ["I", "you", "we", "they", "he", "she", "it"],
+        "intermediate": ["my brother", "my sister", "my friend", "my colleague", "my parents", "my neighbour", "the teacher", "the manager"],
+        "advanced": ["my best friend from school", "the manager of our office", "the students in my class", "my older brother", "one of my colleagues"]
+      },
+      "places": {
+        "basic": ["at home", "at school", "at work", "in the park", "in the city", "at the shop"],
+        "intermediate": ["in the city centre", "in a small café near the office", "in the garden", "near the railway station", "at my friend's place", "in the classroom"],
+        "advanced": ["in a co-working space downtown", "at the local gym", "in a small office in the city centre", "in a quiet residential area"]
+      },
+      "times": {
+        "basic": ["today", "now", "yesterday", "tomorrow", "every day", "in the morning", "in the evening"],
+        "intermediate": ["three times a week", "before breakfast", "after work", "last week", "next week", "two weeks ago", "tonight", "at 7 o'clock"],
+        "advanced": ["whenever I have free time", "at least twice a month", "for the first time this year", "as soon as I can", "during the summer holidays"]
+      },
+      "reasons": {
+        "basic": ["because it's nice", "because I am tired", "because we are happy", "because it's too early", "because I am busy"],
+        "intermediate": ["because I prefer tea", "because they are tired", "because it's difficult", "because I was ill", "because it was raining", "because the weather is nice"],
+        "advanced": ["because it's important for my career", "because we haven't seen each other for a long time", "because the deadline is very close", "because I want to feel more confident"]
+      },
+      "results": {
+        "basic": ["and it is very nice", "so I am happy", "and we had a good time", "and they liked it a lot"],
+        "intermediate": ["and it has changed my routine", "so I feel much better now", "and I have made new friends", "so everything went well", "and it was a nice surprise"],
+        "advanced": ["so I feel much more confident now", "and it has become an important part of my life", "and it has opened up new opportunities"]
+      },
+      "contrasts": {
+        "basic": ["but my sister is", "but my parents are", "but we are ready", "but I am from Italy"],
+        "intermediate": ["but now I am at work", "but now she is at home", "but usually I work from home", "but normally she lives in Kyiv"],
+        "advanced": ["but it still has its advantages", "but it works well for me", "but we can manage it", "but it depends on many factors"]
+      },
+      "conditions": {
+        "basic": ["if it rains", "if you want", "if I have time", "if we go"],
+        "intermediate": ["if I have enough time", "if you remind me", "if you need any support", "if the weather is good", "if everything goes well"],
+        "advanced": ["if you want to feel more confident", "if we want to finish on time", "if you want to avoid problems"]
+      },
+      "people": {
+        "basic": ["me", "you", "us", "them", "him", "her"],
+        "intermediate": ["my friend", "my colleague", "my manager", "my teacher", "my neighbour"],
+        "advanced": ["my best friend from school", "the head of the department", "one of my colleagues", "my old classmate", "the project manager"]
+      },
+      "agents": {
+        "basic": ["by a famous author", "by millions of people", "by the whole team"],
+        "intermediate": ["by a team of experts", "by the research department", "by local craftsmen", "by a well-known director", "by the marketing team"],
+        "advanced": ["by an international panel of judges", "by the board of directors", "by the committee"]
+      }
+    },
+    "topics": {
+      "daily_life": {
+        "complex_objects": {
+          "basic": ["coffee", "tea", "breakfast", "dinner", "a book", "a film", "music", "TV"],
+          "intermediate": ["a cup of coffee in the morning", "a nice dinner at home", "an interesting book about history", "a good film", "the morning news", "a short break after work"],
+          "advanced": ["a quiet evening with a good book", "a documentary about space", "a small dinner for close friends", "a long walk in the park after dinner"]
+        }
+      },
+      "work_career": {
+        "complex_objects": {
+          "basic": ["a job", "an office", "a meeting", "a project", "a report"],
+          "intermediate": ["weekly team meetings", "a small project", "an important client", "a business lunch", "a report for the manager"],
+          "advanced": ["a presentation for tomorrow's meeting", "a project that needs to be finished by Friday", "a new course on digital marketing", "a long-term plan for the company's development"]
+        }
+      },
+      "education": {
+        "complex_objects": {
+          "basic": ["English", "maths", "history", "books", "homework"],
+          "intermediate": ["English classes", "my homework", "a new language", "an important exam", "the main idea", "a difficult task"],
+          "advanced": ["a new online course on digital marketing", "a book about time management", "a language course in the city centre", "a postgraduate course in international relations"]
+        }
+      },
+      "travel": {
+        "complex_objects": {
+          "basic": ["London", "Italy", "the park", "the beach", "the mountains", "the city centre"],
+          "intermediate": ["several countries in Europe", "a trip to the mountains", "a small town near the sea", "a tourist destination", "a short trip abroad"],
+          "advanced": ["to new countries with a small backpack", "an interesting place to live", "a cultural trip to Italy", "a road trip across the whole country"]
+        }
+      },
+      "food_shopping": {
+        "complex_objects": {
+          "basic": ["apples", "bread", "milk", "water", "coffee", "tea", "a new phone"],
+          "intermediate": ["some apples from the shop", "a bottle of milk", "a cup of tea", "a ticket for the concert", "a nice gift", "a table for two"],
+          "advanced": ["a table for two by the window", "a room with a view", "a small present for my friend", "a fresh loaf of bread"]
+        }
+      },
+      "health_sport": {
+        "complex_objects": {
+          "basic": ["football", "the gym", "a walk", "the park", "healthy food"],
+          "intermediate": ["the local gym three times a week", "a short break after work", "a long walk in the park", "a healthy breakfast", "a balanced diet"],
+          "advanced": ["a sustainable exercise routine", "a balanced diet and regular exercise", "a walk in the park after dinner"]
+        }
+      },
+      "media_leisure": {
+        "complex_objects": {
+          "basic": ["a film", "music", "a book", "TV", "a game"],
+          "intermediate": ["a good film", "this book three times", "a live concert", "my favourite song", "a football match"],
+          "advanced": ["a live concert of my favourite band", "an interesting documentary about history", "a book about history and culture", "a podcast about personal development"]
+        }
+      }
+    },
+    "speech": {
+      "wh_words": ["where", "when", "why", "how", "what"],
+      "time_place_changes": {
+        "basic": ["yesterday", "last week", "at home", "here"],
+        "intermediate": ["the day before", "the following week", "at that moment", "from the office", "the next day"],
+        "advanced": ["at that particular moment", "from the office", "the following Monday"]
+      },
+      "additional_info": {
+        "basic": ["and it was very nice", "and we had a good time", "and they liked it a lot"],
+        "intermediate": ["and I will never forget it", "and I often recommend it to others", "and it was a nice surprise", "and I liked it very much"],
+        "advanced": ["and it has become an important part of my life", "and I still remember it very well", "and it was one of the best days of my life"]
+      }
+    },
+    "misc": {
+      "adjectives": {
+        "basic": ["big", "small", "nice", "old", "new", "good", "bad", "happy", "sad", "tired", "hungry", "busy"],
+        "intermediate": ["interesting", "difficult", "easy", "expensive", "cheap", "important", "beautiful", "cold", "warm", "ready", "exciting", "boring", "useful"],
+        "advanced": ["really interesting", "quite difficult", "very important", "extremely useful", "surprisingly easy"]
+      },
+      "comparative_adjectives": {
+        "basic": ["better", "worse", "bigger", "smaller", "older", "newer", "faster", "slower"],
+        "intermediate": ["much better", "far more interesting", "a bit more expensive", "significantly faster", "less stressful", "more effective"],
+        "advanced": ["significantly more effective", "far less complicated", "genuinely more interesting", "much more useful"]
+      },
+      "superlative_adjectives": {
+        "basic": ["best", "worst", "biggest", "smallest", "oldest", "newest", "most expensive", "most interesting"],
+        "intermediate": ["the most useful", "the most expensive", "the most interesting", "the best in the city", "the biggest in the country"],
+        "advanced": ["the most useful in my life", "the most experienced in our team", "the best option available"]
+      },
+      "adverbs_frequency": {
+        "basic": ["always", "usually", "often", "sometimes", "never"],
+        "intermediate": ["always in the morning", "usually at the weekend", "often after work", "sometimes in the evening", "never on Sundays"],
+        "advanced": ["almost always", "quite often", "hardly ever", "at least once a week"]
+      },
+      "adverbs_manner": {
+        "basic": ["quickly", "slowly", "well", "badly", "carefully", "easily", "loudly", "quietly"],
+        "intermediate": ["very carefully", "quite quickly", "really well", "rather slowly", "extremely carefully"],
+        "advanced": ["as carefully as possible", "much more slowly than usual", "surprisingly well"]
+      }
+    }
+  }
+}

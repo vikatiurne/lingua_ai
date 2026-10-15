@@ -1,0 +1,17 @@
+{
+  "name": "lingua-ai",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev:web": "pnpm --filter web dev",
+    "dev:cms": "pnpm --filter cms develop",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0"
+  }
+}

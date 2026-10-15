@@ -1,0 +1,227 @@
+{
+  "level": "C2",
+  "version": "1.0",
+  "description": "Глагольные слоты для шаблонов уровня C2. Включает литературную инверсию, архаичные структуры, риторические фигуры, absolute constructions.",
+  "usage": "В шаблоне: { \"$ref\": \"slots_c2#/slots/<category>/<subcategory>/<slot>\" }",
+  "slots": {
+    "literary_inversion": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "come", "go", "be", "have", "know", "see", "think"
+          ],
+          "intermediate": [
+            "realize", "understand", "recognize", "acknowledge",
+            "appreciate", "consider", "reflect"
+          ],
+          "advanced": [
+            "comprehend", "internalize", "synthesize", "extrapolate",
+            "conceptualize", "postulate", "surmise", "posit"
+          ]
+        }
+      }
+    },
+    "archaic_formal": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "be", "have", "do", "go", "come", "see", "know"
+          ],
+          "intermediate": [
+            "consider", "understand", "acknowledge", "recognize",
+            "appreciate", "regard", "perceive"
+          ],
+          "advanced": [
+            "stipulate", "postulate", "elucidate", "expound",
+            "promulgate", "adjudicate", "deliberate", "exhort"
+          ]
+        }
+      }
+    },
+    "absolute_constructions": {
+      "affirmative": {
+        "V-ing": {
+          "basic": [
+            "having",            "being", "seeing", "knowing", "holding"
+          ],
+          "intermediate": [
+            "considering", "reflecting on", "acknowledging",
+            "recognizing", "appreciating", "regarding"
+          ],
+          "advanced": [
+            "having deliberated", "having adjudicated",
+            "having promulgated", "having stipulated",
+            "having surmised", "having posited"
+          ]
+        }
+      }
+    },
+    "rhetorical_devices": {
+      "anaphora": {
+        "V1": {
+          "basic": [
+            "see", "know", "have", "want", "need", "believe"
+          ],
+          "intermediate": [
+            "realize", "understand", "consider", "acknowledge",
+            "appreciate", "recognize"
+          ],
+          "advanced": [
+            "comprehend", "internalize", "synthesize",
+            "extrapolate", "postulate", "surmise"
+          ]
+        }
+      },
+      "chiasmus": {
+        "V1": {
+          "basic": [
+            "ask", "give", "take", "make", "do", "say"
+          ],
+          "intermediate": [
+            "consider", "understand", "recognize", "appreciate",
+            "acknowledge", "value"
+          ],
+          "advanced": [
+            "deliberate", "adjudicate", "promulgate",
+            "stipulate", "postulate", "exhort"
+          ]
+        }
+      }
+    },
+    "subjunctive_archaic": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "be", "come", "go", "do", "have", "live", "prosper"
+          ],
+          "intermediate": [
+            "succeed", "prosper", "flourish", "thrive",
+            "prevail", "endure", "persevere"
+          ],
+          "advanced": [
+            "transcend", "revolutionize", "redefine",
+            "pioneer", "transform", "orchestrate", "bequeath"
+          ]
+        }
+      }
+    },
+    "advanced_modals_literary": {
+      "past_deduction": {
+        "have_V3": {
+          "basic": [
+            "have gone", "have left", "have forgotten", "have missed"
+          ],
+          "intermediate": [
+            "have decided", "have misunderstood", "have overlooked",
+            "have underestimated", "have noticed"
+          ],
+          "advanced": [
+            "have anticipated", "have extrapolated", "have postulated",
+            "have conceptualized", "have synthesized", "have surmised"
+          ]
+        }
+      },
+      "hypothetical_past": {
+        "have_V3": {
+          "basic": [
+            "have gone", "have done", "have made", "have taken"
+          ],
+          "intermediate": [
+            "have completed", "have submitted", "have prepared",
+            "have reviewed", "have discussed"
+          ],
+          "advanced": [
+            "have adjudicated", "have promulgated",
+            "have stipulated", "have deliberated",
+            "have surmised", "have posited"
+          ]
+        }
+      }
+    },
+    "participle_absolute": {
+      "perfect_participle": {
+        "having_V3": {
+          "basic": [
+            "having finished", "having done", "having seen",
+            "having made", "having taken", "having read"
+          ],
+          "intermediate": [
+            "having completed", "having achieved", "having organized",
+            "having developed", "having discussed", "having reviewed"
+          ],
+          "advanced": [
+            "having deliberated", "having adjudicated",
+            "having promulgated", "having stipulated",
+            "having surmised", "having posited"
+          ]
+        }
+      }
+    },
+    "cleft_advanced_c2": {
+      "it_cleft": {
+        "V": {
+          "basic": [
+            "changed", "helped", "made", "gave", "took", "saw"
+          ],
+          "intermediate": [
+            "influenced", "motivated", "encouraged", "supported",
+            "developed", "created", "organized", "improved"
+          ],
+          "advanced": [
+            "orchestrated", "spearheaded", "revolutionized",
+            "transformed", "redefined", "pioneered", "bequeathed"
+          ]
+        }
+      }
+    },
+    "emphatic_rhetorical": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "like", "want", "need", "believe", "know", "think"
+          ],
+          "intermediate": [
+            "appreciate", "recommend", "support", "understand",
+            "consider", "recognize"
+          ],
+          "advanced": [
+            "advocate", "prioritize", "emphasize",
+            "acknowledge", "value", "endorse", "champion"
+          ]
+        }
+      }
+    },
+    "ellipsis_literary": {
+      "affirmative": {
+        "V": {
+          "basic": ["do", "have", "be", "can", "will"],
+          "intermediate": [
+            "would", "should", "might", "could", "must", "need"
+          ],
+          "advanced": [
+            "would have", "should have", "might have",
+            "could have", "must have", "needn't have"
+          ]
+        }
+      }
+    },
+    "idiomatic_high_register": {
+      "affirmative": {
+        "V": {
+          "basic": [
+            "give up", "put off", "look after", "take off"
+          ],
+          "intermediate": [
+            "come up with", "put up with", "get away with",
+            "look forward to", "run out of", "bring about"
+          ],
+          "advanced": [
+            "countenance", "countenance", "brook",
+            "fathom", "envisage", "envision",
+            "behold", "bequeath", "beget"
+          ]
+        }
+      }
+    }
+  }
+}

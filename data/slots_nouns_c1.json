@@ -1,0 +1,486 @@
+{
+  "level": "C1",
+  "version": "1.0",
+  "description": "Не-глагольные слоты для шаблонов уровня C1.",
+  "usage": "В шаблоне: { \"$ref\": \"slots_nouns_c1#/slots/common/subjects\" }",
+  "slots": {
+    "common": {
+      "subjects": {
+        "basic": ["I", "you", "we", "they", "he", "she"],
+        "intermediate": [
+          "the senior management team", "the board of directors",
+          "the key decision-makers", "the project lead"
+        ],
+        "advanced": [
+          "the executive committee", "the stakeholders involved",
+          "the cross-functional task force", "the industry's leading experts",
+          "the policy-makers responsible"
+        ]
+      },
+      "places": {
+        "basic": [
+          "at home", "at the office", "in the city centre"
+        ],
+        "intermediate": [
+          "at the company headquarters", "in a co-working space downtown",
+          "at a language school in the centre"
+        ],
+        "advanced": [
+          "at an international summit in Geneva",
+          "at the company's flagship office in London",
+          "in a state-of-the-art research facility",
+          "at a high-level industry forum"
+        ]
+      },
+      "times": {
+        "basic": [
+          "every day", "yesterday", "last week", "at the weekend"
+        ],
+        "intermediate": [
+          "three times a week", "before breakfast", "after work",
+          "at least twice a month"
+        ],
+        "advanced": [
+          "whenever the opportunity arises",
+          "over the course of the last few years",
+          "in the wake of recent developments",
+          "at the earliest possible opportunity",
+          "in the foreseeable future",
+          "for the time being"
+        ]
+      },
+      "reasons": {
+        "basic": [
+          "because it's important", "because I am busy"
+        ],
+        "intermediate": [
+          "because the deadline is very close",
+          "because we haven't seen each other for a long time"
+        ],
+        "advanced": [
+          "because it's essential for our long-term strategy",
+          "because it doesn't align with our current priorities",
+          "because it could have far-reaching consequences",
+          "because we need to stay competitive in the long run",
+          "given the complexity of the situation",
+          "in light of the recent developments"
+        ]
+      },
+      "results": {
+        "basic": [
+          "so I feel happy", "and it is very nice"
+        ],
+        "intermediate": [
+          "so I feel much more confident now",
+          "and it has changed my daily routine completely"
+        ],
+        "advanced": [
+          "so it has become a turning point in my career",
+          "and it has significantly improved our overall performance",
+          "and it has fundamentally changed the way we work",
+          "and it has set a new benchmark for the entire industry",
+          "and it has paved the way for future innovation"
+        ]
+      },
+      "contrasts": {
+        "basic": [
+          "but my sister is", "but we are ready"
+        ],
+        "intermediate": [
+          "but usually I work from home",
+          "but it depends on many factors"
+        ],
+        "advanced": [
+          "but the outcome was far better than expected",
+          "but it comes at a considerable cost",
+          "but the long-term benefits outweigh the risks",
+          "but it remains to be seen whether it will last",
+          "but the underlying issues remain unresolved"
+        ]
+      },
+      "conditions": {
+        "basic": [
+          "if it rains", "if you want"
+        ],
+        "intermediate": [
+          "if I have enough time", "if everything goes according to plan"
+        ],
+        "advanced": [
+          "if we want to stay competitive in the long run",
+          "provided that all the conditions are met",
+          "unless the situation changes dramatically",
+          "on the condition that the budget allows it",
+          "in the event that the client confirms by Friday"
+        ]
+      },
+      "people": {
+        "basic": ["me", "you", "us", "them", "him", "her"],
+        "intermediate": [
+          "my manager", "my colleague", "the project manager"
+        ],
+        "advanced": [
+          "the head of the department", "a potential investor",
+          "the key stakeholders", "the senior management team",
+          "the lead consultant on the project",
+          "the chief financial officer"
+        ]
+      },
+      "agents": {
+        "basic": [
+          "by a famous author", "by the whole team"
+        ],
+        "intermediate": [
+          "by a team of experts", "by the research department"
+        ],
+        "advanced": [
+          "by an international panel of judges",
+          "by the board of directors",
+          "by a leading specialist in the field",
+          "by a group of independent consultants",
+          "by the regulatory authority",
+          "by the industry's foremost experts"
+        ]
+      }
+    },
+    "topics": {
+      "work_career": {
+        "complex_objects": {
+          "basic": [
+            "a job", "a meeting", "a project", "a report"
+          ],
+          "intermediate": [
+            "weekly team meetings", "an important client",
+            "a report for the manager"
+          ],
+          "advanced": [
+            "a strategic initiative that could change our whole approach",
+            "an international project with partners from three countries",
+            "a comprehensive restructuring plan",
+            "a cross-functional team with clear objectives",
+            "a high-stakes negotiation with the board",
+            "a transformative business model"
+          ]
+        }
+      },
+      "education": {
+        "complex_objects": {
+          "basic": [
+            "English", "books", "a new language"
+          ],
+          "intermediate": [
+            "a course on digital marketing",
+            "a book about time management"
+          ],
+          "advanced": [
+            "a postgraduate course in international relations",
+            "a professional certification in project management",
+            "a research paper on modern linguistics",
+            "a multidisciplinary approach to learning",
+            "a groundbreaking study in the field",
+            "an intensive executive programme abroad"
+          ]
+        }
+      },
+      "travel": {
+        "complex_objects": {
+          "basic": ["London", "Italy", "a trip"],
+          "intermediate": [
+            "several countries in Europe", "a trip to the mountains"
+          ],
+          "advanced": [
+            "to remote places that few tourists ever visit",
+            "an unforgettable journey through South-East Asia",
+            "a cultural exchange programme in Japan",
+            "a life-changing experience abroad",
+            "a once-in-a-lifetime expedition",
+            "an off-the-beaten-path destination"
+          ]
+        }
+      },
+      "daily_life": {
+        "complex_objects": {
+          "basic": ["coffee", "a book", "a film", "dinner"],
+          "intermediate": [
+            "a cup of coffee in the morning", "a nice dinner at home"
+          ],
+          "advanced": [
+            "a quiet evening with a good book and a cup of tea",
+            "a documentary that completely changed my perspective",
+            "a challenging but rewarding daily routine",
+            "a well-balanced lifestyle",
+            "a moment of quiet reflection"
+          ]
+        }
+      },
+      "relationships": {
+        "complex_objects": {
+          "basic": ["my parents", "my friends", "my family"],
+          "intermediate": [
+            "my old classmates from university", "my closest friend"
+          ],
+          "advanced": [
+            "my closest friends from university days",
+            "a reunion with people I hadn't seen for years",
+            "a long-term relationship built on mutual trust",
+            "a meaningful connection that has stood the test of time",
+            "a support network I can always rely on"
+          ]
+        }
+      },
+      "media_leisure": {
+        "complex_objects": {
+          "basic": ["films", "books", "music", "TV"],
+          "intermediate": [
+            "a live concert of my favourite band",
+            "a real theatre performance"
+          ],
+          "advanced": [
+            "a documentary series about modern art",
+            "an independent film that won several awards",
+            "a thought-provoking article on social issues",
+            "a novel that was adapted into a film",
+            "a critically acclaimed performance",
+            "a piece of investigative journalism"
+          ]
+        }
+      },
+      "environment_tech": {
+        "complex_objects": {
+          "basic": ["a new phone", "a new laptop", "the environment"],
+          "intermediate": [
+            "a new online course on digital marketing",
+            "the new company policy"
+          ],
+          "advanced": [
+            "a new AI tool that could automate most of our tasks",
+            "a sustainable solution to reduce our carbon footprint",
+            "an innovative technology that could change the industry",
+            "a long-term environmental strategy",
+            "a groundbreaking discovery in the field",
+            "a disruptive technology that challenges the status quo"
+          ]
+        }
+      },
+      "society_culture": {
+        "complex_objects": {
+          "basic": [
+            "the news", "a film about life", "a book about people"
+          ],
+          "intermediate": [
+            "a documentary about different cultures",
+            "an article about modern society"
+          ],
+          "advanced": [
+            "a comprehensive study of social inequality",
+            "a critical analysis of contemporary culture",
+            "an in-depth look at global challenges",
+            "a complex issue that requires careful consideration",
+            "a pressing concern for policy-makers",
+            "a debate that has polarized public opinion"
+          ]
+        }
+      }
+    },
+    "speech": {
+      "wh_words": [
+        "where", "when", "why", "how", "what", "who", "whose", "which"
+      ],
+      "time_place_changes": {
+        "basic": ["the day before", "the following week"],
+        "intermediate": [
+          "at that moment", "from the office", "the next day"
+        ],
+        "advanced": [
+          "at that particular moment",
+          "from the company's headquarters",
+          "the following Monday morning",
+          "in the days that followed",
+          "in the aftermath of the meeting"
+        ]
+      },
+      "additional_info": {
+        "basic": [
+          "and it was very nice", "and we had a good time"
+        ],
+        "intermediate": [
+          "and I will never forget it",
+          "and it became a turning point in my life"
+        ],
+        "advanced": [
+          "and it has shaped the way I approach challenges today",
+          "and I still consider it one of the best decisions I have ever made",
+          "and it turned out to be far more valuable than expected",
+          "and it proved to be a game-changing experience",
+          "and it has stood the test of time"
+        ]
+      }
+    },
+    "misc": {
+      "adjectives": {
+        "basic": [
+          "big", "small", "nice", "old", "new", "good", "happy"
+        ],
+        "intermediate": [
+          "interesting", "difficult", "expensive", "important",
+          "beautiful", "exciting", "useful", "stressful"
+        ],
+        "advanced": [
+          "significantly more effective", "far less complicated",
+          "profoundly impactful", "inherently challenging",
+          "increasingly relevant", "remarkably resilient",
+          "undeniably compelling", "inextricably linked"
+        ]
+      },
+      "comparative_adjectives": {
+        "basic": [
+          "better", "worse", "bigger", "smaller", "faster", "newer"
+        ],
+        "intermediate": [
+          "much better", "far more interesting",
+          "significantly faster", "less stressful"
+        ],
+        "advanced": [
+          "considerably more efficient", "incomparably better",
+          "exponentially more valuable", "demonstrably superior",
+          "qualitatively different", "materially more significant"
+        ]
+      },
+      "superlative_adjectives": {
+        "basic": [
+          "best", "worst", "biggest", "smallest", "most expensive"
+        ],
+        "intermediate": [
+          "the most useful", "the most interesting",
+          "the best in the city"
+        ],
+        "advanced": [
+          "the most rewarding experience I have ever had",
+          "the most challenging project of my career",
+          "the most impactful decision I have ever made",
+          "the single most important factor",
+          "the most compelling argument in favour"
+        ]
+      },
+      "nouns": {
+        "basic": ["car", "house", "book", "phone", "friend", "job"],
+        "intermediate": [
+          "opportunity", "experience", "decision", "solution",
+          "career", "challenge", "achievement"
+        ],
+        "advanced": [
+          "career prospects", "long-term strategy",
+          "personal development", "professional growth",
+          "sustainable solution", "strategic initiative",
+          "competitive advantage", "comprehensive framework",
+          "transformative experience", "systemic change",
+          "paradigm shift", "unintended consequence"
+        ]
+      },
+      "question_words": {
+        "basic": ["today", "now", "here", "with you"],
+        "intermediate": [
+          "at the moment", "at the weekend", "in the city"
+        ],
+        "advanced": [
+          "in the long term", "under these circumstances",
+          "before making a decision", "despite the difficulties",
+          "given the current situation", "in light of recent events",
+          "to all intents and purposes", "for all practical purposes"
+        ]
+      },
+      "adverbs_frequency": {
+        "basic": ["always", "usually", "often", "sometimes", "never"],
+        "intermediate": [
+          "always in the morning", "usually at the weekend",
+          "often after work", "sometimes in the evening"
+        ],
+        "advanced": [
+          "almost invariably", "quite frequently", "scarcely ever",
+          "on a regular basis", "more often than not",
+          "with increasing frequency", "as a general rule",
+          "by and large"
+        ]
+      },
+      "adverbs_manner": {
+        "basic": [
+          "quickly", "slowly", "well", "carefully", "easily"
+        ],
+        "intermediate": [
+          "very carefully", "quite quickly", "really well",
+          "rather slowly", "extremely carefully"
+        ],
+        "advanced": [
+          "with remarkable precision", "in a highly professional manner",
+          "with meticulous attention to detail",
+          "in an entirely unprecedented way",
+          "with considerable finesse",
+          "in a characteristically understated way"
+        ]
+      },
+      "linking_words": {
+        "basic": ["and", "but", "so", "because", "or"],
+        "intermediate": [
+          "however", "although", "therefore", "moreover",
+          "in addition", "for example"
+        ],
+        "advanced": [
+          "nevertheless", "consequently", "furthermore",
+          "notwithstanding", "insofar as", "by contrast",
+          "above all", "in the meantime", "for this reason",
+          "to that end", "with this in mind", "in much the same way",
+          "by the same token", "in a similar vein"
+        ]
+      },
+      "discourse_markers": {
+        "basic": [
+          "well", "so", "you know", "I mean"
+        ],
+        "intermediate": [
+          "actually", "basically", "generally speaking",
+          "to be honest", "in my opinion", "as far as I know"
+        ],
+        "advanced": [
+          "to put it another way", "needless to say",
+          "it goes without saying", "on the whole",
+          "by and large", "for the most part",
+          "to some extent", "in a broader sense",
+          "strictly speaking", "in essence", "to all intents and purposes",
+          "in the final analysis", "all things considered"
+        ]
+      },
+      "idioms": {
+        "basic": [
+          "a piece of cake", "break the ice", "hit the books"
+        ],
+        "intermediate": [
+          "get the ball rolling", "think outside the box",
+          "see eye to eye", "cut corners", "bite the bullet"
+        ],
+        "advanced": [
+          "shed light on", "take stock of", "bear fruit",
+          "take its toll", "set the stage", "pave the way",
+          "come to terms with", "weigh up the pros and cons",
+          "strike a balance", "turn a blind eye",
+          "rock the boat", "jump on the bandwagon",
+          "throw in the towel", "go the extra mile"
+        ]
+      },
+      "collocations": {
+        "basic": [
+          "make a decision", "take a break", "have a look"
+        ],
+        "intermediate": [
+          "reach an agreement", "draw a conclusion",
+          "take responsibility", "raise concerns", "meet expectations"
+        ],
+        "advanced": [
+          "draw a distinction", "reach a consensus",
+          "make a compelling case", "pose a significant challenge",
+          "cast doubt on", "shed light on", "have a profound impact on",
+          "gain a competitive edge", "reach a tipping point",
+          "exert considerable influence"
+        ]
+      }
+    }
+  }
+}

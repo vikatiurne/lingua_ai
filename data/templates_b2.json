@@ -1,0 +1,631 @@
+{
+  "level": "B2",
+  "version": "1.0",
+  "slots_ref": ["slots_b2.json", "slots_nouns_b2.json"],
+  "generation_rules": {
+    "min_words": 12,
+    "max_words": 28,
+    "avoid": [
+      "короткие предложения из 6-8 слов",
+      "только базовые времена без нюансов",
+      "однообразная структура",
+      "лексика уровня A2-B1"
+    ],
+    "require": [
+      "хотя бы два сложных элемента: придаточное, причастный оборот, инверсия, cleft",
+      "естественная лексика уровня B2 (upper-intermediate)",
+      "связность через linking words и discourse markers",
+      "чёткая логическая структура (причина-следствие, контраст, уточнение)"
+    ],
+    "default_slot_level": "intermediate"
+  },
+  "topics": [
+    {
+      "topic": "Perfect Continuous Tenses",
+      "subtopics": [
+        {
+          "name": "Past Perfect Continuous (duration before past event)",
+          "patterns": [
+            {
+              "id": "ppc_past_01",
+              "pattern": "[S] + had been + [V-ing] + [complex object] + for/since + [time] + when + [S] + [V2] + [optional: result]",
+              "generation_hint": "Подчеркни длительность до определённого момента в прошлом. Используй for/since.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_b2#/slots/perfect_continuous/past_perfect_continuous/V-ing" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "for/since + time": { "$ref": "slots_nouns_b2#/slots/common/times" },
+                "V2": { "$ref": "slots_b1_plus#/slots/past_perfect/affirmative/V3" },
+                "result": { "$ref": "slots_nouns_b2#/slots/common/results" }
+              },
+              "examples": [
+                "I had been working on a strategic initiative for more than three months when the board finally approved the budget, and everything went smoothly.",
+                "She had been preparing for the certification in project management since January when she realized she needed a completely different approach."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Future Perfect Continuous",
+          "patterns": [
+            {
+              "id": "ppc_future_01",
+              "pattern": "By + [future time], [S] + will have been + [V-ing] + [complex object] + for + [duration]",
+              "generation_hint": "Используй Future Perfect Continuous для длительности к моменту в будущем.",
+              "slots": {
+                "future time": ["next June", "the end of the year", "2027", "next summer", "the end of next quarter"],
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V-ing": { "$ref": "slots_b2#/slots/perfect_continuous/future_perfect_continuous/V-ing" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "duration": ["five years", "ten years", "three months", "more than a decade"]
+              },
+              "examples": [
+                "By next June, I will have been working on international projects for more than five years, and I will have gained invaluable experience.",
+                "By the end of the year, she will have been leading the department for three years, and she will have transformed the whole approach."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Passive Voice (Advanced)",
+      "subtopics": [
+        {
+          "name": "Reporting Passive (It is said / He is believed)",
+          "patterns": [
+            {
+              "id": "pass_report_01",
+              "pattern": "It is/was + [V3] + that + [S] + [V2] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй reporting passive для дистанцирования от утверждения.",
+              "slots": {
+                "is/was": ["is", "was"],
+                "V3": { "$ref": "slots_b2#/slots/passive_advanced/reporting_passive/V3" },
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V2": { "$ref": "slots_b1_plus#/slots/past_perfect/affirmative/V3" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_b2#/slots/common/reasons" }
+              },
+              "examples": [
+                "It is widely believed that the strategic initiative has fundamentally changed the way the company operates.",
+                "It was reported that the board of directors had approved the comprehensive restructuring plan before the end of the quarter.",
+                "It is generally acknowledged that she has made an outstanding contribution to the field."
+              ]
+            },
+            {
+              "id": "pass_report_02",
+              "pattern": "[S] + is/are + [V3] + to have + [V3] + [complex object]",
+              "generation_hint": "Используй конструкцию 'is said to have done' для передачи чужих утверждений.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "is/are": ["is", "are"],
+                "V3": { "$ref": "slots_b2#/slots/passive_advanced/reporting_passive/V3" },
+                "have + V3": { "$ref": "slots_b2#/slots/passive_advanced/all_tenses/V3" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" }
+              },
+              "examples": [
+                "The senior management team is believed to have implemented a completely new strategy that transformed the industry.",
+                "The client's representative is said to have coordinated the entire project without any external support."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Passive with Modals",
+          "patterns": [
+            {
+              "id": "pass_modal_01",
+              "pattern": "[S] + should/must/can/might + have been + [V3] + [optional: by + agent] + [optional: reason]",
+              "generation_hint": "Используй модальный пассив для рекомендаций, обязательств или догадок о прошлом.",
+              "slots": {
+                "S": [
+                  "the proposal", "all the applications",
+                  "the documents", "the presentation"
+                ],
+                "should/must/can/might": ["should", "must", "can", "might"],
+                "have been": ["have been"],
+                "V3": { "$ref": "slots_b2#/slots/passive_advanced/all_tenses/V3" },
+                "by + agent": { "$ref": "slots_nouns_b2#/slots/common/agents" },
+                "reason": { "$ref": "slots_nouns_b2#/slots/common/reasons" }
+              },
+              "examples": [
+                "The proposal should have been reviewed by the committee before the meeting, but it was overlooked.",
+                "All the applications must have been submitted by the end of the week because the deadline was strict.",
+                "The documents might have been prepared by the research department, but nobody is sure."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Inversion",
+      "subtopics": [
+        {
+          "name": "Negative Adverbials at the Beginning",
+          "patterns": [
+            {
+              "id": "inv_neg_01",
+              "pattern": "Never/Rarely/Seldom/Little + [aux] + [S] + [V1] + [complex object] + [optional: result]",
+              "generation_hint": "Используй инверсию для эмфазы. Порядок: negative adverbial + aux + subject + verb.",
+              "slots": {
+                "Never/Rarely/Seldom/Little": ["Never", "Rarely", "Seldom", "Little"],
+                "aux": ["have", "had", "did", "has"],
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b2#/slots/inversion/negative_adverbials/V1" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "result": { "$ref": "slots_nouns_b2#/slots/common/results" }
+              },
+              "examples": [
+                "Never have I witnessed such a comprehensive transformation of an entire industry in just a few years.",
+                "Rarely had she encountered such a complex strategic challenge, but she handled it brilliantly.",
+                "Little did they know that the strategic initiative would fundamentally change the whole company."
+              ]
+            },
+            {
+              "id": "inv_neg_02",
+              "pattern": "Not only + [aux] + [S] + [V1] + [complex object], but + [S] + also + [V1] + [complex object]",
+              "generation_hint": "Используй Not only ... but also ... для акцента на двух элементах.",
+              "slots": {
+                "aux": ["did", "have", "had"],
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b2#/slots/inversion/negative_adverbials/V1" },
+                "complex object (first)": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "V1 (second)": { "$ref": "slots_b2#/slots/inversion/negative_adverbials/V1" },
+                "complex object (second)": { "$ref": "slots_nouns_b2#/slots/topics/education/complex_objects" }
+              },
+              "examples": [
+                "Not only did she coordinate the entire international project, but she also mentored three new employees.",
+                "Not only have they implemented the strategic initiative, but they have also significantly improved our overall performance.",
+                "Not only did he complete the certification, but he also developed a completely new training programme."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Inverted Conditionals (Had / Were / Should)",
+          "patterns": [
+            {
+              "id": "inv_cond_01",
+              "pattern": "Had + [S] + [V3] + [complex object], [S] + would have + [V3] + [complex object]",
+              "generation_hint": "Инверсия в Third Conditional без if. Более формальный стиль.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V3 (had)": { "$ref": "slots_b2#/slots/inversion/conditionals_inverted/V3" },
+                "complex object (condition)": [
+                  "the client's requirements carefully",
+                  "my priorities right",
+                  "about the deadline earlier",
+                  "the offer when it was on the table"
+                ],
+                "would have + V3": { "$ref": "slots_b2#/slots/inversion/conditionals_inverted/V3" },
+                "complex object (result)": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" }
+              },
+              "examples": [
+                "Had I read the client's requirements carefully, I would have avoided all the issues we had.",
+                "Had she got her priorities right, she would have completed the whole project on time.",
+                "Had they acted on the offer when it was on the table, they would have secured the contract."
+              ]
+            },
+            {
+              "id": "inv_cond_02",
+              "pattern": "Were + [S] + to + [V1] + [complex object], [S] + would + [V1] + [complex object]",
+              "generation_hint": "Формальный вариант Second Conditional с инверсией.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "to + V1": { "$ref": "slots_b2#/slots/future_in_past/was_going_to/V1" },
+                "complex object (condition)": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "would + V1": { "$ref": "slots_b1_plus#/slots/conditionals_second/would/V1" },
+                "complex object (result)": { "$ref": "slots_nouns_b2#/slots/common/results" }
+              },
+              "examples": [
+                "Were I to implement this strategy, I would significantly improve our overall performance.",
+                "Were she to take on this role, she would bring a completely new perspective to the team.",
+                "Were they to invest in this technology, they would gain a considerable competitive advantage."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Cleft Sentences",
+      "subtopics": [
+        {
+          "name": "It-cleft (It is ... that)",
+          "patterns": [
+            {
+              "id": "cleft_it_01",
+              "pattern": "It is/was + [focus] + that + [S] + [V] + [complex object] + [optional: reason]",
+              "generation_hint": "Выдели ключевой элемент предложения через it-cleft.",
+              "slots": {
+                "is/was": ["is", "was"],
+                "focus": [
+                  "the strategic initiative", "this decision",
+                  "the mentorship programme", "the long-term plan",
+                  "her leadership"
+                ],
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V": { "$ref": "slots_b2#/slots/cleft_sentences/it_cleft/V" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_b2#/slots/common/reasons" }
+              },
+              "examples": [
+                "It was the strategic initiative that fundamentally transformed the way we approach our work.",
+                "It is her leadership that has inspired the whole team to achieve outstanding results.",
+                "It was the mentorship programme that helped me develop the skills I needed for this role."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Wh-cleft (What ... is)",
+          "patterns": [
+            {
+              "id": "cleft_wh_01",
+              "pattern": "What + [S] + [V] + is + [focus] + [optional: reason]",
+              "generation_hint": "Используй wh-cleft для акцента на ключевой идее.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V": { "$ref": "slots_b2#/slots/cleft_sentences/wh_cleft/V" },
+                "focus": [
+                  "a completely new approach",
+                  "a long-term strategy",
+                  "genuine commitment",
+                  "continuous improvement",
+                  "a collaborative mindset"
+                ],
+                "reason": { "$ref": "slots_nouns_b2#/slots/common/reasons" }
+              },
+              "examples": [
+                "What we really need is a completely new approach, because the old one is no longer effective.",
+                "What she appreciates the most is genuine commitment, and that's what makes our team successful.",
+                "What they require is a long-term strategy, because short-term solutions are no longer enough."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Participle Clauses",
+      "subtopics": [
+        {
+          "name": "Present Participle (V-ing)",
+          "patterns": [
+            {
+              "id": "part_pres_01",
+              "pattern": "[V-ing] + [complex object], [S] + [V1] + [complex object] + [optional: result]",
+              "generation_hint": "Используй present participle для одновременных действий или причин.",
+              "slots": {
+                "V-ing": { "$ref": "slots_b2#/slots/participle_clauses/present_participle/V-ing" },
+                "complex object (participle)": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (main)": { "$ref": "slots_nouns_b2#/slots/topics/education/complex_objects" },
+                "result": { "$ref": "slots_nouns_b2#/slots/common/results" }
+              },
+              "examples": [
+                "Realizing how complex the situation had become, the team decided to completely rethink their approach.",
+                "Considering all the available options, the manager recommended a long-term strategy instead of a quick fix.",
+                "Noticing the gaps in our current framework, she proposed a comprehensive restructuring plan."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Perfect Participle (Having + V3)",
+          "patterns": [
+            {
+              "id": "part_perf_01",
+              "pattern": "Having + [V3] + [complex object], [S] + [V1] + [complex object] + [optional: result]",
+              "generation_hint": "Используй perfect participle для действия, завершённого до другого.",
+              "slots": {
+                "Having + V3": { "$ref": "slots_b2#/slots/participle_clauses/perfect_participle/having_V3" },
+                "complex object (participle)": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (main)": { "$ref": "slots_nouns_b2#/slots/topics/education/complex_objects" },
+                "result": { "$ref": "slots_nouns_b2#/slots/common/results" }
+              },
+              "examples": [
+                "Having completed the strategic initiative, the team focused on developing a long-term plan for sustainable growth.",
+                "Having reviewed all the applications, the committee recommended three candidates for the next stage.",
+                "Having coordinated the entire international project, she decided to take on an even more challenging role."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Subjunctive and Unreal Past",
+      "subtopics": [
+        {
+          "name": "Subjunctive (after suggest, recommend, insist)",
+          "patterns": [
+            {
+              "id": "subj_01",
+              "pattern": "[S] + suggest/recommend/insist/demand + that + [S] + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй subjunctive: после этих глаголов идёт базовая форма без -s.",
+              "slots": {
+                "S (first)": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "suggest/recommend/insist/demand": ["suggest", "recommend", "insist", "demand"],
+                "S (second)": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V1": { "$ref": "slots_b2#/slots/subjunctive/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_b2#/slots/common/reasons" }
+              },
+              "examples": [
+                "The board recommends that the senior management team implement a comprehensive restructuring plan without delay.",
+                "She insisted that the committee prioritize long-term strategy over short-term fixes, because the situation requires it.",
+                "They demand that the client's representative attend every meeting, because communication is critical."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Future in the Past",
+      "subtopics": [
+        {
+          "name": "Was going to / Was to",
+          "patterns": [
+            {
+              "id": "future_past_01",
+              "pattern": "[S] + was/were going to + [V1] + [complex object] + but + [S] + [V2] + [complex object]",
+              "generation_hint": "Используй 'was going to' для планов в прошлом, которые не осуществились.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "was/were": ["was", "were"],
+                "V1": { "$ref": "slots_b2#/slots/future_in_past/was_going_to/V1" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "V2": { "$ref": "slots_b1_plus#/slots/past_perfect/affirmative/V3" },
+                "complex object (contrast)": { "$ref": "slots_nouns_b2#/slots/topics/education/complex_objects" }
+              },
+              "examples": [
+                "I was going to implement the strategic initiative last quarter, but the priorities changed completely.",
+                "She was going to attend the international conference in Berlin, but the project deadline made it impossible.",
+                "They were going to launch the new programme in September, but the budget was cut unexpectedly."
+              ]
+            },
+            {
+              "id": "future_past_02",
+              "pattern": "[S] + was/were to + [V1] + [complex object] + but + [S] + [V2] + [complex object]",
+              "generation_hint": "Используй 'was to' для формальных планов в прошлом.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "was/were": ["was", "were"],
+                "V1": { "$ref": "slots_b2#/slots/future_in_past/was_to/V1" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "V2": { "$ref": "slots_b1_plus#/slots/past_perfect/affirmative/V3" },
+                "complex object (contrast)": { "$ref": "slots_nouns_b2#/slots/topics/education/complex_objects" }
+              },
+              "examples": [
+                "The board was to approve the comprehensive plan at the next meeting, but the CEO postponed the decision.",
+                "She was to lead the international project from January, but the restructuring changed everything.",
+                "They were to implement the new system by the end of the year, but technical issues delayed the launch."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Advanced Gerunds and Infinitives",
+      "subtopics": [
+        {
+          "name": "Perfect Gerund (Having + V3)",
+          "patterns": [
+            {
+              "id": "ger_perf_01",
+              "pattern": "[S] + regret/deny/admit + having + [V3] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй perfect gerund для действий, завершённых до момента речи.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "regret/deny/admit": ["regret", "deny", "admit"],
+                "having + V3": { "$ref": "slots_b2#/slots/gerunds_infinitives_advanced/perfect_gerund/having_V3" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_b2#/slots/common/reasons" }
+              },
+              "examples": [
+                "I regret having underestimated the complexity of the strategic initiative, because it cost us a lot of time.",
+                "She denied having overlooked the client's requirements, but the evidence suggested otherwise.",
+                "They admitted having misunderstood the original objectives, and promised to revise their approach."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Passive Infinitive (to be + V3)",
+          "patterns": [
+            {
+              "id": "inf_pass_01",
+              "pattern": "[S] + expect/want/need + [object] + to be + [V3] + [optional: by + agent] + [optional: time]",
+              "generation_hint": "Используй passive infinitive для действий, которые должны быть выполнены кем-то.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "expect/want/need": ["expect", "want", "need"],
+                "object": [
+                  "the proposal", "the strategic initiative",
+                  "all the documents", "the new system"
+                ],
+                "to be + V3": { "$ref": "slots_b2#/slots/gerunds_infinitives_advanced/passive_infinitive/to_be_V3" },
+                "by + agent": { "$ref": "slots_nouns_b2#/slots/common/agents" },
+                "time": { "$ref": "slots_nouns_b2#/slots/common/times" }
+              },
+              "examples": [
+                "We expect the proposal to be reviewed by the committee before the end of the month.",
+                "They want the new system to be implemented by a team of independent consultants next quarter.",
+                "The company needs all the documents to be submitted by the end of the week."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Advanced Comparatives",
+      "subtopics": [
+        {
+          "name": "The more... the more / The less... the better",
+          "patterns": [
+            {
+              "id": "comp_adv_01",
+              "pattern": "The more + [S] + [V1] + [complex object], the more + [S] + [V1] + [complex object]",
+              "generation_hint": "Используй конструкцию 'the more... the more' для пропорциональной зависимости.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V1 (first)": { "$ref": "slots_b2#/slots/advanced_comparatives/the_more/V1" },
+                "complex object (first)": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "V1 (second)": { "$ref": "slots_b2#/slots/advanced_comparatives/the_more/V1" },
+                "complex object (second)": [
+                  "confident in real conversations",
+                  "open-minded about different perspectives",
+                  "the world around you",
+                  "better results in the long run"
+                ]
+              },
+              "examples": [
+                "The more you communicate with international clients, the more confident you become in real conversations.",
+                "The more we collaborate with different teams, the more open-minded we become about different perspectives.",
+                "The more they practice the language, the better results they achieve in the long run."
+              ]
+            },
+            {
+              "id": "comp_adv_02",
+              "pattern": "No sooner + had + [S] + [V3] + than + [S] + [V2] + [complex object]",
+              "generation_hint": "Используй 'no sooner... than' для двух быстро следующих друг за другом действий.",
+              "slots": {
+                "had": ["had"],
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V3": { "$ref": "slots_b1_plus#/slots/past_perfect/affirmative/V3" },
+                "than": ["than"],
+                "V2": { "$ref": "slots_b1_plus#/slots/past_simple/affirmative/V2" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" }
+              },
+              "examples": [
+                "No sooner had she completed the certification than she was offered a much more challenging role.",
+                "No sooner had they implemented the new system than they saw a significant improvement in performance.",
+                "No sooner had the board approved the plan than the team started working on it."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Wish / If only (Advanced)",
+      "subtopics": [
+        {
+          "name": "Wish + would (irritation and requests)",
+          "patterns": [
+            {
+              "id": "wish_would_01",
+              "pattern": "[S] + wish + [S] + would + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй wish + would для выражения раздражения или просьбы об изменении.",
+              "slots": {
+                "S (first)": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "wish": ["wish"],
+                "S (second)": { "$ref": "slots_nouns_b2#/slots/common/people" },
+                "would": ["would"],
+                "V1": { "$ref": "slots_b1_plus#/slots/future_will/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_b2#/slots/common/reasons" }
+              },
+              "examples": [
+                "I wish the manager would stop changing priorities every week, because it makes planning impossible.",
+                "She wishes her colleagues would communicate more openly, because the current situation is frustrating.",
+                "They wish the client would make a decision soon, because the whole project depends on it."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Ellipsis and Substitution",
+      "subtopics": [
+        {
+          "name": "Ellipsis in Conversation",
+          "patterns": [
+            {
+              "id": "ellipsis_01",
+              "pattern": "[S] + [V] + [complex object] + and + [S (omitted)] + [aux] + [optional: too/either/so/neither]",
+              "generation_hint": "Используй эллипсис, чтобы избежать повторения. Используй so/neither/t00/either.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V": { "$ref": "slots_b2#/slots/ellipsis_substitution/affirmative/V" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "aux": ["do", "have", "can", "will", "would", "should"],
+                "too/either/so/neither": ["too", "either", "so", "neither"]
+              },
+              "examples": [
+                "I can implement this strategy, and so can she.",
+                "We have completed the certification, and they have too.",
+                "She doesn't want to attend the conference, and neither do I."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Emphatic Do/Did",
+      "subtopics": [
+        {
+          "name": "Emphatic Do/Did",
+          "patterns": [
+            {
+              "id": "emph_do_01",
+              "pattern": "[S] + do/does/did + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй do/does/did для эмфазы в утвердительных предложениях.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "do/does/did": ["do", "does", "did"],
+                "V1": { "$ref": "slots_b2#/slots/emphatic_do/affirmative/V1" },
+                "complex object": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "reason": { "$ref": "slots_nouns_b2#/slots/common/reasons" }
+              },
+              "examples": [
+                "I do appreciate the effort you put into this project, and I want you to know it.",
+                "She does believe that a long-term strategy is essential, because short-term fixes have failed before.",
+                "They did implement the strategic initiative last year, and the results speak for themselves."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Advanced Linking and Cohesion",
+      "subtopics": [
+        {
+          "name": "Complex sentence connectors",
+          "patterns": [
+            {
+              "id": "link_adv_01",
+              "pattern": "[S] + [V1] + [complex object]. Nevertheless/Consequently/Furthermore, + [S] + [V1] + [complex object] + [optional: reason]",
+              "generation_hint": "Используй продвинутые linking words для логической связности.",
+              "slots": {
+                "S": { "$ref": "slots_nouns_b2#/slots/common/subjects" },
+                "V1 (first)": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (first)": { "$ref": "slots_nouns_b2#/slots/topics/work_career/complex_objects" },
+                "Nevertheless/Consequently/Furthermore": ["Nevertheless", "Consequently", "Furthermore", "On the other hand", "In contrast", "Above all"],
+                "V1 (second)": { "$ref": "slots_b1_plus#/slots/present_simple/affirmative/V1" },
+                "complex object (second)": { "$ref": "slots_nouns_b2#/slots/topics/education/complex_objects" },
+                "reason": { "$ref": "slots_nouns_b2#/slots/common/reasons" }
+              },
+              "examples": [
+                "Our team has implemented a comprehensive strategic initiative. Nevertheless, we still need to address several long-term challenges.",
+                "The company invested in new technology. Consequently, it developed innovative solutions that transformed the market.",
+                "She completed the certification in project management. Furthermore, she has developed a completely new training programme."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

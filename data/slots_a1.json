@@ -1,0 +1,382 @@
+{
+  "level": "A1",
+  "version": "1.0",
+  "description": "Глагольные слоты для шаблонов уровня A1. Используется для подстановки в pattern-шаблоны.",
+  "usage": "В шаблоне укажите ссылку вида: { \"$ref\": \"slots_a1#/present_simple/affirmative/V1\" }",
+  "slots": {
+    "present_simple": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "work", "study", "live", "play", "read", "go", "eat", "drink",
+            "sleep", "walk", "run", "sing", "dance", "cook", "watch", "help"
+          ],
+          "intermediate": [
+            "commute", "exercise", "practice", "teach", "clean", "shop",
+            "travel", "visit", "call", "text", "listen", "write", "draw",
+            "swim", "drive", "ride", "meet", "talk", "smile", "laugh"
+          ],
+          "advanced": [
+            "volunteer", "organize", "prepare", "collect", "fix", "build",
+            "plant", "paint", "borrow", "lend", "share", "save", "spend",
+            "check", "plan", "discuss", "explain", "remember", "forget"
+          ]
+        }
+      },
+      "negative": {
+        "V1": {
+          "basic": [
+            "like", "want", "need", "go", "work", "eat", "drink", "play",
+            "watch", "read", "sleep", "study", "live", "help", "know"
+          ],
+          "intermediate": [
+            "understand", "remember", "support", "agree", "believe",
+            "enjoy", "prefer", "use", "drive", "walk", "exercise", "cook",
+            "clean", "call", "visit", "travel", "meet", "talk", "listen"
+          ],
+          "advanced": [
+            "recommend", "complain", "argue", "discuss", "share", "borrow",
+            "lend", "spend", "save", "plan", "organize", "volunteer",
+            "practice", "teach", "explain", "notice", "realize", "admit"
+          ]
+        }
+      },
+      "questions": {
+        "V1": {
+          "basic": [
+            "like", "speak", "work", "live", "play", "eat", "drink",
+            "read", "watch", "know", "want", "need", "have", "go"
+          ],
+          "intermediate": [
+            "study", "travel", "exercise", "cook", "clean", "drive",
+            "walk", "call", "visit", "meet", "talk", "listen", "help",
+            "use", "practice", "teach", "learn"
+          ],
+          "advanced": [
+            "recommend", "prefer", "support", "believe", "understand",
+            "remember", "enjoy", "share", "volunteer", "organize",
+            "explain", "discuss", "plan", "realize", "notice"
+          ]
+        }
+      }
+    },
+    "present_continuous": {
+      "affirmative": {
+        "V-ing": {
+          "basic": [
+            "reading", "watching", "writing", "playing", "cooking",
+            "sleeping", "eating", "drinking", "walking", "running",
+            "singing", "dancing", "talking", "listening", "helping"
+          ],
+          "intermediate": [
+            "working", "studying", "driving", "cleaning", "shopping",
+            "traveling", "visiting", "calling", "texting", "exercising",
+            "practicing", "teaching", "learning", "drawing", "painting"
+          ],
+          "advanced": [
+            "organizing", "preparing", "discussing", "explaining",
+            "planning", "volunteering", "recommending", "supporting",
+            "sharing", "fixing", "building", "planting", "borrowing",
+            "lending", "saving", "checking", "noticing", "realizing"
+          ]
+        }
+      },
+      "negative": {
+        "V-ing": {
+          "basic": [
+            "sleeping", "eating", "drinking", "playing", "watching",
+            "reading", "working", "studying", "talking", "walking"
+          ],
+          "intermediate": [
+            "exercising", "cooking", "cleaning", "driving", "calling",
+            "texting", "traveling", "visiting", "practicing", "listening"
+          ],
+          "advanced": [
+            "organizing", "preparing", "discussing", "planning",
+            "volunteering", "supporting", "sharing", "explaining"
+          ]
+        }
+      },
+      "questions": {
+        "V-ing": {
+          "basic": [
+            "reading", "watching", "playing", "eating", "drinking",
+            "sleeping", "working", "studying", "talking", "listening"
+          ],
+          "intermediate": [
+            "exercising", "cooking", "cleaning", "driving", "calling",
+            "traveling", "visiting", "practicing", "helping", "waiting"
+          ],
+          "advanced": [
+            "organizing", "preparing", "discussing", "planning",
+            "volunteering", "supporting", "sharing", "explaining"
+          ]
+        }
+      }
+    },
+    "can_cant": {
+      "ability": {
+        "V1": {
+          "basic": [
+            "swim", "cook", "speak", "play", "drive", "sing", "dance",
+            "run", "jump", "read", "write", "draw", "walk", "eat", "drink"
+          ],
+          "intermediate": [
+            "ride", "ski", "skate", "paint", "teach", "translate",
+            "remember", "understand", "help", "fix", "build", "make",
+            "use", "organize", "explain", "practice", "plan"
+          ],
+          "advanced": [
+            "volunteer", "recommend", "support", "share", "solve",
+            "manage", "lead", "present", "negotiate", "communicate",
+            "collaborate", "contribute", "mentor", "inspire", "motivate"
+          ]
+        }
+      },
+      "permission_requests": {
+        "V1": {
+          "basic": [
+            "go", "have", "use", "open", "sit", "come", "take",
+            "leave", "ask", "speak", "look", "wait"
+          ],
+          "intermediate": [
+            "borrow", "lend", "join", "try", "check", "call",
+            "visit", "help", "bring", "share", "move", "close"
+          ],
+          "advanced": [
+            "recommend", "suggest", "discuss", "explain", "present",
+            "introduce", "organize", "contribute", "participate"
+          ]
+        }
+      },
+      "negative": {
+        "V1": {
+          "basic": [
+            "come", "swim", "go", "play", "help", "eat", "drink",
+            "sleep", "read", "write", "talk", "walk"
+          ],
+          "intermediate": [
+            "work", "study", "drive", "travel", "exercise", "call",
+            "visit", "meet", "join", "attend", "practice", "cook"
+          ],
+          "advanced": [
+            "volunteer", "organize", "recommend", "support", "share",
+            "contribute", "collaborate", "present", "participate"
+          ]
+        }
+      }
+    },
+    "imperatives": {
+      "positive": {
+        "V1": {
+          "basic": [
+            "Open", "Close", "Sit", "Come", "Take", "Listen", "Look",
+            "Wait", "Stop", "Start", "Read", "Write", "Speak", "Give", "Put"
+          ],
+          "intermediate": [
+            "Turn on", "Turn off", "Pick up", "Put down", "Come in",
+            "Go out", "Sit down", "Stand up", "Wake up", "Hurry up",
+            "Calm down", "Slow down", "Write down", "Look at"
+          ],
+          "advanced": [
+            "Remember", "Consider", "Imagine", "Try",
+            "Check", "Prepare", "Practice", "Repeat", "Explain"
+          ]
+        }
+      },
+      "negative": {
+        "V1": {
+          "basic": [
+            "Don't open", "Don't close", "Don't be", "Don't touch",
+            "Don't run", "Don't go", "Don't eat", "Don't drink",
+            "Don't forget", "Don't cry"
+          ],
+          "intermediate": [
+            "Don't worry", "Don't hurry", "Don't shout", "Don't smoke",
+            "Don't cross", "Don't talk", "Don't listen", "Don't wait",
+            "Don't stop", "Don't move"
+          ],
+          "advanced": [
+            "Don't argue", "Don't complain", "Don't interrupt",
+            "Don't hesitate", "Don't pretend", "Don't ignore"
+          ]
+        }
+      }
+    },
+    "past_simple_regular": {
+      "affirmative": {
+        "V2": {
+          "basic": [
+            "worked", "played", "watched", "visited", "cooked", "walked",
+            "talked", "listened", "helped", "opened", "closed", "started",
+            "finished", "asked", "answered", "looked", "waited", "cleaned"
+          ],
+          "intermediate": [
+            "studied", "traveled", "exercised", "practiced", "called",
+            "texted", "painted", "danced", "jumped", "climbed", "shopped",
+            "organized", "prepared", "planned", "checked", "fixed",
+            "planted", "collected", "shared", "borrowed"
+          ],
+          "advanced": [
+            "recommended", "supported", "discussed", "explained",
+            "noticed", "realized", "admitted", "agreed", "believed",
+            "complained", "argued", "volunteered", "contributed",
+            "collaborated", "mentored", "inspired"
+          ]
+        }
+      },
+      "negative_questions": {
+        "V1": {
+          "basic": [
+            "work", "play", "watch", "visit", "cook", "walk", "talk",
+            "listen", "help", "open", "close", "start", "finish",
+            "ask", "answer", "look", "wait", "clean"
+          ],
+          "intermediate": [
+            "study", "travel", "exercise", "practice", "call", "text",
+            "paint", "dance", "jump", "climb", "shop", "organize",
+            "prepare", "plan", "check", "fix", "plant", "collect",
+            "share", "borrow"
+          ],
+          "advanced": [
+            "recommend", "support", "discuss", "explain", "notice",
+            "realize", "admit", "agree", "believe", "complain",
+            "argue", "volunteer", "contribute", "collaborate",
+            "mentor", "inspire"
+          ]
+        }
+      }
+    },
+    "past_simple_irregular": {
+      "affirmative": {
+        "V2": {
+          "basic": [
+            "went", "saw", "had", "did", "made", "took", "got", "came",
+            "said", "told", "knew", "thought", "found", "gave", "left",
+            "felt", "put", "brought", "began", "kept", "held", "wrote",
+            "read", "ran", "ate", "drank", "slept", "spoke", "bought",
+            "sold", "paid", "met", "sat", "stood", "heard"
+          ],
+          "intermediate": [
+            "understood", "became", "broke", "built", "caught", "chose",
+            "drove", "fell", "flew", "forgot", "grew", "hid", "hit",
+            "hurt", "led", "lent", "lost", "meant", "rode", "rang",
+            "rose", "sent", "sang", "shut", "spent", "swam", "taught",
+            "threw", "woke", "wore", "won"
+          ],
+          "advanced": [
+            "arose", "awoke", "bore", "beat", "bent", "bet", "bit",
+            "bled", "blew", "bred", "cast", "crept", "dealt", "dug",
+            "drew", "fed", "fought", "froze", "hung", "laid", "lay",
+            "lit", "overcame", "quit", "shook", "shone", "shot",
+            "sought", "spread", "struck", "swept", "swore", "tore",
+            "wove"
+          ]
+        }
+      },
+      "negative_questions": {
+        "V1": {
+          "basic": [
+            "go", "see", "have", "do", "make", "take", "get", "come",
+            "say", "tell", "know", "think", "find", "give", "leave",
+            "feel", "put", "bring", "begin", "keep", "hold", "write",
+            "read", "run", "eat", "drink", "sleep", "speak", "buy",
+            "sell", "pay", "meet", "sit", "stand", "hear"
+          ],
+          "intermediate": [
+            "understand", "become", "break", "build", "catch", "choose",
+            "drive", "fall", "fly", "forget", "grow", "hide", "hit",
+            "hurt", "lead", "lend", "lose", "mean", "ride", "ring",
+            "rise", "send", "sing", "shut", "spend", "swim", "teach",
+            "throw", "wake", "wear", "win"
+          ],
+          "advanced": [
+            "arise", "awake", "bear", "beat", "bend", "bet", "bite",
+            "bleed", "blow", "breed", "cast", "creep", "deal", "dig",
+            "draw", "feed", "fight", "freeze", "hang", "lay", "lie",
+            "light", "overcome", "quit", "shake", "shine", "shoot",
+            "seek", "spread", "strike", "sweep", "swear", "tear",
+            "weave"
+          ]
+        }
+      }
+    },
+    "like_ing": {
+      "affirmative": {
+        "V-ing": {
+          "basic": [
+            "swimming", "reading", "cooking", "playing", "watching",
+            "eating", "drinking", "sleeping", "walking", "running",
+            "singing", "dancing", "talking", "listening", "drawing"
+          ],
+          "intermediate": [
+            "traveling", "exercising", "practicing", "teaching",
+            "learning", "cleaning", "shopping", "driving", "cycling",
+            "painting", "writing", "photographing", "gardening",
+            "baking", "studying"
+          ],
+          "advanced": [
+            "volunteering", "organizing", "planning", "discussing",
+            "explaining", "recommending", "supporting", "sharing",
+            "collaborating", "mentoring", "inspiring", "motivating",
+            "contributing", "problem-solving", "brainstorming"
+          ]
+        }
+      }
+    },
+    "would_like": {
+      "affirmative": {
+        "to + V1": {
+          "basic": [
+            "to go", "to eat", "to drink", "to sleep", "to play",
+            "to read", "to watch", "to walk", "to talk", "to help"
+          ],
+          "intermediate": [
+            "to travel", "to visit", "to study", "to learn", "to practice",
+            "to exercise", "to cook", "to clean", "to call", "to meet",
+            "to try", "to see", "to buy", "to order", "to book"
+          ],
+          "advanced": [
+            "to volunteer", "to organize", "to recommend", "to discuss",
+            "to explain", "to support", "to share", "to contribute",
+            "to collaborate", "to mentor", "to inspire", "to celebrate"
+          ]
+        },
+        "noun": {
+          "basic": [
+            "a cup of tea", "some water", "a coffee", "an apple",
+            "a sandwich", "a glass of juice"
+          ],
+          "intermediate": [
+            "a new phone", "a big house", "a ticket to the concert",
+            "a table for two", "a room with a view", "a day off"
+          ],
+          "advanced": [
+            "a career change", "a fresh start", "an opportunity to grow",
+            "a long holiday", "a quiet evening at home"
+          ]
+        }
+      }
+    },
+    "going_to": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "visit", "buy", "go", "watch", "cook", "eat", "drink",
+            "play", "read", "sleep", "walk", "talk", "help", "call"
+          ],
+          "intermediate": [
+            "travel", "study", "learn", "practice", "exercise",
+            "clean", "drive", "meet", "try", "see", "order", "book",
+            "organize", "prepare", "plan"
+          ],
+          "advanced": [
+            "volunteer", "recommend", "discuss", "explain", "support",
+            "share", "contribute", "collaborate", "mentor", "inspire",
+            "celebrate", "surprise", "introduce", "present"
+          ]
+        }
+      }
+    }
+  }
+}
