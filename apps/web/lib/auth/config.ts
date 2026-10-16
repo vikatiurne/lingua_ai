@@ -43,11 +43,23 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
       }
+
+      if (token.id) {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.id },
+          select: { level: true, targetLevel: true },
+        });
+        token.level = dbUser?.level ?? null;
+        token.targetLevel = dbUser?.targetLevel ?? null;
+      }
+
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id;
+        session.user.level = token.level ?? null;
+        session.user.targetLevel = token.targetLevel ?? null;
       }
       return session;
     },

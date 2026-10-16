@@ -3,7 +3,7 @@
 **Епік:** E4 — Auth & Users
 **Розмір:** S (1–2 год)
 **Залежності:** 15, 16
-**Статус:** ⬜ Todo
+**Статус:** ✅ Done
 **Гілка:** `feat/17-user-helpers`
 
 > ⚠️ **ЦЯ ЗАДАЧА — ЗРУЧНИЙ ДОСТУП ДО USER.**
@@ -35,18 +35,18 @@
 
 ## ✅ Acceptance Criteria
 
-- [ ] Є `apps/web/lib/auth/session.ts` — `getCurrentUser`, `requireUser`
-- [ ] Є `apps/web/lib/validation/user.ts` — Zod-схема для PATCH
-- [ ] Є `apps/web/lib/validation/user.test.ts` — 4+ тестів
-- [ ] Є `apps/web/app/api/user/me/route.ts` — GET + PATCH
-- [ ] Є `apps/web/middleware.ts` — захист маршрутів
-- [ ] Session callback повертає `session.user.level` і `session.user.targetLevel`
-- [ ] `requireUser()` викликає `redirect("/login")` при відсутності сесії
-- [ ] Middleware не пропускає неавторизованих на `/dashboard`, `/plan`, `/exercise`, `/progress`, `/calendar`
-- [ ] `/api/user/me` повертає User без `passwordHash`
-- [ ] `PATCH /api/user/me` валідує `level` через `CEFR_LEVELS` з `@lingua/shared`
-- [ ] `types/next-auth.d.ts` розширено: `level`, `targetLevel` у `Session.user` і `JWT`
-- [ ] `pnpm typecheck` і `pnpm --filter web test` проходять
+- [x] Є `apps/web/lib/auth/session.ts` — `getCurrentUser`, `requireUser`
+- [x] Є `apps/web/lib/validation/user.ts` — Zod-схема для PATCH
+- [x] Є `apps/web/lib/validation/user.test.ts` — 4+ тестів
+- [x] Є `apps/web/app/api/user/me/route.ts` — GET + PATCH
+- [x] Є `apps/web/middleware.ts` — захист маршрутів
+- [x] Session callback повертає `session.user.level` і `session.user.targetLevel`
+- [x] `requireUser()` викликає `redirect("/login")` при відсутності сесії
+- [x] Middleware не пропускає неавторизованих на `/dashboard`, `/plan`, `/exercise`, `/progress`, `/calendar`
+- [x] `/api/user/me` повертає User без `passwordHash`
+- [x] `PATCH /api/user/me` валідує `level` через `CEFR_LEVELS` з `@lingua/shared`
+- [x] `types/next-auth.d.ts` розширено: `level`, `targetLevel` у `Session.user` і `JWT`
+- [x] `pnpm typecheck` і `pnpm --filter web test` проходять
 
 ---
 
@@ -107,8 +107,8 @@ import { z } from "zod";
 import { CEFR_LEVELS } from "@lingua/shared";
 
 export const updateUserSchema = z.object({
-  level: z.enum(CEFR_LEVELS as [string, ...string[]]).optional(),
-  targetLevel: z.enum(CEFR_LEVELS as [string, ...string[]]).optional(),
+  level: z.enum(CEFR_LEVELS).optional(),
+  targetLevel: z.enum(CEFR_LEVELS).optional(),
   dailyMinutes: z.number().int().min(5).max(240).optional(),
 });
 
@@ -311,13 +311,9 @@ Middleware захищає **сторінки**, не API. API-роути сам�
 
 Після PATCH `/api/user/me` — клієнт має викликати `router.refresh()` або `update()` з `useSession`, щоб session callback перезапустився.
 
-### `CEFR_LEVELS` у Zod enum
+### `z.enum` у Zod 4
 
-```ts
-z.enum(CEFR_LEVELS as [string, ...string[]])
-```
-
-Zod вимагає non-empty tuple. `CEFR_LEVELS` — `CEFRLevel[]`, тому cast обов'язковий.
+Zod 4 приймає `readonly string[]` і сам зберігає literal union. Cast `as [string, ...string[]]` був потрібен лише для Zod 3 і ламає типи (звужує до `string`).
 
 ### Prisma в `callbacks.jwt`
 
@@ -369,7 +365,32 @@ git push origin feat/17-user-helpers
 Заповнюється після завершення.
 
 - Чи працює Prisma у JWT callback без проблем?
+  - Так. JWT callback виконується в Node-контексті API route (NextAuth v4, JWT strategy),
+    а не на Edge. Запит `prisma.user.findUnique({ select: { level, targetLevel } })`
+    додано напряму в `callbacks.jwt`. `pnpm typecheck` проходить.
 - Чи не занадто повільно підтягувати level на кожен рендер?
+  - Для MVP — прийнятно. Кожен `getServerSession` дає +1 запит до БД (N+1). Якщо стане
+    вузьким місцем — кешувати `level`/`targetLevel` у Redis або оновлювати токен лише
+    за `trigger === "update"`. Позначено як оптимізацію на майбутнє.
 - Чи правильно `withAuth` редіректить на `/login` при відсутності cookie?
+  - Налаштовано через `pages: { signIn: "/login" }`. `withAuth` перевіряє JWT cookie і
+    редіректить на `/login` при відсутності/невалідності. Runtime не перевірявся
+    (потрібен запущений застосунок із налаштованим `NEXTAUTH_SECRET`).
 - Чи `redirect()` у `requireUser` працює без помилок у Server Components?
+  - Так, це рекомендований патерн App Router. `redirect()` кидає спеціальний виняток,
+    тому після нього `return user` виконується лише коли `user` існує.
 - Чи треба rate limit на `/api/user/me`?
+  - Ні. Endpoint працює лише для авторизованих; винесено в out of scope.
+
+### Відхилення від специфікації
+
+- У `validation/user.ts` використано `z.enum(CEFR_LEVELS)` без cast `as [string, ...string[]]`.
+  Проєкт на Zod 4, де `z.enum` приймає `readonly string[]` і сам зберігає літеральний union
+  (`CEFRLevel`). Cast до `[string, ...string[]]` звужував би тип до `string` і ламав би
+  `prisma.user.update` (очікує `CEFRLevel`). Cast був потрібен лише для Zod 3.
+
+### Перевірка
+
+- `pnpm --filter web typecheck` — ✅ без помилок.
+- `pnpm --filter web test` — ✅ 111 тестів, у т.ч. 5 нових у `validation/user.test.ts`.
+- Runtime (браузер, реальна сесія) не перевірявся — потрібен запущений застосунок.

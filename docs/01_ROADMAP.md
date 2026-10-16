@@ -54,9 +54,9 @@
 
 - [х] 15 — NextAuth setup (credentials + JWT)
 - [x] 16 — Login + Register pages
-- [ ] 16.5 — UI Foundation (shadcn/ui + базовые компоненты)
-- [ ] 16.6 — Landing page
-- [ ] 17 — User helpers + session callback + /api/user/me
+- [х] 16.5 — UI Foundation (shadcn/ui + базовые компоненты)
+- [х] 16.6 — Landing page
+- [х] 17 — User helpers + session callback + /api/user/me
 
 ## E5 — Level Test
 

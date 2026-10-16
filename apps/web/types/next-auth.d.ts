@@ -1,9 +1,12 @@
 import type { DefaultSession } from "next-auth";
+import type { CEFRLevel } from "@lingua/shared";
 
 declare module "next-auth" {
   interface Session {
     user: {
       id: string;
+      level: CEFRLevel | null;
+      targetLevel: CEFRLevel | null;
     } & DefaultSession["user"];
   }
 
@@ -16,5 +19,7 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     id: string;
+    level?: CEFRLevel | null;
+    targetLevel?: CEFRLevel | null;
   }
 }
