@@ -47,7 +47,7 @@
 - [х] 10 — AI provider interface
 - [x] 11 — OpenRouter provider
 - [х] 12 — Gemini + DeepSeek providers + cross-check
-- [ ] 13 — Redis cache layer
+- [х] 13 — Redis cache layer
 - [ ] 14 — Rate limiting middleware
 
 ## E4 — Auth & Users

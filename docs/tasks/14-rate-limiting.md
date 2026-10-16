@@ -22,9 +22,9 @@
 Після завершення задачі:
 - Є функція `checkRateLimit(key, limit, windowSec)` — INCR + EXPIRE
 - Є middleware `withRateLimit(handler, options)` для Next.js API-роутів
-- Є стандартні ліміти: AI — 10/хв, API — 100/хв
+- Є стандартні ліміти: AI — 10/хв, API — 100/хв, AUTH — 5/хв
 - При перевищенні → 429 з заголовками `Retry-After`, `X-RateLimit-*`
-- Якщо Redis недоступний — пропустити перевірку (fail-open, а не fail-closed)
+- Якщо Redis недоступний — пропустити перевірку (fail-open)
 
 ---
 
@@ -38,7 +38,8 @@
 - [ ] `withRateLimit` повертає 429 при перевищенні
 - [ ] Заголовки: `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`, `Retry-After`
 - [ ] При Redis недоступному — пропуск (fail-open)
-- [ ] `RATE_LIMITS` константа з лімітами
+- [ ] `RATE_LIMITS` константа з лімітами (AI, API, AUTH)
+- [ ] IP витягується з `x-forwarded-for` або `x-real-ip` (не з `req.ip`, якого немає в App Router)
 - [ ] `pnpm typecheck` і `pnpm --filter web test` проходять
 
 ---
@@ -51,23 +52,29 @@
 - ❌ Whitelist для адмінів
 - ❌ Prometheus-метрики
 - ❌ Збереження порушень у БД
+- ❌ Env `RATE_LIMIT_ENABLED` (не потрібно — fail-open уже вирішує)
 
 ---
 
 ## 📁 Файли
 
 ### Створити
+
 - `apps/web/lib/redis/rate-limit.ts`
 - `apps/web/lib/redis/rate-limit.test.ts`
 - `apps/web/lib/api/with-rate-limit.ts`
 - `apps/web/lib/api/with-rate-limit.test.ts`
 
-### Змінити
-- `.env.example` — додати `RATE_LIMIT_ENABLED=true` (для тестів можна вимкнути)
+### Не чіпати
+
+- `apps/web/lib/redis/client.ts`, `cache.ts` — створені в задачі 13
+- `apps/web/lib/ai/**`
+- `packages/shared/**`
+- Prisma
 
 ---
 
-## 🔧 Інтерфейси
+## 🔧 Інтерфейси (обов'язково)
 
 ### `lib/redis/rate-limit.ts`
 
@@ -85,6 +92,12 @@ export function checkRateLimit(
   limit: number,
   windowSeconds: number
 ): Promise<RateLimitResult>;
+
+export const RATE_LIMITS: {
+  AI: { limit: number; windowSeconds: number; keyPrefix: string };
+  API: { limit: number; windowSeconds: number; keyPrefix: string };
+  AUTH: { limit: number; windowSeconds: number; keyPrefix: string };
+};
 ```
 
 ### `lib/api/with-rate-limit.ts`
@@ -96,7 +109,7 @@ export type RateLimitOptions = {
   limit: number;
   windowSeconds: number;
   keyPrefix: string;
-  identifier?: (req: NextRequest) => string; // default: ip
+  identifier?: (req: NextRequest) => string; // default: IP з headers
 };
 
 export function withRateLimit(
@@ -105,40 +118,29 @@ export function withRateLimit(
 ): (req: NextRequest) => Promise<Response>;
 ```
 
-### `RATE_LIMITS` константа
-
-```ts
-export const RATE_LIMITS = {
-  AI: { limit: 10, windowSeconds: 60, keyPrefix: "ai" },
-  API: { limit: 100, windowSeconds: 60, keyPrefix: "api" },
-  AUTH: { limit: 5, windowSeconds: 60, keyPrefix: "auth" },
-} as const;
-```
-
 ---
 
 ## 🧠 Алгоритм (словами)
 
 ### `checkRateLimit(key, limit, windowSec)`
 
-1. Якщо `RATE_LIMIT_ENABLED !== "true"` → повернути `allowed: true` без Redis.
-2. Якщо Redis недоступний → `allowed: true` (fail-open).
-3. `currentCount = await redis.incr(key)`.
-4. Якщо `currentCount === 1` → `redis.expire(key, windowSec)`.
-5. `ttl = await redis.ttl(key)`.
-6. `resetAt = Math.floor(Date.now() / 1000) + ttl`.
-7. Якщо `currentCount <= limit`:
+1. Якщо Redis недоступний → `{ allowed: true, limit, remaining: limit, resetAt: 0 }` (fail-open).
+2. `currentCount = await redis.incr(key)`.
+3. Якщо `currentCount === 1` → `redis.expire(key, windowSec)`.
+4. `ttl = await redis.ttl(key)`.
+5. `resetAt = Math.floor(Date.now() / 1000) + ttl`.
+6. Якщо `currentCount <= limit`:
    - `{ allowed: true, limit, remaining: limit - currentCount, resetAt }`.
-8. Інакше:
+7. Інакше:
    - `{ allowed: false, limit, remaining: 0, resetAt, retryAfter: ttl }`.
 
-**Атомарність:** `INCR` + `EXPIRE` — дві команди. У разі падіння між ними — ключ без TTL, але це рідко. Для повної атомарності — Lua-скрипт. Поки що простого INCR+EXPIRE достатньо.
+**Атомарність:** `INCR` + `EXPIRE` — дві команди. При падінні між ними — ключ без TTL, але рідко. Для повної атомарності — Lua. Поки що достатньо.
 
 ### `withRateLimit(handler, options)`
 
-1. Витягти identifier з запиту:
+1. Витягти identifier:
    - `options.identifier?.(req)` → якщо вказано.
-   - Інакше — `req.ip` або `x-forwarded-for` header, або `"unknown"`.
+   - Інакше → `getClientIp(req)`.
 2. `key = \`ratelimit:${options.keyPrefix}:${identifier}\``.
 3. `result = await checkRateLimit(key, options.limit, options.windowSeconds)`.
 4. Додати до відповіді заголовки:
@@ -146,10 +148,22 @@ export const RATE_LIMITS = {
    - `X-RateLimit-Remaining: ${result.remaining}`
    - `X-RateLimit-Reset: ${result.resetAt}`
 5. Якщо `!result.allowed`:
-   - Повернути `new Response("Too Many Requests", { status: 429 })` з заголовками вище + `Retry-After: ${result.retryAfter}`.
+   - Повернути `Response` 429 з `Retry-After: ${result.retryAfter}` + заголовки.
 6. Інакше — викликати `handler(req)`, додати заголовки до відповіді.
 
-**Важливо:** заголовки додаються і до успішних відповідей — це стандарт.
+### `getClientIp(req)`
+
+```ts
+function getClientIp(req: NextRequest): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0]!.trim();
+  const realIp = req.headers.get("x-real-ip");
+  if (realIp) return realIp;
+  return "unknown";
+}
+```
+
+**`req.ip`** у Next.js App Router **не існує**. Тільки headers.
 
 ---
 
@@ -167,10 +181,7 @@ await checkRateLimit("ratelimit:ai:1.2.3.4", 10, 60)
 // → { allowed: false, limit: 10, remaining: 0, resetAt: 1712345678, retryAfter: 42 }
 
 // Redis недоступний
-// → { allowed: true, limit: 10, remaining: 9, resetAt: 0 }
-
-// У роуті:
-export const POST = withRateLimit(handler, RATE_LIMITS.AI);
+// → { allowed: true, limit: 10, remaining: 10, resetAt: 0 }
 ```
 
 Response headers при успіху:
@@ -201,12 +212,12 @@ Retry-After: 42
 2. 11-й запит при limit=10 → `allowed: false`, `retryAfter > 0`.
 3. `EXPIRE` встановлюється тільки при `INCR === 1`.
 4. Redis недоступний → `allowed: true`, `remaining: limit`.
-5. `RATE_LIMIT_ENABLED !== "true"` → Redis не викликається.
-6. `resetAt` — майбутній timestamp.
+5. `resetAt` — майбутній timestamp.
+6. Ключі різних prefixів не змішуються.
 
 ### `with-rate-limit.test.ts` (5+)
 
-Мокати `checkRateLimit`.
+Мокати `checkRateLimit` (з `./rate-limit`).
 
 1. Успіх → `handler` викликано, заголовки додані.
 2. `allowed: false` → 429, `handler` НЕ викликано.
@@ -238,17 +249,7 @@ await redis.set(key, count + 1, "EX", windowSeconds);
 
 ### Витяг IP у Next.js
 
-```ts
-function getIp(req: NextRequest): string {
-  const forwarded = req.headers.get("x-forwarded-for");
-  if (forwarded) return forwarded.split(",")[0]!.trim();
-  const realIp = req.headers.get("x-real-ip");
-  if (realIp) return realIp;
-  return "unknown";
-}
-```
-
-`req.ip` у Next.js App Router — **недоступно**. Тільки headers.
+`req.ip` у Next.js App Router — **недоступно**. Тільки `headers`.
 
 ### Заголовки у Response
 
@@ -278,11 +279,9 @@ return new Response(response.body, {
 - Ліміти безкоштовних AI-моделей все одно спрацюють на стороні провайдера.
 - Альтернатива (fail-closed) — сайт недоступний, якщо Redis впав.
 
-### `RATE_LIMIT_ENABLED`
+### Redis на порту 6380
 
-- У тестах зазвичай `false` — щоб не мокати Redis у кожному тесті.
-- У продакшні `true`.
-- Перевірка: `process.env.RATE_LIMIT_ENABLED !== "true"` → skip.
+Той самий, що в задачі 13. `.env` містить `REDIS_URL=redis://localhost:6380`.
 
 ---
 
@@ -304,6 +303,7 @@ feat(api): add rate limiting middleware
 - add RATE_LIMITS constants: AI 10/min, API 100/min, AUTH 5/min
 - add standard headers: X-RateLimit-*, Retry-After
 - add fail-open when Redis unavailable
+- extract IP from x-forwarded-for / x-real-ip headers
 - add 11 unit tests with mocked ioredis
 ```
 
@@ -323,6 +323,9 @@ git push origin feat/14-rate-limiting
 
 ## 📝 Нотатки
 
+Заповнюється після завершення.
+
 - Чи потрібен sliding window замість fixed?
 - Чи варто логувати 429 у консоль?
 - Чи потрібен окремий ліміт для cross-check (він робить 2 запити)?
+- Чи коректно витягується IP з різних proxy конфігурацій?

@@ -3,7 +3,7 @@
 **Епік:** E3 — AI & Cache
 **Розмір:** S (1–2 год)
 **Залежності:** 02, 10
-**Статус:** ⬜ Todo
+**Статус:** ✅ Done
 **Гілка:** `feat/13-redis-cache`
 
 > ⚠️ **ЦЯ ЗАДАЧА — ШАР КЕШУ ДЛЯ AI.**
@@ -350,7 +350,24 @@ git push origin feat/13-redis-cache
 
 Заповнюється після завершення.
 
-- Чи варто кешувати divergent-результати cross-check? (поки ні)
-- Чи потрібен fallback на дефолт `redis://localhost:6380`?
-- Чи потрібно логувати cache hit/miss для метрик?
-- Чи правильно визначається `isRedisAvailable()` при lazy connect?
+**Чи варто кешувати divergent-результати cross-check? (поки ні)**
+— Підтверджено: ні. `completeCached` кешує результат `completeWithFallback`, cross-check живе окремо (`cross-check.ts`) і не торкається цього шару. Якщо треба — окрема задача.
+
+**Чи потрібен fallback на дефолт `redis://localhost:6380`?**
+— Ні. Якщо `REDIS_URL` не задано, `client.ts` створює клієнт без URL (lazyConnect, `enableOfflineQueue: false`), який ніколи не стає `ready` → `isRedisAvailable() === false` → кеш працює як no-op. Дефолтний порт у коді не хардкодиться (AGENT_RULES 7.11): `REDIS_URL=redis://localhost:6380` вже є в `.env` і `.env.example`.
+
+**Чи потрібно логувати cache hit/miss для метрик?**
+— У цій задачі — ні (out of scope). Залишити на задачу 35 (логування у БД). Зараз є тільки `console.warn` при помилках get/set/parse — це діагностика, не метрики. Якщо знадобиться — простий лічильник у `completeCached`.
+
+**Чи правильно визначається `isRedisAvailable()` при lazy connect?**
+— Так. `lazyConnect` → статус `ready` тільки після першої вдалої команди/з'єднання; до цього `status !== "ready"` → функція повертає `false` і операції — no-op. Реальна поведінка підтверджена логікою ioredis; у тестах клієнт мокається (`status = "ready"`), тож юніт-тести перевіряють саме контракт «ready → кешує, не ready → пропускає».
+
+### Завершення (2026-10-16)
+
+- `ioredis ^5.4.2` додано до `apps/web/package.json`.
+- Створено: `lib/redis/client.ts` (singleton через `globalThis`, аналог Prisma), `lib/redis/cache.ts`, `lib/ai/cached.ts` + тести (8 + 6 = 14 нових; всього 83 — зелені).
+- `.env.example` вже містив `REDIS_URL=redis://localhost:6380` — зміни не потребував.
+- Ключ: `ai:<sha256(JSON{messages, model, temperature, responseFormat})>`. У ключ НЕ входять `timeoutMs`, `signal`, `cacheTtlSeconds`. TTL за замовчуванням 86400; `cacheTtlSeconds: 0` → пропуск кеша.
+- `connect` логується структурованим JSON (як `logger.ts` з scope `redis`), `error` — `console.warn("[redis] ...")` без кидання.
+- Перевірки: `pnpm typecheck` ✅, `pnpm --filter web test` ✅ (83), `pnpm --filter web build` ✅.
+- `pnpm --filter web lint` — ESLint у web ще не сконфігуровано (next lint питає wizard) — це позачадачевий стан, не змінював.
