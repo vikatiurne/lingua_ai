@@ -158,7 +158,7 @@ pnpm dev:web
 ```
 
 Застосунок буде доступний на [http://localhost:3001](http://localhost:3001).
-Strapi Admin — на [http://localhost:1337/admin](http://localhost:1337/admin).
+Strapi Admin — на [http://localhost:1337/admin](http://localhost:1338/admin).
 
 ---
 
