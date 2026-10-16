@@ -74,6 +74,8 @@ packages/shared/src/
 - [ ] `pnpm typecheck` проходить без помилок
 - [ ] Імпорт з `apps/web` працює
 - [ ] Значення `CEFR_LEVEL` сумісні зі Strapi (задача 03): `A1`, `A2`, `A2+`, `B1`, `B1+`, `B2`, `C1`, `C2`
+- [ ] packages/shared/src/constants/error-recycling.ts створено
+- [ ] ERROR_RECYCLING експортується з @lingua/shared
 
 ---
 
@@ -467,6 +469,13 @@ export * from "./constants/level-meta";
 ```
 
 ---
+
+## 📝 README
+
+Після завершення задачі — оновити `README.md`:
+- [ ] Пункт «X» у «📊 Статус проєкту» → `[x]`
+- [ ] (якщо UI) Додати скриншот в «📸 Скриншоти»
+- [ ] (якщо deploy) Додати live URL в «🚀 Демо»
 
 ## 🧪 Як перевірити
 

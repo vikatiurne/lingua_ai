@@ -1,0 +1,8 @@
+node_modules
+.next
+.strapi
+build
+dist
+.env
+.env.local
+*.log

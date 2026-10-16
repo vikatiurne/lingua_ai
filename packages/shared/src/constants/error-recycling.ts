@@ -1,0 +1,8 @@
+export const ERROR_RECYCLING = {
+  SUCCESS_THRESHOLD: 3,
+  FAILURE_THRESHOLD: 5,
+  RECYCLE_LIMIT: 5,
+  STUCK_BANNER_THRESHOLD: 3,
+} as const;
+
+export type ErrorRecycling = typeof ERROR_RECYCLING;

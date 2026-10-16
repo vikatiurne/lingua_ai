@@ -25,7 +25,7 @@
 
 ## ✅ Acceptance Criteria
 
-- [ ] Є `package.json` у корені з `packageManager: pnpm@9`
+- [ ] Є `package.json` у корені з `packageManager: pnpm@9.15.9`
 - [ ] Є `pnpm-workspace.yaml` з `apps/*` і `packages/*`
 - [ ] Є `turbo.json`, `tsconfig.base.json`, `.gitignore`, `.nvmrc`, `.editorconfig`
 - [ ] `apps/web` — Next.js 14 App Router + TypeScript + Tailwind
@@ -100,7 +100,7 @@
 {
   "name": "lingua-ai",
   "private": true,
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@9.15.9",
   "engines": { "node": ">=22" },
   "scripts": {
     "dev:web": "pnpm --filter web dev",
@@ -263,7 +263,7 @@ export default function Home() {
 ```
 chore(monorepo): setup pnpm workspaces and turborepo
 
-- add root package.json with pnpm@9 and turbo
+- add root package.json with pnpm@9.15.9 and turbo
 - add pnpm-workspace.yaml, turbo.json, tsconfig.base.json
 - add apps/web (Next.js 14 App Router + Tailwind)
 - add apps/cms placeholder
