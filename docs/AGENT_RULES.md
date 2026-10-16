@@ -109,7 +109,10 @@
 - **TypeScript** — строгий режим, без `any` (якщо не уникнути — коментар чому).
 - **Server Components** — за замовчуванням. `"use client"` — тільки якщо треба інтерактив.
 - **Tailwind** — для стилів. Без CSS-модулів, styled-components.
-- **shadcn/ui** — для UI-компонентів. Не додавати інші UI-бібліотеки.
+- **shadcn/ui** — для UI-компонентів (з задачи 16.5). Не додавати інші UI-бібліотеки.
+- **`cn()` helper** з `@/lib/utils` — для умовних класів. Не використовувати template strings для динамічних класів.
+- **Компоненти з `components/ui/`** — не змінювати без явної вказівки. Якщо треба кастомізація — обгортка в `components/<feature>/`.
+- **Кольори** — тільки через CSS-змінні (`bg-background`, `text-foreground`, `text-destructive`). Не хардкодити `bg-gray-100` etc.
 - **Named exports** — для компонентів (`export function Foo`), не default.
 - **Файли** — kebab-case для папок (`app/exercise/[id]/`), PascalCase для компонентів (`ExerciseCard.tsx`).
 - **Мова коду** — англійська. Назви функцій, змінних, типів — англійською.

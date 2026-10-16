@@ -17,6 +17,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
     "@lingua/shared": "workspace:*",
     "@prisma/client": "^6.19.3",
     "bcryptjs": "^3.0.3",
@@ -24,10 +25,11 @@
     "next": "^14.2.0",
     "next-auth": "^4.24.0",
     "react": "^18.3.0",
-    "react-dom": "^18.3.0"
+    "react-dom": "^18.3.0",
+    "react-hook-form": "^7.90.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^3.0.0",
     "@types/node": "^20.0.0",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
