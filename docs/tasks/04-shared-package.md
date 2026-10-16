@@ -1,15 +1,15 @@
-# 05 — Shared Package (Enums, Types, Constants)
+# 04 — Shared Package (Enums, Types, Constants)
 
-**Епік:** E2 — Data & Shared
+**Епік:** E1 — Foundation
 **Розмір:** M (2–3 год)
 **Залежності:** 01
-**Статус:** ⬜ Todo
-**Гілка:** `feat/05-shared-package`
+**Статус:** ✅ Done
+**Гілка:** `feat/04-shared-package`
 
 > ⚠️ **ЦЯ ЗАДАЧА НАПОВНЮЄ `packages/shared/`.**
 > Пакет уже створений (задача 01). Тепер додаємо єнуми, типи, константи.
 >
-> ⚠️ **ЦЯ ЗАДАЧА НЕ ТОРКАЄТЬСЯ:**
+> ⚠️ **НЕ ТОРКАЄТЬСЯ:**
 > - `apps/web/**` (Next.js)
 > - `apps/cms/**` (Strapi)
 > - Prisma (задача 06)
@@ -22,9 +22,9 @@
 ## 🎯 Мета
 
 Після завершення задачі пакет `@lingua/shared` містить:
-- Єнуми CEFR рівнів, типів помилок, статусів вправ
+- Єнуми CEFR рівнів, типів помилок, статусів вправ, статусів recycling
 - Спільні типи (Template, Slot, Exercise, Error)
-- Константи (метадані рівнів, лейбли українською)
+- Константи (метадані рівнів, пороги recycling, лейбли українською)
 
 Імпорт працює з `apps/web`:
 ```ts
@@ -40,6 +40,7 @@ packages/shared/src/
     ├─→ enums/
     │    ├─→ cefr-level.ts
     │    ├─→ error-type.ts
+    │    ├─→ error-recycling-status.ts   ← NEW
     │    ├─→ exercise-status.ts
     │    ├─→ progress-status.ts
     │    ├─→ slot-level.ts
@@ -51,31 +52,33 @@ packages/shared/src/
     │    ├─→ exercise.ts
     │    └─→ error.ts
     ├─→ constants/
-    │    └─→ level-meta.ts
+    │    ├─→ level-meta.ts
+    │    └─→ error-recycling.ts          ← NEW
     └─→ index.ts
 ```
-
-**Перевірка:** `import { CEFR_LEVEL } from "@lingua/shared"` у `apps/web` працює.
 
 ---
 
 ## ✅ Acceptance Criteria
 
-- [ ] `packages/shared/src/enums/cefr-level.ts` — `CEFR_LEVEL` as const + тип + `CEFR_LEVELS` масив + `CEFR_LEVEL_LABELS`
-- [ ] `packages/shared/src/enums/error-type.ts` — `ERROR_TYPE` (TOPIC, GENERAL)
-- [ ] `packages/shared/src/enums/exercise-status.ts` — `EXERCISE_STATUS` (GENERATED, IN_PROGRESS, EVALUATED, REVIEWED)
-- [ ] `packages/shared/src/enums/progress-status.ts` — `PROGRESS_STATUS` (NOT_STARTED, IN_PROGRESS, MASTERED, NEEDS_REVIEW)
-- [ ] `packages/shared/src/enums/slot-level.ts` — `SLOT_LEVEL` (basic, intermediate, advanced)
-- [ ] `packages/shared/src/enums/material-type.ts` — `MATERIAL_TYPE` (podcast, film, article, series, book, video)
-- [ ] `packages/shared/src/enums/locale.ts` — `LOCALE` (uk, en)
-- [ ] `packages/shared/src/types/*.ts` — Template, Slot, Exercise, Error
-- [ ] `packages/shared/src/constants/level-meta.ts` — `LEVEL_META` з назвами, порядком, описами
-- [ ] `packages/shared/src/index.ts` експортує все
+- [ ] `enums/cefr-level.ts` — `CEFR_LEVEL` (as const) + тип + `CEFR_LEVELS` + `CEFR_LEVEL_LABELS` + `CEFR_LEVEL_ORDER`
+- [ ] `enums/error-type.ts` — `ERROR_TYPE` (TOPIC, GENERAL) + labels
+- [ ] `enums/error-recycling-status.ts` — `ERROR_RECYCLING_STATUS` (ACTIVE, ARCHIVED_SUCCESS, ARCHIVED_STUCK)
+- [ ] `enums/exercise-status.ts` — `EXERCISE_STATUS` (GENERATED, IN_PROGRESS, EVALUATED, REVIEWED)
+- [ ] `enums/progress-status.ts` — `PROGRESS_STATUS` (NOT_STARTED, IN_PROGRESS, MASTERED, NEEDS_REVIEW)
+- [ ] `enums/slot-level.ts` — `SLOT_LEVEL` (basic, intermediate, advanced) + `DEFAULT_SLOT_LEVEL`
+- [ ] `enums/material-type.ts` — `MATERIAL_TYPE` (podcast, film, article, series, book, video)
+- [ ] `enums/locale.ts` — `LOCALE` (uk, en) + `DEFAULT_LOCALE`
+- [ ] `types/slot.ts` — `SlotValue`, `SlotWithLevels`, `SlotReference`, `SlotEntry`, `SlotFile`, `SlotNounsFile`
+- [ ] `types/template.ts` — `TemplatePattern`, `TemplateTopic`, `TemplateFile`, `ResolvedPattern`, `ResolvedTemplateTopic`
+- [ ] `types/exercise.ts` — `SentenceDirection`, `ExerciseSentence`, `Exercise`
+- [ ] `types/error.ts` — `UserError` з recycling-полями
+- [ ] `constants/level-meta.ts` — `LEVEL_META`
+- [ ] `constants/error-recycling.ts` — `ERROR_RECYCLING` (пороги 3/5)
+- [ ] `index.ts` експортує все
 - [ ] `pnpm typecheck` проходить без помилок
 - [ ] Імпорт з `apps/web` працює
-- [ ] Значення `CEFR_LEVEL` сумісні зі Strapi (задача 03): `A1`, `A2`, `A2+`, `B1`, `B1+`, `B2`, `C1`, `C2`
-- [ ] packages/shared/src/constants/error-recycling.ts створено
-- [ ] ERROR_RECYCLING експортується з @lingua/shared
+- [ ] `CEFR_LEVEL` значення: `A1`, `A2`, `A2_PLUS`, `B1`, `B1_PLUS`, `B2`, `C1`, `C2` (сумісно зі Strapi, задача 03)
 
 ---
 
@@ -85,7 +88,7 @@ packages/shared/src/
 - ❌ Zod-схеми (задача 10+)
 - ❌ API-клієнти (задача 10)
 - ❌ Промпти для AI (задача 11)
-- ❌ Бізнес-логіка (`getCalorieLevel`-подібна) — тільки якщо потрібно для валідації
+- ❌ Бізнес-логіка
 - ❌ i18n (задача 45)
 
 ---
@@ -93,9 +96,9 @@ packages/shared/src/
 ## 📁 Файли, які треба створити
 
 ### `packages/shared/src/enums/`
-
 - `cefr-level.ts`
 - `error-type.ts`
+- `error-recycling-status.ts`
 - `exercise-status.ts`
 - `progress-status.ts`
 - `slot-level.ts`
@@ -103,25 +106,23 @@ packages/shared/src/
 - `locale.ts`
 
 ### `packages/shared/src/types/`
-
-- `template.ts`
 - `slot.ts`
+- `template.ts`
 - `exercise.ts`
 - `error.ts`
 
 ### `packages/shared/src/constants/`
-
 - `level-meta.ts`
+- `error-recycling.ts`
 
 ### `packages/shared/src/`
-
 - `index.ts` — оновити
 
 ---
 
 ## 🔧 Технічні деталі
 
-### `packages/shared/src/enums/cefr-level.ts`
+### `enums/cefr-level.ts`
 
 ```ts
 export const CEFR_LEVEL = {
@@ -142,7 +143,7 @@ export const CEFR_LEVELS = Object.values(CEFR_LEVEL) as CEFRLevel[];
 export const CEFR_LEVEL_LABELS: Record<CEFRLevel, string> = {
   A1: "Початківець",
   A2: "Елементарний",
-  A2_PLUS: "Просунутий елементарний", 
+  A2_PLUS: "Просунутий елементарний",
   B1: "Середній",
   B1_PLUS: "Міст до B2",
   B2: "Вище середнього",
@@ -153,16 +154,16 @@ export const CEFR_LEVEL_LABELS: Record<CEFRLevel, string> = {
 export const CEFR_LEVEL_ORDER: Record<CEFRLevel, number> = {
   A1: 1,
   A2: 2,
-  "A2_PLUS": 3,
+  A2_PLUS: 3,
   B1: 4,
-  "B1_PLUS": 5,
+  B1_PLUS: 5,
   B2: 6,
   C1: 7,
   C2: 8,
 };
 ```
 
-### `packages/shared/src/enums/error-type.ts`
+### `enums/error-type.ts`
 
 ```ts
 export const ERROR_TYPE = {
@@ -180,7 +181,24 @@ export const ERROR_TYPE_LABELS: Record<ErrorType, string> = {
 };
 ```
 
-### `packages/shared/src/enums/exercise-status.ts`
+### `enums/error-recycling-status.ts` ← NEW
+
+```ts
+export const ERROR_RECYCLING_STATUS = {
+  ACTIVE: "active",
+  ARCHIVED_SUCCESS: "archived_success",
+  ARCHIVED_STUCK: "archived_stuck",
+} as const;
+
+export type ErrorRecyclingStatus =
+  (typeof ERROR_RECYCLING_STATUS)[keyof typeof ERROR_RECYCLING_STATUS];
+
+export const ERROR_RECYCLING_STATUS_VALUES = Object.values(
+  ERROR_RECYCLING_STATUS
+) as ErrorRecyclingStatus[];
+```
+
+### `enums/exercise-status.ts`
 
 ```ts
 export const EXERCISE_STATUS = {
@@ -198,7 +216,7 @@ export const EXERCISE_STATUS_VALUES = Object.values(
 ) as ExerciseStatus[];
 ```
 
-### `packages/shared/src/enums/progress-status.ts`
+### `enums/progress-status.ts`
 
 ```ts
 export const PROGRESS_STATUS = {
@@ -216,7 +234,7 @@ export const PROGRESS_STATUS_VALUES = Object.values(
 ) as ProgressStatus[];
 ```
 
-### `packages/shared/src/enums/slot-level.ts`
+### `enums/slot-level.ts`
 
 ```ts
 export const SLOT_LEVEL = {
@@ -232,7 +250,7 @@ export const SLOT_LEVELS = Object.values(SLOT_LEVEL) as SlotLevel[];
 export const DEFAULT_SLOT_LEVEL: SlotLevel = SLOT_LEVEL.INTERMEDIATE;
 ```
 
-### `packages/shared/src/enums/material-type.ts`
+### `enums/material-type.ts`
 
 ```ts
 export const MATERIAL_TYPE = {
@@ -251,7 +269,7 @@ export const MATERIAL_TYPE_VALUES = Object.values(
 ) as MaterialType[];
 ```
 
-### `packages/shared/src/enums/locale.ts`
+### `enums/locale.ts`
 
 ```ts
 export const LOCALE = {
@@ -266,7 +284,7 @@ export const LOCALES = Object.values(LOCALE) as Locale[];
 export const DEFAULT_LOCALE: Locale = LOCALE.UK;
 ```
 
-### `packages/shared/src/types/slot.ts`
+### `types/slot.ts`
 
 ```ts
 import type { SlotLevel } from "../enums/slot-level";
@@ -285,9 +303,19 @@ export type SlotReference = {
 };
 
 export type SlotEntry = SlotValue | SlotWithLevels | SlotReference;
+
+export type SlotFile = {
+  level: string;
+  version: string;
+  description?: string;
+  usage?: string;
+  slots: Record<string, unknown>;
+};
+
+export type SlotNounsFile = SlotFile;
 ```
 
-### `packages/shared/src/types/template.ts`
+### `types/template.ts`
 
 ```ts
 import type { SlotEntry } from "./slot";
@@ -325,9 +353,23 @@ export type TemplateFile = {
   };
   topics: TemplateTopic[];
 };
+
+export type ResolvedSlot = string[];
+
+export type ResolvedPattern = Omit<TemplatePattern, "slots"> & {
+  slots: Record<string, ResolvedSlot>;
+};
+
+export type ResolvedTemplateTopic = {
+  topic: string;
+  subtopics: {
+    name: string;
+    patterns: ResolvedPattern[];
+  }[];
+};
 ```
 
-### `packages/shared/src/types/exercise.ts`
+### `types/exercise.ts`
 
 ```ts
 import type { CEFRLevel } from "../enums/cefr-level";
@@ -361,10 +403,11 @@ export type Exercise = {
 };
 ```
 
-### `packages/shared/src/types/error.ts`
+### `types/error.ts`
 
 ```ts
 import type { ErrorType } from "../enums/error-type";
+import type { ErrorRecyclingStatus } from "../enums/error-recycling-status";
 
 export type UserError = {
   id: string;
@@ -378,11 +421,20 @@ export type UserError = {
   category?: string;
   word?: string;
   translation?: string;
+
+  // Recycling tracking
+  timesRecycled: number;
+  successCount: number;
+  failureCount: number;
+  status: ErrorRecyclingStatus;
+  archivedAt?: string;
+
   createdAt: string;
+  updatedAt: string;
 };
 ```
 
-### `packages/shared/src/constants/level-meta.ts`
+### `constants/level-meta.ts`
 
 ```ts
 import { CEFR_LEVEL, type CEFRLevel } from "../enums/cefr-level";
@@ -446,12 +498,26 @@ export const LEVEL_META: Record<CEFRLevel, LevelMeta> = {
 };
 ```
 
-### `packages/shared/src/index.ts` — оновити
+### `constants/error-recycling.ts` ← NEW
+
+```ts
+export const ERROR_RECYCLING = {
+  SUCCESS_THRESHOLD: 3,
+  FAILURE_THRESHOLD: 5,
+  RECYCLE_LIMIT: 5,
+  STUCK_BANNER_THRESHOLD: 3,
+} as const;
+
+export type ErrorRecycling = typeof ERROR_RECYCLING;
+```
+
+### `index.ts` — оновити
 
 ```ts
 // Enums
 export * from "./enums/cefr-level";
 export * from "./enums/error-type";
+export * from "./enums/error-recycling-status";
 export * from "./enums/exercise-status";
 export * from "./enums/progress-status";
 export * from "./enums/slot-level";
@@ -466,16 +532,16 @@ export * from "./types/error";
 
 // Constants
 export * from "./constants/level-meta";
+export * from "./constants/error-recycling";
 ```
 
 ---
 
 ## 📝 README
 
-Після завершення задачі — оновити `README.md`:
-- [ ] Пункт «X» у «📊 Статус проєкту» → `[x]`
-- [ ] (якщо UI) Додати скриншот в «📸 Скриншоти»
-- [ ] (якщо deploy) Додати live URL в «🚀 Демо»
+**README не змінюється.** (Shared package — внутрішній пакет, не відображається у статусі проєкту.)
+
+---
 
 ## 🧪 Як перевірити
 
@@ -485,8 +551,9 @@ pnpm typecheck
 # Очікується: без помилок
 
 # 2. Перевірити імпорт у apps/web
-# Відкрити apps/web/app/page.tsx і тимчасово додати:
 ```
+
+Тимчасово у `apps/web/app/page.tsx`:
 
 ```tsx
 import {
@@ -494,6 +561,7 @@ import {
   CEFR_LEVELS,
   CEFR_LEVEL_LABELS,
   LEVEL_META,
+  ERROR_RECYCLING,
 } from "@lingua/shared";
 
 export default function HomePage() {
@@ -507,6 +575,7 @@ export default function HomePage() {
           </li>
         ))}
       </ul>
+      <p>Recycle limit: {ERROR_RECYCLING.RECYCLE_LIMIT}</p>
     </main>
   );
 }
@@ -515,7 +584,7 @@ export default function HomePage() {
 ```bash
 # 3. Запустити
 pnpm dev:web
-# http://localhost:3001 → має показати список 8 рівнів
+# http://localhost:3001 → 8 рівнів + "Recycle limit: 5"
 ```
 
 ---
@@ -526,8 +595,8 @@ pnpm dev:web
 |---|---|
 | `Cannot find module '@lingua/shared'` | Перевір `exports` у `packages/shared/package.json` |
 | TS не бачить нові файли | Перезапустити `pnpm typecheck` |
-| `isolatedModules` помилка | Використовувати `export type` для типів: `export type { ... }` |
-| Значення `A2+` не приймається у Prisma | Це нормально: у Prisma буде `A2_PLUS` (задача 06), а в app-коді — `A2+` |
+| `isolatedModules` помилка | Використовувати `export type` для типів |
+| Значення `A2+` не приймається у Prisma | Нормально: у Prisma буде `A2_PLUS` (задача 06) |
 | Duplicate export | Перевірити, що немає двох файлів з однаковими експортами |
 
 ---
@@ -536,7 +605,6 @@ pnpm dev:web
 
 - `00_CONTEXT.md` → розділ 9 (Рівні CEFR)
 - `00_CONTEXT.md` → розділ 10 (Формат шаблонів і слотів)
-- `docs/tasks/03-strapi-content-types.md` (значення enum мають збігатись)
 - `AGENT_RULES.md` → розділ 7.2 (єнуми)
 
 ---
@@ -546,10 +614,10 @@ pnpm dev:web
 ```
 feat(shared): add enums, types and constants
 
-- add CEFR_LEVEL, ERROR_TYPE, EXERCISE_STATUS, PROGRESS_STATUS enums
+- add CEFR_LEVEL, ERROR_TYPE, ERROR_RECYCLING_STATUS, EXERCISE_STATUS, PROGRESS_STATUS enums
 - add SLOT_LEVEL, MATERIAL_TYPE, LOCALE enums
-- add Slot, Template, Exercise, UserError types
-- add LEVEL_META constants with Ukrainian labels
+- add Slot, Template, Exercise, UserError types with recycling fields
+- add LEVEL_META and ERROR_RECYCLING constants
 - export all from package index
 ```
 
@@ -558,13 +626,13 @@ feat(shared): add enums, types and constants
 ## 🔀 Git workflow
 
 ```bash
-git checkout -b feat/05-shared-package
+git checkout -b feat/04-shared-package
 
 # ... робота ...
 
 git add .
 git commit -m "feat(shared): add enums, types and constants"
-git push origin feat/05-shared-package
+git push origin feat/04-shared-package
 ```
 
 ---
@@ -575,4 +643,4 @@ git push origin feat/05-shared-package
 
 - Чи довелось використовувати `export type` замість `export`?
 - Чи є проблеми з `isolatedModules`?
-- Чи потрібно винести `LEVEL_META` у Strapi seed (задача 04)?
+- Чи потрібно винести `LEVEL_META` у Strapi seed (задача 05)?
