@@ -25,3 +25,13 @@ export type AICompletionResult = {
 };
 
 export type ProviderName = "openrouter" | "gemini" | "deepseek";
+
+export type CrossCheckStatus = "consistent" | "divergent" | "both_failed";
+
+export type CrossCheckResult = {
+  status: CrossCheckStatus;
+  primary?: AICompletionResult;
+  secondary?: AICompletionResult;
+  normalizedTexts?: [string, string];
+  divergenceReason?: string;
+};

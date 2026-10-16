@@ -1,5 +1,10 @@
+import { DeepSeekProvider } from "./providers/deepseek";
+import { GeminiProvider } from "./providers/gemini";
 import { OpenRouterProvider } from "./providers/openrouter";
 import type { AIProvider } from "./provider";
 
-// Task 12 will append Gemini and DeepSeek implementations.
-export const DEFAULT_PROVIDERS: AIProvider[] = [new OpenRouterProvider()];
+export const DEFAULT_PROVIDERS: AIProvider[] = [
+  new OpenRouterProvider(),
+  new GeminiProvider(),
+  new DeepSeekProvider(),
+];

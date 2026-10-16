@@ -14,6 +14,10 @@ export function registerProviders(next: AIProvider[]): void {
   providers = next;
 }
 
+export function getRegisteredProviders(): AIProvider[] {
+  return providers;
+}
+
 export async function completeWithFallback(
   messages: AIMessage[],
   options?: AICompletionOptions

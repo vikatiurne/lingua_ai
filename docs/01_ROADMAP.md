@@ -45,8 +45,8 @@
 ## E3 — AI & Cache
 
 - [х] 10 — AI provider interface
-- [ ] 11 — OpenRouter provider
-- [ ] 12 — Gemini + DeepSeek providers + cross-check
+- [x] 11 — OpenRouter provider
+- [х] 12 — Gemini + DeepSeek providers + cross-check
 - [ ] 13 — Redis cache layer
 - [ ] 14 — Rate limiting middleware
 

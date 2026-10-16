@@ -7,8 +7,8 @@
 **Гілка:** `feat/13-redis-cache`
 
 > ⚠️ **ЦЯ ЗАДАЧА — ШАР КЕШУ ДЛЯ AI.**
-> Redis працює в Docker (задача 02). AI-провайдери готові (задачі 10–12).
-> Тепер обгортаємо виклики AI у кеш, щоб не витрачати безкоштовні ліміти.
+> Redis працює на порту **6380** (задача 02). AI-провайдери готові (задачі 10–12).
+> Тепер обгортаємо виклики AI у кеш.
 >
 > ⚠️ **НЕ ТОРКАЄТЬСЯ:**
 > - Rate limiting (задача 14)
@@ -26,7 +26,7 @@
 - Є функція `hashPrompt` для ключів
 - Є обгортка `completeCached(messages, options)` — як `completeWithFallback`, але з кешем
 - Якщо Redis недоступний — fallback без кеша (graceful degradation)
-- Є змінна `REDIS_URL` у `.env`
+- Є змінна `REDIS_URL` у `.env` (порт **6380**)
 
 ---
 
@@ -40,6 +40,7 @@
 - [ ] Якщо `REDIS_URL` не вказано або Redis недоступний — `completeCached` працює без кеша
 - [ ] TTL за замовчуванням: 24 години (86400 секунд)
 - [ ] Ключ має формат `ai:<sha256(prompt)>`
+- [ ] `.env.example` містить `REDIS_URL=redis://localhost:6380`
 - [ ] `pnpm typecheck` і `pnpm --filter web test` проходять
 
 ---
@@ -58,6 +59,7 @@
 ## 📁 Файли
 
 ### Створити
+
 - `apps/web/lib/redis/client.ts`
 - `apps/web/lib/redis/cache.ts`
 - `apps/web/lib/redis/cache.test.ts`
@@ -65,17 +67,26 @@
 - `apps/web/lib/ai/cached.test.ts`
 
 ### Змінити
-- `.env.example` — додати `REDIS_URL=redis://localhost:6379`
+
+- `.env.example` (корінь) — додати `REDIS_URL=redis://localhost:6380`
 - `apps/web/package.json` — додати `ioredis`
+
+### Не чіпати
+
+- `apps/web/lib/ai/providers/**`
+- `apps/web/lib/ai/fallback.ts`, `provider.ts`, `types.ts`, `errors.ts`, `logger.ts`, `cross-check.ts`
+- `packages/shared/**`
+- Prisma
 
 ---
 
-## 🔧 Інтерфейси
+## 🔧 Інтерфейси (обов'язково)
 
 ### `lib/redis/client.ts`
 
 ```ts
 import type { Redis } from "ioredis";
+
 export const redis: Redis;
 export function isRedisAvailable(): boolean;
 ```
@@ -84,6 +95,7 @@ export function isRedisAvailable(): boolean;
 
 ```ts
 export function hashPrompt(prompt: string): string;
+
 export function cacheGet<T>(key: string): Promise<T | null>;
 export function cacheSet<T>(key: string, value: T, ttlSeconds?: number): Promise<void>;
 export function withCache<T>(
@@ -117,10 +129,10 @@ export function completeCached(
 ### `client.ts` — singleton
 
 1. Створити `new Redis(REDIS_URL, { lazyConnect: true, maxRetriesPerRequest: 3 })`.
-2. Якщо `REDIS_URL` не вказано → створити "фейковий" клієнт, який завжди кидає помилку (щоб `isRedisAvailable()` повертав `false`).
+2. Якщо `REDIS_URL` не вказано → створити «фейковий» клієнт, який завжди кидає помилку (щоб `isRedisAvailable()` повертав `false`).
 3. Обробити події:
-   - `connect` → log info
-   - `error` → log warn (не кидати)
+   - `connect` → log info.
+   - `error` → log warn (не кидати).
 4. `isRedisAvailable()` — повертає `redis.status === "ready"`.
 
 **Singleton через `globalThis`** (як Prisma-клієнт), щоб у dev-режимі з hot-reload не було 100 з'єднань.
@@ -157,7 +169,7 @@ export function completeCached(
 **`completeCached(messages, options)`:**
 1. `promptKey = hashPrompt(JSON.stringify({ messages, options: pick(options, ["model", "temperature", "responseFormat"]) }))`.
 2. `key = \`ai:${promptKey}\``.
-3. `ttl = options?.cacheTtlSeconds ?? 86400` (24 години).
+3. `ttl = options?.cacheTtlSeconds ?? 86400`.
 4. `cached = await cacheGet<AICompletionResult>(key)`.
 5. Якщо є → повернути `{ ...cached, cached: true }`.
 6. Викликати `completeWithFallback(messages, options)`.
@@ -167,11 +179,10 @@ export function completeCached(
 **Що входить у ключ:**
 - `messages` (весь масив).
 - `model`, `temperature`, `responseFormat` — впливають на відповідь.
-- **НЕ входить:** `timeoutMs`, `signal` — не впливають на зміст.
+- **НЕ входить:** `timeoutMs`, `signal`, `cacheTtlSeconds`.
 
 **Що НЕ кешуємо:**
 - Якщо `options.cacheTtlSeconds === 0` → пропустити кеш.
-- Якщо `responseFormat` не вказано і текст довгий (>2000 символів) — все одно кешуємо.
 
 ---
 
@@ -181,7 +192,6 @@ export function completeCached(
 // Перший виклик — cache miss
 await completeCached([{ role: "user", content: "Hello" }])
 // → { text: "...", provider: "openrouter", cached: false, ... }
-// Redis: ai:abc123... → {...}
 
 // Другий виклик — cache hit
 await completeCached([{ role: "user", content: "Hello" }])
@@ -196,7 +206,6 @@ await completeCached([{ role: "user", content: "Hello" }])
 // TTL = 0 (вимкнути кеш)
 await completeCached(messages, { cacheTtlSeconds: 0 })
 // → { cached: false, ... }
-// Redis не використовується
 ```
 
 ---
@@ -246,7 +255,6 @@ if (process.env.NODE_ENV !== "production") globalForRedis.redis = redis;
 function createRedisClient(): Redis {
   const url = process.env.REDIS_URL;
   if (!url) {
-    // stub, який завжди кидає, щоб isRedisAvailable() = false
     return new Redis({ lazyConnect: true, enableOfflineQueue: false })
       .on("error", () => {});
   }
@@ -290,7 +298,14 @@ function buildCacheKey(messages: AIMessage[], options?: AICompletionOptions): st
 }
 ```
 
-**НЕ включати:** `timeoutMs`, `signal`, `cacheTtlSeconds` — вони не впливають на відповідь.
+**НЕ включати:** `timeoutMs`, `signal`, `cacheTtlSeconds`.
+
+### Порт 6380, не 6379
+
+Lingua використовує **6380** (Atlas займає 6379). У `.env.example`:
+```
+REDIS_URL=redis://localhost:6380
+```
 
 ---
 
@@ -314,7 +329,7 @@ feat(cache): add Redis cache layer for AI completions
 - add redis/cache.ts with cacheGet, cacheSet, withCache, hashPrompt
 - add ai/cached.ts completeCached wrapper
 - add 12 unit tests with mocked ioredis and AI
-- add REDIS_URL to .env.example
+- add REDIS_URL (port 6380) to .env.example
 ```
 
 ---
@@ -333,6 +348,9 @@ git push origin feat/13-redis-cache
 
 ## 📝 Нотатки
 
-- Чи варто кешувати і divergent-результати cross-check? (поки ні)
-- Чи потрібен `REDIS_URL` fallback на дефолт `redis://localhost:6379`?
+Заповнюється після завершення.
+
+- Чи варто кешувати divergent-результати cross-check? (поки ні)
+- Чи потрібен fallback на дефолт `redis://localhost:6380`?
 - Чи потрібно логувати cache hit/miss для метрик?
+- Чи правильно визначається `isRedisAvailable()` при lazy connect?
