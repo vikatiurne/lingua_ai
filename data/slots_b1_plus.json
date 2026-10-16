@@ -1,0 +1,1140 @@
+{
+  "level": "B1+",
+  "version": "1.0",
+  "description": "Глагольные слоты для шаблонов уровня B1+. Включает продвинутые времена, модальные перфекты, causative, reported speech.",
+  "usage": "В шаблоне: { \"$ref\": \"slots_b1_plus#/slots/<category>/<subcategory>/<slot>\" }",
+  "slots": {
+    "present_perfect_continuous": {
+      "affirmative": {
+        "V-ing": {
+          "basic": [
+            "working",
+            "studying",
+            "waiting",
+            "learning",
+            "living",
+            "reading",
+            "writing",
+            "playing",
+            "watching",
+            "cooking"
+          ],
+          "intermediate": [
+            "preparing",
+            "organizing",
+            "practicing",
+            "exercising",
+            "traveling",
+            "visiting",
+            "planning",
+            "discussing",
+            "reviewing",
+            "attending",
+            "managing",
+            "coordinating",
+            "teaching",
+            "helping"
+          ],
+          "advanced": [
+            "implementing",
+            "streamlining",
+            "facilitating",
+            "coordinating",
+            "delegating",
+            "leveraging",
+            "optimizing",
+            "spearheading",
+            "cultivating",
+            "orchestrating",
+            "integrating",
+            "strategizing"
+          ]
+        }
+      }
+    },
+    "past_perfect": {
+      "affirmative": {
+        "V3": {
+          "basic": [
+            "finished",
+            "prepared",
+            "read",
+            "written",
+            "done",
+            "seen",
+            "visited",
+            "learned",
+            "made",
+            "taken",
+            "given"
+          ],
+          "intermediate": [
+            "completed",
+            "achieved",
+            "organized",
+            "developed",
+            "improved",
+            "started",
+            "changed",
+            "created",
+            "discovered",
+            "discussed",
+            "reviewed",
+            "planned",
+            "booked",
+            "arranged"
+          ],
+          "advanced": [
+            "implemented",
+            "streamlined",
+            "facilitated",
+            "coordinated",
+            "delegated",
+            "leveraged",
+            "optimized",
+            "spearheaded",
+            "cultivated",
+            "orchestrated",
+            "integrated",
+            "advocated"
+          ]
+        }
+      }
+    },
+    "past_perfect_continuous": {
+      "affirmative": {
+        "V-ing": {
+          "basic": [
+            "working",
+            "studying",
+            "waiting",
+            "playing",
+            "reading",
+            "walking",
+            "talking",
+            "watching",
+            "cooking",
+            "cleaning"
+          ],
+          "intermediate": [
+            "preparing",
+            "organizing",
+            "practicing",
+            "exercising",
+            "traveling",
+            "visiting",
+            "planning",
+            "discussing",
+            "reviewing",
+            "attending",
+            "managing",
+            "coordinating"
+          ],
+          "advanced": [
+            "implementing",
+            "facilitating",
+            "coordinating",
+            "delegating",
+            "optimizing",
+            "spearheading",
+            "orchestrating",
+            "integrating"
+          ]
+        }
+      }
+    },
+    "future_continuous": {
+      "affirmative": {
+        "V-ing": {
+          "basic": [
+            "working",
+            "studying",
+            "traveling",
+            "reading",
+            "watching",
+            "walking",
+            "talking",
+            "playing",
+            "cooking"
+          ],
+          "intermediate": [
+            "preparing",
+            "organizing",
+            "discussing",
+            "reviewing",
+            "attending",
+            "managing",
+            "coordinating",
+            "visiting",
+            "practicing"
+          ],
+          "advanced": [
+            "facilitating",
+            "coordinating",
+            "delegating",
+            "optimizing",
+            "spearheading",
+            "orchestrating",
+            "integrating"
+          ]
+        }
+      }
+    },
+    "future_perfect": {
+      "affirmative": {
+        "V3": {
+          "basic": [
+            "finished",
+            "completed",
+            "done",
+            "written",
+            "read",
+            "visited",
+            "seen",
+            "made",
+            "taken",
+            "given"
+          ],
+          "intermediate": [
+            "completed",
+            "achieved",
+            "organized",
+            "developed",
+            "improved",
+            "started",
+            "changed",
+            "created",
+            "discussed",
+            "reviewed",
+            "planned",
+            "booked",
+            "arranged",
+            "published"
+          ],
+          "advanced": [
+            "implemented",
+            "streamlined",
+            "facilitated",
+            "coordinated",
+            "delegated",
+            "leveraged",
+            "optimized",
+            "spearheaded",
+            "integrated",
+            "advocated",
+            "prioritized"
+          ]
+        }
+      }
+    },
+    "modals_deduction": {
+      "affirmative": {
+        "have_V3": {
+          "basic": [
+            "have gone",
+            "have left",
+            "have forgotten",
+            "have missed",
+            "have taken",
+            "have made"
+          ],
+          "intermediate": [
+            "have decided",
+            "have changed",
+            "have misunderstood",
+            "have overlooked",
+            "have underestimated",
+            "have noticed"
+          ],
+          "advanced": [
+            "have implemented",
+            "have coordinated",
+            "have negotiated",
+            "have compromised",
+            "have prioritized",
+            "have advocated"
+          ]
+        }
+      },
+      "negative": {
+        "have_V3": {
+          "basic": [
+            "have gone",
+            "have left",
+            "have forgotten",
+            "have seen",
+            "have heard",
+            "have noticed"
+          ],
+          "intermediate": [
+            "have decided",
+            "have changed",
+            "have misunderstood",
+            "have overlooked",
+            "have noticed"
+          ],
+          "advanced": [
+            "have implemented",
+            "have coordinated",
+            "have negotiated",
+            "have prioritized"
+          ]
+        }
+      }
+    },
+    "causative": {
+      "affirmative": {
+        "V3": {
+          "basic": [
+            "repaired",
+            "cleaned",
+            "painted",
+            "cut",
+            "washed",
+            "fixed"
+          ],
+          "intermediate": [
+            "renovated",
+            "organized",
+            "prepared",
+            "reviewed",
+            "published",
+            "translated",
+            "developed"
+          ],
+          "advanced": [
+            "implemented",
+            "streamlined",
+            "facilitated",
+            "coordinated",
+            "optimized",
+            "spearheaded",
+            "integrated"
+          ]
+        }
+      }
+    },
+    "third_conditional": {
+      "had_V3": {
+        "V3": {
+          "basic": [
+            "known",
+            "seen",
+            "gone",
+            "taken",
+            "made",
+            "left",
+            "said"
+          ],
+          "intermediate": [
+            "understood",
+            "realized",
+            "decided",
+            "prepared",
+            "discussed",
+            "organized",
+            "planned",
+            "noticed"
+          ],
+          "advanced": [
+            "implemented",
+            "coordinated",
+            "prioritized",
+            "negotiated",
+            "advocated",
+            "compromised",
+            "streamlined"
+          ]
+        }
+      },
+      "would_have_V3": {
+        "V3": {
+          "basic": [
+            "gone",
+            "done",
+            "made",
+            "taken",
+            "seen",
+            "said",
+            "left"
+          ],
+          "intermediate": [
+            "completed",
+            "achieved",
+            "organized",
+            "prepared",
+            "decided",
+            "discussed",
+            "planned",
+            "noticed"
+          ],
+          "advanced": [
+            "implemented",
+            "coordinated",
+            "prioritized",
+            "negotiated",
+            "advocated",
+            "compromised",
+            "streamlined"
+          ]
+        }
+      }
+    },
+    "wish_if_only": {
+      "past_simple": {
+        "V2": {
+          "basic": [
+            "knew",
+            "had",
+            "lived",
+            "were",
+            "could",
+            "went"
+          ],
+          "intermediate": [
+            "understood",
+            "worked",
+            "lived",
+            "studied",
+            "traveled",
+            "organized",
+            "managed"
+          ],
+          "advanced": [
+            "implemented",
+            "coordinated",
+            "prioritized",
+            "negotiated"
+          ]
+        }
+      },
+      "past_perfect": {
+        "had_V3": {
+          "basic": [
+            "known",
+            "seen",
+            "gone",
+            "taken",
+            "said",
+            "made"
+          ],
+          "intermediate": [
+            "understood",
+            "realized",
+            "decided",
+            "prepared",
+            "discussed",
+            "organized",
+            "planned"
+          ],
+          "advanced": [
+            "implemented",
+            "coordinated",
+            "prioritized",
+            "negotiated"
+          ]
+        }
+      }
+    },
+    "passive_advanced": {
+      "present_perfect": {
+        "V3": {
+          "basic": [
+            "completed",
+            "signed",
+            "built",
+            "published",
+            "made",
+            "done",
+            "taken",
+            "given",
+            "seen",
+            "written"
+          ],
+          "intermediate": [
+            "organized",
+            "prepared",
+            "developed",
+            "improved",
+            "created",
+            "discussed",
+            "reviewed",
+            "planned",
+            "arranged",
+            "approved",
+            "confirmed"
+          ],
+          "advanced": [
+            "implemented",
+            "streamlined",
+            "facilitated",
+            "coordinated",
+            "optimized",
+            "spearheaded",
+            "integrated",
+            "prioritized"
+          ]
+        }
+      },
+      "future": {
+        "V3": {
+          "basic": [
+            "opened",
+            "announced",
+            "shown",
+            "sent",
+            "made",
+            "done",
+            "given",
+            "seen",
+            "built"
+          ],
+          "intermediate": [
+            "prepared",
+            "developed",
+            "improved",
+            "created",
+            "discussed",
+            "reviewed",
+            "planned",
+            "booked",
+            "arranged",
+            "approved",
+            "confirmed"
+          ],
+          "advanced": [
+            "implemented",
+            "streamlined",
+            "facilitated",
+            "coordinated",
+            "optimized",
+            "spearheaded",
+            "integrated"
+          ]
+        }
+      },
+      "modals": {
+        "be_V3": {
+          "basic": [
+            "be done",
+            "be finished",
+            "be made",
+            "be seen",
+            "be taken"
+          ],
+          "intermediate": [
+            "be completed",
+            "be organized",
+            "be prepared",
+            "be discussed",
+            "be reviewed",
+            "be planned",
+            "be arranged"
+          ],
+          "advanced": [
+            "be implemented",
+            "be streamlined",
+            "be coordinated",
+            "be optimized",
+            "be prioritized"
+          ]
+        }
+      }
+    },
+    "reporting_advanced": {
+      "verbs": {
+        "basic": [
+          "said",
+          "told",
+          "asked",
+          "answered",
+          "replied",
+          "added"
+        ],
+        "intermediate": [
+          "explained",
+          "mentioned",
+          "promised",
+          "admitted",
+          "insisted",
+          "suggested",
+          "recommended",
+          "warned",
+          "reminded"
+        ],
+        "advanced": [
+          "acknowledged",
+          "emphasized",
+          "highlighted",
+          "clarified",
+          "confirmed",
+          "denied",
+          "pointed out",
+          "argued",
+          "claimed"
+        ]
+      }
+    },
+    "relative_clauses_advanced": {
+      "affirmative": {
+        "V": {
+          "basic": [
+            "helped",
+            "changed",
+            "impressed",
+            "inspired",
+            "lives",
+            "works",
+            "is",
+            "was",
+            "has",
+            "made"
+          ],
+          "intermediate": [
+            "supported",
+            "encouraged",
+            "influenced",
+            "motivated",
+            "developed",
+            "created",
+            "organized",
+            "improved",
+            "managed",
+            "contributed"
+          ],
+          "advanced": [
+            "implemented",
+            "facilitated",
+            "coordinated",
+            "delegated",
+            "optimized",
+            "spearheaded",
+            "cultivated",
+            "orchestrated"
+          ]
+        }
+      }
+    },
+    "linking_verbs": {
+      "affirmative": {
+        "V": {
+          "basic": [
+            "seems",
+            "looks",
+            "feels",
+            "sounds",
+            "tastes",
+            "smells"
+          ],
+          "intermediate": [
+            "appears",
+            "remains",
+            "becomes",
+            "turns",
+            "proves",
+            "grows",
+            "stays"
+          ],
+          "advanced": [
+            "emerges as",
+            "evolves into",
+            "develops into",
+            "proves to be",
+            "turns out to be"
+          ]
+        }
+      }
+    },
+    "present_simple": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "work",
+            "live",
+            "study",
+            "teach",
+            "help",
+            "organize",
+            "manage",
+            "run",
+            "own",
+            "share",
+            "save",
+            "spend"
+          ],
+          "intermediate": [
+            "commute",
+            "collaborate",
+            "volunteer",
+            "mentor",
+            "contribute",
+            "coordinate",
+            "supervise",
+            "maintain",
+            "support",
+            "represent",
+            "negotiate",
+            "communicate",
+            "prioritize",
+            "balance",
+            "schedule"
+          ],
+          "advanced": [
+            "advocate",
+            "implement",
+            "streamline",
+            "facilitate",
+            "delegate",
+            "leverage",
+            "optimize",
+            "delegate",
+            "spearhead",
+            "cultivate",
+            "orchestrate",
+            "synchronize",
+            "strategize",
+            "allocate",
+            "integrate"
+          ]
+        }
+      },
+      "negative": {
+        "V1": {
+          "basic": [
+            "like",
+            "want",
+            "need",
+            "understand",
+            "support",
+            "agree",
+            "believe",
+            "enjoy",
+            "prefer",
+            "use",
+            "know",
+            "remember"
+          ],
+          "intermediate": [
+            "tolerate",
+            "approve",
+            "recommend",
+            "encourage",
+            "allow",
+            "accept",
+            "consider",
+            "recognize",
+            "appreciate",
+            "rely on",
+            "depend on",
+            "belong to",
+            "consist of",
+            "result in"
+          ],
+          "advanced": [
+            "endorse",
+            "condone",
+            "advocate",
+            "prioritize",
+            "compromise",
+            "justify",
+            "undermine",
+            "overlook",
+            "underestimate",
+            "question",
+            "challenge",
+            "rationalize",
+            "internalize",
+            "externalize"
+          ]
+        }
+      },
+      "questions": {
+        "V1": {
+          "basic": [
+            "like",
+            "speak",
+            "work",
+            "live",
+            "play",
+            "want",
+            "need",
+            "know",
+            "have",
+            "go",
+            "study",
+            "read"
+          ],
+          "intermediate": [
+            "recommend",
+            "prefer",
+            "support",
+            "believe",
+            "understand",
+            "remember",
+            "enjoy",
+            "share",
+            "use",
+            "attend",
+            "lead",
+            "manage",
+            "volunteer",
+            "organize",
+            "explain"
+          ],
+          "advanced": [
+            "advocate",
+            "endorse",
+            "prioritize",
+            "compromise",
+            "justify",
+            "implement",
+            "facilitate",
+            "delegate",
+            "leverage",
+            "optimize"
+          ]
+        }
+      }
+    },
+    "past_simple": {
+      "affirmative": {
+        "V2": {
+          "basic": [
+            "went",
+            "saw",
+            "had",
+            "did",
+            "made",
+            "took",
+            "got",
+            "came",
+            "said",
+            "told",
+            "knew",
+            "thought",
+            "found",
+            "gave",
+            "left",
+            "felt",
+            "put",
+            "brought",
+            "wrote",
+            "read",
+            "ran",
+            "ate",
+            "drank",
+            "slept",
+            "spoke",
+            "bought",
+            "met",
+            "sat",
+            "heard"
+          ],
+          "intermediate": [
+            "understood",
+            "became",
+            "broke",
+            "built",
+            "caught",
+            "chose",
+            "drove",
+            "fell",
+            "flew",
+            "forgot",
+            "grew",
+            "led",
+            "lent",
+            "lost",
+            "meant",
+            "rode",
+            "rang",
+            "rose",
+            "sent",
+            "sang",
+            "spent",
+            "swam",
+            "taught",
+            "threw",
+            "woke",
+            "wore",
+            "won",
+            "organized",
+            "prepared",
+            "discussed",
+            "reviewed",
+            "attended"
+          ],
+          "advanced": [
+            "advocated",
+            "implemented",
+            "streamlined",
+            "facilitated",
+            "coordinated",
+            "delegated",
+            "leveraged",
+            "optimized",
+            "spearheaded",
+            "cultivated",
+            "orchestrated",
+            "integrated",
+            "strategized",
+            "allocated",
+            "prioritized",
+            "compromised",
+            "justified",
+            "negotiated",
+            "mentored",
+            "volunteered"
+          ]
+        }
+      },
+      "negative_questions": {
+        "V1": {
+          "basic": [
+            "go",
+            "see",
+            "have",
+            "do",
+            "make",
+            "take",
+            "get",
+            "come",
+            "say",
+            "tell",
+            "know",
+            "think",
+            "find",
+            "give",
+            "leave",
+            "feel",
+            "put",
+            "bring",
+            "write",
+            "read",
+            "run",
+            "eat",
+            "drink",
+            "sleep",
+            "speak",
+            "buy",
+            "meet",
+            "sit",
+            "hear"
+          ],
+          "intermediate": [
+            "understand",
+            "become",
+            "break",
+            "build",
+            "catch",
+            "choose",
+            "drive",
+            "fall",
+            "fly",
+            "forget",
+            "grow",
+            "lead",
+            "lend",
+            "lose",
+            "mean",
+            "ride",
+            "ring",
+            "rise",
+            "send",
+            "sing",
+            "spend",
+            "swim",
+            "teach",
+            "throw",
+            "wake",
+            "wear",
+            "win",
+            "organize",
+            "prepare",
+            "discuss",
+            "review",
+            "attend"
+          ],
+          "advanced": [
+            "advocate",
+            "implement",
+            "streamline",
+            "facilitate",
+            "coordinate",
+            "delegate",
+            "leverage",
+            "optimize",
+            "spearhead",
+            "cultivate",
+            "orchestrate",
+            "integrate",
+            "strategize",
+            "allocate",
+            "prioritize",
+            "compromise",
+            "justify",
+            "negotiate",
+            "mentor",
+            "volunteer"
+          ]
+        }
+      }
+    },
+    "conditionals_second": {
+      "past_simple": {
+        "V2": {
+          "basic": [
+            "had",
+            "lived",
+            "knew",
+            "were",
+            "won",
+            "went",
+            "saw",
+            "did",
+            "made",
+            "took",
+            "got",
+            "came",
+            "found",
+            "gave"
+          ],
+          "intermediate": [
+            "worked",
+            "studied",
+            "traveled",
+            "visited",
+            "organized",
+            "prepared",
+            "discussed",
+            "managed",
+            "coordinated",
+            "improved",
+            "developed",
+            "created",
+            "changed",
+            "started"
+          ],
+          "advanced": [
+            "implemented",
+            "streamlined",
+            "facilitated",
+            "coordinated",
+            "delegated",
+            "leveraged",
+            "optimized",
+            "spearheaded",
+            "negotiated",
+            "prioritized",
+            "advocated",
+            "compromised"
+          ]
+        }
+      },
+      "would": {
+        "V1": {
+          "basic": [
+            "buy",
+            "travel",
+            "tell",
+            "be",
+            "help",
+            "go",
+            "come",
+            "make",
+            "take",
+            "give",
+            "see",
+            "do",
+            "try",
+            "play"
+          ],
+          "intermediate": [
+            "celebrate",
+            "organize",
+            "prepare",
+            "discuss",
+            "review",
+            "support",
+            "share",
+            "visit",
+            "attend",
+            "manage",
+            "coordinate",
+            "contribute",
+            "recommend",
+            "improve",
+            "develop"
+          ],
+          "advanced": [
+            "implement",
+            "streamline",
+            "facilitate",
+            "coordinate",
+            "delegate",
+            "leverage",
+            "optimize",
+            "spearhead",
+            "cultivate",
+            "orchestrate",
+            "integrate",
+            "strategize"
+          ]
+        }
+      }
+    },
+    "future_will": {
+      "affirmative": {
+        "V1": {
+          "basic": [
+            "help",
+            "call",
+            "go",
+            "come",
+            "be",
+            "do",
+            "make",
+            "take",
+            "give",
+            "see",
+            "play",
+            "start",
+            "finish",
+            "try"
+          ],
+          "intermediate": [
+            "organize",
+            "prepare",
+            "discuss",
+            "review",
+            "explain",
+            "support",
+            "share",
+            "visit",
+            "travel",
+            "attend",
+            "manage",
+            "coordinate",
+            "volunteer",
+            "contribute",
+            "recommend"
+          ],
+          "advanced": [
+            "implement",
+            "streamline",
+            "facilitate",
+            "coordinate",
+            "delegate",
+            "leverage",
+            "optimize",
+            "spearhead",
+            "cultivate",
+            "orchestrate",
+            "integrate",
+            "strategize"
+          ]
+        }
+      }
+    }
+  }
+}

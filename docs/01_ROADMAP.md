@@ -39,7 +39,7 @@
 
 - [х] 06 — Prisma schema + migrations
 - [х] 07 — Slot loader
-- [ ] 08 — $ref resolver
+- [х] 08 — $ref resolver
 - [ ] 09 — Template service
 
 ## E3 — AI & Cache
