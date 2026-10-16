@@ -2,7 +2,7 @@
 
 **Епік:** E4 — Auth & Users
 **Розмір:** M (2–3 год)
-**Залежності:** 15
+**Залежності:** 14, 15
 **Статус:** ⬜ Todo
 **Гілка:** `feat/16-auth-pages`
 
@@ -14,6 +14,8 @@
 > - Password reset, email verification
 > - OAuth
 > - Профіль користувача
+> - shadcn/ui (задача 29) — поки що прості Tailwind-компоненти
+> - i18n (задача 45) — поки що українською
 
 ---
 
@@ -23,26 +25,32 @@
 - Є сторінка `/register` — форма (email, password, name)
 - Є сторінка `/login` — форма (email, password)
 - Є `/api/auth/register` — створює User з хешованим паролем
-- Після реєстрації — redirect на `/login` з повідомленням
+- Після реєстрації — redirect на `/login?registered=1` з повідомленням
 - Після входу — redirect на `/dashboard`
 - Помилки валідації показуються під полями
 - Rate limiting на `/api/auth/register` (5/хв)
+- **Chore:** прибрати `@types/bcryptjs` з `apps/web/package.json` (bcryptjs@3 має власні типи)
 
 ---
 
 ## ✅ Acceptance Criteria
 
+- [ ] Є `apps/web/lib/validation/auth.ts` — Zod-схеми
+- [ ] Є `apps/web/lib/validation/auth.test.ts` — 5+ тестів
+- [ ] Є `apps/web/app/(auth)/layout.tsx` — спільний layout для login/register
 - [ ] Є `apps/web/app/(auth)/login/page.tsx`
 - [ ] Є `apps/web/app/(auth)/register/page.tsx`
 - [ ] Є `apps/web/app/api/auth/register/route.ts`
-- [ ] Є `apps/web/lib/validation/auth.ts` — Zod-схеми
-- [ ] Є `apps/web/components/auth/login-form.tsx` і `register-form.tsx`
+- [ ] Є `apps/web/components/auth/login-form.tsx`
+- [ ] Є `apps/web/components/auth/register-form.tsx`
 - [ ] Форми використовують `react-hook-form` + Zod resolver
 - [ ] `/api/auth/register` хешує пароль через `hashPassword`
 - [ ] Дублікат email → 409 з повідомленням
 - [ ] Невалідний email/пароль → 400 з деталями
 - [ ] `/api/auth/register` обгорнутий `withRateLimit(RATE_LIMITS.AUTH)`
-- [ ] `signIn("credentials", ...)` з `redirect: false` → правильна обробка помилок
+- [ ] `signIn("credentials", { redirect: false })` → правильна обробка помилок
+- [ ] `@types/bcryptjs` **видалено** з `apps/web/package.json`
+- [ ] `.env.example` (корінь) і `apps/web/.env.example` синхронізовані
 - [ ] `pnpm typecheck` і `pnpm --filter web test` проходять
 
 ---
@@ -53,14 +61,17 @@
 - ❌ "Забули пароль?"
 - ❌ Email verification
 - ❌ Редизайн / кастомна тема
-- ❌ shadcn/ui (задача 29, поки що прості Tailwind-компоненти)
-- ❌ i18n (задача 45)
+- ❌ shadcn/ui (задача 29)
+- ❌ i18n (задача 45) — поки що рядки українською в коді
+- ❌ Middleware захисту роутів (задача 17)
+- ❌ Rate limiting на `/api/auth/callback/credentials` (NextAuth)
 
 ---
 
 ## 📁 Файли
 
 ### Створити
+
 - `apps/web/lib/validation/auth.ts`
 - `apps/web/lib/validation/auth.test.ts`
 - `apps/web/app/(auth)/layout.tsx`
@@ -71,11 +82,20 @@
 - `apps/web/components/auth/register-form.tsx`
 
 ### Змінити
-- `apps/web/package.json` — додати `react-hook-form`, `@hookform/resolvers`, `zod`
+
+- `apps/web/package.json` — додати `react-hook-form`, `@hookform/resolvers`, `zod`; **прибрати** `@types/bcryptjs`
+
+### Не чіпати
+
+- `apps/web/lib/auth/**`
+- `apps/web/lib/ai/**`, `apps/web/lib/redis/**`
+- `apps/web/types/next-auth.d.ts`
+- `packages/shared/**`
+- `apps/cms/**`
 
 ---
 
-## 🔧 Інтерфейси
+## 🔧 Інтерфейси (обов'язково)
 
 ### `validation/auth.ts`
 
@@ -83,40 +103,18 @@
 import { z } from "zod";
 
 export const registerSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8).max(72),
-  name: z.string().min(1).max(100).optional(),
+  email: z.string().email("Невірний email"),
+  password: z.string().min(8, "Мінімум 8 символів").max(72, "Максимум 72 символи"),
+  name: z.string().min(1, "Введіть ім'я").max(100).optional(),
 });
 
 export const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(1),
+  email: z.string().email("Невірний email"),
+  password: z.string().min(1, "Введіть пароль"),
 });
 
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
-```
-
-### Форми
-
-**Логін-форма (client component):**
-```tsx
-"use client";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
-
-// useForm({ resolver: zodResolver(loginSchema) })
-// onSubmit: signIn("credentials", { ...data, redirect: false })
-//   якщо ok → router.push("/dashboard")
-//   якщо error → setError("root", { message: "Невірний email або пароль" })
-```
-
-**Реєстрація:**
-```tsx
-// POST /api/auth/register
-// якщо ok → router.push("/login?registered=1")
-// якщо 409 → setError("email", { message: "Email вже зареєстровано" })
 ```
 
 ### `api/auth/register/route.ts`
@@ -135,7 +133,7 @@ async function registerHandler(req: NextRequest): Promise<Response>;
 
 1. `body = await req.json()`.
 2. `parsed = registerSchema.safeParse(body)`.
-3. Якщо `!parsed.success` → 400 з `{ errors: parsed.error.flatten().fieldErrors }`.
+3. Якщо `!parsed.success` → 400 `{ errors: parsed.error.flatten().fieldErrors }`.
 4. `existing = await prisma.user.findUnique({ where: { email } })`.
 5. Якщо існує → 409 `{ error: "Email already registered" }`.
 6. `passwordHash = await hashPassword(password)`.
@@ -170,7 +168,7 @@ POST /api/auth/register (повторно)
 
 POST /api/auth/register
 { "email": "bad", "password": "123" }
-→ 400 { "errors": { "email": ["Invalid email"], "password": ["String must contain at least 8 character(s)"] } }
+→ 400 { "errors": { "email": ["Невірний email"], "password": ["Мінімум 8 символів"] } }
 
 POST /api/auth/register (11-й раз за хвилину)
 → 429 Too Many Requests
@@ -187,13 +185,6 @@ POST /api/auth/register (11-й раз за хвилину)
 3. `registerSchema` з коротким паролем → fail.
 4. `registerSchema` без name → success (name опційний).
 5. `loginSchema` з порожнім паролем → fail.
-
-### Інтеграційні (окремо, з мок-prisma)
-
-6. `registerHandler` з новим email → 201, пароль захешовано.
-7. `registerHandler` з існуючим email → 409.
-8. `registerHandler` з невалідним body → 400.
-9. `registerHandler` **не повертає** `passwordHash` у відповіді.
 
 ---
 
@@ -228,20 +219,32 @@ const { passwordHash: _, ...safeUser } = user;
 return Response.json({ user: safeUser }, { status: 201 });
 ```
 
-### Next.js 14 App Router + form actions
+### Client components
 
-Використовуємо **client components** для форм із `react-hook-form`. Server Actions — окрема задача.
+Форми — `"use client"`. Сторінки `page.tsx` можуть бути Server Components, якщо не потрібен стан.
 
 ### `router.refresh()` після входу
 
 Після `router.push("/dashboard")` — викликати `router.refresh()`, щоб session оновилась у Server Components.
 
+### Next.js 14 `(auth)` група
+
+Layout у `app/(auth)/layout.tsx` — спільний для `/login` і `/register`. Обгортка з центрованим блоком.
+
+### Прибрати `@types/bcryptjs`
+
+```bash
+pnpm --filter web remove @types/bcryptjs
+```
+
+bcryptjs@3 має власні типи. Після видалення `pnpm typecheck` має залишитись зеленим.
+
 ---
 
 ## 📎 Контекст
 
-- `docs/tasks/15-nextauth-setup.md`
 - `docs/tasks/14-rate-limiting.md`
+- `docs/tasks/15-nextauth-setup.md`
 - `AGENT_RULES.md` → розділ 7.1 (чисті компоненти)
 
 ---
@@ -254,8 +257,9 @@ feat(auth): add login and register pages with validation
 - add validation/auth.ts with Zod schemas
 - add /register and /login pages with react-hook-form
 - add /api/auth/register endpoint with bcrypt hashing
-- rate limit register endpoint (5/min)
+- rate limit register endpoint (5/min via RATE_LIMITS.AUTH)
 - redirect to /dashboard after login
+- remove deprecated @types/bcryptjs (bcryptjs@3 has own types)
 ```
 
 ---
@@ -274,6 +278,10 @@ git push origin feat/16-auth-pages
 
 ## 📝 Нотатки
 
-- Чи потрібна окрема сторінка "email підтверджено"?
-- Чи використовувати Server Actions замість API route?
-- Чи додавати "Remember me" checkbox?
+Заповнюється після завершення.
+
+- Чи спрацював `signIn` з `redirect: false` без reload?
+- Чи є проблеми з Zod + react-hook-form типами?
+- Чи правильно показуються помилки під полями?
+- Чи потрібен `router.refresh()` для коректної роботи сесії?
+- Чи не потрібен `@types/bcryptjs` (перевірити після видалення)?

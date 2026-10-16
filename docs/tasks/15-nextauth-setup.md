@@ -3,7 +3,7 @@
 **Епік:** E4 — Auth & Users
 **Розмір:** M (2–3 год)
 **Залежності:** 06, 13, 14
-**Статус:** ⬜ Todo
+**Статус:** ✅ Done
 **Гілка:** `feat/15-nextauth-setup`
 
 > ⚠️ **ЦЯ ЗАДАЧА — БАЗОВА АВТЕНТИФІКАЦІЯ.**
@@ -397,9 +397,29 @@ git push origin feat/15-nextauth-setup
 
 ## 📝 Нотатки
 
-Заповнюється після завершення.
+Заповнено після завершення (feat/15-nextauth-setup).
 
-- Чи потрібен OAuth у MVP? (поки ні)
-- Чи спрацював `session.user.id` без `as string`?
-- Чи є проблеми з `NEXTAUTH_URL` при інших портах?
-- Rate limiting на `/api/auth/*` — окремою задачею?
+### Відповіді на питання задачі
+
+- **Чи потрібен OAuth у MVP?** Поки ні. Credentials + JWT повністю покривають MVP. Adapter не підключали, тому міграція на OAuth (з таблицями `Account`, `Session`, `VerificationToken`) — окрема задача, коли знадобиться.
+- **Чи спрацював `session.user.id` без `as string`?** Так. Після `types/next-auth.d.ts` TypeScript бачить `session.user.id: string`. Перевірено й runtime: `GET /api/auth/session` повернув `{"user":{"id":"...","email":"...","name":"..."},"expires":"..."}`.
+- **Чи є проблеми з `NEXTAUTH_URL` при інших портах?** Ні, за умови оновлення. Next.js читає `.env` зі своєї директорії (`apps/web`), а не з кореня. `NEXTAUTH_URL=http://localhost:3001` збігається з `next dev -p 3001`. При зміні порту змінити і `NEXTAUTH_URL`, і скрипт `dev`/`start`.
+- **Rate limiting на `/api/auth/*` — окремою задачею?** Так, out of scope. `/api/auth/*` без обмежень; окрема задача — після 17 (якщо знадобиться).
+
+### Виявлені нюанси (відхилення від плану файлів)
+
+- **`.env` читається не з кореня.** Задача вказувала змінити лише кореневий `.env.example`, але Next.js у `apps/web` читає `apps/web/.env`, тому `NEXTAUTH_SECRET`/`NEXTAUTH_URL` додані також у `apps/web/.env` та `apps/web/.env.example`. Кореневий `.env.example` теж оновлено (як просила задача) — для узгодженості документації. Дефолти однакові, тож плутанини немає.
+- **`bcryptjs@3` має власні типи.** Пакет `@types/bcryptjs@3` — це deprecated stub («bcryptjs provides its own type definitions»). Доданий за вимогою задачі, реальної потреби немає. **Рішення:** прибрати з `apps/web/package.json` разом із задачею 16.
+
+### Перевірено
+
+- `pnpm typecheck` — OK (4/4 задачі).
+- `pnpm --filter web test` — 101 тест пройшов, зокрема 4 `password.test.ts`.
+- `pnpm build` — OK; `/api/auth/[...nextauth]` — dynamic route.
+- Runtime (dev на :3001): без cookie `GET /api/auth/session` → `{}` (200); правильні credentials → сесія з `user.id`; невірний пароль → `POST /api/auth/callback/credentials` → 401, сесія `{}`.
+- Тестовий користувач у БД створювався лише для перевірки входу й видалений після.
+
+### Для наступних задач (16–17)
+
+- Login/Register UI (16) → `pages.signIn = "/login"` вже вказано; форма викликає `signIn("credentials", { email, password })`.
+- Session callback з `level`/`targetLevel` (17) — свідомо НЕ доданий (out of scope).

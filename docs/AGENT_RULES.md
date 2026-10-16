@@ -326,16 +326,19 @@ export const CEFR_LEVEL_LABELS: Record<CEFRLevel, string> = {
 ### 7.11. Порты і URL
 
 **Правила:**
+
 - Усі порти — через `.env` (`POSTGRES_PORT`, `REDIS_PORT`, `STRAPI_PORT`).
 - У коді, документації, README — посилання на **хост-порт** (з `.env`), не на контейнерний.
 - Контейнерні порти (5432, 6379, 1337) — **не згадувати** в документації для користувача. Вони внутрішні.
 - Якщо треба приклад — писати `http://localhost:${STRAPI_PORT}` або `http://localhost:1338`.
 
 **Де шукати:**
+
 - `.env` — джерело істини.
 - `.env.example` — дефолтні значення для нових розробників.
 
 **Ніколи:**
+
 - ❌ Не писати `localhost:1337` у README, docs, коментарях — це внутрішній порт контейнера.
 - ❌ Не хардкодити порти в коді — тільки через `process.env`.
 
@@ -367,10 +370,30 @@ export const CEFR_LEVEL_LABELS: Record<CEFRLevel, string> = {
 **Простіше:** писати міграції вручну та використовувати `pnpm --filter web db:deploy`.
 
 **Ніколи:**
+
 - ❌ Не запускати `prisma migrate dev` — зламає Strapi-дані.
 - ❌ Не запускати `prisma migrate reset` — те саме.
 
 **У продакшні:** `prisma migrate deploy` — безпечний.
+
+### 7.13. Env-файли в монорепо
+
+У проєкті **чотири** `.env`-файли. Кожен читається своїм інструментом:
+
+| Файл            | Читає                 | Призначення                                                                                                |
+| --------------- | --------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `.env` (корінь) | Docker Compose        | `POSTGRES_PORT`, `REDIS_PORT`, `STRAPI_PORT`, `STRAPI_*_SALT`, `STRAPI_ENCRYPTION_KEY`                     |
+| `apps/web/.env` | Next.js, Prisma CLI   | `DATABASE_URL`, `NEXTAUTH_*`, `OPENROUTER_*`, `GEMINI_*`, `DEEPSEEK_*`, `REDIS_URL`, `APP_URL`, `DATA_DIR` |
+| `apps/cms/.env` | Strapi                | `DATABASE_*`, `APP_KEYS`, `API_TOKEN_SALT`, `JWT_SECRET`                                                   |
+| `scripts/.env`  | seed-скрипт (опційно) | `STRAPI_API_TOKEN`, `STRAPI_URL`                                                                           |
+
+**Правила:**
+
+- Для кожної нової env-змінної — додавати **в обидва** файли: кореневий `.env.example` (для Docker) і відповідний `apps/*/.env.example` (для застосунку).
+- Не дублювати: якщо змінна потрібна тільки Next.js — не додавати в корінь.
+- Next.js **не** читає кореневий `.env`. Тільки `apps/web/.env`.
+- Prisma CLI читає `.env` **поруч зі схемою** → `apps/web/.env`.
+- У документації (README, задачі) посилатись на «кореневий `.env.example`» для Docker-змінних і «`apps/web/.env.example`» для застосунку.
 
 ---
 
