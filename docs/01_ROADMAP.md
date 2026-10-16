@@ -12,7 +12,7 @@
 | E1 | Foundation | 5 |
 | E2 | Data & Shared | 4 |
 | E3 | AI & Cache | 5 |
-| E4 | Auth & Users | 3 |
+| E4 | Auth & Users | 5 |
 | E5 | Level Test | 3 |
 | E6 | Plan | 4 |
 | E7 | Exercise | 8 |
@@ -23,7 +23,7 @@
 | E12 | Deploy | 3 |
 | E13 | Reinforcement Stories | 6 |
 
-**Всього: 64 задачі.**
+**Всього: 66 задач.**
 
 ---
 
@@ -55,6 +55,7 @@
 - [х] 15 — NextAuth setup (credentials + JWT)
 - [x] 16 — Login + Register pages
 - [ ] 16.5 — UI Foundation (shadcn/ui + базовые компоненты)
+- [ ] 16.6 — Landing page
 - [ ] 17 — User helpers + session callback + /api/user/me
 
 ## E5 — Level Test
@@ -78,7 +79,8 @@
 - [ ] 27 — Sentence generation (AI + cross-check)
 - [ ] 27.1 — Error recycling logic
 - [ ] 28 — PDF generation
-- [ ] 29 — Exercise state persistence
+- [ ] 29 — Exercise UI (input + checkboxes) 
+- [ ] 30 — Exercise state persistence
 
 ## E8 — Evaluation
 
