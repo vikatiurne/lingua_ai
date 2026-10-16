@@ -3,7 +3,7 @@
 **Епік:** E1 — Foundation
 **Розмір:** M (2–3 год)
 **Залежності:** 02
-**Статус:** ⬜ Todo
+**Статус:** ✅ Done
 **Гілка:** `feat/03-strapi-content-types`
 
 > ⚠️ **ЦЯ ЗАДАЧА СТВОРЮЄ CONTENT-TYPES У STRAPI.**
