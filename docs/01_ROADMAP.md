@@ -52,7 +52,7 @@
 
 ## E4 — Auth & Users
 
-- [ ] 15 — NextAuth setup (credentials + JWT)
+- [х] 15 — NextAuth setup (credentials + JWT)
 - [ ] 16 — Login + Register pages
 - [ ] 17 — User helpers + session callback + /api/user/me
 
