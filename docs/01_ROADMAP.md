@@ -37,8 +37,8 @@
 
 ## E2 — Data & Shared
 
-- [ ] 06 — Prisma schema + migrations
-- [ ] 07 — Slot loader
+- [х] 06 — Prisma schema + migrations
+- [х] 07 — Slot loader
 - [ ] 08 — $ref resolver
 - [ ] 09 — Template service
 
