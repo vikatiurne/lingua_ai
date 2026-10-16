@@ -20,9 +20,9 @@ _Live demo coming soon._
 > Заповнюється після реалізації UI. Тут буде галерея з 5 ключових екранів:
 > landing, login, dashboard, exercise, evaluation.
 
-| Dashboard | Exercise | Evaluation |
-|---|---|---|
-| _coming soon_ | _coming soon_ | _coming soon_ |
+| Login | Dashboard | Exercise | Evaluation |
+|---|---|---|---|
+| ![Login](docs/screenshots/02-login.png) | _coming soon_ | _coming soon_ | _coming soon_ |
 
 ---
 

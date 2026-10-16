@@ -53,7 +53,8 @@
 ## E4 — Auth & Users
 
 - [х] 15 — NextAuth setup (credentials + JWT)
-- [ ] 16 — Login + Register pages
+- [x] 16 — Login + Register pages
+- [ ] 16.5 — UI Foundation (shadcn/ui + базовые компоненты)
 - [ ] 17 — User helpers + session callback + /api/user/me
 
 ## E5 — Level Test
@@ -77,8 +78,7 @@
 - [ ] 27 — Sentence generation (AI + cross-check)
 - [ ] 27.1 — Error recycling logic
 - [ ] 28 — PDF generation
-- [ ] 29 — Exercise UI (input + checkboxes)
-- [ ] 30 — Exercise state persistence
+- [ ] 29 — Exercise state persistence
 
 ## E8 — Evaluation
 

@@ -3,7 +3,7 @@
 **Епік:** E4 — Auth & Users
 **Розмір:** M (2–3 год)
 **Залежності:** 14, 15
-**Статус:** ⬜ Todo
+**Статус:** ✅ Done
 **Гілка:** `feat/16-auth-pages`
 
 > ⚠️ **ЦЯ ЗАДАЧА — UI + API РЕЄСТРАЦІЇ ТА ВХОДУ.**
@@ -35,23 +35,23 @@
 
 ## ✅ Acceptance Criteria
 
-- [ ] Є `apps/web/lib/validation/auth.ts` — Zod-схеми
-- [ ] Є `apps/web/lib/validation/auth.test.ts` — 5+ тестів
-- [ ] Є `apps/web/app/(auth)/layout.tsx` — спільний layout для login/register
-- [ ] Є `apps/web/app/(auth)/login/page.tsx`
-- [ ] Є `apps/web/app/(auth)/register/page.tsx`
-- [ ] Є `apps/web/app/api/auth/register/route.ts`
-- [ ] Є `apps/web/components/auth/login-form.tsx`
-- [ ] Є `apps/web/components/auth/register-form.tsx`
-- [ ] Форми використовують `react-hook-form` + Zod resolver
-- [ ] `/api/auth/register` хешує пароль через `hashPassword`
-- [ ] Дублікат email → 409 з повідомленням
-- [ ] Невалідний email/пароль → 400 з деталями
-- [ ] `/api/auth/register` обгорнутий `withRateLimit(RATE_LIMITS.AUTH)`
-- [ ] `signIn("credentials", { redirect: false })` → правильна обробка помилок
-- [ ] `@types/bcryptjs` **видалено** з `apps/web/package.json`
-- [ ] `.env.example` (корінь) і `apps/web/.env.example` синхронізовані
-- [ ] `pnpm typecheck` і `pnpm --filter web test` проходять
+- [x] Є `apps/web/lib/validation/auth.ts` — Zod-схеми
+- [x] Є `apps/web/lib/validation/auth.test.ts` — 5+ тестів
+- [x] Є `apps/web/app/(auth)/layout.tsx` — спільний layout для login/register
+- [x] Є `apps/web/app/(auth)/login/page.tsx`
+- [x] Є `apps/web/app/(auth)/register/page.tsx`
+- [x] Є `apps/web/app/api/auth/register/route.ts`
+- [x] Є `apps/web/components/auth/login-form.tsx`
+- [x] Є `apps/web/components/auth/register-form.tsx`
+- [x] Форми використовують `react-hook-form` + Zod resolver
+- [x] `/api/auth/register` хешує пароль через `hashPassword`
+- [x] Дублікат email → 409 з повідомленням
+- [x] Невалідний email/пароль → 400 з деталями
+- [x] `/api/auth/register` обгорнутий `withRateLimit(RATE_LIMITS.AUTH)`
+- [x] `signIn("credentials", { redirect: false })` → правильна обробка помилок
+- [x] `@types/bcryptjs` **видалено** з `apps/web/package.json`
+- [x] `.env.example` (корінь) і `apps/web/.env.example` синхронізовані
+- [x] `pnpm typecheck` і `pnpm --filter web test` проходять
 
 ---
 
@@ -280,8 +280,16 @@ git push origin feat/16-auth-pages
 
 Заповнюється після завершення.
 
-- Чи спрацював `signIn` з `redirect: false` без reload?
-- Чи є проблеми з Zod + react-hook-form типами?
-- Чи правильно показуються помилки під полями?
-- Чи потрібен `router.refresh()` для коректної роботи сесії?
-- Чи не потрібен `@types/bcryptjs` (перевірити після видалення)?
+- Чи спрацював `signIn` з `redirect: false` без reload? — Так, `result.error` повертається без reload; успіх → `router.push("/dashboard")` + `router.refresh()`.
+- Чи є проблеми з Zod + react-hook-form типами? — Ні. `zodResolver` + `useForm<LoginInput/RegisterInput>` проходять `tsc --noEmit` без `as any`.
+- Чи правильно показуються помилки під полями? — Так: серверні 400 → `setError(field, ...)` за `fieldErrors`, клієнтські → `errors.<field>.message`; root-помилки (невірний пароль, 429) → банер над полями.
+- Чи потрібен `router.refresh()` для коректної роботи сесії? — Так, після `push` викликається, щоб session оновилась у Server Components (перевірити runtime після появи `/dashboard`, задача 22).
+- Чи не потрібен `@types/bcryptjs` (перевірити після видалення)? — Не потрібен. bcryptjs@3 має власні типи; typecheck зелений після `pnpm --filter web remove @types/bcryptjs`.
+
+Інше:
+
+- `RATE_LIMITS.AUTH` структурно сумісний із `withRateLimit` (ті самі 3 поля) — `export const POST = withRateLimit(registerHandler, RATE_LIMITS.AUTH)` працює без адаптера. Це перший реальний споживач `withRateLimit`.
+- `.env.example` не змінювались: задача не додає нових env-змінних, `NEXTAUTH_*` вже синхронізовані.
+- `/dashboard` поки не існує (задача 22) — після входу до її виконання буде 404.
+- `/login` рендериться dynamic (через `searchParams`), `/register` — static; обидва входять у `next build`.
+- Помилка «Email вже зареєстровано» дублюється на сервері (409 `"Email already registered"`) та в UI (українською) — формулювання різняться свідомо, бо i18n лише в задачі 45.
