@@ -189,7 +189,7 @@ lingua-ai/
 - [x] Monorepo setup
 - [x] Docker Compose (Postgres + Redis + Strapi)
 - [x] Seed data (8 Levels + Topics + Subtopics)
-- [ ] Prisma schema
+- [x] Prisma schema
 - [ ] AI-провайдери з fallback
 - [ ] Автентифікація
 - [ ] Тест рівня
