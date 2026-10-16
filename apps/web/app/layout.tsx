@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Lora, Mulish } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin", "cyrillic"] });
+const mulish = Mulish({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-sans",
+});
+
+const lora = Lora({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-display",
+});
 
 export const metadata: Metadata = {
   title: "Lingua AI",
@@ -17,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${mulish.variable} ${lora.variable} font-sans`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
