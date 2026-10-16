@@ -40,11 +40,11 @@
 - [х] 06 — Prisma schema + migrations
 - [х] 07 — Slot loader
 - [х] 08 — $ref resolver
-- [ ] 09 — Template service
+- [x] 09 — Template service
 
 ## E3 — AI & Cache
 
-- [ ] 10 — AI provider interface
+- [х] 10 — AI provider interface
 - [ ] 11 — OpenRouter provider
 - [ ] 12 — Gemini + DeepSeek providers + cross-check
 - [ ] 13 — Redis cache layer
