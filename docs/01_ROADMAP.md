@@ -33,7 +33,7 @@
 - [x] 02 — Docker Compose (Postgres 5433 + Redis 6380 + Strapi 1338)
 - [x] 03 — Strapi content-types (Level, Topic, Subtopic, CuratedMaterial)
 - [х] 04 — Shared package (enums, types, constants)
-- [ ] 05 — Seed data (Levels, Topics, Subtopics)
+- [х] 05 — Seed data (Levels, Topics, Subtopics)
 
 ## E2 — Data & Shared
 
