@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "curated_materials",
+  "info": {
+    "singularName": "curated-material",
+    "pluralName": "curated-materials",
+    "displayName": "Curated Material",
+    "description": "Podcasts, films, articles recommended for a subtopic"
+  },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "type": {
+      "type": "enumeration",
+      "enum": ["podcast", "film", "article", "series", "book", "video"],
+      "required": true
+    },
+    "url": { "type": "string", "required": true },
+    "description": { "type": "text" },
+    "language": {
+      "type": "enumeration",
+      "enum": ["en", "uk", "other"],
+      "default": "en"
+    },
+    "difficulty": {
+      "type": "enumeration",
+      "enum": ["easy", "medium", "hard"],
+      "default": "medium"
+    },
+    "subtopic": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::subtopic.subtopic",
+      "inversedBy": "curatedMaterials",
+      "required": true
+    }
+  }
+}

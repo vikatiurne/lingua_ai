@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "levels",
+  "info": {
+    "singularName": "level",
+    "pluralName": "levels",
+    "displayName": "Level",
+    "description": "CEFR levels: A1, A2, A2_PLUS, B1, B1_PLUS, B2, C1, C2"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "enumeration",
+      "enum": ["A1", "A2", "A2_PLUS", "B1", "B1_PLUS", "B2", "C1", "C2"],
+      "required": true,
+      "unique": true
+    },
+    "name": { "type": "string", "required": true },
+    "description": { "type": "text" },
+    "order": { "type": "integer", "required": true, "default": 0 },
+    "topics": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::topic.topic",
+      "mappedBy": "level"
+    }
+  }
+}
