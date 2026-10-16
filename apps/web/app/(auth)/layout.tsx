@@ -15,12 +15,17 @@ export default function AuthLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="grid min-h-screen lg:grid-cols-2">
-      <aside className="relative hidden overflow-hidden bg-[#1C1A18] p-10 text-white lg:flex lg:flex-col lg:justify-between">
-        <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-primary/40 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-32 -right-16 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
-        <DoodlePattern id="doodles-brand" className="text-white opacity-[0.07]" />
-
+    <div className="relative grid min-h-screen overflow-hidden bg-background lg:grid-cols-2">
+      <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-primary/20 blur-3xl dark:bg-primary/40" />
+      <div className="pointer-events-none absolute -bottom-32 -right-16 h-80 w-80 rounded-full bg-accent/15 blur-3xl dark:bg-accent/20" />
+      <div className="absolute right-4 top-4 z-[60]">
+        <ThemeToggle />
+      </div>
+      <DoodlePattern
+        id="doodles-auth"
+        className="text-foreground opacity-[0.06]"
+      />
+      <aside className="relative hidden overflow-hidden p-10 text-foreground dark:text-white lg:flex lg:flex-col lg:justify-between">
         <p className="relative font-display text-lg font-semibold tracking-tight">
           Lingua AI
         </p>
@@ -29,32 +34,26 @@ export default function AuthLayout({
           <h2 className="font-display text-3xl font-bold leading-tight tracking-tight xl:text-4xl">
             Англійська, що тримається в голові
           </h2>
-          <p className="leading-relaxed text-white/70">
+          <p className="leading-relaxed text-foreground/70 dark:text-white/70">
             AI-план, щоденні вправи та розбір помилок — усе, щоб нарешті
             заговорити впевнено.
           </p>
           <ul className="space-y-3.5">
             {features.map(({ icon: Icon, text }) => (
               <li key={text} className="flex items-start gap-3 text-sm">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10">
-                  <Icon className="h-3.5 w-3.5 text-accent" />
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 dark:bg-white/10">
+                  <Icon className="h-3.5 w-3.5 text-primary dark:text-accent" />
                 </span>
-                <span className="text-white/85">{text}</span>
+                <span className="text-foreground dark:text-white/85">{text}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <p className="relative text-sm text-white/50">A1 → C2 · за шкалою CEFR</p>
+        <p className="relative text-sm text-foreground/50 dark:text-white/50">A1 → C2 · за шкалою CEFR</p>
       </aside>
 
-      <div className="relative flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-accent/40 p-4">
-        <DoodlePattern id="doodles-form" className="text-foreground opacity-[0.06]" />
-
-        <div className="absolute right-4 top-4 z-10">
-          <ThemeToggle />
-        </div>
-
+      <div className="relative flex flex-col items-center justify-center overflow-hidden p-4">
         <p className="relative z-10 mb-6 font-display text-lg font-semibold tracking-tight lg:hidden">
           Lingua AI
         </p>
