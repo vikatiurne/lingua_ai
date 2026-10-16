@@ -2,11 +2,12 @@
 
 **Епік:** E2 — Data & Shared
 **Розмір:** S (1–2 год)
-**Залежності:** 05
-**Статус:** ⬜ Todo
+**Залежності:** 02, 04
+**Статус:** ✅ Done
 **Гілка:** `feat/07-slot-loader`
 
 > ⚠️ **ЦЯ ЗАДАЧА НЕ ТОРКАЄТЬСЯ:**
+>
 > - `data/**` — читаємо, не змінюємо
 > - `apps/cms/**` (Strapi)
 > - `$ref` resolver (задача 08)
@@ -20,10 +21,11 @@
 ## 🎯 Мета
 
 Після завершення задачі:
+
 - Є функції `loadSlotFile`, `loadNounsFile`, `loadTemplateFile` — читають три типи JSON-файлів.
 - Файли кешуються в пам'яті після першого читання.
 - Є мапінг рівнів CEFR → імена файлів.
-- Типи `SlotFile`, `SlotNounsFile` додані в `@lingua/shared`.
+- Типи `SlotFile`, `SlotNounsFile` **імпортуються** з `@lingua/shared` (створені в задачі 04).
 
 ---
 
@@ -41,13 +43,15 @@ loadTemplateFile("B1")
 
 ## ✅ Acceptance Criteria
 
-- [ ] Є `apps/web/lib/slots/level-files.ts` — мапінг `CEFRLevel → { slots, nouns, templates }`
-- [ ] Є `apps/web/lib/slots/loader.ts` — три функції + `clearSlotCache`
-- [ ] Є `apps/web/lib/slots/loader.test.ts` — 5+ тестів
-- [ ] Типи `SlotFile`, `SlotNounsFile` додані в `packages/shared`
-- [ ] Кеш працює: другий виклик повертає ту саму референцію (`toBe`)
-- [ ] Всі 8 рівнів завантажуються без помилок
-- [ ] `pnpm typecheck` і `pnpm --filter web test` проходять
+- [x] Є `apps/web/lib/slots/level-files.ts` — мапінг `CEFRLevel → { slots, nouns, templates }`
+- [x] Є `apps/web/lib/slots/loader.ts` — три функції + `clearSlotCache`
+- [x] Є `apps/web/lib/slots/loader.test.ts` — 6+ тестів
+- [x] Типи `SlotFile`, `SlotNounsFile` імпортуються з `@lingua/shared` (створені в задачі 04)
+- [x] Шлях до `data/` через `import.meta.url` з fallback на `process.env.DATA_DIR`
+- [x] Кеш працює: другий виклик повертає ту саму референцію (`toBe`)
+- [x] Всі 8 рівнів завантажуються без помилок
+- [x] `pnpm typecheck` і `pnpm --filter web test` проходять
+- [x] `DATA_DIR=` додано в `.env.example`
 
 ---
 
@@ -58,6 +62,7 @@ loadTemplateFile("B1")
 - ❌ Watch mode
 - ❌ Кеш у Redis (задача 13)
 - ❌ Fetch зі Strapi (тільки fs)
+- ❌ Створення типів `SlotFile`, `SlotNounsFile` — вони вже в `@lingua/shared`
 
 ---
 
@@ -68,36 +73,37 @@ loadTemplateFile("B1")
 - `apps/web/lib/slots/level-files.ts`
 - `apps/web/lib/slots/loader.ts`
 - `apps/web/lib/slots/loader.test.ts`
+- `apps/web/vitest.config.ts` (якщо знадобиться для налаштування root)
 
 ### Змінити
 
-- `packages/shared/src/types/slot.ts` — додати `SlotFile`, `SlotNounsFile`
-- `packages/shared/src/index.ts` — експорт
-- `apps/web/package.json` — додати `vitest` + скрипти `test`, `test:watch`
+- `apps/web/package.json` — додати `vitest` (devDep) + скрипти `test`, `test:watch`
+- `.env.example` (корінь) — додати `DATA_DIR=`
+
+### Не чіпати
+
+- `data/**`
+- `packages/shared/**` — тільки імпорт
+- `apps/cms/**`
+- Prisma
 
 ---
 
 ## 🔧 Інтерфейси (обов'язково)
 
-### Типи в `@lingua/shared`
+### Типи (імпортуються з `@lingua/shared`)
 
 ```ts
-export type SlotFile = {
-  level: string;
-  version: string;
-  description?: string;
-  usage?: string;
-  slots: Record<string, unknown>;
-};
-
-export type SlotNounsFile = {
-  level: string;
-  version: string;
-  description?: string;
-  usage?: string;
-  slots: Record<string, unknown>;
-};
+import type {
+  CEFRLevel,
+  SlotFile,
+  SlotNounsFile,
+  TemplateFile,
+} from "@lingua/shared";
+import { CEFR_LEVEL } from "@lingua/shared";
 ```
+
+**НЕ створювати ці типи повторно.** Вони вже в `packages/shared/src/types/slot.ts` і `template.ts` (задача 04).
 
 ### Функції в `loader.ts`
 
@@ -126,11 +132,26 @@ export const LEVEL_FILES: Record<CEFRLevel, LevelFileNames>;
 
 ## 🧠 Алгоритм (словами)
 
+**Шлях до `data/`:**
+
+```ts
+const DATA_DIR =
+  process.env.DATA_DIR ?? new URL("../../../data/", import.meta.url).pathname;
+```
+
+**Чому так:**
+
+- `process.cwd()` у Vitest, CI, `pnpm dev:web` — різний. Ненадійно.
+- `import.meta.url` завжди вказує на **поточний файл** (`apps/web/lib/slots/loader.ts`).
+- `new URL("../../../data/", import.meta.url)` → `<root>/data/`.
+- Env `DATA_DIR` дозволяє перевизначити (для тестів або нестандартного розташування).
+
 **`loadSlotFile(level)`:**
+
 1. Якщо в кеші є — повернути.
 2. Взяти ім'я файлу з `LEVEL_FILES[level].slots`.
-3. Прочитати `data/<filename>` через `fs.readFile`.
-4. `JSON.parse`.
+3. `path.join(DATA_DIR, filename)`.
+4. `fs.readFile` → `JSON.parse`.
 5. Покласти в кеш.
 6. Повернути.
 
@@ -138,13 +159,22 @@ export const LEVEL_FILES: Record<CEFRLevel, LevelFileNames>;
 
 **`clearSlotCache()`** — очистити всі три `Map`.
 
-**Шлях до `data/`:** через `process.cwd()` + `../../data`. Якщо `process.cwd()` ненадійний — винести в env `DATA_DIR`.
+**При імпорті модуля:**
+
+```ts
+// Перевірити, що LEVEL_FILES має всі 8 рівнів
+for (const level of Object.values(CEFR_LEVEL)) {
+  if (!LEVEL_FILES[level]) {
+    throw new Error(`Missing file mapping for level: ${level}`);
+  }
+}
+```
 
 ---
 
 ## 🔬 Приклади входу/виходу
 
-```
+```ts
 loadTemplateFile(CEFR_LEVEL.A1)
 → { level: "A1", version: "3.0", topics: [...], generation_rules: {...} }
 
@@ -153,13 +183,16 @@ loadSlotFile(CEFR_LEVEL.B1)
 
 loadTemplateFile(CEFR_LEVEL.B2) === loadTemplateFile(CEFR_LEVEL.B2)
 → true (та сама референція через кеш)
+
+loadTemplateFile(CEFR_LEVEL.A1).topics.length > 0
+→ true
 ```
 
 ---
 
 ## 🧪 Тести (як специфікація)
 
-У `loader.test.ts`:
+У `loader.test.ts` — 6+ тестів:
 
 1. `loadTemplateFile(A1)` → `file.level === "A1"`, `topics.length > 0`
 2. `loadSlotFile(B1)` → `file.slots` визначено
@@ -168,22 +201,43 @@ loadTemplateFile(CEFR_LEVEL.B2) === loadTemplateFile(CEFR_LEVEL.B2)
 5. `loadTemplateFile` для всіх 8 рівнів → `topics.length > 0`
 6. `clearSlotCache()` → наступний виклик читає файл заново
 
-`beforeEach` викликає `clearSlotCache()`.
+```ts
+import { beforeEach, describe, expect, it } from "vitest";
+import { CEFR_LEVEL } from "@lingua/shared";
+import {
+  loadSlotFile,
+  loadNounsFile,
+  loadTemplateFile,
+  clearSlotCache,
+} from "./loader";
+
+describe("slot loader", () => {
+  beforeEach(() => {
+    clearSlotCache();
+  });
+
+  // ... тести
+});
+```
 
 ---
 
 ## ⚠️ Нюанси
 
-- **`process.cwd()` у Next.js** — це `apps/web/`. Шлях `../../data` веде в корінь монорепо. Для тестів може знадобитись env `DATA_DIR`.
+- **`import.meta.url`** — обов'язково використовувати для резолву `data/`. `process.cwd()` ненадійний у тестах.
+- **Env `DATA_DIR`** — додати в `.env.example` (порожньо = fallback на `import.meta.url`).
 - **Кеш — `Map<CEFRLevel, T>`**, не звичайний об'єкт.
-- **При імпорті модуля** — перевірити, що `LEVEL_FILES` має всі 8 рівнів, інакше кинути помилку одразу.
+- **При імпорті модуля** — перевірити, що `LEVEL_FILES` має всі 8 рівнів.
+- **Vitest з ESM + TypeScript** — може знадобитись `vitest.config.ts` з `test: { globals: true }` і `resolve.alias`. Якщо `pnpm --filter web test` впаде на резолві `@lingua/shared` — додати alias у конфіг.
+- **`fs.readFile`** — використовувати `node:fs/promises` (async). Не `fs.readFileSync`.
 
 ---
 
 ## 📎 Контекст
 
-- `00_CONTEXT.md` → розділ 9, 10
-- `docs/tasks/05-shared-package.md`
+- `00_CONTEXT.md` → розділи 9, 10
+- `docs/tasks/02-docker-compose.md`
+- `docs/tasks/04-shared-package.md`
 
 ---
 
@@ -194,8 +248,9 @@ feat(slots): add loader for slots and templates JSON files
 
 - add level-files.ts mapping CEFR levels to filenames
 - add loader.ts with in-memory cache and clearSlotCache
-- add SlotFile, SlotNounsFile types to shared package
-- add unit tests and vitest setup
+- resolve data/ via DATA_DIR env or import.meta.url
+- add vitest setup and 6+ unit tests
+- add DATA_DIR to .env.example
 ```
 
 ---
@@ -214,5 +269,43 @@ git push origin feat/07-slot-loader
 
 ## 📝 Нотатки
 
-- Чи `process.cwd()` працює правильно?
-- Чи потрібен `DATA_DIR`?
+Заповнено після завершення. Статус: ✅ Done.
+
+### Чи `import.meta.url` дав правильний шлях?
+
+**Так, але з виправленням.** У задачі було вказано
+`new URL("../../../data/", import.meta.url)` — це дало `apps/data/`
+(3 рівні вгору з `apps/web/lib/slots/` → `apps/`).
+
+Правильно — **чотири** рівні: `new URL("../../../../data/", import.meta.url)`
+→ `<root>/data/`. Саме так реалізовано в `loader.ts`.
+Без цього всі 6 тестів падали з `ENOENT` на `apps/data/`.
+
+Fallback на `process.env.DATA_DIR` працює: якщо задано — шлях береться з env.
+
+### Чи знадобився `vitest.config.ts` з alias?
+
+**Так.** Без alias `@lingua/shared` не резолвився у Vitest.
+У `vitest.config.ts` задано:
+
+- `resolve.alias` → `../../packages/shared/src/index.ts` (прямий шлях на src,
+  щоб не залежати від збірки пакета)
+- `resolve.conditions` → `["node", "import", "module"]`
+- `test.globals: true`, `test.environment: "node"`
+
+Після додавання `vitest` у devDependencies знадобився `pnpm install`,
+інакше `vitest: command not found`.
+
+### Чи є проблеми з ESM + TypeScript у тестах?
+
+**Суттєвих немає.** Тести працюють:
+
+- `node:fs/promises` та `import.meta.url` — коректні в середовищі Vitest (Node)
+- Типи з `@lingua/shared` імпортуються через `import type` — без проблем
+- `pnpm typecheck` і `pnpm --filter web test` проходять (6/6 тестів)
+
+### Інше
+
+- Кеш перевірено: другий виклик `loadTemplateFile(B2)` → `toBe` (та сама референція)
+- `clearSlotCache()` → наступний виклик читає файл заново (нова референція)
+- `DATA_DIR=` додано в `.env.example` (порожній = fallback на `import.meta.url`)

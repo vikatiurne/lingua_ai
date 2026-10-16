@@ -2,7 +2,7 @@
 
 **Епік:** E2 — Data & Shared
 **Розмір:** M (2–3 год)
-**Залежності:** 05, 07
+**Залежності:** 04, 07
 **Статус:** ⬜ Todo
 **Гілка:** `feat/08-ref-resolver`
 
@@ -18,12 +18,13 @@
 
 ## 🎯 Мета
 
-Після завершення задачі:
-- `resolveRef(ref, slotLevel, cefrLevel)` → масив рядків
-- `resolveTemplate(pattern, cefrLevel, slotLevel)` → шаблон з розкритими слотами
-- `resolveTemplateFile(cefrLevel, slotLevel)` → усі теми з розкритими слотами
+Після завершення:
+- `resolveRef(ref, cefrLevel, slotLevel?)` → масив рядків
+- `resolveTemplate(pattern, cefrLevel, slotLevel?)` → шаблон з розкритими слотами
+- `resolveTemplateFile(cefrLevel, slotLevel?)` → усі теми з розкритими слотами
 - Підтримка `slots_*` і `slots_nouns_*`
 - Підтримка рівнів `basic / intermediate / advanced`
+- Типи `ResolvedPattern`, `ResolvedTemplateTopic`, `ResolvedSlot` **імпортуються** з `@lingua/shared` (створені в задачі 04)
 
 ---
 
@@ -50,7 +51,7 @@ resolveTemplate(ps_01, "B1", intermediate)
 - [ ] Підтримка 3 форматів слотів: масив / об'єкт з рівнями / `$ref`
 - [ ] Помилки з описом: невалідний формат, неіснуючий шлях
 - [ ] Інтеграційний тест: усі 8 рівнів резолвляться без помилок
-- [ ] Типи `ResolvedPattern`, `ResolvedTemplateTopic` у `@lingua/shared`
+- [ ] Типи `ResolvedPattern`, `ResolvedTemplateTopic`, `ResolvedSlot` **імпортуються** з `@lingua/shared`
 - [ ] `pnpm typecheck` і `pnpm --filter web test` проходять
 
 ---
@@ -62,6 +63,7 @@ resolveTemplate(ps_01, "B1", intermediate)
 - ❌ HTTP-резолв
 - ❌ Кеш резолвнутих результатів
 - ❌ Zod-валідація
+- ❌ Створення типів `ResolvedPattern`, `ResolvedTemplateTopic` — вони вже в `@lingua/shared` (задача 04)
 
 ---
 
@@ -72,39 +74,42 @@ resolveTemplate(ps_01, "B1", intermediate)
 - `apps/web/lib/slots/ref-resolver.ts`
 - `apps/web/lib/slots/ref-resolver.test.ts`
 
-### Змінити
+### Не чіпати
 
-- `packages/shared/src/types/template.ts` — додати `ResolvedPattern`, `ResolvedTemplateTopic`
+- `data/**`
+- `packages/shared/**` — тільки імпорт
+- `apps/cms/**`
+- Prisma
+- `apps/web/lib/slots/loader.ts`, `level-files.ts` — створені в задачі 07
 
 ---
 
 ## 🔧 Інтерфейси (обов'язково)
 
-### Типи в `@lingua/shared`
+### Типи (імпортуються з `@lingua/shared`)
 
 ```ts
-export type ResolvedSlot = string[];
-
-export type ResolvedPattern = Omit<TemplatePattern, "slots"> & {
-  slots: Record<string, ResolvedSlot>;
-};
-
-export type ResolvedTemplateTopic = {
-  topic: string;
-  subtopics: {
-    name: string;
-    patterns: ResolvedPattern[];
-  }[];
-};
+import type {
+  CEFRLevel,
+  SlotLevel,
+  TemplatePattern,
+  ResolvedPattern,
+  ResolvedTemplateTopic,
+} from "@lingua/shared";
+import { DEFAULT_SLOT_LEVEL, SLOT_LEVEL } from "@lingua/shared";
 ```
 
+**НЕ створювати ці типи повторно.** Вони вже в `packages/shared/src/types/template.ts` (задача 04).
+
 ### Функції в `ref-resolver.ts`
+
+**Узгоджений порядок аргументів:** спочатку `cefrLevel` (required), потім `slotLevel` (optional, default = `intermediate`).
 
 ```ts
 export function resolveRef(
   ref: string,
-  level: SlotLevel,
-  cefrLevel: CEFRLevel
+  cefrLevel: CEFRLevel,
+  slotLevel?: SlotLevel
 ): Promise<string[]>;
 
 export function resolveTemplate(
@@ -123,24 +128,24 @@ export function resolveTemplateFile(
 
 ## 🧠 Алгоритм (словами)
 
-**`resolveRef`:**
-1. Розібрати `ref` на `<file>` і `<path[]>`.
+**`resolveRef(ref, cefrLevel, slotLevel = DEFAULT_SLOT_LEVEL)`:**
+1. Розібрати `ref` на `<file>` і `<path[]>` через regex.
 2. Визначити, який лоадер викликати: `loadSlotFile` чи `loadNounsFile`.
 3. Знайти значення по шляху.
 4. Визначити формат:
    - якщо масив рядків → повернути;
-   - якщо об'єкт з рівнями → вибрати `level` або `default`;
+   - якщо об'єкт з рівнями → вибрати `slotLevel` або `default`;
    - інакше — помилка.
 5. Повернути масив.
 
-**`resolveTemplate`:**
+**`resolveTemplate(pattern, cefrLevel, slotLevel = DEFAULT_SLOT_LEVEL)`:**
 1. Для кожного слоту в `pattern.slots`:
    - якщо це `$ref` → викликати `resolveRef`;
    - якщо масив → залишити;
    - якщо об'єкт з рівнями → вибрати рівень.
 2. Повернути новий pattern з розкритими слотами.
 
-**`resolveTemplateFile`:**
+**`resolveTemplateFile(cefrLevel, slotLevel = DEFAULT_SLOT_LEVEL)`:**
 1. Завантажити файл шаблонів через `loadTemplateFile`.
 2. Пройтися по всіх topics → subtopics → patterns.
 3. Кожен pattern резолвнути через `resolveTemplate`.
@@ -150,34 +155,58 @@ export function resolveTemplateFile(
 
 ## 🔬 Приклади входу/виходу
 
-```
-resolveRef("slots_a1#/slots/present_simple/affirmative/V1", INTERMEDIATE, A1)
-→ ["work", "study", "live", ...]
+```ts
+// resolveRef(ref, cefrLevel, slotLevel?)
+resolveRef("slots_a1#/slots/present_simple/affirmative/V1", CEFR_LEVEL.A1)
+→ ["work", "study", "live", ...]  // intermediate за замовчуванням
 
-resolveRef("slots_nouns_b1#/slots/common/subjects", INTERMEDIATE, B1)
+resolveRef("slots_a1#/slots/present_simple/affirmative/V1", CEFR_LEVEL.A1, SLOT_LEVEL.BASIC)
+→ ["work", "study", ...]  // basic
+
+resolveRef("slots_nouns_b1#/slots/common/subjects", CEFR_LEVEL.B1)
 → ["I", "my brother", "my colleague", ...]
 
-resolveRef("invalid", ...)
+resolveRef("invalid", CEFR_LEVEL.B1)
 → throws Error("Invalid $ref format: invalid")
 
-resolveTemplate(pattern_ps_01, B1, INTERMEDIATE)
+// resolveTemplate(pattern, cefrLevel, slotLevel?)
+resolveTemplate(pattern_ps_01, CEFR_LEVEL.B1)
 → { id: "ps_01", pattern: "...", slots: { V1: [...], S: [...], ... }, ... }
+
+// resolveTemplateFile(cefrLevel, slotLevel?)
+resolveTemplateFile(CEFR_LEVEL.A1, SLOT_LEVEL.BASIC)
+→ [{ topic: "...", subtopics: [{ name: "...", patterns: [...] }] }, ...]
 ```
 
 ---
 
 ## 🧪 Тести (як специфікація)
 
+У `ref-resolver.test.ts` — 8+ тестів:
+
 1. `resolveRef` з простим масивом (A1) → масив рядків.
 2. `resolveRef` з файлом `slots_nouns_*` (B1) → масив рядків.
 3. `resolveRef` з `basic` vs `advanced` (B2) → різні масиви.
-4. `resolveRef` з невалідним форматом → throws.
-5. `resolveRef` з неіснуючим шляхом → throws.
+4. `resolveRef` з невалідним форматом → throws `/Invalid \$ref/`.
+5. `resolveRef` з неіснуючим шляхом → throws `/path not found/`.
 6. `resolveTemplate` для першого pattern B1 → всі слоти масиви, не порожні.
 7. `resolveTemplateFile(A1, BASIC)` → усі patterns резолвнуто.
 8. **Інтеграційний:** `resolveTemplateFile` для всіх 8 рівнів → без помилок.
 
-`beforeEach` викликає `clearSlotCache()`.
+```ts
+import { beforeEach, describe, expect, it } from "vitest";
+import { CEFR_LEVEL, SLOT_LEVEL } from "@lingua/shared";
+import { clearSlotCache } from "./loader";
+import { resolveRef, resolveTemplate, resolveTemplateFile } from "./ref-resolver";
+
+describe("ref-resolver", () => {
+  beforeEach(() => {
+    clearSlotCache();
+  });
+
+  // ... тести
+});
+```
 
 ---
 
@@ -221,7 +250,7 @@ const REF_PATTERN = /^(slots(?:_nouns)?_[a-z0-9_]+)#\/(.+)$/;
 ## 📎 Контекст
 
 - `00_CONTEXT.md` → розділ 10
-- `docs/tasks/05-shared-package.md`
+- `docs/tasks/04-shared-package.md`
 - `docs/tasks/07-slot-loader.md`
 
 ---
@@ -234,7 +263,7 @@ feat(slots): add $ref resolver for templates
 - add ref-resolver.ts with resolveRef, resolveTemplate, resolveTemplateFile
 - support slots_* and slots_nouns_* files
 - support basic/intermediate/advanced levels
-- add ResolvedPattern, ResolvedTemplateTopic types to shared
+- use ResolvedPattern, ResolvedTemplateTopic from @lingua/shared
 - add 8 unit tests including integration over all 8 CEFR levels
 ```
 
@@ -254,6 +283,8 @@ git push origin feat/08-ref-resolver
 
 ## 📝 Нотатки
 
+Заповнюється після завершення.
+
 - Чи всі 8 рівнів пройшли інтеграційний тест?
 - Чи є шаблони з нерозкривними `$ref`?
-- Чи потрібен кеш резолвнутих?
+- Чи потрібен кеш резолвнутих результатів?
