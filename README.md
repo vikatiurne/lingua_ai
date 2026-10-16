@@ -206,6 +206,7 @@ lingua-ai/
 - [`00_CONTEXT.md`](00_CONTEXT.md) — контекст проєкту, стек, архітектура
 - [`AGENT_RULES.md`](AGENT_RULES.md) — правила роботи з AI-агентом
 - [`01_ROADMAP.md`](01_ROADMAP.md) — план розробки
+- [`docs/02_DESIGN_SYSTEM.md`](docs/02_DESIGN_SYSTEM.md) — дизайн-система (шрифти, палітра, UI-токени)
 - [`docs/tasks/`](docs/tasks/) — окремі задачі
 
 ---
