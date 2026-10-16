@@ -1,7 +1,7 @@
 {
   "name": "lingua-ai",
   "private": true,
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@9.15.9",
   "engines": { "node": ">=22" },
   "scripts": {
     "dev:web": "pnpm --filter web dev",

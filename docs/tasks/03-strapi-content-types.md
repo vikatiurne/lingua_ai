@@ -12,7 +12,7 @@
 > ⚠️ **НЕ ТОРКАЄТЬСЯ:**
 > - `apps/web/**`, `packages/shared/**`
 > - JSON-файли `data/**` (вони — джерело істини)
-> - Seed (задача 04)
+> - Seed (задача 05)
 > - Prisma (задача 06)
 >
 > **Тільки 4 content-types: Level, Topic, Subtopic, CuratedMaterial.**
@@ -21,9 +21,9 @@
 
 ## 🎯 Мета
 
-Після завершення в Strapi Admin (`http://localhost:1337/admin`) є 4 content-types:
+Після завершення в Strapi Admin (`http://localhost:1338/admin`) є 4 content-types:
 **Level** (без relations), **Topic** (→Level), **Subtopic** (→Topic), **CuratedMaterial** (→Subtopic).
-Порожні, seed — задача 04.
+Порожні, seed — задача 05.
 
 ---
 
@@ -34,18 +34,20 @@
 - [ ] `Topic` має поля: `name`, `slug`, `description`, `order`, `level` (manyToOne)
 - [ ] `Subtopic` має поля: `name`, `slug`, `description`, `order`, `topic` (manyToOne)
 - [ ] `CuratedMaterial` має поля: `title`, `type`, `url`, `description`, `language`, `difficulty`, `subtopic` (manyToOne)
-- [ ] Усі 4 типи видно в Strapi Admin після `docker compose restart strapi`
-- [ ] `curl http://localhost:1337/api/levels` → `{ "data": [] }`
+- [ ] `Level.code` enum має значення: `["A1", "A2", "A2_PLUS", "B1", "B1_PLUS", "B2", "C1", "C2"]`
+- [ ] Усі 4 типи видно в Strapi Admin (`http://localhost:1338/admin`) після `docker compose restart strapi`
 - [ ] `docker compose logs strapi --tail=50` без помилок
+- [ ] У Strapi Admin → Content Manager → Level → Create new entry форма відкривається, enum `code` показує 8 значень
 
 ---
 
 ## 🚫 Що НЕ входить (out of scope)
 
-- ❌ Seed (задача 04)
+- ❌ Seed (задача 05)
 - ❌ Права доступу Public role (окремо, якщо потрібно)
 - ❌ Localization (пізніше)
 - ❌ Медіа-поля, вебхуки, custom controllers
+- ❌ Перевірка через публічний API (без прав Public role поверне 403)
 
 ---
 
@@ -68,6 +70,7 @@ apps/cms/src/api/level/
 ## 🔧 Хрупкі схеми (обов'язково)
 
 ### `level/schema.json`
+
 ```json
 {
   "kind": "collectionType",
@@ -76,14 +79,14 @@ apps/cms/src/api/level/
     "singularName": "level",
     "pluralName": "levels",
     "displayName": "Level",
-    "description": "CEFR levels: A1, A2, A2+, B1, B1+, B2, C1, C2"
+    "description": "CEFR levels: A1, A2, A2_PLUS, B1, B1_PLUS, B2, C1, C2"
   },
   "options": { "draftAndPublish": false },
   "pluginOptions": {},
   "attributes": {
     "code": {
       "type": "enumeration",
-     "enum": ["A1", "A2", "A2_PLUS", "B1", "B1_PLUS", "B2", "C1", "C2"],
+      "enum": ["A1", "A2", "A2_PLUS", "B1", "B1_PLUS", "B2", "C1", "C2"],
       "required": true,
       "unique": true
     },
@@ -100,7 +103,10 @@ apps/cms/src/api/level/
 }
 ```
 
+**Важливо:** `enum` значення — **точно** `A2_PLUS`, `B1_PLUS` (з підкресленням). Не `A2+`. Це критично для синхронізації з `@lingua/shared` (задача 04) і Prisma (задача 06).
+
 ### `topic/schema.json`
+
 ```json
 {
   "kind": "collectionType",
@@ -136,6 +142,7 @@ apps/cms/src/api/level/
 ```
 
 ### `subtopic/schema.json`
+
 ```json
 {
   "kind": "collectionType",
@@ -171,6 +178,7 @@ apps/cms/src/api/level/
 ```
 
 ### `curated-material/schema.json`
+
 ```json
 {
   "kind": "collectionType",
@@ -213,7 +221,7 @@ apps/cms/src/api/level/
 }
 ```
 
-### Controllers/Routes/Services (стандартні)
+### Controllers / Routes / Services (стандартні)
 
 Для кожного типу `X` — три файли зі стандартним фабричним кодом Strapi 5:
 
@@ -239,14 +247,35 @@ export default factories.createCoreService("api::X.X");
 
 ---
 
+## 📝 README
+
+Після завершення задачі — **README не змінюється**.
+(Strapi content-types не відображаються в README — вони внутрішні.)
+
+---
+
 ## 🧪 Як перевірити
 
 ```bash
+# 1. Перезапустити Strapi
 docker compose restart strapi
-docker compose logs -f strapi    # Ctrl+C коли "Welcome back"
-# http://localhost:1337/admin → 4 нові типи в лівому меню
 
-curl http://localhost:1337/api/levels
+# 2. Подивитись логи — має бути "Welcome back" без помилок
+docker compose logs -f strapi
+# Ctrl+C
+
+# 3. Відкрити Strapi Admin
+# http://localhost:1338/admin
+# → У лівому меню: Level, Topic, Subtopic, Curated Material
+
+# 4. Перевірити поля Level
+# Content Manager → Level → Create new entry
+# code (dropdown, 8 значень), name, description, order → зберегти
+# Save → Publish
+
+# 5. Перевірити через admin token (опційно)
+# Створити API token: Settings → API Tokens → Full access
+curl -H "Authorization: Bearer <TOKEN>" http://localhost:1338/api/levels
 # → {"data":[],"meta":{...}}
 ```
 
@@ -254,25 +283,29 @@ curl http://localhost:1337/api/levels
 
 ## ⚠️ Нюанси
 
+- **Порти змінені:** Lingua використовує `5433`/`6380`/`1338`. Atlas — `5432`/`6379`/`1337`. Не плутати.
 - **Порядок створення:** спочатку `level`, потім `topic`, потім `subtopic`, потім `curated-material`. Інакше relations не знайдуть target.
-- **`enum` у Strapi** має точні значення (`"A2+"` — з плюсом). Це важливо для синхронізації з `@lingua/shared`.
-- **`draftAndPublish: false`** для Level/Topic/Subtopic — вони не редагуються часто. Для CuratedMaterial — `true`, бо контент може додаватись.
-- **Значення `enum`** мають **точно** збігатися з тими, що будуть у `@lingua/shared` (задача 05).
-- **Права доступу** — за замовчуванням Public role не бачить нових типів. Для API це треба буде видати окремо (можна в задачі 04 або окремою).
+- **Значення enum:** **точно** `A2_PLUS`, `B1_PLUS` — з підкресленням. Не `A2+`. Це критично.
+- **`draftAndPublish: false`** для Level/Topic/Subtopic — вони не редагуються часто. Для CuratedMaterial — `true`.
+- **Значення enum** мають **точно** збігатися з тими, що будуть у `@lingua/shared` (задача 04).
+- **Права доступу** — за замовчуванням Public role не бачить нових типів. Для API це треба буде видати окремо (у задачі 05 або окремою).
+- **Після `docker compose restart strapi`** — Strapi автоматично створює таблиці в Postgres. Перший restart може зайняти 30–60 секунд.
 
 ---
 
 ## 📎 Контекст
+
 - `00_CONTEXT.md` → розділи 4, 9, 10
 - `docs/tasks/02-docker-compose.md`
 
 ---
 
 ## 💬 Commit message
+
 ```
 feat(cms): add Level, Topic, Subtopic, CuratedMaterial content-types
 
-- add Level schema with code, name, description, order
+- add Level schema with code enum (A1..C2), name, description, order
 - add Topic with relation to Level
 - add Subtopic with relation to Topic
 - add CuratedMaterial with relation to Subtopic
@@ -282,6 +315,7 @@ feat(cms): add Level, Topic, Subtopic, CuratedMaterial content-types
 ---
 
 ## 🔀 Git workflow
+
 ```bash
 git checkout -b feat/03-strapi-content-types
 # ...

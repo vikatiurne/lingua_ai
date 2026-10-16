@@ -59,6 +59,9 @@ apps/web/
 - [ ] `pnpm --filter web prisma generate` проходить
 - [ ] `pnpm --filter web prisma studio` показує 6 таблиць Prisma + таблиці Strapi
 - [ ] Enum `CEFRLevel` у Prisma використовує `A2_PLUS`, `B1_PLUS` (без `+`)
+- [ ] UserError має поля timesRecycled, successCount, failureCount, status, archivedAt
+- [ ] Enum ErrorRecyclingStatus: ACTIVE, ARCHIVED_SUCCESS, ARCHIVED_STUCK
+- [ ] Індекси на (userId, status) та (userId, type)
 - [ ] `pnpm typecheck` проходить
 - [ ] `apps/web/app/page.tsx` може імпортувати `import { prisma } from "@/lib/db/client"` без помилок
 
@@ -170,6 +173,12 @@ enum SentenceDirection {
   EN_UK
 }
 
+enum ErrorRecyclingStatus {
+  ACTIVE
+  ARCHIVED_SUCCESS
+  ARCHIVED_STUCK
+}
+
 // ==================
 // Models
 // ==================
@@ -279,9 +288,18 @@ model UserError {
   word        String?
   translation String?
 
+  // Error recycling tracking
+  timesRecycled Int                   @default(0)
+  successCount  Int                   @default(0)
+  failureCount  Int                   @default(0)
+  status        ErrorRecyclingStatus  @default(ACTIVE)
+  archivedAt    DateTime?
+
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@index([userId, type])
+  @@index([userId, status])
   @@index([exerciseId])
   @@map("user_errors")
 }
@@ -344,6 +362,13 @@ if (process.env.NODE_ENV !== "production") {
 
 ---
 
+## 📝 README
+
+Після завершення задачі — оновити `README.md`:
+- [ ] Пункт «X» у «📊 Статус проєкту» → `[x]`
+- [ ] (якщо UI) Додати скриншот в «📸 Скриншоти»
+- [ ] (якщо deploy) Додати live URL в «🚀 Демо»
+
 ## 🧪 Як перевірити
 
 ```bash
@@ -391,6 +416,7 @@ pnpm typecheck
 | `relation "users" does not exist` у Strapi | Нормально: Strapi використовує `up_users` |
 | TS помилки на `PrismaClient` | `pnpm --filter web db:generate` |
 | `Cannot find module '@prisma/client'` | `pnpm --filter web install` |
+| Помилка при `prisma migrate` через нове поле | Не забути `updatedAt` у UserError — Prisma вимагає його при `@updatedAt` |
 
 ### ⚠️ Про `prisma migrate reset`
 

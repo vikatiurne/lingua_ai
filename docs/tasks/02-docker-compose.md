@@ -21,7 +21,7 @@
 ## 🎯 Мета
 
 Після завершення задачі команда `docker compose up -d` піднімає Postgres, Redis і Strapi.
-Strapi Admin доступний на `http://localhost:1337/admin`.
+Strapi Admin доступний на `http://localhost:${STRAPI_PORT}/admin` (дефолт — `1338`).
 Дані зберігаються у Docker volumes між перезапусками.
 Next.js продовжує запускатись локально через `pnpm dev:web`.
 
@@ -34,7 +34,7 @@ docker compose up -d
     ├─→ postgres:16 (volume: postgres_data)
     ├─→ redis:7     (volume: redis_data)
     └─→ strapi:5    (depends_on postgres, redis)
-         └─→ http://localhost:1337/admin
+         └─→ http://localhost:${STRAPI_PORT}/admin
 ```
 
 **Перевірка:** `docker compose ps` показує 3 healthy контейнери.
@@ -50,9 +50,9 @@ docker compose up -d
 - [ ] `apps/cms/` містить реальний Strapi 5 (`src/`, `config/`)
 - [ ] `docker compose up -d` піднімає 3 контейнери без помилок
 - [ ] `docker compose ps` показує `postgres` і `redis` у стані `healthy`
-- [ ] `http://localhost:1337/admin` відкривається — можна створити першого адміна
-- [ ] `redis-cli -h localhost ping` повертає `PONG`
-- [ ] `psql` до Postgres працює з хост-машини
+- [ ] `http://localhost:${STRAPI_PORT}/admin` відкривається — можна створити першого адміна
+- [ ] Redis відповідає `PONG` (через `docker compose exec redis redis-cli ping` або pg/redis-клієнт з хоста на `localhost:${REDIS_PORT}`)
+- [ ] Postgres-конект працює (через `docker compose exec postgres psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} -c "\dt"` або клієнт з хоста на `localhost:${POSTGRES_PORT}`)
 - [ ] Після `docker compose down` і `up -d` дані зберігаються
 - [ ] `docker compose logs -f strapi` не показує помилок підключення до БД
 
@@ -86,18 +86,22 @@ docker compose up -d
 ### Створити/оновити в `apps/cms/`
 
 - `Dockerfile` — **NEW**
+- `.dockerignore` — **NEW** (щоб не копіювати host `node_modules`, `.env` тощо в образ)
+- `.gitignore` — **NEW** (ігнорувати `.strapi`, `types/generated`, `.strapi-updater.json`)
+- `.env.example` — **NEW** (Strapi-генерований, без секретів)
 - `.env` — **NEW** (локально, у `.gitignore`)
 - `src/` — **NEW** (Strapi 5 генерує сам)
 - `config/` — **NEW** (Strapi 5 генерує сам)
-- `package.json` — **ОНОВИТИ** (замінити заглушку з задачі 01 на реальний Strapi)
+- `package.json` — **ОНОВИТИ** (замінити заглушку з задачі 01 на реальний Strapi; додати `typecheck`)
 - `tsconfig.json` — **NEW** (Strapi)
+- `types/generated/.gitkeep` — **NEW** (щоб порожня тека відслідковувалась)
 - `favicon.png`, `public/` — генерується Strapi
 
 ### Не чіпати
 
 - `apps/web/**`
 - `packages/shared/**`
-- `package.json` (корінь)
+- `package.json` (корінь) — **виняток:** `packageManager` оновлено до `pnpm@9.15.9` (фікс багу optional deps на darwin-arm64, див. нотатки)
 - `pnpm-workspace.yaml`
 - `turbo.json`
 
@@ -141,24 +145,25 @@ pnpm dlx create-strapi-app@latest .
 POSTGRES_USER=lingua
 POSTGRES_PASSWORD=lingua
 POSTGRES_DB=lingua_ai
-POSTGRES_PORT=5432
+POSTGRES_PORT=5433
 
 # Redis
-REDIS_PORT=6379
+REDIS_PORT=6380
 REDIS_PASSWORD=
 
 # Strapi
-STRAPI_PORT=1337
+STRAPI_PORT=1338
 STRAPI_APP_KEYS=toBeModified1,toBeModified2
 STRAPI_API_TOKEN_SALT=toBeModified
 STRAPI_ADMIN_JWT_SECRET=toBeModified
 STRAPI_TRANSFER_TOKEN_SALT=toBeModified
 STRAPI_JWT_SECRET=toBeModified
+STRAPI_ENCRYPTION_KEY=toBeModified
 
 # URLs
-DATABASE_URL=postgres://lingua:lingua@localhost:5432/lingua_ai
-REDIS_URL=redis://localhost:6379
-STRAPI_URL=http://localhost:1337
+DATABASE_URL=postgres://lingua:lingua@localhost:5433/lingua_ai
+REDIS_URL=redis://localhost:6380
+STRAPI_URL=http://localhost:1338
 ```
 
 ### `docker-compose.yml`
@@ -216,6 +221,7 @@ services:
       ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
       TRANSFER_TOKEN_SALT: ${STRAPI_TRANSFER_TOKEN_SALT}
       JWT_SECRET: ${STRAPI_JWT_SECRET}
+      ENCRYPTION_KEY: ${STRAPI_ENCRYPTION_KEY}
     ports:
       - "${STRAPI_PORT}:1337"
     volumes:
@@ -254,7 +260,7 @@ save 300 10
 
 ```dockerfile
 FROM node:22-alpine AS base
-RUN corepack enable && corepack prepare pnpm@9 --activate
+RUN corepack enable && corepack prepare pnpm@9.15.9 --activate
 WORKDIR /app
 
 FROM base AS deps
@@ -269,6 +275,13 @@ CMD ["pnpm", "develop"]
 ```
 
 ---
+
+## 📝 README
+
+Після завершення задачі — оновити `README.md`:
+- [ ] Пункт «X» у «📊 Статус проєкту» → `[x]`
+- [ ] (якщо UI) Додати скриншот в «📸 Скриншоти»
+- [ ] (якщо deploy) Додати live URL в «🚀 Демо»
 
 ## 🧪 Як перевірити
 
@@ -292,15 +305,15 @@ docker compose ps
 docker compose logs -f strapi
 # Ctrl+C коли побачиш "Welcome back"
 
-# 6. Відкрити http://localhost:1337/admin
+# 6. Відкрити http://localhost:1338/admin
 # Створити першого адміна
 
 # 7. Перевірити Redis
-redis-cli -h localhost ping
+docker compose exec redis redis-cli ping
 # → PONG
 
 # 8. Перевірити Postgres
-psql postgres://lingua:lingua@localhost:5432/lingua_ai -c "\dt"
+docker compose exec postgres psql -U lingua -d lingua_ai -c "\dt"
 # → список таблиць Strapi
 
 # 9. Перезапустити
@@ -315,8 +328,9 @@ docker compose up -d
 
 | Проблема | Рішення |
 |---|---|
-| Порт 5432/6379/1337 зайнятий | Змінити в `.env` |
+| Порт 5433/6380/1338 (або 5432/6379/1337, якщо зайняті іншим проєктом) зайнятий | Змінити в `.env` |
 | Strapi не стартує — `APP_KEYS` | Перевірити, що всі `STRAPI_*` заповнені |
+| Strapi warning про `ENCRYPTION_KEY` | Заповнити `STRAPI_ENCRYPTION_KEY` (потрібен у Strapi 5) |
 | `pnpm-lock.yaml` не знайдено | `cd apps/cms && pnpm install --lockfile-only` |
 | `permission denied` на `redis.conf` | `chmod 644 docker/redis/redis.conf` |
 | Postgres volume займає місце | `docker compose down -v` (видалить дані!) |
@@ -343,9 +357,15 @@ build(docker): add compose with postgres, redis, strapi
 - add docker/redis/redis.conf with LRU policy and AOF
 - add apps/cms with Strapi 5 (replaces placeholder)
 - add apps/cms/Dockerfile for dev hot-reload
-- add .env.example with all required env vars
-- add .env to .gitignore
+- add apps/cms/.dockerignore and .gitignore for build artifacts
+- add .env.example with all required env vars incl. STRAPI_ENCRYPTION_KEY
+- add ENCRYPTION_KEY to strapi service (required by Strapi 5)
+- add cms typecheck script
+- map host ports to 5433/6380/1338 (5432/6379/1337 are taken)
+- bump packageManager to pnpm@9.15.9 (fixes optional deps bug on darwin-arm64)
 ```
+
+> **Примітка:** бамп `packageManager` можна винести в окремий `chore(pnpm):` коміт, якщо хочеться тримати задачі 01 і 02 роздільно.
 
 ---
 
@@ -365,9 +385,15 @@ git push origin feat/02-docker-compose
 
 ## 📝 Нотатки
 
-Заповнюється після завершення.
+Заповнено після виконання (задача 02).
 
-- Чи довелось змінювати `config/database.ts` у Strapi?
-- Скільки часу займає перший білд `apps/cms/Dockerfile`?
-- Чи є проблеми з правами на `public/uploads`?
-- Що винести в окрему задачу (наприклад, production Dockerfile)?
+- **`config/database.ts` змінювати не довелось.** Strapi 5.58 сам читає `DATABASE_CLIENT/HOST/...` та `DATABASE_URL`. У контейнері `docker-compose` env-змінні мають пріоритет над `apps/cms/.env` (`dotenv.config()` без `override`).
+- **Перший білд `apps/cms/Dockerfile`** — орієнтовно 3–5 хв (pnpm install Strapi у `deps`-стейджі), кешується після цього.
+- **Прав на `public/uploads`** не виникало (named volume `strapi_uploads`).
+- **Виявлені реальні вимоги, які треба було додати понад початковий текст задачі:**
+  1. `STRAPI_ENCRYPTION_KEY` → `ENCRYPTION_KEY` (Strapi 5.58 вимагає; `config/admin.ts:17`).
+  2. `apps/cms/.dockerignore` — інакше `COPY . .` затирає `node_modules` образу хостовими симлінками.
+  3. `apps/cms/.gitignore` — `.strapi/`, `types/generated/`, `.strapi-updater.json`.
+  4. Бамп `packageManager` `pnpm@9.0.0` → `9.15.9`: 9.0.0 не лінкує optional `@esbuild/darwin-arm64@0.28.2`, через що postinstall `esbuild` падає і `pnpm install`/lockfile не завершуються.
+  5. Порти змінено на **5433/6380/1338** — 5432/6379/1337 зайняті іншим локальним проєктом (`recipe_atlas`).
+- **Кандидати в окрему задачу:** production Dockerfile (47), CI/CD (48), Vite admin build у контейнері (зараз білдиться на старті `develop`).
