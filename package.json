@@ -2,13 +2,16 @@
   "name": "lingua-ai",
   "private": true,
   "packageManager": "pnpm@9.15.9",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev:web": "pnpm --filter web dev",
     "dev:cms": "pnpm --filter cms develop",
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "seed": "pnpm --filter @lingua/scripts seed"
   },
   "devDependencies": {
     "turbo": "^2.0.0",

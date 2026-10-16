@@ -1,0 +1,19 @@
+{
+  "name": "@lingua/scripts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "seed": "tsx seed.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@lingua/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.0.0",
+    "dotenv": "^16.4.0",
+    "typescript": "^5.4.0",
+    "@types/node": "^20.0.0"
+  }
+}
