@@ -339,6 +339,39 @@ export const CEFR_LEVEL_LABELS: Record<CEFRLevel, string> = {
 - ❌ Не писати `localhost:1337` у README, docs, коментарях — це внутрішній порт контейнера.
 - ❌ Не хардкодити порти в коді — тільки через `process.env`.
 
+### 7.12. Prisma на shared DB (Strapi + Prisma)
+
+**Контекст:** Strapi и Prisma делят одну БД `lingua_ai`, но разные таблицы. Strapi — `public.levels`, `public.topics`. Prisma — `public.users`, `public.exercises`.
+
+**Проблема:** `prisma migrate dev` видит Strapi-таблицы как drift и предлагает `reset` (удалить всё).
+
+**Workflow для нових міграцій:**
+
+1. Змінити `schema.prisma`.
+2. Згенерувати SQL без застосування:
+   ```bash
+   pnpm --filter web prisma migrate diff \
+     --from-schema-datasource prisma/schema.prisma \
+     --to-schema-datamodel prisma/schema.prisma \
+     --script > prisma/migrations/<timestamp>_<name>/migration.sql
+   ```
+3. Застосувати:
+   ```bash
+   pnpm --filter web prisma db execute --file <path> --schema prisma/schema.prisma
+   ```
+4. Позначити як applied:
+   ```bash
+   pnpm --filter web prisma migrate resolve --applied <timestamp>_<name>
+   ```
+
+**Простіше:** писати міграції вручну та використовувати `pnpm --filter web db:deploy`.
+
+**Ніколи:**
+- ❌ Не запускати `prisma migrate dev` — зламає Strapi-дані.
+- ❌ Не запускати `prisma migrate reset` — те саме.
+
+**У продакшні:** `prisma migrate deploy` — безпечний.
+
 ---
 
 ## 8. Формат відповіді

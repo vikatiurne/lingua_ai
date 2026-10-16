@@ -1,0 +1,198 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================
+// Enums
+// ==================
+// Values MUST match @lingua/shared enums exactly (lowercase, snake_case).
+// Only CEFRLevel keeps PascalCase because those are level names.
+
+enum CEFRLevel {
+  A1
+  A2
+  A2_PLUS
+  B1
+  B1_PLUS
+  B2
+  C1
+  C2
+}
+
+enum ProgressStatus {
+  not_started
+  in_progress
+  mastered
+  needs_review
+}
+
+enum ExerciseStatus {
+  generated
+  in_progress
+  evaluated
+  reviewed
+}
+
+enum ErrorType {
+  topic
+  general
+}
+
+enum SentenceDirection {
+  uk_en
+  en_uk
+}
+
+enum ErrorRecyclingStatus {
+  active
+  archived_success
+  archived_stuck
+}
+
+// ==================
+// Models
+// ==================
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  passwordHash  String?
+  image         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  level         CEFRLevel?
+  targetLevel   CEFRLevel?
+  dailyMinutes  Int      @default(30)
+
+  progress       UserProgress[]
+  plans          Plan[]
+  exercises      Exercise[]
+  errors         UserError[]
+  calendarEvents CalendarEvent[]
+
+  @@map("users")
+}
+
+model UserProgress {
+  id            String         @id @default(cuid())
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  level         CEFRLevel
+  topicName     String
+  subtopicName  String?
+  templateId    String?
+
+  status        ProgressStatus @default(not_started)
+  score         Float?
+  attempts      Int            @default(0)
+  lastPracticed DateTime?
+
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@unique([userId, level, topicName, subtopicName, templateId])
+  @@index([userId, level])
+  @@map("user_progress")
+}
+
+model Plan {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  level     CEFRLevel
+  content   Json
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, isActive])
+  @@map("plans")
+}
+
+model Exercise {
+  id           String         @id @default(cuid())
+  userId       String
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  planId       String?
+
+  level        CEFRLevel
+  topicName    String
+  subtopicName String?
+  templateIds  String[]
+
+  sentences    Json
+
+  topicScore   Float?
+  grammarScore Float?
+
+  status       ExerciseStatus @default(generated)
+  createdAt    DateTime       @default(now())
+  completedAt  DateTime?
+
+  errors       UserError[]
+
+  @@index([userId, status])
+  @@index([userId, level])
+  @@map("exercises")
+}
+
+model UserError {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exerciseId  String
+  exercise    Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+
+  type        ErrorType
+  sentence    String
+  userAnswer  String
+  reference   String
+  explanation String   @db.Text
+  category    String?
+  word        String?
+  translation String?
+
+  // Error recycling tracking
+  timesRecycled Int                   @default(0)
+  successCount  Int                   @default(0)
+  failureCount  Int                   @default(0)
+  status        ErrorRecyclingStatus  @default(active)
+  archivedAt    DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId, type])
+  @@index([userId, status])
+  @@index([exerciseId])
+  @@map("user_errors")
+}
+
+model CalendarEvent {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title        String
+  description  String?
+  scheduledAt  DateTime
+  durationMin  Int      @default(30)
+  reminderSent Boolean  @default(false)
+  icsToken     String?  @unique
+
+  createdAt    DateTime @default(now())
+
+  @@index([userId, scheduledAt])
+  @@map("calendar_events")
+}
