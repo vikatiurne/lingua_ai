@@ -4,6 +4,8 @@ import { getCurrentUser } from "@/lib/auth/session";
 import { prisma } from "@/lib/db/client";
 import { withRateLimit } from "@/lib/api/with-rate-limit";
 import { RATE_LIMITS } from "@/lib/redis/rate-limit";
+import { analyzeGaps, persistGaps } from "@/lib/test/gap-map";
+import { loadTestQuestions } from "@/lib/test/loader";
 import { testSubmissionSchema } from "@/lib/validation/test";
 
 async function submitHandler(req: NextRequest): Promise<Response> {
@@ -36,8 +38,19 @@ async function submitHandler(req: NextRequest): Promise<Response> {
     data: { level, targetLevel },
   });
 
+  const questions = loadTestQuestions();
+  const gaps = analyzeGaps(parsed.data.answers, questions);
+
+  let weakTopics = gaps;
+  try {
+    await persistGaps(user.id, gaps);
+  } catch (error) {
+    console.error("[test/submit] persistGaps failed", error);
+    weakTopics = [];
+  }
+
   const { passwordHash: _, ...safeUser } = updated;
-  return Response.json({ user: safeUser, correctCount, totalCount });
+  return Response.json({ user: safeUser, correctCount, totalCount, weakTopics });
 }
 
 export const POST = withRateLimit(submitHandler, RATE_LIMITS.API);

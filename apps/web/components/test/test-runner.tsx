@@ -1,9 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { CEFR_LEVEL_LABELS, CEFR_LEVELS, type CEFRLevel } from "@lingua/shared";
 import type { TestQuestion } from "@/lib/test/loader";
+import type { WeakTopic } from "@/lib/test/gap-map";
 import {
   getNextQuestion,
   getResult,
@@ -17,10 +17,10 @@ import { QuestionCard } from "./question-card";
 import { TestResult, type SubmitStatus } from "./test-result";
 
 export function TestRunner({ questions }: { questions: TestQuestion[] }) {
-  const router = useRouter();
   const [state, setState] = useState<AdaptiveState>(() => startTest(questions));
   const [currentQuestion, setCurrentQuestion] = useState<TestQuestion | null>(null);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+  const [weakTopics, setWeakTopics] = useState<WeakTopic[]>([]);
   const submittedRef = useRef(false);
 
   const currentLevel = useMemo<CEFRLevel>(
@@ -36,9 +36,10 @@ export function TestRunner({ questions }: { questions: TestQuestion[] }) {
     setSubmitStatus("submitting");
 
     const result = getResult(state);
-    const answers = state.history.map(({ questionId, correct }) => ({
+    const answers = state.history.map(({ questionId, correct, skipped }) => ({
       questionId,
       correct,
+      skipped,
     }));
 
     fetch("/api/test/submit", {
@@ -53,13 +54,17 @@ export function TestRunner({ questions }: { questions: TestQuestion[] }) {
     })
       .then((res) => {
         if (!res.ok) throw new Error("Failed to submit test");
-        router.push("/dashboard");
+        return res.json();
+      })
+      .then((data: { weakTopics?: WeakTopic[] }) => {
+        setWeakTopics(data.weakTopics ?? []);
+        setSubmitStatus("success");
       })
       .catch(() => {
         submittedRef.current = false;
         setSubmitStatus("error");
       });
-  }, [finished, state, router]);
+  }, [finished, state]);
 
   const handleStart = useCallback(() => {
     const initial = startTest(questions);
@@ -112,6 +117,7 @@ export function TestRunner({ questions }: { questions: TestQuestion[] }) {
         level={result.level}
         correctCount={result.correctCount}
         totalCount={result.totalCount}
+        weakTopics={weakTopics}
         status={submitStatus}
       />
     );

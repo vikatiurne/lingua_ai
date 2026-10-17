@@ -8,6 +8,7 @@ export const testSubmissionSchema = z.object({
       z.object({
         questionId: z.string().min(1),
         correct: z.boolean(),
+        skipped: z.boolean().optional().default(false),
       }),
     )
     .min(5)
