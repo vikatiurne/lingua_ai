@@ -12,13 +12,14 @@
 > ⚠️ **НЕ ТОРКАЄТЬСЯ:**
 > - Dashboard UI (22)
 > - Plan generation (21)
+> - Оновлення `UserProgress` при вправах (30+)
 
 ---
 
 ## 🎯 Мета
 
 Після завершення:
-- Submit-endpoint аналізує помилки → групує за темою
+- Submit-endpoint (19) аналізує помилки → групує за темою
 - Створює `UserProgress` для слабких тем (status = `NOT_STARTED`)
 - Відповідь містить `weakTopics`
 - TestResult показує слабкі теми
@@ -28,11 +29,11 @@
 ## ✅ Acceptance Criteria
 
 - [ ] `apps/web/lib/test/gap-map.ts` — 2 функції (сигнатури нижче)
-- [ ] `apps/web/lib/test/gap-map.test.ts` — 4+ тестів
-- [ ] Submit-endpoint викликає `analyzeGaps` + `persistGaps`
-- [ ] Відповідь містить `weakTopics: { topic, level, errors }[]`
-- [ ] Ідемпотентність: повторний submit не дублює `UserProgress`
-- [ ] TestResult показує список слабких тем (або «Гарний результат!»)
+- [ ] `apps/web/lib/test/gap-map.test.ts` — 5+ тестів
+- [ ] `analyzeGaps` приймає `answers` з полем `skipped: boolean`
+- [ ] Відповідь `/api/test/submit` містить `weakTopics: { topic, level, errors, skippedCount }[]`
+- [ ] `persistGaps` створює `UserProgress` для кожної слабкої теми (ідемпотентно)
+- [ ] TestResult показує список слабких тем (або «Гарний результат!», якщо порожньо)
 - [ ] `pnpm typecheck` і `pnpm --filter web test` проходять
 
 ---
@@ -42,6 +43,8 @@
 - ❌ Dashboard UI (22)
 - ❌ Plan generation (21)
 - ❌ Оновлення `UserProgress` при вправах (30+)
+- ❌ Окремий API для gap map (тільки в submit)
+- ❌ Історія проходжень
 
 ---
 
@@ -54,13 +57,13 @@
 
 ### Змінити
 
-- `apps/web/app/api/test/submit/route.ts` — виклик
-- `apps/web/components/test/test-result.tsx` — показ
+- `apps/web/app/api/test/submit/route.ts` — виклик `analyzeGaps` + `persistGaps`, розширити відповідь
+- `apps/web/components/test/test-result.tsx` — показ `weakTopics`
+- `apps/web/lib/validation/test.ts` — якщо потрібно, додати `weakTopics` у відповідь (але ні — це серверна відповідь, не запит)
 
 ### Не чіпати
 
 - `apps/web/lib/test/{adaptive,loader}.ts`
-- `apps/web/lib/validation/test.ts`
 - `apps/web/lib/ai/**`, `redis/**`, `slots/**`
 - `packages/shared/**`
 
@@ -74,7 +77,8 @@
 type WeakTopic = {
   topic: string;
   level: CEFRLevel;
-  errors: number;
+  errors: number;       // скільки неправильних (включно зі skipped)
+  skippedCount: number; // скільки з них — skipped (для майбутнього)
 };
 ```
 
@@ -82,30 +86,62 @@ type WeakTopic = {
 
 ```ts
 analyzeGaps(
-  answers: { questionId: string; correct: boolean }[],
+  answers: { questionId: string; correct: boolean; skipped: boolean }[],
   questions: TestQuestion[]
 ): WeakTopic[]
 
 persistGaps(userId: string, gaps: WeakTopic[]): Promise<void>
 ```
 
+### Розширена відповідь `/api/test/submit`
+
+```json
+{
+  "user": { "id": "...", "level": "B1", "targetLevel": "B1_PLUS", ... },
+  "correctCount": 12,
+  "totalCount": 20,
+  "weakTopics": [
+    { "topic": "Present Perfect", "level": "A2_PLUS", "errors": 2, "skippedCount": 1 },
+    { "topic": "Second Conditional", "level": "B1", "errors": 1, "skippedCount": 0 }
+  ]
+}
+```
+
+**Без `passwordHash`.**
+
 ---
 
 ## 🧠 Алгоритм (словами)
 
-### `analyzeGaps`
+### `analyzeGaps(answers, questions)`
 
-1. `Map<questionId, TestQuestion>` з `questions`.
+1. Побудувати `Map<questionId, TestQuestion>` з `questions`.
 2. Пройти по `answers`:
-   - `!correct` → додати в `Map<topic, { level, errors }>`.
-3. Повернути масив, відсортований за `errors DESC`.
+   - Знайти питання за `questionId`.
+   - Якщо `correct === true` → пропустити.
+   - Якщо `correct === false` → додати в `Map<topic, { level, errors, skippedCount }>`:
+     - `errors += 1`
+     - `skippedCount += skipped ? 1 : 0`
+3. Повернути `WeakTopic[]`, відсортований за `errors DESC` (найслабші першими).
 
-### `persistGaps`
+**Логіка:** `skipped` і «помилка» обидва свідчать про слабкість. Розділяємо в `skippedCount` для майбутнього аналізу, але для MVP обидва = «слабка тема».
 
-Для кожної теми — `prisma.userProgress.upsert`:
-- **Знайти** за `(userId, level, topicName)`.
-- **Створити** зі `status: "NOT_STARTED"`, якщо немає.
-- **Не оновлювати** статус, якщо вже є.
+### `persistGaps(userId, gaps)`
+
+Для кожної `gap`:
+1. Перевірити, чи існує `UserProgress` з ключем `(userId, level, topicName)`.
+2. Якщо ні → створити зі `status: "NOT_STARTED"`, `subtopicName: ""`, `templateId: ""`.
+3. Якщо є → **не оновлювати** (не скидати прогрес, якщо учень уже почав цю тему).
+
+**Ідемпотентність:** повторний submit не створює дублів, не скидає існуючий прогрес.
+
+### Оновлення `submit/route.ts`
+
+Після `prisma.user.update`:
+1. `questions = await loadTestQuestions()` (з `lib/test/loader.ts`).
+2. `gaps = analyzeGaps(parsed.data.answers, questions)`.
+3. `await persistGaps(user.id, gaps)`.
+4. Повернути `{ user, correctCount, totalCount, weakTopics: gaps }`.
 
 ---
 
@@ -116,26 +152,50 @@ persistGaps(userId: string, gaps: WeakTopic[]): Promise<void>
 @@unique([userId, level, topicName, subtopicName, templateId])
 ```
 
-У Postgres `NULL != NULL`, тому два рядки з `subtopicName = null, templateId = null` **не вважаються конфліктом**. `upsert` не спрацює.
+У Postgres `NULL != NULL`, тому два рядки з `subtopicName = null, templateId = null` **не вважаються конфліктом**. `upsert` не спрацює — будуть дублі.
 
-**Рішення (обрати одне):**
+**Рішення — у `persistGaps` писати `""` замість `null`:**
 
-**A.** У `persistGaps` писати `subtopicName: ""`, `templateId: ""` (порожній рядок замість null). Швидко, але трохи брудно.
+```ts
+create({
+  userId,
+  level: gap.level,
+  topicName: gap.topic,
+  subtopicName: "",   // ← порожній рядок, не null
+  templateId: "",     // ← порожній рядок, не null
+  status: "NOT_STARTED",
+})
+```
 
-**B.** Додати в `UserProgress` додатковий `@@unique([userId, level, topicName])`. Чистіше, але потребує міграції. Це **окрема chore-задача 20.1**.
+Тоді `@@unique` працює: `"" == ""` → конфлікт → `upsert` не створить дубль.
 
-**C.** Замість `upsert` — `findFirst` + `create` if not exists. Працює, але race condition (не критично для MVP).
+**Перевірка:** після двох submit підряд → у `user_progress` тільки один запис на `(userId, level, topicName)`.
 
-**Рекомендація:** варіант **A** для MVP. Якщо схема розшириться — перейти на **B**.
+**Альтернатива (чистіша, але потребує міграції):** додати `@@unique([userId, level, topicName])` у схему. Окрема chore-задача 20.1. Для MVP — варіант з `""`.
 
 ---
 
-## 🧪 Тести (4+)
+## 🧪 Тести (5+)
 
-1. `analyzeGaps` з 0 помилок → `[]`.
-2. `analyzeGaps` з 1 помилкою → `[{ topic, level, errors: 1 }]`.
-3. Помилки в одній темі → групує (`errors: 3`).
-4. Помилки в різних темах → сортує за `errors DESC`.
+### `gap-map.test.ts`
+
+1. **Порожній `answers`** → `[]`.
+2. **1 неправильна** → `[{ topic, level, errors: 1, skippedCount: 0 }]`.
+3. **3 неправильні в одній темі** → `[{ topic, errors: 3 }]`.
+4. **Неправильні в різних темах** → сортує за `errors DESC`.
+5. **2 неправильні, з них 1 skipped** → `{ errors: 2, skippedCount: 1 }`.
+6. **Всі правильні** → `[]`.
+
+---
+
+## ⚠️ Нюанси
+
+- **`weakTopics` сортувати за `errors DESC`** — найслабші першими.
+- **`persistGaps` не скидає існуючий прогрес.** Якщо учень уже почав тему — не перезаписувати `status` і `score`.
+- **`subtopicName: ""`, `templateId: ""`** — критично для `@@unique` (див. вище).
+- **`skipped` і `errors` разом** — для MVP обидва = слабка тема. У майбутньому `skippedCount` дозволить відрізняти «не знав» від «помилився».
+- **TestResult показ:** якщо `weakTopics.length === 0` → «Гарний результат!». Інакше — список тем з кількістю помилок.
+- **Не блокувати учня** при помилці `persistGaps` — якщо БД впала, submit все одно повертає 200 з `weakTopics: []` і логує помилку. Основний результат (`User.level`) зберігся.
 
 ---
 
@@ -143,6 +203,7 @@ persistGaps(userId: string, gaps: WeakTopic[]): Promise<void>
 
 - `docs/tasks/19-test-submission-api.md`
 - `docs/tasks/06-prisma-schema.md` (модель `UserProgress`)
+- `docs/tasks/18-adaptive-test-ui.md` (структура `answers`)
 
 ---
 
@@ -152,11 +213,11 @@ persistGaps(userId: string, gaps: WeakTopic[]): Promise<void>
 feat(test): add gap map analysis after level test
 
 - add lib/test/gap-map.ts with analyzeGaps and persistGaps
-- group wrong answers by topic, create UserProgress entries
+- group wrong answers by topic (includes skipped)
 - extend /api/test/submit response with weakTopics
 - show weak topics in TestResult component
-- idempotent via upsert with empty-string subtopic/template
-- add 4 unit tests for analyzeGaps
+- idempotent via empty-string subtopic/template (Postgres @@unique)
+- add 6 unit tests for analyzeGaps
 ```
 
 ---
@@ -175,6 +236,10 @@ git push origin feat/20-gap-map
 
 ## 📝 Нотатки
 
-- Який варіант обрано для `@@unique`? (A/B/C)
-- Чи треба окрема chore-задача на `@@unique`?
-- Чи показувати gap map окремо на dashboard?
+Заповнюється після завершення.
+
+- Чи правильно вибрано `""` замість `null` для `subtopicName`/`templateId`?
+- Чи не створюються дублі при повторному submit?
+- Чи правильно `persistGaps` не скидає існуючий прогрес?
+- Чи варто окрема chore-задача на `@@unique([userId, level, topicName])`?
+- Чи треба показувати gap map окремо на dashboard? (задача 22)
