@@ -71,24 +71,46 @@ model User {
   targetLevel   CEFRLevel?
   dailyMinutes  Int      @default(30)
 
-  progress       UserProgress[]
-  plans          Plan[]
-  exercises      Exercise[]
-  errors         UserError[]
-  calendarEvents CalendarEvent[]
+  topicProgress     TopicProgress[]
+  exerciseProgress  ExerciseProgress[]
+  plans             Plan[]
+  exercises         Exercise[]
+  errors            UserError[]
+  calendarEvents    CalendarEvent[]
 
   @@map("users")
 }
 
-model UserProgress {
+model TopicProgress {
   id            String         @id @default(cuid())
   userId        String
   user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   level         CEFRLevel
   topicName     String
-  subtopicName  String?
-  templateId    String?
+
+  status        ProgressStatus @default(not_started)
+  score         Float?
+  attempts      Int            @default(0)
+  lastPracticed DateTime?
+
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@unique([userId, level, topicName])
+  @@index([userId, level])
+  @@map("topic_progress")
+}
+
+model ExerciseProgress {
+  id            String         @id @default(cuid())
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  level         CEFRLevel
+  topicName     String
+  subtopicName  String
+  templateId    String
 
   status        ProgressStatus @default(not_started)
   score         Float?
@@ -100,7 +122,7 @@ model UserProgress {
 
   @@unique([userId, level, topicName, subtopicName, templateId])
   @@index([userId, level])
-  @@map("user_progress")
+  @@map("exercise_progress")
 }
 
 model Plan {

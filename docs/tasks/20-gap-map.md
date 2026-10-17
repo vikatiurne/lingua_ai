@@ -145,33 +145,9 @@ persistGaps(userId: string, gaps: WeakTopic[]): Promise<void>
 
 ---
 
-## ⚠️ Критичний нюанс — `@@unique` з nullable полями
+## ⚠️ Ідемпотентність `persistGaps`
 
-**Проблема.** У `UserProgress` (задача 06) є:
-```prisma
-@@unique([userId, level, topicName, subtopicName, templateId])
-```
-
-У Postgres `NULL != NULL`, тому два рядки з `subtopicName = null, templateId = null` **не вважаються конфліктом**. `upsert` не спрацює — будуть дублі.
-
-**Рішення — у `persistGaps` писати `""` замість `null`:**
-
-```ts
-create({
-  userId,
-  level: gap.level,
-  topicName: gap.topic,
-  subtopicName: "",   // ← порожній рядок, не null
-  templateId: "",     // ← порожній рядок, не null
-  status: "NOT_STARTED",
-})
-```
-
-Тоді `@@unique` працює: `"" == ""` → конфлікт → `upsert` не створить дубль.
-
-**Перевірка:** після двох submit підряд → у `user_progress` тільки один запис на `(userId, level, topicName)`.
-
-**Альтернатива (чистіша, але потребує міграції):** додати `@@unique([userId, level, topicName])` у схему. Окрема chore-задача 20.1. Для MVP — варіант з `""`.
+Раніше тут був нюанс про `@@unique` з nullable полями і `""`-хак. У задачі **20.1** прогрес розділено на `TopicProgress` + `ExerciseProgress`, і `persistGaps` пише в `topicProgress` за природним ключем `@@unique([userId, level, topicName])` — хак більше не потрібен.
 
 ---
 
@@ -192,7 +168,7 @@ create({
 
 - **`weakTopics` сортувати за `errors DESC`** — найслабші першими.
 - **`persistGaps` не скидає існуючий прогрес.** Якщо учень уже почав тему — не перезаписувати `status` і `score`.
-- **`subtopicName: ""`, `templateId: ""`** — критично для `@@unique` (див. вище).
+- **`persistGaps` → `topicProgress`** за ключем `(userId, level, topicName)`. Хак з `""` прибрано в задачі 20.1.
 - **`skipped` і `errors` разом** — для MVP обидва = слабка тема. У майбутньому `skippedCount` дозволить відрізняти «не знав» від «помилився».
 - **TestResult показ:** якщо `weakTopics.length === 0` → «Гарний результат!». Інакше — список тем з кількістю помилок.
 - **Не блокувати учня** при помилці `persistGaps` — якщо БД впала, submit все одно повертає 200 з `weakTopics: []` і логує помилку. Основний результат (`User.level`) зберігся.
@@ -236,11 +212,9 @@ git push origin feat/20-gap-map
 
 ## 📝 Нотатки
 
-- **`""` замість `null` для `subtopicName`/`templateId` — правильно.** Перевірено на живій БД: `@@unique([userId, level, topicName, subtopicName, templateId])` з порожніми рядками дає конфлікт, `upsert` не створює дублів.
-- **Дублів при повторному submit немає.** `persistGaps` реалізовано через `upsert` (а не find + create), тож операція атомарна й ідемпотентна. Інтеграційна перевірка на реальній БД: два виклики підряд → один рядок у `user_progress`.
-- **Існуючий прогрес не скидається.** `upsert` має `update: {}` — статус і `score` не чіпаються. Перевірено: після ручної зміни `status` на `in_progress` повторний `persistGaps` залишив `in_progress`.
-- **Окрема chore-задача на `@@unique([userId, level, topicName])` — НЕ потрібна (відхилено).** Такий ключ конфліктував би з рядками потоку вправ (30+), де на одну тему є багато підтем: `(user, B1, "Present Perfect", "Present Perfect Simple", "pp_01")` і `(user, B1, "Present Perfect", "Present Perfect Continuous", "pp_02")`. Додатковий `@@unique` на `(userId, level, topicName)` зробив би їх конфліктними й заблокував би просування по різних підтемах. Поточний `""`-хак лишаємо.
-- **Gap map показувати на dashboard (22) — так, варто.** Dashboard може перевикористати `UserProgress(status = not_started)` / `weakTopics`, щоб підказати перші теми. У межах цієї задачі не робив (out of scope).
+- **`""`-хак (був тимчасовим).** У межах задачі 20 `persistGaps` писав `subtopicName: ""`, `templateId: ""`, щоб працював `@@unique` на nullable полях. **Задача 20.1 прибрала хак:** прогрес розділено на `TopicProgress` (тема для gap map) + `ExerciseProgress` (підтема + шаблон для потоку вправ), `persistGaps` пише в `topicProgress`.
+- **Дублів при повторному submit немає.** `upsert` + `update: {}` — атомарно й ідемпотентно. Інтеграційна перевірка на живій БД: два виклики підряд → один рядок, статус не скидається.
+- **Gap map показувати на dashboard (22) — так, варто.** Dashboard може перевикористати `TopicProgress(status = not_started)` / `weakTopics`, щоб підказати перші теми. У межах цієї задачі не робив (out of scope).
 
 ### Відхилення / рішення
 - У схемі `ProgressStatus` — **lowercase snake_case**, тому в коді `status: "not_started"`, а не `"NOT_STARTED"` з контракту задачі.
