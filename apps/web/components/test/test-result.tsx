@@ -2,18 +2,21 @@ import { CEFR_LEVEL_LABELS, type CEFRLevel } from "@lingua/shared";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import type { WeakTopic } from "@/lib/test/gap-map";
 
-export type SubmitStatus = "idle" | "submitting" | "error";
+export type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
 export function TestResult({
   level,
   correctCount,
   totalCount,
+  weakTopics = [],
   status = "idle",
 }: {
   level: CEFRLevel;
   correctCount: number;
   totalCount: number;
+  weakTopics?: WeakTopic[];
   status?: SubmitStatus;
 }) {
   const score = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
@@ -50,9 +53,31 @@ export function TestResult({
             </Button>
           </div>
         ) : (
-          <Button asChild className="w-full sm:w-auto">
-            <Link href="/dashboard">Почати навчання</Link>
-          </Button>
+          <div className="space-y-4">
+            {status === "success" ? (
+              weakTopics.length > 0 ? (
+                <div className="space-y-2 text-left">
+                  <p className="text-sm font-medium">Теми для повторення:</p>
+                  <ul className="space-y-1">
+                    {weakTopics.map((weakTopic) => (
+                      <li
+                        key={`${weakTopic.level}-${weakTopic.topic}`}
+                        className="flex items-center justify-between text-sm text-muted-foreground"
+                      >
+                        <span>{weakTopic.topic}</span>
+                        <span>{weakTopic.errors} помилок</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">Гарний результат!</p>
+              )
+            ) : null}
+            <Button asChild className="w-full sm:w-auto">
+              <Link href="/dashboard">Почати навчання</Link>
+            </Button>
+          </div>
         )}
       </CardContent>
     </Card>

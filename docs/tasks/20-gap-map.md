@@ -3,7 +3,7 @@
 **Епік:** E5 — Level Test
 **Розмір:** S (1–2 год)
 **Залежності:** 19
-**Статус:** ⬜ Todo
+**Статус:** ✅ Done
 **Гілка:** `feat/20-gap-map`
 
 > ⚠️ **ЦЯ ЗАДАЧА — АНАЛІЗ ПРОБІЛІВ ПІСЛЯ ТЕСТУ.**
@@ -236,10 +236,14 @@ git push origin feat/20-gap-map
 
 ## 📝 Нотатки
 
-Заповнюється після завершення.
+- **`""` замість `null` для `subtopicName`/`templateId` — правильно.** Перевірено на живій БД: `@@unique([userId, level, topicName, subtopicName, templateId])` з порожніми рядками дає конфлікт, `upsert` не створює дублів.
+- **Дублів при повторному submit немає.** `persistGaps` реалізовано через `upsert` (а не find + create), тож операція атомарна й ідемпотентна. Інтеграційна перевірка на реальній БД: два виклики підряд → один рядок у `user_progress`.
+- **Існуючий прогрес не скидається.** `upsert` має `update: {}` — статус і `score` не чіпаються. Перевірено: після ручної зміни `status` на `in_progress` повторний `persistGaps` залишив `in_progress`.
+- **Окрема chore-задача на `@@unique([userId, level, topicName])` — НЕ потрібна (відхилено).** Такий ключ конфліктував би з рядками потоку вправ (30+), де на одну тему є багато підтем: `(user, B1, "Present Perfect", "Present Perfect Simple", "pp_01")` і `(user, B1, "Present Perfect", "Present Perfect Continuous", "pp_02")`. Додатковий `@@unique` на `(userId, level, topicName)` зробив би їх конфліктними й заблокував би просування по різних підтемах. Поточний `""`-хак лишаємо.
+- **Gap map показувати на dashboard (22) — так, варто.** Dashboard може перевикористати `UserProgress(status = not_started)` / `weakTopics`, щоб підказати перші теми. У межах цієї задачі не робив (out of scope).
 
-- Чи правильно вибрано `""` замість `null` для `subtopicName`/`templateId`?
-- Чи не створюються дублі при повторному submit?
-- Чи правильно `persistGaps` не скидає існуючий прогрес?
-- Чи варто окрема chore-задача на `@@unique([userId, level, topicName])`?
-- Чи треба показувати gap map окремо на dashboard? (задача 22)
+### Відхилення / рішення
+- У схемі `ProgressStatus` — **lowercase snake_case**, тому в коді `status: "not_started"`, а не `"NOT_STARTED"` з контракту задачі.
+- `skipped` у `testSubmissionSchema` додано як `z.boolean().optional().default(false)` — зворотньо сумісно з наявними тестами й запитами.
+- Додатково змінено `components/test/test-runner.tsx` (немає у списку файлів задачі): без нього він одразу редіректив на `/dashboard`, тож `weakTopics` ніколи б не відобразились. Тепер шле `skipped`, читає `weakTopics` з відповіді й показує `TestResult` зі статусом `"success"`.
+- `test-runner.tsx` не блокує submit при падінні `persistGaps`: ловить помилку, логує, повертає `weakTopics: []`, `User.level` уже збережено.
