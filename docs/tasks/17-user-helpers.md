@@ -42,7 +42,7 @@
 - [x] Є `apps/web/middleware.ts` — захист маршрутів
 - [x] Session callback повертає `session.user.level` і `session.user.targetLevel`
 - [x] `requireUser()` викликає `redirect("/login")` при відсутності сесії
-- [x] Middleware не пропускає неавторизованих на `/dashboard`, `/plan`, `/exercise`, `/progress`, `/calendar`
+- [x]  Middleware захищає /dashboard, /test, /plan, /exercise, /progress, /calendar
 - [x] `/api/user/me` повертає User без `passwordHash`
 - [x] `PATCH /api/user/me` валідує `level` через `CEFR_LEVELS` з `@lingua/shared`
 - [x] `types/next-auth.d.ts` розширено: `level`, `targetLevel` у `Session.user` і `JWT`
@@ -157,6 +157,7 @@ export default withAuth({
 export const config = {
   matcher: [
     "/dashboard/:path*",
+    "/test/:path*",        
     "/plan/:path*",
     "/exercise/:path*",
     "/progress/:path*",

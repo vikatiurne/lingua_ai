@@ -1,12 +1,14 @@
 {
-  "version": "1.0",
-  "description": "Adaptive English level test. 5 questions per CEFR level (A1-C2).",
-  "totalQuestions": 40,
-  "questionsPerLevel": 5,
+  "version": "2.0",
+  "description": "Adaptive English level test. 10 questions per CEFR level (2 sets of 5).",
+  "totalQuestions": 80,
+  "questionsPerLevel": 10,
+  "questionsPerSet": 5,
   "questions": [
     {
       "id": "a1_01",
       "level": "A1",
+      "set": 1,
       "topic": "Verb to be",
       "question": "My sister ___ a doctor.",
       "options": ["am", "is", "are", "be"],
@@ -15,6 +17,7 @@
     {
       "id": "a1_02",
       "level": "A1",
+      "set": 1,
       "topic": "Present Simple",
       "question": "He ___ to work every day.",
       "options": ["go", "goes", "going", "gone"],
@@ -23,6 +26,7 @@
     {
       "id": "a1_03",
       "level": "A1",
+      "set": 1,
       "topic": "Plural Nouns",
       "question": "There are three ___ in the garden.",
       "options": ["child", "childs", "children", "childrens"],
@@ -31,6 +35,7 @@
     {
       "id": "a1_04",
       "level": "A1",
+      "set": 1,
       "topic": "Have got",
       "question": "I ___ two brothers.",
       "options": ["has got", "have got", "am got", "having got"],
@@ -39,14 +44,61 @@
     {
       "id": "a1_05",
       "level": "A1",
+      "set": 1,
       "topic": "Articles",
       "question": "She wants to be ___ engineer.",
       "options": ["a", "an", "the", "—"],
       "correctIndex": 1
     },
     {
+      "id": "a1_06",
+      "level": "A1",
+      "set": 2,
+      "topic": "Can / Can't",
+      "question": "She ___ swim very well, but she can't drive.",
+      "options": ["can", "cans", "can to", "is can"],
+      "correctIndex": 0
+    },
+    {
+      "id": "a1_07",
+      "level": "A1",
+      "set": 2,
+      "topic": "There is / There are",
+      "question": "___ a book on the table.",
+      "options": ["There is", "There are", "It is", "They are"],
+      "correctIndex": 0
+    },
+    {
+      "id": "a1_08",
+      "level": "A1",
+      "set": 2,
+      "topic": "This / That / These / Those",
+      "question": "___ shoes are very expensive.",
+      "options": ["This", "That", "These", "It"],
+      "correctIndex": 2
+    },
+    {
+      "id": "a1_09",
+      "level": "A1",
+      "set": 2,
+      "topic": "Prepositions of Place",
+      "question": "The cat is ___ the sofa.",
+      "options": ["on", "under", "in", "at"],
+      "correctIndex": 1
+    },
+    {
+      "id": "a1_10",
+      "level": "A1",
+      "set": 2,
+      "topic": "Possessive 's",
+      "question": "This is ___ car.",
+      "options": ["Anna", "Anna's", "Annas", "of Anna"],
+      "correctIndex": 1
+    },
+    {
       "id": "a2_01",
       "level": "A2",
+      "set": 1,
       "topic": "Past Simple",
       "question": "We ___ to the cinema last night.",
       "options": ["go", "goes", "went", "gone"],
@@ -55,6 +107,7 @@
     {
       "id": "a2_02",
       "level": "A2",
+      "set": 1,
       "topic": "Present Continuous",
       "question": "Look! It ___ outside.",
       "options": ["rain", "rains", "is raining", "rained"],
@@ -63,14 +116,21 @@
     {
       "id": "a2_03",
       "level": "A2",
+      "set": 1,
       "topic": "Comparatives",
       "question": "This book is ___ than the one I read last week.",
-      "options": ["interesting", "more interesting", "most interesting", "the most interesting"],
+      "options": [
+        "interesting",
+        "more interesting",
+        "most interesting",
+        "the most interesting"
+      ],
       "correctIndex": 1
     },
     {
       "id": "a2_04",
       "level": "A2",
+      "set": 1,
       "topic": "Future will",
       "question": "I think it ___ tomorrow.",
       "options": ["rains", "will rain", "is raining", "rained"],
@@ -79,14 +139,61 @@
     {
       "id": "a2_05",
       "level": "A2",
+      "set": 1,
       "topic": "Some / Any",
       "question": "Do you have ___ milk in the fridge?",
       "options": ["some", "any", "a", "the"],
       "correctIndex": 1
     },
     {
+      "id": "a2_06",
+      "level": "A2",
+      "set": 2,
+      "topic": "Past Continuous",
+      "question": "At 8 pm yesterday, I ___ TV.",
+      "options": ["watch", "watched", "was watching", "have watched"],
+      "correctIndex": 2
+    },
+    {
+      "id": "a2_07",
+      "level": "A2",
+      "set": 2,
+      "topic": "Going to",
+      "question": "We ___ visit my parents next weekend.",
+      "options": ["go to", "are going to", "will go", "going to"],
+      "correctIndex": 1
+    },
+    {
+      "id": "a2_08",
+      "level": "A2",
+      "set": 2,
+      "topic": "Present Perfect",
+      "question": "I ___ finished my homework. Can I go out?",
+      "options": ["just", "have just", "just have", "am just"],
+      "correctIndex": 1
+    },
+    {
+      "id": "a2_09",
+      "level": "A2",
+      "set": 2,
+      "topic": "Much / Many",
+      "question": "How ___ money do you need?",
+      "options": ["many", "much", "few", "a lot"],
+      "correctIndex": 1
+    },
+    {
+      "id": "a2_10",
+      "level": "A2",
+      "set": 2,
+      "topic": "Adverbs of Frequency",
+      "question": "She ___ goes to the gym on Mondays.",
+      "options": ["usual", "usually", "usualy", "used to"],
+      "correctIndex": 1
+    },
+    {
       "id": "a2p_01",
       "level": "A2_PLUS",
+      "set": 1,
       "topic": "Present Perfect",
       "question": "I ___ this film three times.",
       "options": ["see", "saw", "have seen", "am seeing"],
@@ -95,6 +202,7 @@
     {
       "id": "a2p_02",
       "level": "A2_PLUS",
+      "set": 1,
       "topic": "Past Continuous",
       "question": "While I ___ dinner, the phone rang.",
       "options": ["cook", "cooked", "was cooking", "have cooked"],
@@ -103,6 +211,7 @@
     {
       "id": "a2p_03",
       "level": "A2_PLUS",
+      "set": 1,
       "topic": "Used to",
       "question": "I ___ play football every weekend when I was a child.",
       "options": ["use to", "used to", "am used to", "using to"],
@@ -111,6 +220,7 @@
     {
       "id": "a2p_04",
       "level": "A2_PLUS",
+      "set": 1,
       "topic": "First Conditional",
       "question": "If it ___ tomorrow, we will stay at home.",
       "options": ["will rain", "rains", "rained", "is raining"],
@@ -119,14 +229,61 @@
     {
       "id": "a2p_05",
       "level": "A2_PLUS",
+      "set": 1,
       "topic": "Modal Verbs",
       "question": "You ___ smoke here. It's forbidden.",
       "options": ["mustn't", "don't have to", "shouldn't", "needn't"],
       "correctIndex": 0
     },
     {
+      "id": "a2p_06",
+      "level": "A2_PLUS",
+      "set": 2,
+      "topic": "Present Perfect vs Past Simple",
+      "question": "I ___ this film last week, and I liked it.",
+      "options": ["have seen", "saw", "seen", "was seeing"],
+      "correctIndex": 1
+    },
+    {
+      "id": "a2p_07",
+      "level": "A2_PLUS",
+      "set": 2,
+      "topic": "Past Continuous",
+      "question": "While they ___ dinner, it started to rain.",
+      "options": ["have", "had", "were having", "having"],
+      "correctIndex": 2
+    },
+    {
+      "id": "a2p_08",
+      "level": "A2_PLUS",
+      "set": 2,
+      "topic": "Used to",
+      "question": "She ___ long hair, but now it's short.",
+      "options": ["use to have", "used to have", "uses to have", "used have"],
+      "correctIndex": 1
+    },
+    {
+      "id": "a2p_09",
+      "level": "A2_PLUS",
+      "set": 2,
+      "topic": "Modal Verbs",
+      "question": "You ___ ask for help. It's free.",
+      "options": ["can", "must", "shouldn't", "needn't"],
+      "correctIndex": 0
+    },
+    {
+      "id": "a2p_10",
+      "level": "A2_PLUS",
+      "set": 2,
+      "topic": "First Conditional",
+      "question": "If you ___ hard, you will pass the exam.",
+      "options": ["study", "will study", "studied", "studying"],
+      "correctIndex": 0
+    },
+    {
       "id": "b1_01",
       "level": "B1",
+      "set": 1,
       "topic": "Present Perfect vs Past Simple",
       "question": "I ___ my keys. I can't find them anywhere.",
       "options": ["lost", "have lost", "lose", "was losing"],
@@ -135,6 +292,7 @@
     {
       "id": "b1_02",
       "level": "B1",
+      "set": 1,
       "topic": "Second Conditional",
       "question": "If I ___ more time, I would travel the world.",
       "options": ["have", "had", "will have", "would have"],
@@ -143,6 +301,7 @@
     {
       "id": "b1_03",
       "level": "B1",
+      "set": 1,
       "topic": "Passive Voice",
       "question": "This bridge ___ in 1920.",
       "options": ["built", "was built", "is built", "has built"],
@@ -151,6 +310,7 @@
     {
       "id": "b1_04",
       "level": "B1",
+      "set": 1,
       "topic": "Reported Speech",
       "question": "She said that she ___ tired.",
       "options": ["is", "was", "be", "were"],
@@ -159,14 +319,61 @@
     {
       "id": "b1_05",
       "level": "B1",
+      "set": 1,
       "topic": "Gerunds and Infinitives",
       "question": "I enjoy ___ books in the evening.",
       "options": ["read", "to read", "reading", "reads"],
       "correctIndex": 2
     },
     {
+      "id": "b1_06",
+      "level": "B1",
+      "set": 2,
+      "topic": "Present Perfect Continuous",
+      "question": "She ___ here since 2020.",
+      "options": ["works", "is working", "has been working", "worked"],
+      "correctIndex": 2
+    },
+    {
+      "id": "b1_07",
+      "level": "B1",
+      "set": 2,
+      "topic": "Second Conditional",
+      "question": "If I ___ you, I would apologize.",
+      "options": ["am", "was", "were", "be"],
+      "correctIndex": 2
+    },
+    {
+      "id": "b1_08",
+      "level": "B1",
+      "set": 2,
+      "topic": "Passive Voice",
+      "question": "The letter ___ yesterday.",
+      "options": ["sent", "was sent", "has sent", "is sent"],
+      "correctIndex": 1
+    },
+    {
+      "id": "b1_09",
+      "level": "B1",
+      "set": 2,
+      "topic": "Reported Speech",
+      "question": "He asked me where I ___ from.",
+      "options": ["come", "came", "coming", "will come"],
+      "correctIndex": 1
+    },
+    {
+      "id": "b1_10",
+      "level": "B1",
+      "set": 2,
+      "topic": "Gerunds and Infinitives",
+      "question": "We decided ___ to Spain for our holiday.",
+      "options": ["go", "going", "to go", "went"],
+      "correctIndex": 2
+    },
+    {
       "id": "b1p_01",
       "level": "B1_PLUS",
+      "set": 1,
       "topic": "Present Perfect Continuous",
       "question": "I ___ English for three years.",
       "options": ["learn", "am learning", "have been learning", "learned"],
@@ -175,6 +382,7 @@
     {
       "id": "b1p_02",
       "level": "B1_PLUS",
+      "set": 1,
       "topic": "Past Perfect",
       "question": "By the time we arrived, the film ___.",
       "options": ["started", "has started", "had started", "was starting"],
@@ -183,14 +391,21 @@
     {
       "id": "b1p_03",
       "level": "B1_PLUS",
+      "set": 1,
       "topic": "Modals of Deduction",
       "question": "She ___ the message — she left her phone at home.",
-      "options": ["mustn't have received", "can't have received", "shouldn't receive", "didn't have to receive"],
+      "options": [
+        "mustn't have received",
+        "can't have received",
+        "shouldn't receive",
+        "didn't have to receive"
+      ],
       "correctIndex": 1
     },
     {
       "id": "b1p_04",
       "level": "B1_PLUS",
+      "set": 1,
       "topic": "Third Conditional",
       "question": "If I ___ about the meeting, I would have come.",
       "options": ["knew", "had known", "have known", "would know"],
@@ -199,22 +414,75 @@
     {
       "id": "b1p_05",
       "level": "B1_PLUS",
+      "set": 1,
       "topic": "Causative",
       "question": "I need to ___ my car repaired.",
       "options": ["make", "have", "do", "let"],
       "correctIndex": 1
     },
     {
+      "id": "b1p_06",
+      "level": "B1_PLUS",
+      "set": 2,
+      "topic": "Past Perfect Continuous",
+      "question": "She ___ for two hours when I arrived.",
+      "options": ["waited", "was waiting", "had been waiting", "has waited"],
+      "correctIndex": 2
+    },
+    {
+      "id": "b1p_07",
+      "level": "B1_PLUS",
+      "set": 2,
+      "topic": "Modals of Deduction",
+      "question": "He ___ the news. He looks shocked.",
+      "options": ["must hear", "must have heard", "should hear", "can hear"],
+      "correctIndex": 1
+    },
+    {
+      "id": "b1p_08",
+      "level": "B1_PLUS",
+      "set": 2,
+      "topic": "Third Conditional",
+      "question": "If they ___ earlier, they would have caught the train.",
+      "options": ["left", "have left", "had left", "would leave"],
+      "correctIndex": 2
+    },
+    {
+      "id": "b1p_09",
+      "level": "B1_PLUS",
+      "set": 2,
+      "topic": "Causative",
+      "question": "She ___ her hair cut yesterday.",
+      "options": ["has", "got", "made", "did"],
+      "correctIndex": 1
+    },
+    {
+      "id": "b1p_10",
+      "level": "B1_PLUS",
+      "set": 2,
+      "topic": "Wish / If only",
+      "question": "I wish I ___ more free time.",
+      "options": ["have", "had", "will have", "would have"],
+      "correctIndex": 1
+    },
+    {
       "id": "b2_01",
       "level": "B2",
+      "set": 1,
       "topic": "Past Perfect Continuous",
       "question": "She ___ for two hours before he finally called.",
-      "options": ["waited", "was waiting", "had been waiting", "has been waiting"],
+      "options": [
+        "waited",
+        "was waiting",
+        "had been waiting",
+        "has been waiting"
+      ],
       "correctIndex": 2
     },
     {
       "id": "b2_02",
       "level": "B2",
+      "set": 1,
       "topic": "Inversion",
       "question": "Never ___ such a beautiful sunset.",
       "options": ["I have seen", "have I seen", "I saw", "did I have seen"],
@@ -223,6 +491,7 @@
     {
       "id": "b2_03",
       "level": "B2",
+      "set": 1,
       "topic": "Cleft Sentences",
       "question": "It ___ his honesty that impressed me most.",
       "options": ["is", "was", "were", "has been"],
@@ -231,6 +500,7 @@
     {
       "id": "b2_04",
       "level": "B2",
+      "set": 1,
       "topic": "Participle Clauses",
       "question": "___ the report, she went home.",
       "options": ["Finishing", "Having finished", "Finished", "To finish"],
@@ -239,14 +509,66 @@
     {
       "id": "b2_05",
       "level": "B2",
+      "set": 1,
       "topic": "Advanced Passive",
       "question": "He is believed ___ the country last year.",
       "options": ["to leave", "to have left", "leaving", "having left"],
       "correctIndex": 1
     },
     {
+      "id": "b2_06",
+      "level": "B2",
+      "set": 2,
+      "topic": "Future Perfect",
+      "question": "By next year, she ___ her degree.",
+      "options": [
+        "finishes",
+        "will finish",
+        "will have finished",
+        "has finished"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "b2_07",
+      "level": "B2",
+      "set": 2,
+      "topic": "Future Continuous",
+      "question": "This time tomorrow, I ___ on the beach.",
+      "options": ["lie", "will lie", "will be lying", "am lying"],
+      "correctIndex": 2
+    },
+    {
+      "id": "b2_08",
+      "level": "B2",
+      "set": 2,
+      "topic": "Inversion",
+      "question": "Rarely ___ such dedication in a student.",
+      "options": ["I have seen", "have I seen", "I saw", "did I have seen"],
+      "correctIndex": 1
+    },
+    {
+      "id": "b2_09",
+      "level": "B2",
+      "set": 2,
+      "topic": "Participle Clauses",
+      "question": "___ in a hurry, he forgot his keys.",
+      "options": ["Leaving", "Left", "Having left", "To leave"],
+      "correctIndex": 0
+    },
+    {
+      "id": "b2_10",
+      "level": "B2",
+      "set": 2,
+      "topic": "Advanced Passive",
+      "question": "It ___ that the company will close next year.",
+      "options": ["is said", "says", "is saying", "was said"],
+      "correctIndex": 0
+    },
+    {
       "id": "c1_01",
       "level": "C1",
+      "set": 1,
       "topic": "Mixed Conditionals",
       "question": "If she ___ harder at university, she would be a manager now.",
       "options": ["studied", "had studied", "studies", "would study"],
@@ -255,6 +577,7 @@
     {
       "id": "c1_02",
       "level": "C1",
+      "set": 1,
       "topic": "Subjunctive",
       "question": "The board insists that he ___ the report by Friday.",
       "options": ["submits", "submit", "submitted", "will submit"],
@@ -263,6 +586,7 @@
     {
       "id": "c1_03",
       "level": "C1",
+      "set": 1,
       "topic": "Hedging",
       "question": "It ___ be argued that the policy has failed.",
       "options": ["could", "must", "should", "would"],
@@ -271,6 +595,7 @@
     {
       "id": "c1_04",
       "level": "C1",
+      "set": 1,
       "topic": "Nominalization",
       "question": "The ___ of the initiative required considerable investment.",
       "options": ["implement", "implementing", "implementation", "implemented"],
@@ -279,14 +604,61 @@
     {
       "id": "c1_05",
       "level": "C1",
+      "set": 1,
       "topic": "Idioms",
       "question": "The new evidence ___ doubt on his testimony.",
       "options": ["put", "cast", "made", "gave"],
       "correctIndex": 1
     },
     {
+      "id": "c1_06",
+      "level": "C1",
+      "set": 2,
+      "topic": "Mixed Conditionals",
+      "question": "If she ___ so shy, she would have given a better presentation yesterday.",
+      "options": ["weren't", "hadn't been", "isn't", "wouldn't be"],
+      "correctIndex": 0
+    },
+    {
+      "id": "c1_07",
+      "level": "C1",
+      "set": 2,
+      "topic": "Subjunctive",
+      "question": "It is essential that every applicant ___ the deadline.",
+      "options": ["meets", "meet", "met", "will meet"],
+      "correctIndex": 1
+    },
+    {
+      "id": "c1_08",
+      "level": "C1",
+      "set": 2,
+      "topic": "Hedging",
+      "question": "The results ___ to suggest a correlation.",
+      "options": ["seem", "must", "will", "should"],
+      "correctIndex": 0
+    },
+    {
+      "id": "c1_09",
+      "level": "C1",
+      "set": 2,
+      "topic": "Nominalization",
+      "question": "His ___ of the problem was surprisingly accurate.",
+      "options": ["analyse", "analysing", "analysis", "analysed"],
+      "correctIndex": 2
+    },
+    {
+      "id": "c1_10",
+      "level": "C1",
+      "set": 2,
+      "topic": "Collocations",
+      "question": "The manager ___ a compelling case for the new strategy.",
+      "options": ["did", "made", "took", "gave"],
+      "correctIndex": 1
+    },
+    {
       "id": "c2_01",
       "level": "C2",
+      "set": 1,
       "topic": "Literary Inversion",
       "question": "Into the room ___ the CEO, and everyone fell silent.",
       "options": ["walked", "did walk", "was walking", "he walked"],
@@ -295,6 +667,7 @@
     {
       "id": "c2_02",
       "level": "C2",
+      "set": 1,
       "topic": "Litotes",
       "question": "The proposal is not ___ merit, though it has flaws.",
       "options": ["with", "without", "for", "by"],
@@ -303,6 +676,7 @@
     {
       "id": "c2_03",
       "level": "C2",
+      "set": 1,
       "topic": "Archaic Subjunctive",
       "question": "___ it to say that the outcome exceeded our expectations.",
       "options": ["Suffices", "Suffice", "Suffixing", "To suffice"],
@@ -311,6 +685,7 @@
     {
       "id": "c2_04",
       "level": "C2",
+      "set": 1,
       "topic": "Chiasmus",
       "question": "We value the means, not the ends; we value ___, not the means.",
       "options": ["the ends", "the ways", "the goals", "the paths"],
@@ -319,9 +694,60 @@
     {
       "id": "c2_05",
       "level": "C2",
+      "set": 1,
       "topic": "Anaphora",
       "question": "We shall comprehend, we shall acknowledge, we shall ___.",
       "options": ["act", "acting", "have acted", "to act"],
+      "correctIndex": 0
+    },
+    {
+      "id": "c2_06",
+      "level": "C2",
+      "set": 2,
+      "topic": "Literary Inversion",
+      "question": "So great ___ the impact that the industry was forced to rethink.",
+      "options": ["was", "it was", "has been", "were"],
+      "correctIndex": 0
+    },
+    {
+      "id": "c2_07",
+      "level": "C2",
+      "set": 2,
+      "topic": "Archaic Subjunctive",
+      "question": "Be that as it ___, we must proceed.",
+      "options": ["is", "may", "will", "would"],
+      "correctIndex": 1
+    },
+    {
+      "id": "c2_08",
+      "level": "C2",
+      "set": 2,
+      "topic": "Chiasmus",
+      "question": "Ask not what your country can do for you — ask what ___.",
+      "options": [
+        "you can do for your country",
+        "for your country you can do",
+        "can you do for your country",
+        "your country can do"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "c2_09",
+      "level": "C2",
+      "set": 2,
+      "topic": "Litotes",
+      "question": "Her performance was not ___ praise.",
+      "options": ["without", "with", "for", "by"],
+      "correctIndex": 0
+    },
+    {
+      "id": "c2_10",
+      "level": "C2",
+      "set": 2,
+      "topic": "Anaphora",
+      "question": "We will fight, we will endure, we will ___.",
+      "options": ["prevail", "prevailing", "have prevailed", "to prevail"],
       "correctIndex": 0
     }
   ]

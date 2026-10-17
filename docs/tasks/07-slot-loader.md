@@ -224,12 +224,27 @@ describe("slot loader", () => {
 
 ## ⚠️ Нюанси
 
-- **`import.meta.url`** — обов'язково використовувати для резолву `data/`. `process.cwd()` ненадійний у тестах.
-- **Env `DATA_DIR`** — додати в `.env.example` (порожньо = fallback на `import.meta.url`).
+- **Шлях до `data/`:** використовувати `fileURLToPath(import.meta.url)` + `path.join`, **НЕ** `new URL(...)`. Причина: `new URL` з `import.meta.url` працює у Vitest, але ламає `next build` (webpack намагається резолвити його як модуль і падає).
+
+  ```ts
+  import { fileURLToPath } from "node:url";
+  import { dirname, join } from "node:path";
+
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const DATA_DIR = process.env.DATA_DIR ?? join(__dirname, "../../../../data");
+  ```
+
+- **Env `DATA_DIR`** — додати в `.env.example` (порожньо = fallback на `fileURLToPath`).
+
 - **Кеш — `Map<CEFRLevel, T>`**, не звичайний об'єкт.
-- **При імпорті модуля** — перевірити, що `LEVEL_FILES` має всі 8 рівнів.
+
+- **При імпорті модуля** — перевірити, що `LEVEL_FILES` має всі 8 рівнів. Інакше кинути помилку одразу.
+
 - **Vitest з ESM + TypeScript** — може знадобитись `vitest.config.ts` з `test: { globals: true }` і `resolve.alias`. Якщо `pnpm --filter web test` впаде на резолві `@lingua/shared` — додати alias у конфіг.
+
 - **`fs.readFile`** — використовувати `node:fs/promises` (async). Не `fs.readFileSync`.
+
+- **`import.meta.url` у тестах.** У Vitest `import.meta.url` вказує на файл у `apps/web/lib/slots/loader.ts` — той самий, як і в production. Резолв `../../../../data` дає корінь монорепо. Якщо в CI інша структура — використати `DATA_DIR`.
 
 ---
 
