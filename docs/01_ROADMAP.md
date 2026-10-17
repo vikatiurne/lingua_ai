@@ -60,8 +60,8 @@
 
 ## E5 — Level Test
 
-- [ ] 18 — Adaptive test UI
-- [ ] 19 — Test submission API
+- [х] 18 — Adaptive test UI
+- [x] 19 — Test submission API
 - [ ] 20 — Gap map
 
 ## E6 — Plan

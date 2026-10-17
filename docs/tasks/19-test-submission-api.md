@@ -3,7 +3,7 @@
 **Епік:** E5 — Level Test
 **Розмір:** S (1–2 год)
 **Залежності:** 18
-**Статус:** ⬜ Todo
+**Статус:** ✅ Done
 **Гілка:** `feat/19-test-submission-api`
 
 > ⚠️ **ЦЯ ЗАДАЧА — ЗБЕРЕЖЕННЯ РЕЗУЛЬТАТУ ТЕСТУ.**
@@ -27,16 +27,16 @@
 
 ## ✅ Acceptance Criteria
 
-- [ ] `apps/web/app/api/test/submit/route.ts`
-- [ ] `apps/web/lib/validation/test.ts` — Zod-схема
-- [ ] `apps/web/lib/validation/test.test.ts` — 4+ тестів
-- [ ] Endpoint захищений (`getCurrentUser`) — 401 якщо немає сесії
-- [ ] Обгорнутий `withRateLimit(RATE_LIMITS.API)`
-- [ ] Оновлює `User.level` + `User.targetLevel` (наступний рівень, для C2 → C2)
-- [ ] Повертає `{ user, correctCount, totalCount }`
-- [ ] TestRunner викликає API, показує loading
-- [ ] Після успіху → `router.push("/dashboard")`
-- [ ] `pnpm typecheck` і `pnpm --filter web test` проходять
+- [x] `apps/web/app/api/test/submit/route.ts`
+- [x] `apps/web/lib/validation/test.ts` — Zod-схема
+- [x] `apps/web/lib/validation/test.test.ts` — 4+ тестів
+- [x] Endpoint захищений (`getCurrentUser`) — 401 якщо немає сесії
+- [x] Обгорнутий `withRateLimit(RATE_LIMITS.API)`
+- [x] Оновлює `User.level` + `User.targetLevel` (наступний рівень, для C2 → C2)
+- [x] Повертає `{ user, correctCount, totalCount }`
+- [x] TestRunner викликає API, показує loading
+- [x] Після успіху → `router.push("/dashboard")`
+- [x] `pnpm typecheck` і `pnpm --filter web test` проходять
 
 ---
 
@@ -175,6 +175,29 @@ git push origin feat/19-test-submission-api
 
 ## 📝 Нотатки
 
-- Чи правильно визначається `targetLevel` для C2?
-- Чи треба серверна валідація `correct`?
-- Чи треба зберігати історію проходжень?
+**Статус:** завершено. `pnpm typecheck`, `pnpm --filter web build`, `pnpm --filter web test` — зелені
+(6 нових тестів у `test.test.ts`, всього 127).
+
+### Відповіді на питання
+
+- **Чи правильно визначається `targetLevel` для C2?**
+  Так. `targetLevel = CEFR_LEVELS[indexOf(level) + 1] ?? level`. Для `C2` (індекс 7)
+  `CEFR_LEVELS[8]` — `undefined`, тому fallback повертає сам `C2`. Для решти рівнів —
+  наступний у `CEFR_LEVELS`.
+- **Чи треба серверна валідація `correct`?**
+  Для MVP — ні. Клієнтський `correct` не впливає на безпеку (учень шкодить лише собі),
+  а серверна перевірка вимагала б доставки `correctIndex` на клієнт і повторної
+  валідації питань. `correctCount`/`correct` лише пишуться у відповідь і надалі
+  вплинуть на gap map (20). Винесено в беклог.
+- **Чи треба зберігати історію проходжень?**
+  Ні, out of scope. `User.level` перезаписується при повторному проходженні, окремої
+  таблиці історії немає (окрема задача, якщо знадобиться analytics).
+
+### Нюанс
+
+`router.push("/dashboard")` веде на сторінку, якої ще немає — її створює задача 22.
+На момент 19 редірект коректний, але дасть 404 до реалізації dashboard.
+
+### README не змінювався
+
+Жоден пункт статусу не завершено: це backend-задача (submit level-тесту).
