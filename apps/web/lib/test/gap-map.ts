@@ -1,4 +1,4 @@
-import type { CEFRLevel } from "@lingua/shared";
+import { CEFR_LEVELS, type CEFRLevel } from "@lingua/shared";
 import type { TestQuestion } from "./loader";
 
 export type WeakTopic = {
@@ -45,13 +45,24 @@ export function analyzeGaps(
   return [...byTopic.values()].sort((a, b) => b.errors - a.errors);
 }
 
-export async function persistGaps(userId: string, gaps: WeakTopic[]): Promise<void> {
-  if (gaps.length === 0) return;
+export async function persistGaps(
+  userId: string,
+  weakTopics: WeakTopic[],
+  maxLevel: CEFRLevel,
+): Promise<void> {
+  if (weakTopics.length === 0) return;
+
+  const maxIndex = CEFR_LEVELS.indexOf(maxLevel);
+  const relevant = weakTopics.filter(
+    (weakTopic) => CEFR_LEVELS.indexOf(weakTopic.level) <= maxIndex,
+  );
+
+  if (relevant.length === 0) return;
 
   const { prisma } = await import("../db/client");
 
   await Promise.all(
-    gaps.map((gap) =>
+    relevant.map((gap) =>
       prisma.topicProgress.upsert({
         where: {
           userId_level_topicName: {

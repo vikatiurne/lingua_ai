@@ -43,7 +43,7 @@ async function submitHandler(req: NextRequest): Promise<Response> {
 
   let weakTopics = gaps;
   try {
-    await persistGaps(user.id, gaps);
+    await persistGaps(user.id, gaps, targetLevel);
   } catch (error) {
     console.error("[test/submit] persistGaps failed", error);
     weakTopics = [];

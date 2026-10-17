@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import type { PlanContent } from "@/lib/plan/generate";
 import { pluralize } from "@/lib/i18n/plural";
+import { formatLevelCode } from "@/lib/level";
 
 const MAX_TOPICS = 5;
 
@@ -23,7 +24,7 @@ export function PlanPreview({ content }: { content: PlanContent }) {
         <CardDescription>
           {content.topics.length}{" "}
           {pluralize(content.topics.length, "тема", "теми", "тем")} · рівень{" "}
-          {content.level}
+          {formatLevelCode(content.level)}
         </CardDescription>
       </CardHeader>
       <CardContent>

@@ -32,7 +32,7 @@ export default async function DashboardPage() {
   }
 
   const weakTopics = await prisma.topicProgress.findMany({
-    where: { userId: user.id, level: user.level, status: "not_started" },
+    where: { userId: user.id, status: "not_started" },
   });
 
   const content = activePlan.content as unknown as PlanContent;
@@ -52,7 +52,7 @@ export default async function DashboardPage() {
       </div>
       <div className="grid gap-6 lg:grid-cols-2">
         <PlanPreview content={content} />
-        <WeakTopicsCard topics={weakTopics} />
+        <WeakTopicsCard topics={weakTopics} currentLevel={user.level} />
       </div>
     </div>
   );

@@ -1,17 +1,7 @@
 import { CEFR_LEVELS, type CEFRLevel } from "@lingua/shared";
 
+import { LEVEL_SHORT_LABELS } from "@/lib/level";
 import { cn } from "@/lib/utils";
-
-const LEVEL_SHORT_LABELS: Record<CEFRLevel, string> = {
-  A1: "A1",
-  A2: "A2",
-  A2_PLUS: "A2+",
-  B1: "B1",
-  B1_PLUS: "B1+",
-  B2: "B2",
-  C1: "C1",
-  C2: "C2",
-};
 
 export function LevelLadder({ currentLevel }: { currentLevel: CEFRLevel }) {
   const currentIndex = CEFR_LEVELS.indexOf(currentLevel);
