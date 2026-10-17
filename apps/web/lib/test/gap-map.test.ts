@@ -1,7 +1,13 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { CEFR_LEVEL } from "@lingua/shared";
 import type { TestQuestion } from "./loader";
-import { analyzeGaps, type TestAnswer } from "./gap-map";
+import { analyzeGaps, persistGaps, type TestAnswer } from "./gap-map";
+
+const { upsert } = vi.hoisted(() => ({ upsert: vi.fn().mockResolvedValue({}) }));
+
+vi.mock("../db/client", () => ({
+  prisma: { topicProgress: { upsert } },
+}));
 
 function makeQuestion(id: string, topic: string, level: TestQuestion["level"]): TestQuestion {
   return {
@@ -85,5 +91,41 @@ describe("analyzeGaps", () => {
       questions,
     );
     expect(result).toEqual([]);
+  });
+});
+
+describe("persistGaps", () => {
+  it("upserts topic progress using the generated compound key", async () => {
+    upsert.mockClear();
+
+    await persistGaps("user_1", [
+      { topic: "Present Perfect", level: CEFR_LEVEL.A2_PLUS, errors: 2, skippedCount: 1 },
+    ]);
+
+    expect(upsert).toHaveBeenCalledTimes(1);
+    expect(upsert).toHaveBeenCalledWith({
+      where: {
+        userId_level_topicName: {
+          userId: "user_1",
+          level: CEFR_LEVEL.A2_PLUS,
+          topicName: "Present Perfect",
+        },
+      },
+      create: {
+        userId: "user_1",
+        level: CEFR_LEVEL.A2_PLUS,
+        topicName: "Present Perfect",
+        status: "not_started",
+      },
+      update: {},
+    });
+  });
+
+  it("does nothing for an empty gaps array", async () => {
+    upsert.mockClear();
+
+    await persistGaps("user_1", []);
+
+    expect(upsert).not.toHaveBeenCalled();
   });
 });

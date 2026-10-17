@@ -52,24 +52,18 @@ export async function persistGaps(userId: string, gaps: WeakTopic[]): Promise<vo
 
   await Promise.all(
     gaps.map((gap) =>
-      prisma.userProgress.upsert({
-        // Empty strings (not null) keep the @@unique constraint effective:
-        // in Postgres NULL != NULL, so nulls would create duplicates.
+      prisma.topicProgress.upsert({
         where: {
-          userId_level_topicName_subtopicName_templateId: {
+          userId_level_topicName: {
             userId,
             level: gap.level,
             topicName: gap.topic,
-            subtopicName: "",
-            templateId: "",
           },
         },
         create: {
           userId,
           level: gap.level,
           topicName: gap.topic,
-          subtopicName: "",
-          templateId: "",
           status: "not_started",
         },
         // Never touch existing progress for a topic the user already started.

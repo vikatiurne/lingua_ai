@@ -62,7 +62,8 @@
 
 - [х] 18 — Adaptive test UI
 - [x] 19 — Test submission API
-- [ ] 20 — Gap map
+- [x] 20 — Gap map
+- [x] 20.1 — Split progress tables (chore)
 
 ## E6 — Plan
 
