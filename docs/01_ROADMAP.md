@@ -67,7 +67,7 @@
 
 ## E6 — Plan
 
-- [ ] 21 — Plan generation (AI)
+- [х] 21 — Plan generation (AI)
 - [ ] 22 — Dashboard (з планом)
 - [ ] 23 — React Flow visualization
 - [ ] 24 — Plan editing UI

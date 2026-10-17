@@ -1,0 +1,331 @@
+# 21 — Plan Generation (deterministic)
+
+**Епік:** E6 — Plan
+**Розмір:** S (1–2 год)
+**Залежності:** 09, 17, 20.1
+**Статус:** ✅ Done
+**Гілка:** `feat/21-plan-generation`
+
+> ⚠️ **ЦЯ ЗАДАЧА — ГЕНЕРАЦІЯ ПЛАНУ (детермінована).**
+> AI-заметки і реордеринг — задача 21.5 (окремо, пізніше).
+> MVP-план: слабкі теми першими, решта — у порядку з шаблонів.
+>
+> ⚠️ **НЕ ТОРКАЄТЬСЯ:**
+> - Dashboard UI (22)
+> - React Flow (23)
+> - Plan editing (24)
+> - AI notes (21.5)
+
+---
+
+## 🎯 Мета
+
+Після завершення:
+- `POST /api/plan/generate` — створює персональний план
+- Слабкі теми (з `TopicProgress`) — першими, з `priority: "high"`
+- Решта — у порядку шаблонів рівня, `priority: "normal"`
+- Один активний план на користувача
+- Повертає `{ plan }`
+
+---
+
+## ✅ Acceptance Criteria
+
+- [x] `apps/web/lib/plan/generate.ts` — `generatePlanContent`
+- [x] `apps/web/lib/plan/generate.test.ts` — 6+ тестів (7)
+- [x] `apps/web/lib/plan/persist.ts` — `savePlan`
+- [x] `apps/web/app/api/plan/generate/route.ts` — POST endpoint
+- [x] Endpoint захищений (`getCurrentUser`) — 401 якщо немає сесії
+- [x] Обгорнутий `withRateLimit(RATE_LIMITS.API)`
+- [x] 400 якщо `user.level === null`
+- [x] Читає `TopicProgress` зі `status in ["not_started", "in_progress"]` для поточного рівня
+- [x] Читає шаблони через `loadTemplateFile(user.level)`
+- [x] `generatePlanContent` фільтрує `weakTopics` за `level === user.level` (інші ігноруються)
+- [x] `savePlan` в транзакції: деактивує попередні, створює новий
+- [x] Один активний план на користувача
+- [x] `pnpm typecheck` і `pnpm --filter web test` проходять
+
+---
+
+## 🚫 Що НЕ входить
+
+- ❌ AI-заметки/реордеринг (21.5)
+- ❌ UI (22)
+- ❌ React Flow (23)
+- ❌ Ручне редагування (24)
+- ❌ Автоматичне оновлення плану після вправ (окремо)
+- ❌ Локалізація назв тем (45)
+
+---
+
+## 📁 Файли
+
+### Створити
+
+- `apps/web/lib/plan/generate.ts`
+- `apps/web/lib/plan/generate.test.ts`
+- `apps/web/lib/plan/persist.ts`
+- `apps/web/app/api/plan/generate/route.ts`
+
+### Не чіпати
+
+- `apps/web/lib/test/**`
+- `apps/web/lib/slots/**` (тільки імпорт `loadTemplateFile`)
+- `apps/web/lib/ai/**` (у цій задачі не використовується)
+- `packages/shared/**`
+- `apps/web/prisma/**`
+
+---
+
+## 🔧 Контракти (обов'язково)
+
+### Типи
+
+```ts
+type PlanSubtopic = {
+  name: string;
+  priority: "high" | "normal";
+};
+
+type PlanTopic = {
+  name: string;
+  priority: "high" | "normal";
+  subtopics: PlanSubtopic[];
+};
+
+type PlanContent = {
+  level: CEFRLevel;
+  generatedAt: string;   // ISO 8601 timestamp
+  topics: PlanTopic[];
+};
+```
+
+### Функції
+
+```ts
+generatePlanContent(
+  level: CEFRLevel,
+  weakTopics: WeakTopic[]
+): PlanContent
+
+savePlan(userId: string, content: PlanContent): Promise<Plan>
+```
+
+`WeakTopic` — тип з задачі 20: `{ topic: string; level: CEFRLevel; errors: number; skippedCount: number }`.
+
+### Формат відповіді 200
+
+```json
+{
+  "plan": {
+    "id": "...",
+    "level": "B1",
+    "content": {
+      "level": "B1",
+      "generatedAt": "2026-10-17T12:00:00.000Z",
+      "topics": [
+        {
+          "name": "Present Perfect",
+          "priority": "high",
+          "subtopics": [
+            { "name": "Present Perfect Simple", "priority": "high" },
+            { "name": "Present Perfect Continuous", "priority": "high" }
+          ]
+        },
+        {
+          "name": "Past Simple",
+          "priority": "normal",
+          "subtopics": [
+            { "name": "Affirmative", "priority": "normal" }
+          ]
+        }
+      ]
+    },
+    "isActive": true
+  }
+}
+```
+
+---
+
+## 🧠 Алгоритм (словами)
+
+### `generatePlanContent(level, weakTopics)`
+
+1. `templateFile = await loadTemplateFile(level)` — усі теми/підтеми в порядку з JSON.
+2. `weakTopicsForLevel = weakTopics.filter(w => w.level === level)` — **інші рівні ігноруються**.
+3. `errorsByTopic = Map<topicName, errors>` з `weakTopicsForLevel`.
+4. Для кожного `topic` з `templateFile.topics`:
+   - `errors = errorsByTopic.get(topic.topic) ?? 0`.
+   - `priority = errors > 0 ? "high" : "normal"`.
+   - `subtopics` — усі з `templateFile`, з тим самим `priority`.
+5. Сортувати `topics`:
+   - Спочатку `priority === "high"`, відсортовані за `errors DESC` (найслабші вище).
+   - Потім `priority === "normal"`, у порядку шаблонів.
+6. Повернути `{ level, generatedAt: new Date().toISOString(), topics }`.
+
+**Важливо:** лише теми поточного рівня. `weakTopics` з інших рівнів ігноруються.
+
+### `savePlan(userId, content)`
+
+У `prisma.$transaction`:
+1. `prisma.plan.updateMany({ where: { userId, isActive: true }, data: { isActive: false } })`.
+2. `prisma.plan.create({ data: { userId, level: content.level, content, isActive: true } })`.
+3. Повернути створений план.
+
+**Ідемпотентність:** повторний виклик → стара деактивована, нова створена. Завжди один `isActive: true`.
+
+### API endpoint `POST /api/plan/generate`
+
+1. `user = await getCurrentUser()` → 401 якщо null.
+2. Якщо `user.level === null` → 400 `{ error: "Level not set. Complete the test first." }`.
+3. `progress = await prisma.topicProgress.findMany({ where: { userId: user.id, level: user.level, status: { in: ["not_started", "in_progress"] } } })`.
+4. `weakTopics: WeakTopic[] = progress.map(p => ({ topic: p.topicName, level: p.level, errors: 1, skippedCount: 0 }))`.
+   - **Зауваження:** у `TopicProgress` немає поля `errors` (тільки `attempts`, `score`). Для plan generation достатньо факту наявності запису. `errors: 1` — умовне значення, бо важлива сама присутність теми в gap map, а не точна кількість помилок.
+5. `content = generatePlanContent(user.level, weakTopics)`.
+6. `plan = await savePlan(user.id, content)`.
+7. Повернути 200 `{ plan }`.
+
+**Обробка помилок:**
+- Помилка `loadTemplateFile` → 500 з повідомленням «Не вдалось завантажити шаблони».
+- Помилка `savePlan` → 500 з повідомленням «Не вдалось зберегти план».
+
+---
+
+## 🧪 Тести (6+)
+
+### `generate.test.ts`
+
+1. **Порожній `weakTopics`** → усі теми `priority: "normal"`, порядок = як у шаблоні.
+2. **1 слабка тема** → вона перша, `priority: "high"`, решта `"normal"`.
+3. **Кілька слабких тем** → сортовані за `errors DESC`, потім нормальні.
+4. **Слабкі теми з іншого рівня** → ігноруються (тільки поточний рівень).
+5. **`generatedAt`** — ISO 8601 timestamp (regex `/^\d{4}-\d{2}-\d{2}T/`).
+6. **Структура:** всі поля `PlanTopic` і `PlanSubtopic` присутні.
+7. **Невідома тема в `weakTopics`** (не з шаблону) → ігнорується (не додається в план).
+
+---
+
+## ⚠️ Нюанси
+
+- **`loadTemplateFile`** — з задачі 07, повертає `TemplateFile` з `topics[].topic` і `topics[].subtopics[].name`.
+- **Порядок у шаблоні** — це «природний» порядок вивчення (Present Simple → Present Continuous → Present Perfect).
+- **`user.level === null`** → 400. Тест має бути пройдений до плану.
+- **`TopicProgress` не має поля `errors`** — у plan generation використовуємо `errors: 1` (умовно). Точність не критична — важливо, що тема є слабкою. Якщо знадобиться точність — у задачі 30+ буде писатися `attempts` і `score`.
+- **`savePlan`** — транзакція обов'язкова. Інакше при падінні між деактивацією і створенням — 0 активних планів.
+- **Повторний submit** — допустимо. Старий план деактивується, новий створюється. Учень може перегенерувати план.
+- **`weakTopics` з інших рівнів** — ігноруються. Учень на B1 не отримає в план слабкі теми A2. Якщо треба — окрема функція (не в MVP).
+- **Тестування через `curl`** (коли з'явиться auth-flow):
+  ```bash
+  curl -X POST http://localhost:3001/api/plan/generate -H "Cookie: ..."
+  # → { plan: { id, level, content, isActive: true } }
+  ```
+
+---
+
+## 📎 Контекст
+
+- `docs/tasks/07-slot-loader.md` (`loadTemplateFile`)
+- `docs/tasks/17-user-helpers.md` (`getCurrentUser`)
+- `docs/tasks/20-gap-map.md` (`WeakTopic`, `TopicProgress`)
+- `docs/tasks/20.1-split-progress-tables.md` (`TopicProgress` schema)
+- `docs/tasks/06-prisma-schema.md` (модель `Plan`)
+- `AGENT_RULES.md` → 7.6 (Prisma)
+
+---
+
+## 💬 Commit message
+
+```
+feat(plan): add deterministic plan generation
+
+- add lib/plan/generate.ts with generatePlanContent
+- filter weakTopics by level (ignore other levels)
+- weak topics sorted first (priority high), rest in template order
+- add lib/plan/persist.ts with savePlan (transaction, one active)
+- add POST /api/plan/generate (protected, rate-limited)
+- 400 if user.level is null
+- add 7 unit tests
+```
+
+---
+
+## 🔀 Git workflow
+
+```bash
+git checkout -b feat/21-plan-generation
+# ...
+git add .
+git commit -m "feat(plan): add deterministic plan generation"
+git push origin feat/21-plan-generation
+```
+
+---
+
+## 📝 Нотатки
+
+Заповнено після завершення (2026-10-17).
+
+### Реалізація
+
+- `generatePlanContent(level, weakTopics)` зроблено **async** (`Promise<PlanContent>`),
+  попри те що в контракті сигнатура без `Promise`. Причина: алгоритм (крок 1)
+  явно вимагає `templateFile = await loadTemplateFile(level)`, а ця функція
+  async. Це внутрішнє протиріччя задачі (сигнатура vs алгоритм), вирішено на
+  користь алгоритму. Типи `PlanContent`/`PlanTopic`/`PlanSubtopic`/`PlanPriority`
+  визначені локально в `lib/plan/generate.ts` (у `packages/shared` їх немає, і
+  чіпати shared заборонено).
+- Імпорти в `generate.ts` — **відносні** (`../slots/loader`, `../test/gap-map`),
+  бо `vitest.config.ts` не має аліасу `@/` (тестовані lib-файли в проєкті
+  використовують відносні шляхи). `persist.ts` і `route.ts` — через `@/` (вони
+  не покриті unit-тестами), як і решта коду.
+
+### Питання зі задачі
+
+- **Чи правильно визначаються слабкі теми з `TopicProgress`?** — Так, з
+  застереженням: у `TopicProgress` немає поля `errors`, тому всі теми зі
+  `status in ["not_started", "in_progress"]` для поточного рівня отримують
+  `errors: 1`. Визначення — **за наявністю запису** (тема у gap map), а не за
+  точністю. Відповідає нюансам задачі.
+- **Чи завжди один `isActive: true` після `savePlan`?** — Так.
+  `prisma.$transaction`: `updateMany` деактивує всі активні плани користувача,
+  потім `create` створює новий з `isActive: true`. Атомарно.
+- **Чи коректно сортується за `errors DESC`?** — Так. `Array.sort` стабільний
+  (ES2019+), тож при рівних `errors` зберігається порядок шаблону. На практиці
+  всі слабкі теми мають `errors: 1`, тому серед `high` порядок фактично
+  = порядок шаблону; сортування коректне й для майбутніх точніших `errors`.
+- **Чи треба AI-заметки (21.5) для MVP?** — Ні. Детермінований план
+  (слабкі → решта) покриває мету. AI-заметки/реордеринг — окрема задача 21.5.
+- **Чи треба кешувати `loadTemplateFile` тут?** — Ні. `loader.ts` уже має
+  module-level `templateCache` (`Map<CEFRLevel, TemplateFile>`), тож повторні
+  виклики повертають той самий об'єкт без читання диска.
+- **Чи правильно фільтруються `weakTopics` з інших рівнів?** — Так.
+  `weakTopics.filter(w => w.level === level)`; теми інших рівнів повністю
+  ігноруються (покрито тестом №4). Невідомі теми (яких немає в шаблоні) теж
+  ігноруються — бо ітерація йде по темах шаблону (тест №7).
+
+### Відхилення від scope (важливо)
+
+- **Змінено `apps/web/lib/slots/loader.ts`**, хоча задача каже `lib/slots/** — не
+  чіпати`. Причина: `pnpm build` падав з `Module not found: Can't resolve
+  '../../../../data/'`. `loader.ts` використовував
+  `new URL("../../../../data/", import.meta.url).pathname` — webpack трактує це
+  як посилання на асет і не може резолвнути. Це латентний баг задачі 07: він не
+  проявлявся, бо до задачі 21 `slots/loader` не імпортувався з server-коду в
+  графі збірки (лише тести). Виправлено за зразком робочого
+  `lib/test/loader.ts` (задача 20): `fileURLToPath(import.meta.url)` +
+  `join(dirname(...), "../../../../data")`. Зміна мінімальна (2 рядки), логіку
+  завантаження не чіпав. Без неї AC «build проходить» недосяжний.
+- **Повідомлення про помилки в `route.ts` — українською** («Не вдалось
+  завантажити шаблони», «Не вдалось зберегти план»), як явно вказано в задачі,
+  хоча решта існуючих роутів (`/api/test/submit` тощо) використовує англійські
+  рядки. Пріоритет — текст із задачі.
+
+### Перевірка
+
+- `pnpm typecheck` — 4/4 успішно.
+- `pnpm --filter web test` — 19 файлів, 142 тести (у т.ч. 7 нових у
+  `generate.test.ts`).
+- `pnpm build` — успішно, маршрут `/api/plan/generate` присутній (ƒ dynamic).
+- Runtime (браузер/curl з auth-cookie) не перевіряв — auth-flow та даних немає
+  в поточній сесії. Потребує ручної перевірки після появи сесії учня.
