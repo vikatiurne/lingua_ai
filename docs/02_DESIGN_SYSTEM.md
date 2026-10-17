@@ -116,7 +116,26 @@ Tailwind-класи (`bg-background`, `text-primary`, `border-border` тощо)
   `enableSystem`, `disableTransitionOnChange`) у `app/layout.tsx`.
 - `<html suppressHydrationWarning>` — обов'язково (theme script).
 - `ThemeToggle` (`components/theme-toggle.tsx`) — mounted-safe (disabled до mounted).
-- Перемикач живе у правому верхньому куті auth-сторінок; у dashboard — у header (задача 22).
+
+### 5.1 Спільний фон і перемикач теми — на кожній сторінці
+
+**Обов'язково для всіх сторінок без винятку:**
+
+- Кожна сторінка має фоновий шар: градієнт
+  `bg-gradient-to-br from-background via-background to-accent/40` + `DoodlePattern`
+  (`text-foreground opacity-[0.06]`). Той самий вигляд, що на лендингу.
+- `ThemeToggle` — завжди у правому верхньому куті сторінки.
+
+**Як досягається:** через `AppShell` (`apps/web/components/layout/app-shell.tsx`).
+`app/(dashboard)/layout.tsx` обгортає весь вміст у `AppShell`, тож усі dashboard-
+сторінки отримують фон і перемикач автоматично. Landing (`app/page.tsx`) і auth
+(`app/(auth)/layout.tsx`) мають власні еквіваленти (той самий градієнт + дудл +
+`ThemeToggle`), бо мають складніший layout.
+
+**Правило:** додаєш нову групу сторінок/route group — обов'язково обгорни її в
+`AppShell` (або, за потреби, відтвори той самий фон + `ThemeToggle`). Якщо контент
+має власний непрозорий фон, він перекриє дудл-узор — це заборонено (фон
+сторінки мусить лишатися видимим).
 
 ---
 
@@ -166,6 +185,7 @@ Tailwind-класи (`bg-background`, `text-primary`, `border-border` тощо)
 - shadcn-конфіг — `apps/web/components.json`
 - UI-компоненти — `apps/web/components/ui/`
 - Feature-компоненти — `apps/web/components/<feature>/`
+- Спільний фон + перемикач теми — `apps/web/components/layout/app-shell.tsx` (`AppShell`)
 - Favicon — `apps/web/app/icon.svg`
 
 ---

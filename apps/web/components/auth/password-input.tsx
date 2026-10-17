@@ -6,16 +6,17 @@ import { Eye, EyeOff, Lock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-export function PasswordInput({
-  className,
-  ...props
-}: React.ComponentProps<typeof Input>) {
+export const PasswordInput = React.forwardRef<
+  React.ElementRef<typeof Input>,
+  React.ComponentPropsWithoutRef<typeof Input>
+>(({ className, ...props }, ref) => {
   const [visible, setVisible] = React.useState(false);
 
   return (
     <div className="relative">
       <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
       <Input
+        ref={ref}
         type={visible ? "text" : "password"}
         className={cn("h-11 pl-9 pr-10", className)}
         {...props}
@@ -34,4 +35,5 @@ export function PasswordInput({
       </button>
     </div>
   );
-}
+});
+PasswordInput.displayName = "PasswordInput";
