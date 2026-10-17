@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import type {
   CEFRLevel,
   SlotFile,
@@ -14,7 +15,8 @@ function resolveDataDir(): string {
     return envDir;
   }
   // Resolve <root>/data from apps/web/lib/slots/loader.ts
-  return new URL("../../../../data/", import.meta.url).pathname;
+  const currentFile = fileURLToPath(import.meta.url);
+  return join(dirname(currentFile), "../../../../data");
 }
 
 const DATA_DIR = resolveDataDir();
