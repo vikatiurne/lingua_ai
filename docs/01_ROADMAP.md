@@ -64,11 +64,14 @@
 - [x] 19 — Test submission API
 - [x] 20 — Gap map
 - [x] 20.1 — Split progress tables (chore)
+- [x] 20.2 — Fix level filtering in gap map and TestResult
+- [x] 20.3 — Dashboard show all gap topics
+
 
 ## E6 — Plan
 
 - [х] 21 — Plan generation (AI)
-- [ ] 22 — Dashboard (з планом)
+- [х] 22 — Dashboard (з планом)
 - [ ] 23 — React Flow visualization
 - [ ] 24 — Plan editing UI
 

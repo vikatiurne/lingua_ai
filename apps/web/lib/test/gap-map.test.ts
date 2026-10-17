@@ -98,9 +98,13 @@ describe("persistGaps", () => {
   it("upserts topic progress using the generated compound key", async () => {
     upsert.mockClear();
 
-    await persistGaps("user_1", [
-      { topic: "Present Perfect", level: CEFR_LEVEL.A2_PLUS, errors: 2, skippedCount: 1 },
-    ]);
+    await persistGaps(
+      "user_1",
+      [
+        { topic: "Present Perfect", level: CEFR_LEVEL.A2_PLUS, errors: 2, skippedCount: 1 },
+      ],
+      CEFR_LEVEL.B1,
+    );
 
     expect(upsert).toHaveBeenCalledTimes(1);
     expect(upsert).toHaveBeenCalledWith({
@@ -124,7 +128,61 @@ describe("persistGaps", () => {
   it("does nothing for an empty gaps array", async () => {
     upsert.mockClear();
 
-    await persistGaps("user_1", []);
+    await persistGaps("user_1", [], CEFR_LEVEL.B1);
+
+    expect(upsert).not.toHaveBeenCalled();
+  });
+
+  it("upserts only topics at or below the max level", async () => {
+    upsert.mockClear();
+
+    await persistGaps(
+      "user_1",
+      [
+        { topic: "Below", level: CEFR_LEVEL.A2, errors: 1, skippedCount: 0 },
+        { topic: "Max", level: CEFR_LEVEL.B1, errors: 1, skippedCount: 0 },
+        { topic: "Ahead B2", level: CEFR_LEVEL.B2, errors: 1, skippedCount: 0 },
+        { topic: "Ahead C1", level: CEFR_LEVEL.C1, errors: 1, skippedCount: 0 },
+      ],
+      CEFR_LEVEL.B1,
+    );
+
+    const persistedTopics = upsert.mock.calls.map(
+      ([arg]) => arg.where.userId_level_topicName.topicName,
+    );
+    expect(persistedTopics).toEqual(["Below", "Max"]);
+    expect(persistedTopics).not.toContain("Ahead B2");
+    expect(persistedTopics).not.toContain("Ahead C1");
+  });
+
+  it("keeps topics up to the target level (one above the result level)", async () => {
+    upsert.mockClear();
+
+    await persistGaps(
+      "user_1",
+      [
+        { topic: "Result", level: CEFR_LEVEL.B1, errors: 1, skippedCount: 0 },
+        { topic: "Target", level: CEFR_LEVEL.B1_PLUS, errors: 2, skippedCount: 0 },
+        { topic: "Too far", level: CEFR_LEVEL.B2, errors: 1, skippedCount: 0 },
+      ],
+      CEFR_LEVEL.B1_PLUS,
+    );
+
+    const persistedTopics = upsert.mock.calls.map(
+      ([arg]) => arg.where.userId_level_topicName.topicName,
+    );
+    expect(persistedTopics).toEqual(["Result", "Target"]);
+    expect(persistedTopics).not.toContain("Too far");
+  });
+
+  it("does not upsert when every topic is above the max level", async () => {
+    upsert.mockClear();
+
+    await persistGaps(
+      "user_1",
+      [{ topic: "Ahead", level: CEFR_LEVEL.B2, errors: 2, skippedCount: 0 }],
+      CEFR_LEVEL.B1,
+    );
 
     expect(upsert).not.toHaveBeenCalled();
   });
