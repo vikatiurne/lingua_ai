@@ -22,7 +22,7 @@ _Live demo coming soon._
 
 | Login | Dashboard | Exercise | Evaluation |
 |---|---|---|---|
-| ![Login](docs/screenshots/02-login.png) | _coming soon_ | _coming soon_ | _coming soon_ |
+| ![Login](docs/screenshots/02-login.png) | ![Dashboard](docs/screenshots/03-dashboard.png) | _coming soon_ | _coming soon_ |
 
 ---
 

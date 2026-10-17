@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { WeakTopic } from "@/lib/test/gap-map";
+import { pluralize } from "@/lib/i18n/plural";
 
 export type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
@@ -65,7 +66,10 @@ export function TestResult({
                         className="flex items-center justify-between text-sm text-muted-foreground"
                       >
                         <span>{weakTopic.topic}</span>
-                        <span>{weakTopic.errors} помилок</span>
+                        <span>
+                          {weakTopic.errors}{" "}
+                          {pluralize(weakTopic.errors, "помилка", "помилки", "помилок")}
+                        </span>
                       </li>
                     ))}
                   </ul>
