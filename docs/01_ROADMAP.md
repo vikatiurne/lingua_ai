@@ -74,35 +74,29 @@
 - [х] 22 — Dashboard (з планом)
 - [х] 23 — Plan visualization (interactive timeline)
 - [ ] 24 — Plan editing UI
-- [ ] 24.5 — Topic Library UI (Explore mode)   
+- [х] 24.5 — Topic Library UI (Explore mode)   
 
 ## E7 — Exercise
-
-- [ ] 25 — Topic selector (next subtopic)
-- [ ] 26 — Topic explanation (AI)
-- [ ] 26.1 — Error/Quizlet context for generation
-- [ ] 27 — Sentence generation (AI + cross-check)
-- [ ] 27.1 — Error recycling logic
-- [ ] 28 — PDF generation
-- [ ] 29 — Exercise UI (input + checkboxes) 
+- [ ] 25 — Exercise Setup (вибір режиму: PDF або в додатку + вибір кількості речень)  ← ТЕКУЩАЯ
+- [ ] 26 — Topic explanation (AI) + Rule Accordion
+- [ ] 27 — Sentence generation (AI + Error recycling)
+- [ ] 28 — PDF generation (для режиму друку)
+- [ ] 29 — Exercise UI (Інпути для введення відповідей у додатку)
 - [ ] 30 — Exercise state persistence
 
 ## E8 — Evaluation
-
-- [ ] 31 — Answer evaluation (AI)
+- [ ] 31 — Answer evaluation (AI + обробка `...` для пропущених слів)
 - [ ] 32 — Double score (topic + grammar)
 - [ ] 33 — Error breakdown
-- [ ] 34 — Error review button
-- [ ] 35 — Quizlet export
+...
 
 ## E9 — Review & Exports
-
-- [ ] 36 — Review exercise (only errors)
-- [ ] 37 — Recommendations (podcasts, films, articles)
+- [ ] 36 — Review exercise
+- [ ] 37 — Recommendations
 - [ ] 38 — Curated materials DB
-- [ ] 39 — Quizlet file generator
-- [ ] 39.1 — Save Quizlet exports to DB ← NEW
-- [ ] 39.2 — Quizlet history page in cabinet ← NEW
+- [ ] 39 — Quizlet file generator (відредагований список користувачем)
+- [ ] 39.5 — Flashcards (Quizlet-style UI)  ← НОВАЯ ЗАДАЧА
+- [ ] 39.6 — Spelling exercise (вивчення написання слів)  ← НОВАЯ ЗАДАЧА
 
 ## E10 — Calendar
 

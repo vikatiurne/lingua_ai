@@ -27,6 +27,15 @@ export default async function DashboardPage() {
       <div className="space-y-6">
         <LevelBadge level={user.level} />
         <NoPlanCTA />
+        <p className="text-center text-sm text-muted-foreground">
+          Хочете обрати тему самостійно?{" "}
+          <Link
+            href="/library"
+            className="font-medium text-primary underline-offset-4 hover:underline"
+          >
+            → Бібліотека
+          </Link>
+        </p>
       </div>
     );
   }
@@ -54,6 +63,15 @@ export default async function DashboardPage() {
         <PlanPreview content={content} targetLevel={user.targetLevel} />
         <WeakTopicsCard topics={weakTopics} />
       </div>
+      <p className="text-sm text-muted-foreground">
+        Хочете обрати тему самостійно?{" "}
+        <Link
+          href="/library"
+          className="font-medium text-primary underline-offset-4 hover:underline"
+        >
+          → Бібліотека
+        </Link>
+      </p>
     </div>
   );
 }
