@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lora, Mulish } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const mulish = Mulish({
   subsets: ["latin", "cyrillic"],
@@ -33,6 +34,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster richColors position="top-center" />
         </ThemeProvider>
       </body>
     </html>

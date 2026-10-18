@@ -9,7 +9,7 @@ export function AppShell({
   showThemeToggle?: boolean;
 }>) {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-background to-accent/40">
+    <div className="relative min-h-screen bg-gradient-to-br from-background via-background to-accent/40">
       <DoodlePattern
         id="doodles-app"
         className="text-foreground opacity-[0.06]"
