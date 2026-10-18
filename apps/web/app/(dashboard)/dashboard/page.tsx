@@ -51,8 +51,8 @@ export default async function DashboardPage() {
         </div>
       </div>
       <div className="grid gap-6 lg:grid-cols-2">
-        <PlanPreview content={content} />
-        <WeakTopicsCard topics={weakTopics} currentLevel={user.level} />
+        <PlanPreview content={content} targetLevel={user.targetLevel} />
+        <WeakTopicsCard topics={weakTopics} />
       </div>
     </div>
   );

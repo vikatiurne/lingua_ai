@@ -63,14 +63,19 @@ Tailwind-класи (`bg-background`, `text-primary`, `border-border` тощо)
 | `--background` | `40 60% 98%` | `#FDFBF7` | Кремовий/овсяний фон сторінок |
 | `--foreground` | `215 28% 17%` | `#1F2937` | Графітовий текст |
 | `--card` | `0 0% 100%` | `#FFFFFF` | Картки (білі) |
-| `--primary` | `15 55% 48%` | `#BE5937` | Теракота: кнопки, посилання, активні стани |
-| `--primary-foreground` | `40 60% 98%` | `#FDFBF7` | Текст на primary |
+| `--primary` | `24 50% 25%` | `#603920` | Темна теракота: кнопки, посилання, активні стани |
+| `--primary-foreground` | `40 33% 95%` | `#F6F4EE` | Текст на primary |
 | `--secondary` | `35 44% 89%` | `#EFE5D7` | Другорядні поверхні |
 | `--muted` | `38 38% 85%` | `#E7DDCA` | Приглушені поверхні |
 | `--muted-foreground` | `37 12% 38%` | `#6D6455` | Другорядний текст |
 | `--accent` | `40 70% 85%` | `#F4E2BE` | Пісочні плашки (правила, підказки), hover |
 | `--border` / `--input` | `37 25% 88%` | `#E8E2D9` | Тепла бежева рамка |
-| `--ring` | `15 55% 48%` | `#BE5937` | Focus-ring = primary |
+| `--ring` | `24 50% 25%` | `#603920` | Focus-ring = primary |
+| `--success` | `24 35% 38%` | `#835A3F` | Статус «успішно»: банер завершення, галочки |
+| `--success-foreground` | `40 33% 98%` | `#FCFAF8` | Текст на success |
+| `--completed-bg` | `36 38% 92%` | `#F2ECE3` | Фон пройденої теми (бежево-пісочний) |
+| `--completed-border` | `28 25% 75%` | `#CFBEAF` | Рамка пройденої теми |
+| `--completed-text` | `24 30% 38%` | `#7E5B44` | Текст пройденої теми (приглушений/закреслений) |
 
 ### Dark
 
@@ -82,8 +87,21 @@ Tailwind-класи (`bg-background`, `text-primary`, `border-border` тощо)
 | `--primary` | `15 63% 60%` | `#D97959` | Світліша терракота |
 | `--accent` | `40 37% 66%` | `#C8B388` | Пісочний акцент |
 | `--border` / `--input` | `33 10% 21%` | `#3B3630` | Тепла темна рамка |
+| `--success` | `24 45% 55%` | `#C08259` | Статус «успішно» |
+| `--success-foreground` | `30 8% 10%` | `#1C1A17` | Текст на success |
+| `--completed-bg` | `30 12% 16%` | `#2E2924` | Фон пройденої теми |
+| `--completed-border` | `28 15% 28%` | `#52473D` | Рамка пройденої теми |
+| `--completed-text` | `28 20% 70%` | `#C2B1A3` | Текст пройденої теми |
 
 **`--destructive`** — стандартний червоний (семантика помилок), не чіпати.
+
+**Статусні токени (`--success`, `--completed-*`).** Успіх і завершення
+позначаються **терракотовою** гамою, а не зеленим — щоб не вибиватись із
+теплої палітри (принцип «жодних кислотних кольорів», §1).
+- `--success` — банери завершення, іконка `CheckCircle2`, галочки.
+- `--completed-bg` / `--completed-border` / `--completed-text` — стан
+  «тема пройдена» (напр. картка уроку): бежево-пісочний фон, приглушений
+  закреслений текст.
 
 ---
 
@@ -105,7 +123,8 @@ Tailwind-класи (`bg-background`, `text-primary`, `border-border` тощо)
 - Помилка поля: `<Label>` + `<Input aria-invalid>` + `text-sm font-medium text-destructive`.
 - Root-помилка (невірний пароль, 429): банер над формою —
   `border-destructive/50 bg-destructive/10 text-destructive` + іконка `AlertCircle`.
-- Успіх: зелений банер + `CheckCircle2`.
+- Успіх: банер `border-success/50 bg-success/10 text-success` + `CheckCircle2`
+  (терракота, не зелений — див. §3 про токен `--success`).
 - Loading: кнопка `disabled`, текст + `Loader2` (`animate-spin`).
 
 ---
@@ -141,7 +160,7 @@ Tailwind-класи (`bg-background`, `text-primary`, `border-border` тощо)
 
 ## 6. Асети
 
-- **Favicon:** `apps/web/app/icon.svg` — теракота `#BE5937` + кремова «L» (serif).
+- **Favicon:** `apps/web/app/icon.svg` — теракота `#603920` (= `--primary`) + кремова «L» (serif).
 - **Дудл-фон:** `apps/web/components/auth/doodle-pattern.tsx` — SVG `<pattern>`
   з ручками, олівцями, «?», «!», зірочками, хвилями. Освітня тема, без
   зовнішніх зображень. Використання: низька прозорість (6–8%) як фон.

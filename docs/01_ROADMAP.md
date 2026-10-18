@@ -72,8 +72,9 @@
 
 - [х] 21 — Plan generation (AI)
 - [х] 22 — Dashboard (з планом)
-- [ ] 23 — React Flow visualization
+- [х] 23 — Plan visualization (interactive timeline)
 - [ ] 24 — Plan editing UI
+- [ ] 24.5 — Topic Library UI (Explore mode)   
 
 ## E7 — Exercise
 

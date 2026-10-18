@@ -7,13 +7,30 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { PlanContent } from "@/lib/plan/generate";
+import type { CEFRLevel } from "@lingua/shared";
 import { pluralize } from "@/lib/i18n/plural";
 import { formatLevelCode } from "@/lib/level";
 
 const MAX_TOPICS = 5;
 
-export function PlanPreview({ content }: { content: PlanContent }) {
+export function PlanPreview({
+  content,
+  targetLevel = null,
+}: {
+  content: PlanContent;
+  targetLevel?: CEFRLevel | null;
+}) {
   const topics = content.topics.slice(0, MAX_TOPICS);
+
+  const topicsCount = pluralize(
+    content.topics.length,
+    "тема",
+    "теми",
+    "тем"
+  );
+  const description = targetLevel
+    ? `${content.topics.length} ${topicsCount} для переходу на ${formatLevelCode(targetLevel)}`
+    : `${content.topics.length} ${topicsCount} для закріплення`;
 
   return (
     <Card>
@@ -21,11 +38,7 @@ export function PlanPreview({ content }: { content: PlanContent }) {
         <CardTitle className="font-display text-xl font-semibold tracking-tight">
           Ваш план
         </CardTitle>
-        <CardDescription>
-          {content.topics.length}{" "}
-          {pluralize(content.topics.length, "тема", "теми", "тем")} · рівень{" "}
-          {formatLevelCode(content.level)}
-        </CardDescription>
+        <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
         <ol className="space-y-3">
