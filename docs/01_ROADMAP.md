@@ -77,7 +77,7 @@
 - [х] 24.5 — Topic Library UI (Explore mode)   
 
 ## E7 — Exercise
-- [ ] 25 — Exercise Setup (вибір режиму: PDF або в додатку + вибір кількості речень)  ← ТЕКУЩАЯ
+- [х] 25 — Exercise Setup (вибір режиму: PDF або в додатку + вибір кількості речень)  ← ТЕКУЩАЯ
 - [ ] 26 — Topic explanation (AI) + Rule Accordion
 - [ ] 27 — Sentence generation (AI + Error recycling)
 - [ ] 28 — PDF generation (для режиму друку)
