@@ -129,6 +129,7 @@ export function PlanTimeline({
           <PlanTopicCard
             key={topic.name}
             topic={topic}
+            level={content.level}
             status={progressMap.get(topic.name) ?? "not_started"}
             isCurrent={index === currentTopicIndex}
             onToggle={handleToggle}

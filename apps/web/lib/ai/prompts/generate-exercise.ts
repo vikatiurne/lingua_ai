@@ -4,8 +4,8 @@ export type ExercisePromptParams = {
   level: CEFRLevel;
   topic: string;
   subtopic: string;
-  uaEnCount: number;
-  enUaCount: number;
+  ukEnCount: number;
+  enUkCount: number;
   hint: string;
   examples: string[];
   pastErrors: string[];
@@ -14,8 +14,8 @@ export type ExercisePromptParams = {
 export function getPrompt(params: ExercisePromptParams): string {
   const lines: string[] = [
     "You are an English teacher. Generate " +
-      `${params.uaEnCount} Ukrainian sentences to translate to English, ` +
-      `and ${params.enUaCount} English sentences to translate to Ukrainian.`,
+      `${params.ukEnCount} Ukrainian sentences to translate to English, ` +
+      `and ${params.enUkCount} English sentences to translate to Ukrainian.`,
     `Topic: ${params.topic} (${params.subtopic}), Level: ${params.level}.`,
     `Must follow these rules: ${params.hint}.`,
     `Base your style on these examples: ${params.examples.join(" ")}`,
@@ -29,9 +29,11 @@ export function getPrompt(params: ExercisePromptParams): string {
   }
 
   lines.push(
-    'Return ONLY a valid JSON object in this format: ' +
-      '{ "sentences": [{ "source": "...", "direction": "uk_en" }] } ' +
-      'where direction is "uk_en" (Ukrainian to English) or "en_uk" (English to Ukrainian).'
+    "Return ONLY a valid JSON object in this format: " +
+      '{ "sentences": [{ "source": "...", "reference": "...", "direction": "uk_en" }] } ' +
+      'where "source" is the sentence to translate, "reference" is the correct ' +
+      'translation of "source" into the other language, and direction is "uk_en" ' +
+      '(Ukrainian to English) or "en_uk" (English to Ukrainian).'
   );
 
   return lines.join("\n");

@@ -20,11 +20,11 @@
 
 Після завершення:
 - Є API `POST /api/exercise/generate`.
-- Він приймає параметри: `level`, `topic`, `subtopic`, `uaEnCount`, `enUaCount`.
+- Він приймає параметри: `level`, `topic`, `subtopic`, `ukEnCount`, `enUkCount`.
 - Витягує минулі помилки користувача (`UserError`) зі статусом `ACTIVE`.
 - Формує промпт для AI з урахуванням шаблонів та помилок.
 - Отримує JSON з реченнями (укр → англ і англ → укр).
-- Зберігає `Exercise` у БД і повертає `exerciseId`.
+- Зберігає `Exercise` у БД і повертає `exerciseId` та речення.
 
 ---
 
@@ -37,10 +37,10 @@
 - [x] Функція витягує `UserError` де `status === "ACTIVE"` (до 5 штук).
 - [x] Функція витягує шаблони через `loadTemplateFile`, знаходить потрібну тему/підтему і дістає `examples` та `generation_hint`.
 - [x] Формується промпт, який передається в `completeWithFallback`.
-- [x] AI повертає JSON `{ sentences: [{ source, direction }] }`.
+- [x] AI повертає JSON `{ sentences: [{ source, reference, direction }] }`.
 - [x] Робиться валідація через Zod, що AI повернув правильний формат.
 - [x] `Exercise` створюється в БД зі `status: "generated"`.
-- [x] API повертає `{ exerciseId }`.
+- [x] API повертає `{ exerciseId, sentences, isFallback }`.
 - [x] `pnpm typecheck` і `pnpm build` проходять.
 
 ---
@@ -59,18 +59,18 @@
 ### 1. `prompts/generate-exercise.ts`
 Функція формування промпту. Отримує:
 - `level`, `topic`, `subtopic`
-- `uaEnCount`, `enUaCount`
+- `ukEnCount`, `enUkCount`
 - `examples` (2-3 речення з шаблону)
 - `hint` (generation_hint з шаблону)
 - `pastErrors` (масив рядків)
 
 Повертає рядок промпту:
-> "You are an English teacher. Generate {uaEnCount} Ukrainian sentences to translate to English, and {enUaCount} English sentences to translate to Ukrainian. 
+> "You are an English teacher. Generate {ukEnCount} Ukrainian sentences to translate to English, and {enUkCount} English sentences to translate to Ukrainian. 
 > Topic: {topic} ({subtopic}), Level: {level}.
 > Must follow these rules: {hint}.
 > Base your style on these examples: {examples}.
 > Important: Include these past mistakes/sentences to test the student again: {pastErrors}.
-> Return ONLY a valid JSON object in this format: { "sentences": [{ "source": "...", "direction": "uk_en" }] }"
+> Return ONLY a valid JSON object in this format: { "sentences": [{ "source": "...", "reference": "...", "direction": "uk_en" }] }"
 
 ### 2. `generator.ts`
 1. Витягує `pastErrors` з БД (`prisma.userError.findMany` де `status: ACTIVE`).
@@ -86,7 +86,7 @@
 2. Zod-валідація вхідних параметрів.
 3. `const sentences = await generateExercises(user.id, ...params)`.
 4. `prisma.exercise.create({ data: { userId, level, topicName, subtopicName, sentences, status: "generated" } })`.
-5. Повернути `{ exerciseId }`.
+5. Повернути `{ exerciseId, sentences, isFallback }`.
 
 ---
 
@@ -130,4 +130,7 @@ feat(exercise): add AI generation API with error recycling
 - **Self-correction** передає повний контекст: prompt + AI-відповідь + текст помилки (інакше AI не знає, що виправляти).
 - **Fallback**: `examples` з шаблону віддаються як є з напрямом `en_uk` (усі приклади — англійські речення).
 - **Topic/subtopic не знайдено в шаблоні** → не 404, а `console.warn` + генерація без `hint`/`examples` (AI отримує тільки назву теми).
+- **`uaEnCount`/`enUaCount` → `ukEnCount`/`enUkCount` (до задачі 29).** Стандарт ISO для України — `uk`, не `ua`. Zod-схема, генератор і промпт перейменовано. Спільно з задачею 25 (URL-параметри `ukEn`/`enUk`).
+- **Відповідь розширено до `{ exerciseId, sentences, isFallback }` (до задачі 29).** UI має рендерити речення одразу після генерації (за форматом `GenerateResponse` з задачі 29): `{ id, source, direction, reference }`. `id` генерується сервером (`crypto.randomUUID()`) і зберігається в БД разом із реченнями; `reference` (еталонний переклад) повертає AI — додано до Zod-схеми та промпту. У fallback `reference: ""`.
+- **Формат `direction` в API-відповіді** — `uk_en` / `en_uk` (підкреслення), як і в БД.
 - Runtime-перевірка: без логіну → `401`; повний цикл з AI не запускався (потребує ключів `OPENROUTER_*`).

@@ -1,7 +1,7 @@
 import type { CEFRLevel } from "@lingua/shared";
 import { z } from "zod";
 import { prisma } from "@/lib/db/client";
-import { completeWithFallback } from "@/lib/ai/fallback";
+import { completeCached } from "@/lib/ai/cached";
 import type { AIMessage } from "@/lib/ai/types";
 import { logAIRequest } from "@/lib/ai/logger";
 import { getPrompt } from "@/lib/ai/prompts/generate-exercise";
@@ -10,24 +10,28 @@ import { loadTemplateFile } from "@/lib/slots/loader";
 const MAX_SENTENCES = 20;
 const MAX_PAST_ERRORS = 5;
 const FALLBACK_EXAMPLE_LIMIT = 6;
+const AI_TIMEOUT_MS = 8000;
 
 const aiSentenceSchema = z.object({
   source: z.string().min(1),
   direction: z.enum(["uk_en", "en_uk"]),
+  reference: z.string().min(1),
 });
 
 const aiResponseSchema = z.object({
   sentences: z.array(aiSentenceSchema).min(1).max(MAX_SENTENCES),
 });
 
-export type GeneratedSentence = z.infer<typeof aiSentenceSchema>;
+export type GeneratedSentence = z.infer<typeof aiSentenceSchema> & {
+  id: string;
+};
 
 export type GenerateExercisesParams = {
   level: CEFRLevel;
   topic: string;
   subtopic: string;
-  uaEnCount: number;
-  enUaCount: number;
+  ukEnCount: number;
+  enUkCount: number;
 };
 
 export type GenerateExercisesResult = {
@@ -89,10 +93,19 @@ export async function generateExercises(
   }
 
   return {
-    sentences: parsed.sentences,
+    sentences: withIds(parsed.sentences),
     templateIds: template.templateIds,
     isFallback: false,
   };
+}
+
+function withIds(
+  sentences: z.infer<typeof aiSentenceSchema>[]
+): GeneratedSentence[] {
+  return sentences.map((sentence) => ({
+    id: crypto.randomUUID(),
+    ...sentence,
+  }));
 }
 
 type ResolvedTemplate = {
@@ -130,15 +143,18 @@ async function resolveTemplate(
 
 function buildFallbackSentences(examples: string[]): GeneratedSentence[] {
   return examples.slice(0, MAX_SENTENCES).map((source) => ({
+    id: crypto.randomUUID(),
     source,
     direction: "en_uk",
+    reference: "",
   }));
 }
 
 async function callAI(messages: AIMessage[]): Promise<string> {
-  const result = await completeWithFallback(messages, {
+  const result = await completeCached(messages, {
     responseFormat: "json",
     temperature: 0.7,
+    timeoutMs: AI_TIMEOUT_MS,
   });
   return result.text;
 }

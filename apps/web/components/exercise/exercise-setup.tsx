@@ -10,12 +10,13 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type ExerciseMode = "pdf" | "app";
 
-const COUNT_MIN = 1;
+const COUNT_DEFAULT = "5";
 const COUNT_MAX = 20;
 
-function clampCount(value: number): number {
-  if (Number.isNaN(value)) return 5;
-  return Math.min(COUNT_MAX, Math.max(COUNT_MIN, value));
+function parseCount(value: string): number {
+  if (value === "") return 0;
+  const parsed = Number(value);
+  return Number.isNaN(parsed) ? 0 : Math.min(COUNT_MAX, parsed);
 }
 
 export function ExerciseSetup({
@@ -29,16 +30,22 @@ export function ExerciseSetup({
 }) {
   const router = useRouter();
   const [mode, setMode] = useState<ExerciseMode>("pdf");
-  const [uaEnCount, setUaEnCount] = useState(5);
-  const [enUaCount, setEnUaCount] = useState(5);
+  const [ukEn, setUkEn] = useState(COUNT_DEFAULT);
+  const [enUk, setEnUk] = useState(COUNT_DEFAULT);
+
+  const ukEnCount = parseCount(ukEn);
+  const enUkCount = parseCount(enUk);
+  const totalCount = ukEnCount + enUkCount;
+  const isCountValid = totalCount >= 1 && totalCount <= COUNT_MAX;
 
   const handleStart = () => {
+    if (!isCountValid) return;
     const query = new URLSearchParams({
       level,
       topic,
       subtopic,
-      uaEn: String(clampCount(uaEnCount)),
-      enUa: String(clampCount(enUaCount)),
+      ukEn: String(ukEnCount),
+      enUk: String(enUkCount),
     });
     router.push(`/exercise/${mode}?${query.toString()}`);
   };
@@ -65,30 +72,46 @@ export function ExerciseSetup({
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="uaEnCount">Скільки речень укр → англ</Label>
+          <Label htmlFor="ukEnCount">Скільки речень укр → англ</Label>
           <Input
-            id="uaEnCount"
+            id="ukEnCount"
             type="number"
-            min={COUNT_MIN}
+            min={0}
             max={COUNT_MAX}
-            value={uaEnCount}
-            onChange={(event) => setUaEnCount(Number(event.target.value))}
+            value={ukEn}
+            onChange={(event) =>
+              setUkEn(event.target.value.replace(/[^0-9]/g, ""))
+            }
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="enUaCount">Скільки речень англ → укр</Label>
+          <Label htmlFor="enUkCount">Скільки речень англ → укр</Label>
           <Input
-            id="enUaCount"
+            id="enUkCount"
             type="number"
-            min={COUNT_MIN}
+            min={0}
             max={COUNT_MAX}
-            value={enUaCount}
-            onChange={(event) => setEnUaCount(Number(event.target.value))}
+            value={enUk}
+            onChange={(event) =>
+              setEnUk(event.target.value.replace(/[^0-9]/g, ""))
+            }
           />
         </div>
       </div>
 
-      <Button onClick={handleStart} className="w-full sm:w-auto">
+      {!isCountValid ? (
+        <p className="text-sm font-medium text-destructive">
+          {totalCount < 1
+            ? "Оберіть хоча б одне речення для перекладу"
+            : `Максимум ${COUNT_MAX} речень за тренування`}
+        </p>
+      ) : null}
+
+      <Button
+        onClick={handleStart}
+        disabled={!isCountValid}
+        className="w-full sm:w-auto"
+      >
         Почати
       </Button>
     </div>
