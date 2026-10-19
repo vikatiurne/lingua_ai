@@ -28,6 +28,7 @@ export function TopicList({
               {topic.topic}
             </span>
 
+
             <div className="max-h-60 min-h-0 flex-1 overflow-y-auto pr-2">
               <ul className="space-y-0.5">
                 {topic.subtopics.map((subtopic) => (

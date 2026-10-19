@@ -1,9 +1,1117 @@
 {
-  "B1": {
+  "A1": {
+    "Verb to be (am/is/are)": {
+      "Affirmative": {
+        "formula": "S + am/is/are + N/Adj",
+        "short": "Дієслово to be перекладається як «бути», «є» і змінюється за особами: am (з I), is (з he, she, it), are (з we, you, they).",
+        "full": "Дієслово **to be** (бути) в теперішньому часі (Present Simple) в стверджувальних реченнях має три форми:\n\n- **I + am** (Я є)\n- **He / She / It + is** (Він / Вона / Воно є)\n- **We / You / They + are** (Ми / Ви / Вони є)\n\n**Приклади:**\n- I am a student. (Я — студент.)\n- She is happy. (Вона щаслива.)\n- They are friends. (Вони — друзі.)\n\nУ розмовній мові часто використовують скорочення: *I'm, he's, she's, it's, we're, you're, they're*."
+      },
+      "Negative": {
+        "formula": "S + am/is/are + not + N/Adj/Adv",
+        "short": "Для утворення заперечення з дієсловом to be додаємо частку not після am, is або are.",
+        "full": "Щоб утворити заперечне речення з дієсловом **to be** на рівні A1, потрібно додати частку **not** одразу після форми дієслова (am, is, are).\n\nСкорочені форми (часто використовуються в розмовної мові):\n- is not = isn't\n- are not = aren't\n*(Форма am not зазвичай не скорочується в am'n't)*\n\nПриклади:\n- I am not tired. (Я не втомлений.)\n- She is not (isn't) a doctor. (Вона не лікар.)\n- They are not (aren't) at home. (Вони не вдома.)"
+      },
+      "Questions": {
+        "formula": "am/is/are + S + N/Adj/Adv?",
+        "short": "Щоб утворити запитання з дієсловом to be, поставте am, is або are на перше місце перед підметом.",
+        "full": "Для утворення загальних запитань (Yes/No questions) з дієсловом to be, ми міняємо місцями підмет і дієслово.\n\n- Am I late? (Я запізнююся?)\n- Is he a doctor? (Він лікар?)\n- Is she happy? (Вона щаслива?)\n- Is it cold today? (Сьогодні холодно?)\n- Are you ready? (Ти готовий? / Ви готові?)\n- Are we friends? (Ми друзі?)\n- Are they at home? (Вони вдома?)\n\nКороткі відповіді:\n- Yes, I am. / No, I am not.\n- Yes, she is. / No, she isn't.\n- Yes, they are. / No, they aren't."
+      }
+    },
+    "Subject Pronouns and Possessive Adjectives": {
+      "Subject Pronouns": {
+        "formula": "S + V1",
+        "short": "Особові займенники (Subject Pronouns) вказують на те, хто виконує дію, і зазвичай стоять на початку речення перед дієсловом.",
+        "full": "Особові займенники (Subject Pronouns) замінюють іменники та відповідають на питання «хто?» або «що?». Вони вказують на виконавця дії.\n\nОсновні займенники:\n- I — я\n- You — ти / ви\n- He — він (про чоловіків і хлопчиків)\n- She — вона (про жінок і дівчаток)\n- It — воно (про неодушевлені предмети та тварин)\n- We — ми\n- They — вони\n\nПриклади речень:\n- I am a student. (Я — студент.)\n- She is happy. (Вона щаслива.)\n- They play football. (Вони грають у футбол.)"
+      },
+      "Possessive Adjectives": {
+        "formula": "Possessive Adj + N",
+        "short": "Присвійні прикметники (Possessive Adjectives) показують, кому належить предмет, і завжди стоять перед іменником.",
+        "full": "Possessive Adjectives (присвійні прикметники) вказують на приналежність чогось комусь. Вони завжди використовуються разом з іменником і не змінюються за числами чи родами.\n\nОсновні форми:\n- my (мій / моя / моє / мої)\n- your (твій / ваш)\n- his (його — про чоловіка)\n- her (її — про жінку)\n- its (його / її — про неодушевлені предмети або тварин)\n- our (наш)\n- their (їхній)\n\nПриклади:\n- This is **my** book. (Це моя книга.)\n- **His** car is red. (Його машина червона.)\n- We love **our** teacher. (Ми любимо нашого вчителя.)"
+      }
+    },
+    "Articles (a/an/the)": {
+      "Indefinite Article (a/an)": {
+        "formula": "a/an + N (singular, countable)",
+        "short": "Неозначений артикль a/an використовується з одниною злічуваних іменників, коли ми згадуємо предмет уперше або говоримо про нього загалом.",
+        "full": "Неозначений артикль (a/an) походить від слова 'one' (один) і зазвичай (у більшості випадків) вживається зі злічуваними іменниками в однині.\n\nОсновні правила:\n- Використовуй **a** перед словами, що починаються з приголосного звука: *a cat, a book, a house*.\n- Використовуй **an** перед словами, що починаються з голосного звука: *an apple, an egg, an umbrella*.\n\nКоли вживаємо:\n1. Коли говоримо про предмет або людину вперше: *I have a dog. The dog is big.* (Перша згадка — a dog, друга — the dog).\n2. Коли називаємо професію або ким є людина: *She is a teacher. He is an engineer.*\n3. У значенні «один», «будь-який»: *I need a pen, please.*"
+      },
+      "Definite Article (the)": {
+        "formula": "the + N",
+        "short": "Означений артикль 'the' зазвичай використовується, коли ми говоримо про конкретний предмет або людину, яку можна однозначно визначити з контексту: вона вже згадувалася раніше, є єдиною у своєму роді або зрозуміла з ситуації.",
+        "full": "Означений артикль 'the' вживається з іменниками (в однині та множині), коли співрозмовники знають, про що саме йдеться.\n\nОсновні випадки вживання (головний принцип — предмет можна однозначно визначити з контексту):\n- Предмет уже згадувався раніше: I saw a cat. The cat is black.\n- Предмет є єдиним у світі: the sun (сонце), the moon (місяць).\n- Перед назвами деяких місць, океанів, морів: the Pacific Ocean, the UK.\n- Коли з контексту зрозуміло, про що мова: Close the door, please.\n\nПриклади:\n- The book on the table is mine. (Книга на столі — моя, конкретна книга)\n- Look at the sky! (Подивися на небо! Небо одне-єдине)"
+      }
+    },
+    "Plural Nouns": {
+      "Regular Plurals (s/es)": {
+        "formula": "N + -s/-es",
+        "short": "Більшість іменників в англійській мові утворюють множину за допомогою закінчення -s. Якщо слово закінчується на -s, -ss, -sh, -ch, -x або -z, додається закінчення -es.",
+        "full": "Основне правило утворення множини (Regular Plurals) для рівня A1:\n\n1. До більшості іменників ми просто додаємо закінчення **-s**.\n- Приклад: *cat – cats* (кіт – коти), *book – books* (книга – книги).\n\n2. Якщо іменник закінчується на шиплячі та свистячі звуки (**-s, -ss, -sh, -ch, -x, -z**), ми додаємо закінчення **-es**, щоб слово було легше вимовити.\n- Приклад: *bus – buses* (автобус – автобуси), *box – boxes* (коробка – коробки), *watch – watches* (годинник – годинники).\n\nПриклади речень:\n- I have two cats. (У мене є двоє котів.)\n- She has three boxes. (У неї є три коробки.)"
+      },
+      "Irregular Plurals": {
+        "formula": "N (singular) → N (irregular plural)",
+        "short": "Деякі іменники у множині змінюють свою форму повністю або залишаються без змін, а не просто додають закінчення -s.",
+        "full": "Деякі іменники в англійській мові не підкоряються загальному правилу і утворюють множину особливим чином (Irregular Plurals). Їх просто потрібно запам'ятати.\n\nОсновні групи:\n- Зміна кореневої голосної: man (чоловік) - men (чоловіки), woman (жінка) - women (жінки), tooth (зуб) - teeth (зуби), foot (стопа) - feet (стопи), child (дитина) - children (діти), mouse (миша) - mice (миші).\n- Форма не змінюється: sheep (вівця) - sheep (вівці), fish (риба) - fish (риби), deer (олень) - deer (олені).\n\nПриклади в реченнях:\n- I see a man. → I see three men.\n- The child is happy. → The children are happy.\n- I have one tooth. → Brush your teeth!"
+      }
+    },
+    "This / That / These / Those": {
+      "Demonstratives": {
+        "formula": "This/That + is + N / These/Those + are + N / This/That/These/Those + N",
+        "short": "Вказівні займенники допомагають показати на предмети залежно від їхньої відстані (близько чи далеко) та кількості (однина чи множина).",
+        "full": "Вказівні займенники (Demonstratives) вказують на конкретні предмети або людей.\n\nОсновні правила:\n- **This** (цей / ця / це) — для однини, коли предмет знаходиться **близько** (в руках або перед нами).\n  *Приклад:* This is my pen. (Це моя ручка.)\n- **That** (той / та / те) — для однини, коли предмет знаходиться **далеко** (не під рукою).\n  *Приклад:* That is a big house. (Той будинок великий.)\n- **These** (ці) — для множини, коли предмети знаходяться **близько**.\n  *Приклад:* These are my books. (Це мої книги.)\n- **Those** (ті) — для множини, коли предмети знаходяться **далеко**.\n  *Приклад:* Those are my friends. (Ті — мої друзі.)\n\nТакож ці слова можуть використовуватися з іменниками:\n- This book (ця книга) — That book (та книга)\n- These books (ці книги) — Those books (ті книги)\n\nДві функції вказівних слів:\n- Самостійне вживання (без іменника) — потрібне дієслово is/are: This is my book. / These are my books.\n- Перед іменником (як означення) — дієслово не потрібне: this book, that car, these books, those people."
+      }
+    },
+    "Have got / Has got": {
+      "Possession": {
+        "formula": "S + have got/has got + O",
+        "short": "Дієслово 'have got' / 'has got' використовується для вираження володіння предметами. Форма 'has got' вживається з займенниками he, she, it.",
+        "full": "Конструкція **have got / has got** використовується в англійській мові для позначення володіння (наприклад, коли у нас щось є).\n\n- **I / You / We / They** + **have got** ('ve got)\n- **He / She / It** + **has got** ('s got)\n\n**Приклади:**\n- I have got a car. (У мене є машина.)\n- She has got a cat. (У неї є кіт.)\n- They have got a big house. (У них є великий будинок.)"
+      },
+      "Negative and Questions": {
+        "formula": "S + haven't/hasn't + got / Have/Has + S + got?",
+        "short": "Для утворення заперечень у Present Simple з 'have got' використовуємо частку 'not' (haven't/hasn't got), а для запитань міняємо місцями підмет і 'have/has'.",
+        "full": "Тема: Have got / Has got (Negative and Questions)\n\n1. Заперечення (Negative sentences):\nДодаємо частку 'not' після 'have' або 'has'.\n- I / We / You / They + haven't got (have not got)\n- He / She / It + hasn't got (has not got)\n\nПриклади:\n- I haven't got a car. (У мене немає машини.)\n- She hasn't got a brother. (У неї немає брата.)\n\n2. Запитання (Questions):\nСтавимо 'Have' або 'Has' на перше місце в реченні.\n- Have + I / we / you / they + got...?\n- Has + he / she / it + got...?\n\nПриклади:\n- Have you got a pen? (У тебе є ручка?)\n- Has he got a dog? (У нього є собака?)\n\n3. Короткі відповіді (Short answers):\n- Yes, I have. / No, I haven't.\n- Yes, he has. / No, he hasn't."
+      }
+    },
+    "There is / There are": {
+      "Affirmative": {
+        "formula": "There is/are + N",
+        "short": "Використовуйте 'There is' для однини та незлічуваних іменників, а 'There are' — для множини, щоб сказати, що щось десь є.",
+        "full": "Конструкція **'There is / There are'** використовується для того, щоб повідомити про наявність предмета чи істоти в певному місці.\n\n- **There is** + однина (один предмет) або незлічувані іменники (те, що не можна порахувати).\n  *Приклади:*\n  - There is a book on the table. (На столі є книга.)\n  - There is some milk in the fridge. (У холодильнику є молоко.)\n\n- **There are** + множина (два і більше предметів).\n  *Приклади:*\n  - There are two cats in the room. (У кімнаті є двоє котів.)\n  - There are many apples on the tree. (На дереві багато яблук.)"
+      },
+      "Negative and Questions": {
+        "formula": "There + isn't/aren't + N / Is/Are + there + N?",
+        "short": "Для заперечення додаємо 'not' (there is not / there are not), а в питаннях міняємо місцями 'is/are' та 'there' (Is there? / Are there?).",
+        "full": "Тема: Negative and Questions (Заперечення та питання)\n\n1. Заперечні речення (Negative):\nЩоб сказати, чогось немає, ми додаємо частку 'not' після 'is' або 'are'.\n- There is not (There isn't) a cat. (Тут немає кота.)\n- There are not (There aren't) books. (Тут немає книг.)\n\n2. Питальні речення (Questions):\nЩоб задати питання, ми ставимо 'Is' або 'Are' на перше місце перед 'there'.\n- Is there a pen? (Чи є ручка?)\n- Are there apples? (Чи є яблука?)\n\n3. Короткі відповіді (Short answers):\n- Yes, there is. / No, there isn't.\n- Yes, there are. / No, there aren't."
+      }
+    },
+    "Present Simple": {
+      "Affirmative": {
+        "formula": "S + V1 (he/she/it + V1-s/es)",
+        "short": "Для утворення стверджувальних речень у Present Simple використовуємо першу форму дієслова, а для займенників he, she, it додаємо закінчення -s або -es.",
+        "full": "Present Simple (Простий теперішній час) у стверджувальних реченнях (Affirmative) описує регулярні дії, звички або загальні факти.\n\nСтруктура:\n- I / You / We / They + дієслово (наприклад: work, play, read)\n- He / She / It + дієслово з закінченням -s / -es (наприклад: works, plays, reads)\n\nПриклади:\n- I play tennis every weekend. (Я граю в теніс щовихідних.)\n- She likes apples. (Вона любить яблука.)\n- We live in Kyiv. (Ми живемо в Києві.)\n- He works in an office. (Він працює в офісі.)"
+      },
+      "Negative": {
+        "formula": "S + do/does + not + V1",
+        "short": "Для утворення заперечення у Present Simple використовуємо допоміжні дієслова do (для I, you, we, they) або does (для he, she, it) з часткою not та основну форму дієслова.",
+        "full": "У заперечних реченнях Present Simple ми додаємо допоміжне дієслово do або does та частку not перед основним дієсловом.\n\nФорма **don't** уживається з I, you, we, they, а **doesn't** — з he, she, it.\n\nПриклади:\n- I don't like coffee. (Я не люблю каву.)\n- They don't work on Sundays. (Вони не працюють по неділях.)\n- He doesn't speak French. (Він не розмовляє французькою.)\n- She doesn't live here. (Вона не живе тут.)\n\nЗверни увагу: у третій особі однини (he, she, it) закінчення -s з основного дієслова зникає, оскільки його 'забирає' слово doesn't."
+      },
+      "Questions": {
+        "formula": "Do/Does + S + V1?",
+        "short": "Для утворення запитань у Present Simple використовуємо допоміжні дієслова do (для I, you, we, they) та does (для he, she, it), які ставимо на перше місце.",
+        "full": "У Present Simple запитання утворюються за допомогою допоміжних дієслів **do** та **does**.\n\n**Структура загального запитання:**\nДопоміжне дієслово (Do / Does) + Підмет (I, you, he, she...) + Основна дія (дієслово в початковій формі без змін) + інші члени речення.\n\n- **Do** використовується з займенниками *I, you, we, they*.\n  *Приклад:* **Do** you speak English? (Ти розмовляєш англійською?)\n- **Does** використовується з займенниками *he, she, it*. У цьому випадку закінчення -s/-es з основного дієслова зникає, оскільки його 'забирає' слово does.\n  *Приклад:* **Does** she **like** apples? (Вона любить яблука?)\n\n**Короткі відповіді:**\n- Yes, I do. / No, I don't.\n- Yes, he does. / No, he doesn't."
+      }
+    },
+    "Present Simple vs Present Continuous": {
+      "Contrast": {
+        "formula": "S + V1 / S + am/is/are + V-ing",
+        "short": "Present Simple використовується для постійних дій і звичок, а Present Continuous — для дій, що відбуваються прямо зараз, а також для тимчасових ситуацій та домовленостей на майбутнє.",
+        "full": "Present Simple vs Present Continuous (Contrast):\n\n1. Present Simple (теперішній простий):\n- Використовуємо для постійних фактів, розпорядків дня та звичок.\n- Слова-маркери: always, usually, every day, sometimes.\n- Приклад: I work every day. (Я працюю щодня.)\n- Приклад: She lives in Kyiv. (Вона живе в Києві.)\n\n2. Present Continuous (теперішній тривалий):\n- Використовуємо для дій, які відбуваються в момент мовлення.\n- Утворюється за допомогою: am/is/are + дієслово з закінченням -ing.\n- Слова-маркери: now, at the moment, look, listen.\n- Приклад: I am working now. (Я працюю зараз.)\n- Приклад: Look! She is dancing. (Дивись! Вона танцює.)\n- Тимчасова ситуація: I am staying with my friends this week. (Цього тижня я живу в друзів.)\n- Домовленість на майбутнє: I am meeting Anna tomorrow. (Я зустрічаюся з Анною завтра.)"
+      }
+    },
+    "Can / Can't (Ability and Permission)": {
+      "Ability": {
+        "formula": "S + can/can't + V1",
+        "short": "Дієслово 'can' використовується для вираження вміння або здатності щось робити, а 'can't' — для її відсутності.",
+        "full": "Ми використовуємо дієслово **can** (можу, вмію), щоб показати, що людина має певну фізичну чи розумову здатність (ability) щось робити.\n\n**Будова стверджувальних речень:**\nПідмет + can + основна дія (дієслово без частки to).\n- *I can swim.* (Я вмію плавати.)\n- *She can speak English.* (Вона вміє розмовляти англійською.)\n\n**Будова заперечних речень:**\nПідмет + can't (cannot) + основна дія.\n- *I can't fly.* (Я не вмію літати.)\n- *He can't play the guitar.* (Він не вміє грати на гітарі.)\n\n**Запитання:**\nCan + підмет + дія?\n- *Can you swim?* — Yes, I can. / No, I can't."
+      },
+      "Permission and Requests": {
+        "formula": "Can + S + V1?",
+        "short": "Модальне дієслово 'can' використовується для прохання про дозвіл та його надання, а також для ввічливих прохань.",
+        "full": "Для того щоб запитати дозвіл або попросити про щось у неформальній обстановці, ми використовуємо дієслово **Can** на початку речення.\n\n**Can** ставиться на початок речення, перед підметом.\n\nПриклади:\n- **Can I** go out? (Чи можу я вийти? - дозвіл)\n- **Can you** help me? (Чи можеш ти мені допомогти? - прохання)\n\nДля відповіді використовуємо короткими формами:\n- Yes, you can.\n- No, you can't."
+      },
+      "Negative (can't)": {
+        "formula": "S + can + not + V1",
+        "short": "Для вираження неможливості або заборони в англійській мові використовується заперечна форма 'can't' (cannot) з усіма займенниками без змін.",
+        "full": "Заперечення 'can't' утворюється додаванням частки 'not' до модального дієслова 'can' (can + not = cannot, або скорочено can't).\n\nОсобливості використання:\n- Форма 'can't' є однаковою для всіх осіб (I, you, he, she, it, we, they).\n- Після 'can't' завжди використовується основне дієслово без частки 'to'.\n\nПриклади:\n- I can't swim. (Я не вмію плавати.)\n- You can't park here. (Тут не можна паркуватися — заборона.)\n- She can't speak Chinese. (Вона не вміє розмовляти китайською.)"
+      }
+    },
+    "Imperatives": {
+      "Positive and Negative Imperatives": {
+        "formula": "V1 / Don't + V1",
+        "short": "Наказовий спосіб використовується для надання інструкцій, порад або наказу. Створюється за допомогою інфінітива без частки 'to' для стверджень або 'Don't' + дієслово для заперечень.",
+        "full": "Наказовий спосіб (Imperatives) використовується, коли ми просимо когось щось зробити або даємо пораду.\n\n- **Positive Imperatives (Стверджувальні):** Використовуємо базову форму дієслова (інфінітив без 'to') на початку речення.\n  *Приклад:* Open the door. (Відчиніть двері.)\n  *Приклад:* Listen to the teacher. (Слухайте вчителя.)\n\n- **Negative Imperatives (Заперечні):** Додаємо слово 'Don't' (або 'Do not') перед дієсловом, щоб сказати чого робити не треба.\n  *Приклад:* Don't open the window. (Не відчиняйте вікно.)\n  *Приклад:* Don't run in the classroom. (Не бігайте в класі.)\n\nПідмет 'you' зазвичай опускається, оскільки команда спрямована безпосередньо до співрозмовника."
+      }
+    },
+    "Possessive 's": {
+      "Possessive 's": {
+        "formula": "N + 's + N",
+        "short": "Ми використовуємо 's (апостроф та s) після іменників, щоб показати, кому належить предмет. Наприклад: Anna's book (книга Анни).",
+        "full": "Повне правило:\n\nМи додаємо апостроф і букву 's' ('s) до імені або назви істоти (людини чи тварини), щоб показати володіння.\n\nПорядок такий: спочатку йде той, хто володіє, потім 's, а далі — те, що належить.\n\nПриклади:\n- Tom's car (машина Тома)\n- cat's toy (іграшка кота)\n- Maria's pen (ручка Марії)\n\nВажливо:\n- Якщо слово у множині закінчується на -s, ми додаємо тільки апостроф: my friends' house (будинок моїх друзів)."
+      }
+    },
+    "Prepositions of Place": {
+      "In, on, at, under, next to, behind, in front of": {
+        "formula": "S + am/is/are + in/on/at/under/next to/behind/in front of + N",
+        "short": "Прийменники місця (Prepositions of Place) вказують, де саме знаходиться предмет чи людина відносно інших об'єктів.",
+        "full": "Основні прийменники місця для рівня А1:\n\n- **in** (в, всередині): використовується, коли хтось або щось перебуває всередині простору, у межах території або певного місця (закриті приміщення, а також міста, країни, сади): *in the box*, *in Kyiv*, *in Ukraine*, *in the garden*.\nПриклад: *The cat is in the box.* (Кіт у коробці.)\n\n- **on** (на): використовується для поверхні.\nПриклад: *The book is on the table.* (Книга на столі.)\n\n- **at** (біля, в): вказує на конкретну точку або місце.\nПриклад: *She is at the door.* (Вона біля дверей.)\n\n- **under** (під): під чимось.\nПриклад: *The ball is under the bed.* (М'яч під ліжком.)\n\n- **next to** (поруч з, біля): поряд з кимось або чимось.\nПриклад: *The lamp is next to the sofa.* (Лампа стоїть біля дивана.)\n\n- **behind** (за, позаду): з тильного боку.\nПриклад: *The car is behind the house.* (Машина за будинком.)\n\n- **in front of** (перед): навпроти або спереду.\nПриклад: *He is in front of the mirror.* (Він перед дзеркалом.)"
+      }
+    },
+    "Prepositions of Time": {
+      "In, on, at (time)": {
+        "formula": "at/on/in + N",
+        "short": "Використовуйте AT для точного часу, ON для днів тижня та дат, а IN для місяців, років та довгих періодів часу.",
+        "full": "Для вираження часу в англійській мові ми використовуємо три основні прийменники:\n\n- **AT** використовується з конкретним часом на годиннику та святами.\n  *Приклади:* at 7 o'clock, at noon, at midnight, at Christmas.\n\n- **ON** використовується з днями тижня та конкретними датами.\n  *Приклади:* on Monday, on my birthday, on 5th May.\n\n- **IN** використовується з місяцями, роками, порами року та частинами доби (окрім ночі).\n  *Приклади:* in January, in 2023, in summer, in the morning."
+      }
+    },
+    "Past Simple (was/were)": {
+      "Was/Were": {
+        "formula": "S + was/were + N/Adj/Adv",
+        "short": "Дієслово \"to be\" в минулому часі має дві форми: \"was\" для однини (I, he, she, it) та \"were\" для множини (we, you, they). Вони використовуються для опису станів, почуттів або місця перебування у минулому.",
+        "full": "Дієслово \"to be\" (бути) у Past Simple використовується для опису того, ким або де хтось був, або яким був предмет у минулому.\n\nОсновні форми:\n- Was — використовується з займенниками I, he, she, it (однина).\n- Were — використовується з займенниками we, you, they (множина).\n\nПриклади стверджувальних речень:\n- I was at home yesterday. (Я вчора був удома.)\n- She was happy. (Вона була щасливою.)\n- We were friends. (Ми були друзями.)\n- They were late. (Вони запізнилися.)\n\nДля утворення заперечення додаємо частку \"not\" (was not = wasn't, were not = weren't):\n- I wasn't tired. (Я не був втомленим.)\n- You weren't at school. (Ти не був у школі.)\n\nДля питання виносимо was/were на початок речення:\n- Were you ready? — Yes, I was. / No, I wasn't. (Ти був готовим? — Так / Ні.)"
+      },
+      "Was/Were — Negative and Questions": {
+        "formula": "S + was/were + not + O/Adj/Adv / Was/Were + S + O/Adj/Adv?",
+        "short": "Для утворення заперечень у Past Simple з дієсловом to be додаємо частку not (wasn't/weren't), а для запитань виносимо was або were на початок речення.",
+        "full": "Заперечення та запитання з дієсловом to be у минулому часі (Past Simple):\n\n1. Заперечення (Negative sentences):\nДодаємо частку **not** після **was** або **were**.\n- З одниною (I, he, she, it) уживається **wasn't**, а з множиною (we, you, they) — **weren't**.\n- Приклад: I wasn't at home yesterday. (Я не був удома вчора.)\n- Приклад: They weren't happy. (Вони не були щасливі.)\n\n2. Запитання (Interrogative sentences):\nВиносимо **Was** або **Were** на самий початок речення (перед підметом).\n- Питання починається з **Was** (для однини) або **Were** (для множини).\n- Приклад: Was she late? ( Вона запізнилася?)\n- Приклад: Were you at school? (Ти був у школі?)"
+      }
+    },
+    "Past Simple (Regular Verbs)": {
+      "Affirmative": {
+        "formula": "S + V2(-ed)",
+        "short": "Для утворення стверджувальних речень у Past Simple для правильних дієслів додаємо закінчення -ed до основної форми дієслова для всіх займенників.",
+        "full": "Past Simple (Минулий простий час) використовується для дій, які завершилися в минулому.\n\nУ стверджувальних реченнях (Affirmative) для правильних дієслів (Regular Verbs) ми додаємо до основного дієслова закінчення **-ed**.\n\nЦя форма є однаковою для всіх осіб (I, you, he, she, it, we, they).\n\nОсобливості правопису:\n- Якщо дієслово закінчується на **-e**, додаємо лише **-d** (любити: *love – loved*).\n- Якщо дієслово закінчується на приголосну + **-y**, **y** змінюється на **-i** і додається **-ed** (вивчати: *study – studied*).\n- У багатьох односкладових дієсловах, що закінчуються на «голосна + приголосна», остання приголосна подвоюється перед -ed: *stop – stopped*, *plan – planned*. Але є винятки, зокрема слова, що закінчуються на -w, -x або -y (*snow – snowed*, *fix – fixed*).\n- У багатоскладових дієсловах подвоєння зазвичай відбувається, якщо наголос падає на останній склад: *prefer – preferred*, але *visit – visited* (наголос не на останньому складі).\n\nПриклади:\n- I **worked** yesterday. (Я працював учора.)\n- She **played** tennis last week. (Вона грала в теніс минулого тижня.)\n- They **visited** Kyiv in 2020. (Вони відвідали Київ у 2020 році.)"
+      },
+      "Negative and Questions": {
+        "formula": "S + did + not + V1 / Did + S + V1?",
+        "short": "Для утворення заперечень та запитань у Past Simple для правильних і неправильних дієслів використовується допоміжне дієслово did (форма минулого часу від do).",
+        "full": "У минулому простому часі (Past Simple) для побудови заперечень та запитань ми використовуємо допоміжне дієслово **did**.\n\n- **Заперечення (Negative):** Додаємо частку **not** до **did** (скорочено **didn't**) після підмета. Основне дієслово завжди ставиться у початкову форму (без закінчення -ed):\n  - I *didn't play* tennis yesterday. (Я не грав у теніс вчора.)\n  - She *didn't watch* TV. (Вона не дивилася телевізор.)\n\n- **Запитання (Questions):** Виносимо **Did** на початок речення перед підметом. Основне дієслово також залишається у початковій формі:\n  - *Did* you *play* football? (Ти грав у футбол?)\n  - *Did* they *walk* in the park? (Вони гуляли в парку?)\n\nПам'ятайте: закінчення **-ed** додається **тільки** у стверджувальних реченнях!"
+      }
+    },
+    "Past Simple (Irregular Verbs)": {
+      "Common Irregular Verbs": {
+        "formula": "S + V2",
+        "short": "Неправильні форми дієслів у Past Simple не утворюються за допомогою додавання -ed, а змінюють свій кореневий звук або повністю форму.",
+        "full": "Для опису подій у минулому з неправильними дієсловами (Irregular Verbs) ми не додаємо закінчення -ed. Замість цього кожне дієслово має свою унікальну другу форму (Past Simple), яку потрібно запам'ятати.\n\nОсновні правила:\n- У стверджувальних реченнях використовується друга форма для всіх займенників (I, you, he, she, it, we, they).\n- У запереченнях та запитаннях використовується допоміжне дієслово did / didn't, а основне дієслово повертається у початкову форму (Infinitive).\n\nПриклади:\n- go → went: I went to school yesterday.\n- see → saw: She saw a good movie last week.\n- eat → ate: They ate pizza for dinner.\n- have → had: We had a cat two years ago."
+      }
+    },
+    "Countable and Uncountable Nouns": {
+      "Countable vs Uncountable": {
+        "formula": "N (countable: a/an + singular / plural) / N (uncountable)",
+        "short": "Злічувані іменники можна порахувати (apple, apples), а незлічувані — ні, бо це речовини або абстрактні поняття (water, milk).",
+        "full": "Що таке Countable та Uncountable Nouns?\n\n1. Countable Nouns (Злічувані іменники):\n- Це предмети, які можна порахувати окремо.\n- Вони мають однину та множину.\n- Приклади:\n  - An apple — two apples (Яблуко — два яблука).\n  - A book — three books (Книга — три книги).\n\n2. Uncountable Nouns (Незлічувані іменники):\n- Це речовини, рідини, ідеї або абстрактні поняття, які неможливо порахувати штучно (вони не мають множини).\n- Приклади:\n  - Water (Вода): I want some water.\n  - Milk (Молоко): She drinks milk.\n  - Money (Гроші): I have money."
+      }
+    },
+    "Some / Any": {
+      "Some and Any": {
+        "formula": "S + V1 + some/any + N",
+        "short": "Використовуйте 'some' у стверджувальних реченнях, а 'any' — у заперечних та питальних для незліченних іменників і множини. Some також доречне в запитаннях-пропозиціях і проханнях (Would you like some tea?).",
+        "full": "Правило використання 'some' та 'any' на рівні A1:\n\n1. **Some** (кілька, трохи) використовується у **стверджувальних** реченнях.\n- *Приклад:* I have some apples. (У мене є кілька яблук.)\n- *Приклад:* There is some water. (Трохи води є.)\n\n2. **Any** (будь-який, скільки-небудь) використовується у **заперечних** та **питальних** реченнях.\n- *Приклад (заперечення):* I don't have any apples. (У мене немає яблук.)\n- *Приклад (питання):* Do you have any water? (Чи є у тебе вода?)\n\nВажливо: 'some' також можливе в питальних реченнях-пропозиціях і проханнях:\n- Would you like some tea? (Хочеш чаю?)\n- Could I have some water, please? (Можна мені трохи води?)"
+      }
+    },
+    "Much / Many / A lot of": {
+      "Quantifiers": {
+        "formula": "S + V + much/many/a lot of + N",
+        "short": "Much зазвичай використовується з незлічуваними іменниками, many — зі злічуваними у множині, а a lot of підходить для обох типів у стверджувальних реченнях.",
+        "full": "Ми використовуємо слова much, many та a lot of, щоб показати кількість предметів чи речовин.\n\n- **Many** використовується зі злічуваними іменниками (те, що можна порахувати: 1 яблуко, 2 яблука) зазвичай у запереченнях і питаннях. \nПриклад: Do you have many friends? (У тебе багато друзів?)\n\n- **Much** використовується з незлічуваними іменниками (те, що не можна порахувати поштучно: вода, гроші, час, молоко) у запереченнях і питаннях.\nПриклад: I don't have much time. (У мене мало/небагато часу).\n\n- **A lot of** використовується і зі злічуваними, і з незлічуваними іменниками, переважно у стверджувальних реченнях.\nПриклад: She has a lot of books. (У неї багато книг).\nПриклад: There is a lot of water. (Тут багато води).\n\nЗауваження: у неформальному мовленні much і many також можливі у стверджувальних реченнях (наприклад, *too much*, *so many*), а в запереченнях і питаннях можливий і *a lot of*."
+      }
+    },
+    "Present Continuous": {
+      "Affirmative": {
+        "formula": "S + am/is/are + V-ing",
+        "short": "Present Continuous (стверджувальна форма) використовується для дій, які відбуваються прямо зараз. Утворюється за допомогою займенника, дієслова to be (am/is/are) та основного дієслова із закінченням -ing.",
+        "full": "Present Continuous (стверджувальна форма) використовується для опису дій, які відбуваються в момент мовлення.\n\nЦя форма утворюється з дієслова **to be** (am / is / are) та основного дієслова із закінченням **-ing**.\n\nРозподіл дієслова to be:\n- I + am (I'm)\n- He, She, It + is ('s)\n- We, You, They + are ('re)\n\nПриклади:\n- I am reading a book now. (Я читаю книгу зараз.)\n- She is playing tennis. (Вона грає в теніс.)\n- We are learning English. (Ми вивчаємо англійську.)"
+      },
+      "Negative and Questions": {
+        "formula": "S + am/is/are + not + V-ing / Am/Is/Are + S + V-ing?",
+        "short": "Для утворення заперечення у Present Continuous використовуємо допоміжне дієслово (am/is/are) та частку not, а для питання — виносимо am/is/are на початок речення.",
+        "full": "Заперечення та питання у Present Continuous (Зараз)\n\n1. Заперечення (Negative sentences):\nДопоміжні дієслова am, is, are отримують частку not, після чого йде дієслово із закінченням -ing.\n- I am not sleeping. (Я не сплю.)\n- She is not (isn't) working. (Вона не працює.)\n- They are not (aren't) playing. (Вони не грають.)\n\n2. Питання (Questions):\nДопоміжні дієслова am, is, are ставляться на самий початок речення (перед підметом).\n- Am I dreaming? (Я марю?)\n- Is he reading a book? (Він читає книгу?)\n- Are you listening to me? (Ти слухаєш мене?)"
+      }
+    },
+    "Adverbs of Frequency": {
+      "Always, usually, often, sometimes, never": {
+        "formula": "S + Adv + V1 / S + am/is/are + Adv",
+        "short": "Прислівники частоти (always, usually, often, sometimes, never) показують, як часто відбувається дія. Зазвичай вони стають перед основним дієсловом, але після дієслова to be.",
+        "full": "Прислівники частоти (Adverbs of Frequency) вказують на регулярність дій.\n\nОсновні слова від найчастішого до найрідкіснішого:\n- always — завжди (100%)\n- usually — зазвичай (80%)\n- often — часто (60%)\n- sometimes — іноді (40%)\n- never — ніколи (0%)\n\nПравила розташування в реченні:\n1. Перед основним дієсловом (play, eat, go тощо):\n- I always drink coffee in the morning.\n- She sometimes reads books.\n- They never eat meat.\n\n2. ПАСЛЯ дієслова to be (am, is, are):\n- I am always happy.\n- He is usually late.\n- We are often busy."
+      }
+    },
+    "Like + V-ing": {
+      "Like, love, hate + V-ing": {
+        "formula": "S + like/love/hate + V-ing",
+        "short": "Після дієслів like (любити), love (обожнювати) та hate (ненавидіти) дія виражається за допомогою форми дієслова з закінченням -ing.",
+        "full": "Ми використовуємо конструкції **like, love, hate + V-ing**, щоб говорити про наші загальні вподобання — що нам подобається чи не подобається робити.\n\n- **Like + V-ing** (досить подобається)\n- **Love + V-ing** (дуже подобається, обожнюю)\n- **Hate + V-ing** (абсолютно не подобається, ненавиджу)\n\nВажливо: після like, love та hate можна вживати як форму з **-ing**, так і інфінітив із часткою **to** — обидва варіанти правильні й майже не відрізняються за значенням:\n- *I like swimming.* = *I like to swim.*\n- *She loves reading.* = *She loves to read.*\n- *They hate waiting.* = *They hate to wait.*\n\nПриклади:\n- I **like swimming**. (Я люблю плавати.)\n- She **loves reading** books. (Вона обожнює читати книги.)\n- They **hate waiting**. (Вони ненавидять чекати.)"
+      }
+    },
+    "Would like": {
+      "Would like + noun / to + V1": {
+        "formula": "S + would like + N / to + V1 / Would + S + like + ...? / S + wouldn't like + ...",
+        "short": "«Would like» перекладається як «хотів би» і використовується для ввічливого вираження бажань. Після нього ми використовуємо або іменник, або дієслово з часткою «to».",
+        "full": "Конструкція **«would like»** (скорочено **'d like**) використовується для ввічливого прохання або вираження бажання на рівні з «want», але звучить набагато чемніше.\n\nКонструкція має дві форми: **would like + іменник** (для предметів) та **would like + to + дієслово** (для дій).\n\nПриклади:\n- I **would like** a cup of coffee, please. (Я б хотів чашку кави, будь ласка.)\n- She **'d like** to buy a new car. (Вона б хотіла купити нову машину.)\n- **Would** you **like** to dance? (Ти хотів би потанцювати?)"
+      }
+    },
+    "Going to (Future Plans)": {
+      "Be going to": {
+        "formula": "S + am/is/are + going to + V1",
+        "short": "Конструкція 'be going to' використовується для вираження планів та намірів на майбутнє.",
+        "full": "Ми використовуємо 'be going to' + дієслово (verb), коли говоримо про свої плани або наміри на майбутнє.\n\nФорма дієслова **to be** залежить від підмета:\n- I + am going to (I'm going to)\n- He / She / It + is going to ('s going to)\n- We / You / They + are going to ('re going to)\n\nПриклади:\n- I am going to visit my grandparents tomorrow. (Я збираюся відвідати бабусю і дідуся завтра.)\n- She is going to buy a new car. (Вона збирається купити нову машину.)\n- We are going to watch a film tonight. (Ми збираємося подивитися фільм сьогодні ввечері.)"
+      }
+    }
+  },
+  "A2": {
+    "Present Simple": {
+      "Affirmative": {
+        "formula": "S + V1 (he/she/it + V1-s/es)",
+        "short": "Для утворення стверджувальних речень у Present Simple використовуйте початкову форму дієслова, а для займенників he, she, it додавайте закінчення -s або -es.",
+        "full": "Present Simple у стверджувальній формі (Affirmative) використовується для опису регулярних дій, звичок або загальних фактів на рівні A2.\n\nОсновне правило:\n- З займенниками I, you, we, they використовується базовий інфінітив без частки 'to' (наприклад: *I work*, *They play*).\n- З займенниками he, she, it до дієслова додається закінчення **-s** або **-es** (наприклад: *He works*, *She plays*).\n\nПриклади:\n- I live in Kyiv. (Я живу в Києві.)\n- You speak English very well. (Ти дуже добре розмовляєш англійською.)\n- He likes coffee. (Він любить каву.)\n- She goes to the gym on Mondays. (Вона ходить до спортивного залу по понеділках.)\n- We work every day. (Ми працюємо щодня.)\n- They play football after school. (Вони грають у футбол після школи.)"
+      },
+      "Negative": {
+        "formula": "S + do/does + not + V1",
+        "short": "Для утворення заперечення у Present Simple використовуємо допоміжні дієслова don't (I, you, we, they) або doesn't (he, she, it) та базову форму основного дієслова.",
+        "full": "У рівні A2 для створення заперечень у Present Simple ми використовуємо допоміжні дієслова do або does з часткою not (у скороченій формі don't та doesn't).\n\nДля I, you, we, they уживається **don't**, а для he, she, it — **doesn't**, після чого стоїть основне дієслово.\n\nВажливо: з допоміжним дієсловом doesn't основне дієслово вживається без закінчення -s/-es.\n\nПриклади:\n- I don't like coffee. (Я не люблю каву.)\n- They don't live in Kyiv. (Вони не живуть у Києві.)\n- She doesn't work on Sundays. (Вона не працює по неділях.)\n- He doesn't speak French. (Він не розмовляє французькою.)"
+      },
+      "Questions": {
+        "formula": "Aux (Do/Does) + S + V1?",
+        "short": "Для утворення запитань у Present Simple використовуємо допоміжні дієслова do (для I, you, we, they) або does (для he, she, it), які ставимо на перше місце.",
+        "full": "У Present Simple запитання утворюються за допомогою допоміжних дієслів **do** та **does**.\n\n- **Do** використовується з займенниками *I, you, we, they*.\n- **Does** використовується з займенниками *he, she, it* (при цьому закінчення -s/-es у основного дієслова зникає).\n\n**Структура загального запитання:**\nДопоміжне дієслово (Do/Does) + Підмет + Основне дієслово (у першій формі) + інші члени речення?\n\n**Приклади:**\n- **Do** you **speak** English? (Ти розмовляєш англійською?)\n- **Does** she **work** here? (Вона тут працює?)\n\n**Спеціальні запитання** починаються з питального слова (What, Where, When, Why, How):\n- **Where do** you live? (Де ти живеш?)\n- **What time does** the film start? (О котрій годині починається фільм?)"
+      }
+    },
+    "Present Continuous": {
+      "Affirmative": {
+        "formula": "S + am/is/are + V-ing",
+        "short": "Present Continuous (стверджувальна форма) утворюється за допомогою допоміжного дієслова to be (am/is/are) та основного дієслова із закінченням -ing і вказує на дію, що відбувається прямо зараз.",
+        "full": "Для утворення стверджувальних речень у Present Continuous ми використовуємо займенник або іменник, відповідну форму дієслова **to be** (am для I, is для he/she/it, are для we/you/they) та основне дієслово з кінцевим **-ing**.\n\nОтже, після підмета стоїть **am/is/are**, а далі — основне дієслово із закінченням **-ing**.\n\nПриклади:\n- I am reading a book now. (Я читаю книгу зараз.)\n- She is playing tennis at the moment. (Вона грає в теніс у цю хвилину.)\n- They are watching TV in the living room. (Вони дивляться телевізор у вітальні.)"
+      },
+      "Negative and Questions": {
+        "formula": "S + am/is/are + not + V-ing / Am/Is/Are + S + V-ing?",
+        "short": "Для утворення заперечення у Present Continuous додаємо частку not після дієслова to be, а в запитанні — виносимо to be на початок речення.",
+        "full": "Заперечення у Present Continuous утворюється за допомогою допоміжного дієслова to be (am/is/are) та частки **not**, після чого йде основне дієслово із закінченням **-ing**.\n\nЗаперечні форми виглядають так:\n- I am not working.\n- He/She/It is not (isn't) working.\n- We/You/They are not (aren't) working.\n\nПитальні речення утворюються шляхом винесення дієслова to be (Am/Is/Are) на самий початок речення (перед підметом).\n\nПитальні форми виглядають так:\n- Am I working?\n- Is he/she/it working?\n- Are we/you/they working?\n\nПриклади:\n- She isn't reading a book now.\n- Are they playing football?"
+      }
+    },
+    "Present Perfect": {
+      "Experience (ever/never)": {
+        "formula": "Have/Has + S + ever + V3? (питання) / S + have/has + never + V3 (заперечне значення) / S + have/has + ever + V3 (після суперлатива: the best ... I have ever seen)",
+        "short": "Для опису життєвого досвіду ми використовуємо Present Perfect (have/has + V3), додаючи 'ever' у запитаннях та 'never' у заперечних реченнях.",
+        "full": "Ми використовуємо **Present Perfect** для розповіді про життєвий досвід (що ми робили або не робили у своєму житті до цього моменту).\n\nСтверджувальна форма утворюється з **have** (I/you/we/they) або **has** (he/she/it) та третьої форми дієслова (V3), а в запитанні have/has виноситься перед підметом.\n\n**Слова-маркери:**\n- **Ever** (коли-небудь) — використовується у запитаннях.\n  *Приклад:* Have you ever been to London? (Ти коли-небудь був у Лондоні?)\n- **Never** (ніколи в житті) — використовується у стверджувальних реченнях, але має заперечне значення (додаткового заперечення 'not' не потрібно).\n  *Приклад:* I have never eaten sushi. (Я ніколи не їв суші.)"
+      },
+      "Recent Actions (just/already/yet)": {
+        "formula": "S + have/has + just/already + V3 / S + have/has + not + V3 + yet / Have/Has + S + V3 + yet",
+        "short": "Використовуйте just, already та yet у Present Perfect для подій, які нещодавно відбулися або впливають на теперішній момент.",
+        "full": "Правило використання слів just, already та yet у Present Perfect (A2):\n\n- **Just** (щойно) — використовується для дій, які завершилися зовсім нещодавно. Ставиться між допоміжним дієсловом (have/has) та основним дієсловом у третій формі (V3).\n*Приклад:* I have just eaten lunch. (Я щойно пообідав.)\n\n- **Already** (вже) — використовується в стверджувальних реченнях, коли дія сталася раніше, ніж очікувалося. Також ставиться між have/has та основним дієсловом у третій формі (V3).\n*Приклад:* She has already finished her homework. (Вона вже зробила домашнє завдання.)\n\n- **Yet** (вже / ще ні) — використовується в питальних та заперечних реченнях для подій, яких очікують. Завжди ставиться в кінці речення.\n*Приклад:* Have you seen this film yet? (Ти вже бачив цей фільм?)\n*Приклад:* I haven't finished yet. (Я ще не закінчив.)"
+      },
+      "Duration (for/since)": {
+        "formula": "S + have/has + V3 + for/since + time",
+        "short": "Використовуйте 'for' з періодом часу (скільки часу триває дія), а 'since' — з точним моментом її початку.",
+        "full": "Для вираження тривалості дії, яка почалася в минулому і триває дотепер у Present Perfect, ми використовуємо слова for та since.\n\n- FOR (протягом) вказує на період часу (довжину): \n  - for 3 years (протягом 3 років)\n  - for a long time (довго)\n  - for 2 hours (протягом 2 годин)\n  Приклад: I have lived here for 5 years.\n\n- SINCE (з / відколи) вказує на точний момент початку дії в минулому:\n  - since 2010 (з 2010 року)\n  - since Monday (з понеділка)\n  - since I was a child (з дитинства)\n  Приклад: She has worked here since 2018.\n\nПримітка: для тривалих активних дій, які досі тривають, часто використовують Present Perfect Continuous: *I have been working here for five years.* Докладніше — на рівні B1."
+      }
+    },
+    "Past Simple": {
+      "Regular Verbs": {
+        "formula": "S + V2(-ed)",
+        "short": "Past Simple використовується для дій, які завершилися в минулому. Для правильних дієслів (regular verbs) у стверджувальних реченнях додається закінчення -ed.",
+        "full": "Правило утворення Past Simple для правильних дієслів (Regular Verbs):\n\n1. У стверджувальних реченнях до всіх займенників (I, you, he, she, it, we, they) додається закінчення -ed до основної форми дієслова.\n- I played tennis yesterday.\n- She watched a movie last night.\n\n2. Особливості написання:\n- Якщо дієслово закінчується на -e, додаємо лише -d (like → liked).\n- Якщо на приголосну + -y, то -y змінюється на -i та додається -ed (study → studied).\n- В односкладових дієсловах, що закінчуються на «голосна + приголосна», остання приголосна подвоюється перед -ed: stop → stopped, plan → planned.\n- У багатоскладових дієсловах подвоєння відбувається, якщо наголос падає на останній склад: prefer → preferred. Якщо наголос не на останньому складі — подвоєння немає: visit → visited.\n\n3. У запереченнях і питаннях використовується допоміжне дієслово did / didn't, а основне дієслово залишається у першій формі.\n- I didn't play tennis.\n- Did you watch the movie?"
+      },
+      "Irregular Verbs": {
+        "formula": "S + V2",
+        "short": "Неправильні форми дієслів у Past Simple не утворюються за допомогою додавання -ed, їх потрібно запам'ятати.",
+        "full": "Для опису дій у минулому з неправильними дієсловами (Irregular Verbs) ми використовуємо другу форму дієслова (V2), яка міняє своє написання повністю або частково.\n\nОсновні моменти:\n- Не додавайте закінчення -ed до неправильних дієслів.\n- Форма однакова для всіх займенників (I, you, he, she, it, we, they).\n- У запереченнях (didn't) та питаннях (Did) дієслово повертається у початкову форму (V1).\n\nПриклади:\n- Go (йти) → went: I went to the cinema yesterday.\n- See (бачити) → saw: She saw a good film last week.\n- Eat (їсти) → ate: They ate pizza for dinner."
+      },
+      "Negative and Questions": {
+        "formula": "S + did + not + V1 / Did + S + V1?",
+        "short": "Для утворення заперечень і запитань у Past Simple використовується допоміжне дієслово did та інфінітив основного дієслова без закінчення -ed.",
+        "full": "У темі Past Simple для заперечень і запитань ми завжди використовуємо допоміжне дієслово **did** (форма минулого часу від *do*). Його головна особливість полягає в тому, що воно «забирає» на себе минулий час, тому основне дієслово після нього завжди ставиться в початкову форму (інфінітив без частки *to*).\n\n- **Заперечення (Negative):** \n  Заперечення утворюється з **did not (didn't)** та дієслова в початковій формі.\n  *Приклад:* I **didn't play** tennis yesterday. (Я не грав у теніс вчора.)\n  *Приклад:* She **didn't go** to the cinema. (Вона не ходила до кінотеатру.)\n\n- **Запитання (Questions):** \n  У запитанні **Did** виноситься перед підметом, а дієслово залишається в початковій формі.\n  *Приклад:* **Did** you **watch** this film? — Yes, I did. / No, I didn't.\n  *Приклад:* **Did** they **visit** London last year?"
+      }
+    },
+    "Past Continuous": {
+      "Interrupted Action": {
+        "formula": "S + was/were + V-ing + when + S + V2",
+        "short": "Past Continuous використовується для опису тривалої дії в минулому, яку перервала коротка дія (Past Simple).",
+        "full": "Ми використовуємо **Past Continuous** (was/were + V-ing) для дії, яка тривала в якийсь момент у минулому, коли раптом сталася інша, коротка дія, яку ми виражаємо через **Past Simple**.\n\n- Тривала дія йде у **Past Continuous** (was/were + V-ing), а коротка дія, що її перериває, — у **Past Simple** після **when**.\n- **Приклад 1:** I was watching TV when the phone rang. (Я дивився телевізор, коли зателефонував телефон.)\n- **Приклад 2:** She was cooking dinner when he came home. (Вона готувала вечерю, коли він прийшов додому.)\n\n*Підказка:* Слово **when** зазвичай стоїть перед коротким завадою у Past Simple."
+      }
+    },
+    "Future Forms": {
+      "Will": {
+        "formula": "S + will + V1",
+        "short": "Ми використовуємо 'will' для вираження спонтанних рішень, прийнятих у момент мовлення, а також для обіцянок, прохань та передбачень на основі особистої думки.",
+        "full": "Після підмета ставиться **will** (скорочено 'll) та основне дієслово. У запереченні will not скорочується до **won't**, а в запитанні **Will** виноситься перед підметом.\n\nОсновні випадки використання:\n- Спонтанні рішення: 'The phone is ringing. I'll get it.'\n- Обіцянки: 'I will help you with your homework.'\n- Передбачення без доказів (зі словами think, believe, hope): 'I think it will rain tomorrow.'"
+      },
+      "Going to": {
+        "formula": "S + am/is/are + going to + V1",
+        "short": "Використовуємо 'going to' для вираження планів, намірів на майбутнє та передбачень на основі очевидних доказів.",
+        "full": "Структура така: підмет + **am/is/are** + **going to** + основа дієслова.\n\nВикористання:\n- Плани та наміри: I am going to visit my grandparents this weekend.\n- Передбачення на основі очевидного: Look at those dark clouds! It is going to rain.\n\nФорми:\n- Affirmative: I am going to play.\n- Negative: She isn't going to buy a car.\n- Question: Are you going to watch TV?"
+      },
+      "Present Continuous for Future": {
+        "formula": "S + am/is/are + V-ing",
+        "short": "Present Continuous використовується для вираження запланованих дій у майбутньому, особливо коли вже є домовленість з іншими людьми.",
+        "full": "Present Continuous for Future\n\nМи використовуємо Present Continuous (am/is/are + verb-ing), коли говоримо про особисті плани на найближче майбутнє.\n\nОсновна умова: дія зазвичай вже запланована, і часто є домовленість, час чи місце.\n\nНаприклад, у ствердженні, запереченні та запитанні:\n- (+) I am meeting my friend tomorrow.\n- (-) They aren't coming to the party.\n- (?) Are you working on Saturday?\n\nПриклади:\n- I am flying to Paris next week. (Квитки вже куплені)\n- We are playing tennis this evening. (Є домовленість з другом)"
+      }
+    },
     "Modal Verbs": {
-      "Obligation (must, have to, should)": {
-        "short": "Must — сильний обов'язок. Have to — зовнішня необхідність. Should — порада.",
-        "full": "Повне правило: ...\nПриклади: ..."
+      "Ability (can/can't)": {
+        "formula": "S + can/can't + V1",
+        "short": "Модальне дієслово 'can' використовується для вираження вміння або здатності щось робити, а 'can't' — для її відсутності.",
+        "full": "Дієслово **can** (можу, вмію) та його заперечна форма **can't** (не можу, не вмію) вживаються для опису фізичних або розумових здібностей.\n\n**Особливості використання:**\n- Форма 'can' є однаковою для всіх займенників (I, you, he, she, it, we, they).\n- Після 'can' та 'can't' завжди використовується основне дієслово без частки 'to'.\n\n**Приклади:**\n- I can swim. (Я вмію плавати.)\n- She can speak English. (Вона вміє розмовляти англійською.)\n- They can't play the guitar. (Вони не вміють грати на гітарі.)\n- Can you drive a car? (Ти вмієш возити машину?)"
+      },
+      "Obligation (must/have to)": {
+        "formula": "S + must/have to + V1",
+        "short": "Для вираження обов'язку використовуємо 'must' (власна воля чи правила від мовця) та 'have to' (зовнішні правила та обставини).",
+        "full": "Модальні дієслова 'must' та 'have to' використовуються для вираження обов'язку або необхідності на рівні A2.\n\n- **Must** використовується, коли обов'язок встановлює сам мовець (його власна думка чи правила).\n  Приклад: I must clean my room today. (Я маю прибрати свою кімнату сьогодні — я так вирішив).\n\n- **Have to** використовується для вираження зовнішнього обов'язку, правил чи законів, на які ми не можемо вплинути.\n  Приклад: I have to wear a uniform at school. (Я повинен носити форму в школі — такі правила).\n\nПам'ятайте про заперечення:\n- **Mustn't** означає заборону (не можна).\n  Приклад: You mustn't park here. (Тут паркуватися заборонено).\n- **Don't have to** означає відсутність обов'язку (не обов'язково, на розсуд).\n  Приклад: You don't have to come with me. (Тобі не обов'язково йти зі мною)."
+      },
+      "Advice (should)": {
+        "formula": "S + should/shouldn't + V1",
+        "short": "Дієслово should використовується для надання порад або рекомендацій у теперішньому чи майбутньому часі.",
+        "full": "Ми використовуємо **should** (і заперечення **shouldn't**), щоб сказати, що щось є правильною або неправильною дією в певній ситуації.\n\n**Структура ствердження:**\n- Підмет + should + дієслово у першій формі.\n- Приклад: You should sleep 8 hours a day. (Тобі слід спати 8 годин на день.)\n\n**Структура заперечення:**\n- Підмет + shouldn't + дієслово у першій формі.\n- Приклад: You shouldn't eat so much fast food. (Тобі не слід їсти так багато фастфуду.)\n\n**Питальна форма:**\n- Should + підмет + дієслово у першій формі?\n- Приклад: Should I call a doctor? (Чи варто мені викликати лікаря?)"
+      },
+      "Probability (may/might)": {
+        "formula": "S + may/might + V1",
+        "short": "Модальні дієслова may та might використовуються для вираження ймовірності того, що дія відбувається зараз або станеться в майбутньому.",
+        "full": "Ми використовуємо **may** та **might**, коли не впевнені у чомусь на 100%.\n\n- **May** означає «можливо» (близько 50% впевненості).\n- **Might** означає «можливо, але шансів ще менше» (близько 30% впевненості).\n\nПісля підмета ставиться **may** або **might**, а далі — дієслово без частки to.\n\nПриклади:\n- It **may** rain later, take an umbrella. (Можливо, пізніше буде дощ, візьми парасольку).\n- She **might** come to the party, but she is very busy. (Вона, можливо, прийде на вечірку, але вона дуже зайнята)."
+      }
+    },
+    "Conditionals": {
+      "First Conditional": {
+        "formula": "If + S + V1 (s/es), S + will + V1",
+        "short": "First Conditional використовується для реальних ситуацій у майбутньому. Він описує умову та її ймовірний результат.",
+        "full": "First Conditional (Перший умовний тип) вживається для вираження реальної та ймовірної події в майбутньому.\n\nСтруктура речення:\n- If + Підмет + Present Simple (умова), Підмет + will + V1 (результат).\n- Частини речення можна міняти місцями, але кома перед 'if' у такому разі не ставиться.\n\nПриклади:\n- If it rains, I will stay at home. (Якщо піде дощ, я залишуся вдома.)\n- She will pass the exam if she studies hard. (Вона складе іспит, якщо старанно вчитиметься.)\n- What will you do if you miss the bus? (Що ти зробиш, якщо запізнишся на автобус?)"
+      },
+      "Second Conditional": {
+        "formula": "If + S + V2/were, S + would + V1",
+        "short": "Second Conditional використовується для уявних або малоймовірних ситуацій у теперішньому чи майбутньому.",
+        "full": "Ми використовуємо Second Conditional, коли говоримо про фантазії, мрії або ситуації, які навряд чи стануться в реальному житті.\n\nПісля **If** уживається Past Simple, а в головній частині — **would** та базове дієслово.\n\nПриклади:\n- If I had a million dollars, I would buy a big house. (Якби я мав мільйон доларів, я б купив великий будинок.)\n- If I were you, I would study harder. (Якби я був на твоєму місці, я б вчився старанніше.)\n\nЗверніть увагу: з усіма займенниками у формальній англійській мові з дієсловом to be використовується форма 'were' (If I were, if she were)."
+      }
+    },
+    "Passive Voice": {
+      "Present Simple Passive": {
+        "formula": "S + am/is/are + V3",
+        "short": "Present Simple Passive використовується, коли важливіша сама дія або об'єкт, над яким вона виконується, а не той, хто її робить.",
+        "full": "Правило утворення:\nМи утворюємо Present Simple Passive за допомогою допоміжного дієслова to be (am, is, are) у теперішньому часі та третьої форми основного дієслова (V3 або закінчення -ed для правильних дієслов).\n\nУ ствердженні об'єкт стоїть перед **am/is/are** та третьою формою дієслова (V3); у запереченні додається **not**, а в запитанні am/is/are виноситься на початок.\n\nПриклади:\n- English is spoken all over the world. (Англійською говорять у всьому світі.)\n- Coffee is not grown in Ukraine. (Кава не вирощується в Україні.)\n- Are cars made in this factory? (Автомобілі виробляються на цій фабриці?)"
+      },
+      "Past Simple Passive": {
+        "formula": "S + was/were + V3",
+        "short": "Past Simple Passive використовується, коли важливіша сама дія в минулому, а не той, хто її виконав. Формується за допомогою was/were та третьої форми дієслова (V3/ed).",
+        "full": "Правило утворення Past Simple Passive (Пасивний стан у минулому часі):\n\nМи використовуємо цей час, коли дія вже відбулася в минулому, але фокус робиться на об'єкті, над яким виконували дію, а не на самій особі.\n\nСтверджувальна форма будується з **was/were** та третьої форми дієслова (V3).\n\n- was використовується з одниною (I, he, she, it)\n- were використовується з множиною (we, you, they)\n\nПриклади:\n- The car was washed yesterday. (Машину помили вчора.)\n- English was spoken at the meeting. (На зустрічі розмовляли англійською.)\n- These houses were built in 1990. (Ці будинки були збудовані у 1990 році.)"
+      }
+    },
+    "Used to": {
+      "Past Habits": {
+        "formula": "S + used to + V1",
+        "short": "Використовуйте 'used to' для опису звичок або станів у минулому, які більше не існують у теперішньому.",
+        "full": "Конструкція **used to** використовується для опису дій, звичок або станів, які регулярно відбувалися в минулому, але зараз вже не є актуальними.\n\nУ ствердженні вживається **used to** + дієслово, у запереченні — **didn't use to** + дієслово, а в запитанні **Did** виноситься перед підметом:\n- **Ствердження:** I used to play tennis.\n- **Заперечення:** I didn't use to like coffee.\n- **Питання:** Did you use to live here?\n\nПриклади:\n- She used to have long hair, but now it is short.\n- We didn't use to watch TV much."
+      }
+    },
+    "Comparatives and Superlatives": {
+      "Comparatives": {
+        "formula": "S + V1 + Adj-er + than + O / S + V1 + more + Adj + than + O",
+        "short": "Для порівняння двох предметів чи людей додаємо до коротких прикметників закінчення -er та слово than, а перед довгими використовуємо more.",
+        "full": "Правило порівняння (Comparatives) на рівні A2:\n\n1. Короткі прикметники (1 склад): додаємо закінчення **-er** + слово **than**.\n- Приклад: *old* ➔ *older* (My house is older than yours.)\n- Якщо прикметник закінчується на приголосну після голосної, остання літера подвоюється: *big* ➔ *bigger*.\n- Якщо закінчується на -y, міняємо його на -i та додаємо -er: *happy* ➔ *happier*.\n\n2. Довгі прикметники (2 і більше складів): ставимо слово **more** перед прикметником + **than**.\n- Приклад: *expensive* ➔ *more expensive* (This car is more expensive than that one.)\n\n3. Винятки (неправильні форми), які треба запам'ятати:\n- good ➔ better (ніж) → the best (найкращий)\n- bad ➔ worse (гірший) → the worst (найгірший)\n- far ➔ further / farther → the furthest / the farthest"
+      },
+      "Superlatives": {
+        "formula": "S + V + the + Adj-est / the most + Adj",
+        "short": "Superlatives (найвищий ступінь) використовується для порівняння одного предмета чи особи з усіма іншими в групі.",
+        "full": "Для утворення найвищого ступеня прикметників ми додаємо артикль **the** перед прикметником і суфікс **-est** до коротких слів (або використовуємо **the most** перед довгими).\n\n- Короткі прикметники (1 склад): додаємо **-est** (наприклад, *old* — **the oldest**).\n- Прикметники на -y: змінюємо *y* на *i* і додаємо **-est** (наприклад, *happy* — **the happiest**).\n- Довгі прикметники (2 і більше складів): ставимо **the most** перед словом (наприклад, *expensive* — **the most expensive**).\n\nПриклади:\n- Kyiv is **the biggest** city in Ukraine.\n- This is **the most interesting** book in the library.\n- Неправильні форми: good ➔ **the best**, bad ➔ **the worst**, far ➔ **the furthest / the farthest**."
+      }
+    },
+    "Gerunds and Infinitives": {
+      "Gerunds (V-ing)": {
+        "formula": "S + like/love/hate/enjoy/mind + V-ing",
+        "short": "Герундій (дієслово з закінченням -ing) використовується як іменник після певних дієслів, наприклад, love, like, hate та enjoy.",
+        "full": "Герундій — це форма дієслова з закінченням -ing (наприклад: *reading, swimming*), яка виконує роль іменника.\n\nОсновні випадки використання на рівні A2:\n- Після дієслів, що виражають уподобання або емоції: **like, love, hate, enjoy, don't mind**.\n- Приклади:\n  - I like **swimming** in the sea. (Я люблю плавати в морі.)\n  - She hates **cooking**. (Вона ненавидить готувати.)\n  - Do you enjoy **reading** books? (Тобі подобається читати книги?)"
+      },
+      "Infinitives (to + V1)": {
+        "formula": "S + V + to + V1",
+        "short": "Інфінітив (to + V1) використовується після певних дієслів, щоб показати мету дії або після прикметників.",
+        "full": "Інфінітив складається з частки **to** та першої форми дієслова (**V1**).\n\n**Коли ми його використовуємо:**\n- Після деяких дієслів, наприклад: *want* (хотіти), *would like* (хотів би), *need* (потребувати), *decide* (вирішити).\n- Для пояснення мети дії (навіщо?).\n- Після прикметників (наприклад, *happy*, *glad*).\n\n**Приклади:**\n- I want **to eat** an apple. (Я хочу з'їсти яблуко.)\n- She would like **to drink** some water. (Вона хотіла б випити води.)\n- I went to the shop **to buy** milk. (Я пішов у магазин, щоб купити молоко.)\n- I am happy **to help** you. (Я радий допомогти тобі.)"
+      }
+    },
+    "Relative Clauses": {
+      "Defining Relative Clauses": {
+        "formula": "N + who/which/that + V / N + who/which/that + S + V",
+        "short": "Defining Relative Clauses уточнюють, про яку саме людину чи річ йдеться, і є необхідними для розуміння речення.",
+        "full": "Defining Relative Clauses (означальні підрядні речення) дають важливу інформацію про особу чи предмет, без якої речення втратить сенс.\n\nОсновні займенники (Relative pronouns):\n- Who / That — для людей (The man who/that lives next door is a doctor.)\n- Which / That — для речей та тварин (The car which/that I bought is red.)\n- Where — для місць (This is the hotel where we stayed.)\n\nЗверніть увагу: ми не ставимо кому перед цими займенниками.\n\nФорма залежить від ролі займенника у підрядному реченні:\n- Якщо who/which/that є **підметом**, після нього одразу йде дієслово: *The man who lives next door is a doctor.* (who = підмет).\n- Якщо займенник є **додатком**, після нього стоять підмет і дієслово: *The car which I bought is red.* (which = додаток, далі підмет I)."
+      }
+    }
+  },
+  "A2_PLUS": {
+    "Present Perfect": {
+      "Experience (ever/never)": {
+        "formula": "Have/Has + S + ever + V3? / S + have/has + never + V3",
+        "short": "Використовуйте Present Perfect з 'ever' (у питаннях) та 'never' (у запереченнях), щоб говорити про життєвий досвід без зазначення точного часу.",
+        "full": "Present Perfect для вираження досвіду (Experience)\n\nМи використовуємо Present Perfect (have/has + V3) для того, щоб розповісти про життєвий досвід, тобто про те, що ми робили чи не робили у своєму житті до теперішнього моменту. Точний час події не важливий.\n\nОсновні слова-маркери:\n- ever (коли-небудь) — використовується переважно в запитаннях.\n- never (ніколи) — використовується в стверджувальних реченнях, але має заперечне значення (не потребує частки 'not').\n\nСтруктура:\n- Питання: Have you ever + V3? (Have you ever been to London?)\n- Заперечення: I/You/We/They have never + V3 (I have never eaten sushi.)\n- Заперечення (he/she/it): He/She has never + V3 (She has never seen snow.)\n\nПриклади:\n- Have you ever met a famous person?\n- I have never travelled abroad."
+      },
+      "Recent Actions (just/already/yet)": {
+        "formula": "S + have/has + just/already + V3 / S + have/has + not + V3 + yet / Have/Has + S + V3 + yet",
+        "short": "Використовуйте just, already та yet у Present Perfect для подій, що нещодавно сталися або впливають на теперішній момент.",
+        "full": "Правило для Present Perfect з прислівниками recent actions (just, already, yet):\n\n- **Just** (щойно) — використовується для дій, які завершилися зовсім недавно. Ставиться перед основним дієсловом.\n  *Приклад:* I have just finished my homework.\n\n- **Already** (вже) — вказує на те, що дія сталася раніше, ніж очікувалося. Ставиться перед основним дієсловом.\n  *Приклад:* She has already bought the tickets.\n\n- **Yet** (вже, ще ні) — використовується в питальних та заперечних реченнях для дій, яких очікують. Завжди ставиться в кінці речення.\n  *Приклад:* Have you eaten lunch yet? / I haven't seen that film yet."
+      },
+      "Duration (for/since)": {
+        "formula": "S + have/has + V3 + for + period / since + point",
+        "short": "Використовуйте 'for' для позначення періоду часу (duration), а 'since' — для точної точки початку дії у минулому з часом Present Perfect.",
+        "full": "Тема: Present Perfect з 'for' та 'since'\n\nМи використовуємо Present Perfect, щоб показати, що дія почалася в минулому і триває досі (або тільки-но завершилася).\n\n- **FOR** + період часу (скільки триває дія):\n  - Використовується для тривалості.\n  - Приклади: *for 3 years* (протягом 3 років), *for a long time* (довго), *for 2 weeks* (два тижні).\n  - Приклад речення: *I have lived here for 5 years.* (Я живу тут уже 5 років).\n\n- **SINCE** + момент початку дії (коли вона стартувала):\n  - Використовується для точної точки відліку.\n  - Приклади: *since 2010* (з 2010 року), *since Monday* (з понеділка), *since I was a child* (з дитинства).\n  - Приклад речення: *She has worked here since 2018.* (Вона працює тут з 2018 року)."
+      }
+    },
+    "Past Continuous": {
+      "Interrupted Action": {
+        "formula": "S + was/were + V-ing + when + S + V2",
+        "short": "Past Continuous описує тривалу дію в минулому, яку перервала інша коротка дія у Past Simple.",
+        "full": "Тема: Interrupted Action (Перервана дія у Past Continuous)\n\nМи використовуємо **Past Continuous** для тривалої дії, яка тривала в якийсь момент у минулому, коли раптом сталася інша, коротка дія (вона виражається у **Past Simple**).\n\nТривала дія виражається через **was/were + V-ing**, а коротка дія-переривання — через V2 (-ed).\n\nЧасто ми використовуємо слова **when** (коли) або **while** (поки).\n\nПриклади:\n- I **was watching** TV **when** the phone **rang**. (Я дивився телевізор, коли зателефонував телефон)\n- **While** she **was cooking**, the lights **went out**. (Поки вона готувала, згас світло)"
+      }
+    },
+    "Used to": {
+      "Past Habits": {
+        "formula": "S + used to + V1",
+        "short": "Конструкція 'used to' використовується для опису звичок або станів у минулому, які більше не існують у теперішньому.",
+        "full": "Ми використовуємо 'used to + verb' (інфінітив без to), щоб говорити про дії, які регулярно повторювалися в минулому, або про минулі стани, але зараз вони змінилися.\n\nФорми:\n- Ствердження: I used to play tennis. (Я раніше грав у теніс, але зараз уже ні).\n- Заперечення: I didn't use to like broccoli. (Раніше я не любив броколі).\n- Питання: Did you use to live here? (Ти раніше жив тут?)\n\nВажливо: Не плутайте з 'to be used to' (мати звичку робити щось зараз)."
+      }
+    },
+    "Passive Voice": {
+      "Present Simple Passive": {
+        "formula": "S + am/is/are + V3",
+        "short": "Present Simple Passive використовується, коли важливі сама дія або її об'єкт, а не той, хто її виконує. Формується за допомогою дієслова to be (am/is/are) та Третьої форми основного дієслова (V3/Past Participle).",
+        "full": "## Present Simple Passive (Пасивний стан у теперішньому простому часі)\n\nМи використовуємо пасивний стан, коли фокус уваги спрямований на предмет чи людину, над якою виконується дія, а не на самого виконавця.\n\nУ ствердженні об'єкт стоїть перед **am/is/are** та третьою формою дієслова (V3); у запереченні додається **not**, а в запитанні am/is/are виноситься на початок.\n\n### Приклади:\n- **Active:** People grow coffee in Brazil. (Люди вирощують каву в Бразилії.)\n- **Passive:** Coffee is grown in Brazil. (Кава вирощується в Бразилії.)\n- **Active:** They don't clean this room every day. (Вони не прибирають цю кімнату щодня.)\n- **Passive:** This room is not cleaned every day. (Ця кімната не прибирається щодня.)\n- **Passive (питання):** Are English and Spanish spoken here? (Тут розмовляють англійською та іспанською?)"
+      },
+      "Past Simple Passive": {
+        "formula": "S + was/were + V3",
+        "short": "Past Simple Passive використовується, коли важливіша сама дія в минулому або той, над ким її виконали, а не той, хто її зробив.",
+        "full": "Ми використовуємо Past Simple Passive (Пасивний стан у минулому простому часі), коли зосереджуємося на об'єкті дії або на самому результаті в минулому, а не на виконавці.\n\nСтверджувальна форма будується з **was/were** та третьої форми дієслова (V3).\n\nПриклади:\n- The car was washed yesterday. (Машину помили вчора).\n- The letters were sent last week. (Листи були відправлені минулого тижня).\n- English was not taught here. (Тут не викладали англійську).\n- Was the window broken by Tom? (Вікно було зламано Томом?)"
+      }
+    },
+    "Conditionals": {
+      "First Conditional": {
+        "formula": "If + S + V1, S + will + V1",
+        "short": "First Conditional використовується для вираження реальних ситуацій та їх можливих наслідків у майбутньому.",
+        "full": "First Conditional (Перший умовний тип) описує реальні ймовірні події в майбутньому та їхні наслідки.\n\nСтруктура речення:\n- If + Підмет + Present Simple (умова), Підмет + will + V1 / базове дієслово (результат).\n\nПриклади:\n- If it rains, I will stay at home. (Якщо піде дощ, я залишуся вдома.)\n- If you study hard, you will pass the exam. (Якщо ти будеш старанно вчитися, ти складеш іспит.)\n\nПримітку: Частини речення можна міняти місцями, але якщо речення починається з 'if', між частинами ставиться кома."
+      },
+      "Second Conditional": {
+        "formula": "If + S + V2, S + would + V1",
+        "short": "Second Conditional використовується для уявних, малоймовірних або нереальних ситуацій у теперішньому чи майбутньому часі.",
+        "full": "Ми використовуємо Second Conditional, коли говоримо про мрії, фантазії або ситуації, які навряд чи стануться в реальності.\n\nПісля **If** уживається Past Simple, а в головній частині — **would** та базове дієслово.\n\nВажливо:\n- У формальній англійській з займенником 'I' та іменниками замість 'was' часто використовують 'were' (наприклад: If I were you...). \n\nПриклади:\n- If I had a million dollars, I would buy a big house. (Якби я мав мільйон доларів, я б купив великий будинок.)\n- If I spoke French, I would work in Paris. (Якби я розмовляв французькою, я б працював у Парижі.)"
+      }
+    },
+    "Modal Verbs": {
+      "Obligation (must/have to)": {
+        "formula": "S + must / have to + V1",
+        "short": "Для вираження обов'язку використовуємо 'must' (власна воля мовця) та 'have to' (зовнішні правила або обставини).",
+        "full": "Тема: Obligation (Must / Have to)\n\n1. Must\nВикористовується, коли обов'язок виходить від самого мовця (його особиста думка, правило чи рішення).\nПриклади:\n- I must finish this report today. (Я маю закінчити цей звіт сьогодні — це моє рішення).\n- You must try this cake! (Ти мусиш спробувати цей торт!).\n\n2. Have to\nВикористовується для вираження обов'язку, який диктується зовнішніми обставинами, правилами або законами (не мовцем).\nПриклади:\n- I have to wear a uniform at work. (Я повинен носити форму на роботі — такі правила компанії).\n- She has to get up early on Mondays. (Вона мусить вставати рано по понеділках — через розклад).\n\nЗаперечна форма (дуже важливо!):\n- Mustn't = заборона (не можна).\n  Приклад: You mustn't park here. (Тут паркуватися заборонено).\n- Don't / doesn't have to = відсутність обов'язку (не обов'язково, можна за бажанням).\n  Приклад: You don't have to come early. (Тобі не обов'язково приїжджати рано)."
+      },
+      "Advice (should)": {
+        "formula": "S + should/shouldn't + V1",
+        "short": "Модальне дієслово should використовується для надання порад або вираження думки про те, що щось є правильним чи бажаним.",
+        "full": "Правило використання should для поради (рівень A2+):\n\n1. Утворення:\nУ ствердженні після підмета стоїть **should** і дієслово без to, у запереченні — **shouldn't** і дієслово, а в запитанні **Should** виноситься перед підметом.\n\n2. Використання:\n- Ми використовуємо should, щоб дати комусь пораду або сказати, що певна дія є хорошою і правильною.\n- Ми використовуємо shouldn't, щоб сказати, що щось робити не варто.\n\n3. Приклади:\n- You should sleep more. (Тобі слід спати більше.)\n- She shouldn't eat so much fast food. (Їй не слід їсти так багато фастфуду.)\n- Should I call him? (Чи варто мені йому зателефонувати?)"
+      },
+      "Probability (may/might)": {
+        "formula": "S + may/might + V1",
+        "short": "Дієслова may та might використовуються для вираження ймовірності того, що дія відбудеться зараз або в майбутньому.",
+        "full": "Модальні дієслова **may** та **might** показують, що ми не впевнені у чомусь, але вважаємо це можливим.\n\n- **Утворення:** після підмета ставиться **may** або **might**, а далі — інфінітив без частки 'to'.\n- **Різниця:** *May* висловлює трохи більшу впевненість, а *might* — меншу (але на рівні A2+ їх часто використовують як синоніми).\n- **Приклади:**\n  - It **may** rain later, take an umbrella. (Можливо, пізніше піде дощ, візьми парасольку.)\n  - She **might** come to the party, but she isn't sure. (Вона, може, прийде на вечірку, але вона не впевнена.)\n  - Don't eat that mushroom; it **might** be dangerous. (Не їж цей гриб; він може бути небезпечним.)"
+      }
+    },
+    "Gerunds and Infinitives": {
+      "Gerunds (V-ing)": {
+        "formula": "S + V (like/love/hate/enjoy) + V-ing / S + Prep + V-ing / V-ing + S + V",
+        "short": "Герундій (дієслово з закінченням -ing) використовується після певних дієслів (як-от like, love, hate, enjoy) та після прийменників.",
+        "full": "Герундій — це форма дієслова з закінченням -ing (наприклад, swimming, reading), яка виконує роль іменника.\n\nОсновні випадки вживання на рівні A2+:\n- Після дієслів, що виражають уподобання або емоції: like, love, hate, enjoy, don't mind.\n- Приклад: I enjoy reading books in the evening.\n- Після прийменників (in, on, at, about, before, after).\n- Приклад: She is good at drawing.\n- На початку речення як підмет.\n- Приклад: Swimming is a great sport."
+      }
+    }
+  },
+  "B1": {
+    "Present Tenses": {
+      "Present Simple": {
+        "formula": "S + V1 (he/she/it + V1-s)",
+        "short": "Present Simple використовується для вираження регулярних дій, загальних фактів, звичок та розкладів на рівні B1.",
+        "full": "Present Simple на рівні B1 вживається для опису постійних ситуацій, загальновідомих істин, регулярних звичок та подій за розкладом.\n\nОсновні випадки вживання:\n- Регулярні дії та звички: I usually work from home on Fridays.\n- Загальні факти і закони природи: Water boils at 100 degrees Celsius.\n- Розклади та розклади руху транспорту: The train leaves at 6 PM tomorrow.\n- Почуття, стани та думки (стагові дієслова): I believe that education is important.\n\nФормування:\n- Ствердження: I/You/We/They + V (працюю); He/She/It + Vs/es (працює).\n- Заперечення: do/does not + V.\n- Питання: Do/Does + підмет + V."
+      },
+      "Present Continuous": {
+        "formula": "S + am/is/are + V-ing",
+        "short": "Present Continuous використовується для опису дій, які відбуваються прямо зараз, а також для тимчасових ситуацій або попередньо запланованих планів на майбутнє.",
+        "full": "Present Continuous утворюється за допомогою допоміжного дієслова to be (am/is/are) та основного дієслова із закінченням -ing.\n\nОсновні випадки використання:\n- Дія, що відбувається в момент мовлення (наприклад: *She is reading a book now.*).\n- Тимчасові ситуації, які відрізняються від звичного стану (наприклад: *I am living with my friends this month.*).\n- Особисті плани та домовленості на найближче майбутнє (наприклад: *We are meeting tomorrow at 5 PM.*).\n\nМаркери часу (слова-маркери): now, at the moment, currently, today, tonight."
+      },
+      "Present Perfect": {
+        "formula": "S + have/has + V3",
+        "short": "Present Perfect вживається для опису дій, які сталися в минулому, але мають важливий результат або зв'язок із теперішнім моментом.",
+        "full": "Правило утворення: have/has + V3 (третя форма дієслова або закінчення -ed).\n\nОсновні випадки вживання:\n- Досвід (без зазначення точного часу): I have been to Paris.\n- Результат, важливий зараз: I have lost my keys (і я досі їх не маю).\n- Дія, що почалася в минулому і триває досі: She has lived here for 5 years.\n\nМаркери часу: ever, never, just, already, yet, since, for."
+      },
+      "Present Perfect Continuous": {
+        "formula": "S + have/has + been + V-ing",
+        "short": "Present Perfect Continuous використовується для дій, які почалися в минулому і тривають до теперішнього моменту. Основна увага приділяється тривалості процесу.",
+        "full": "Правило: Present Perfect Continuous (Теперішній тривалий завершений час)\n\nЦей час утворюється з **have/has + been** та дієслова із закінченням -ing. У запереченні додається **not** (haven't/hasn't), а в запитанні have/has виноситься перед підметом.\n\nОсновні випадки вживання:\n1. Дія почалася в минулому і триває зараз (особливо з маркерами since та for).\n- Приклад: I have been learning English for three years.\n\n2. Дія щойно завершилася, але є видимий результат у теперішньому.\n- Приклад: You are out of breath. Have you been running?\n\nМаркери часу:\n- for (протягом)\n- since (з моменту)\n- all day / all morning (весь день / увесь ранок)\n- how long (як довго)"
+      }
+    },
+    "Past Tenses": {
+      "Past Perfect": {
+        "formula": "S + had + V3",
+        "short": "Past Perfect вживається для опису дії, яка завершилася раніше за іншу минулу дію або конкретний момент у минулому.",
+        "full": "Past Perfect утворюється за допомогою допоміжного дієслова had та третьої форми основного дієслова (V3 або закінчення -ed).\n\nОсновні випадки вживання:\n- Дія, яка сталася до іншої події в минулому (часто вживається разом з Past Simple):\n  * When I arrived at the station, the train had already left.\n  - Подія, що завершилася до певного моменту в минулому:\n  * She had finished her report by 5 o'clock yesterday.\n\nМаркери часу: before, by, already, just, never, after."
+      },
+      "Past Simple": {
+        "formula": "S + V2 / S + did + not + V1 / Did + S + V1",
+        "short": "Past Simple використовується для опису завершених дій у минулому, які мали місце в конкретний час.",
+        "full": "Ми використовуємо Past Simple (простий минулий час) для дій, які почалися і закінчилися в минулому. Часто в реченні є чіткий маркер часу (yesterday, last year, in 2010).\n\n**Утворення:**\n- Стверджувальні речення: підмет + V2 (друга форма дієслова) або was/were. Для правильних дієслів додаємо закінчення -ed (play - played).\n- Заперечні речення: підмет + did not (didn't) + V1 (базова форма дієслова).\n- Питальні речення: Did + підмет + V1?\n\n**Приклади:**\n- I visited my grandparents *last weekend*.\n- She *didn't go* to the party yesterday.\n- *Did* you *see* that movie?"
+      },
+      "Past Continuous": {
+        "formula": "S + was/were + V-ing",
+        "short": "Past Continuous описує тривалу дію, яка тривала в певний момент у минулому. Вона утворюється за допомогою допоміжного дієслова was/were та дієслова із закінченням -ing.",
+        "full": "Ми використовуємо Past Continuous (минулий тривалий час) для вираження дії, яка тривала в конкретний момент або період у минулому.\n\nЦей час утворюється з **was/were** та дієслова із закінченням -ing. У запереченні додається **not**, а в запитанні was/were виноситься перед підметом.\n\nОсновні випадки використання:\n1. Дія, яка тривала в конкретний момент у минулому.\nПриклад: At 5 PM yesterday, I was cooking dinner.\n\n2. Дія у процесі, яку перервала інша коротка дія (в Past Simple).\nПриклад: While I was reading a book, the phone rang.\n\n3. Дві або більше дій, які відбувалися одночасно в минулому.\nПриклад: While she was cleaning, he was washing the dishes."
+      }
+    },
+    "Future Forms": {
+      "Will": {
+        "formula": "S + will + V1",
+        "short": "Використовуйте 'will' для spontaneous (спонтанних) рішень, обіцянок, передбачень на основі думок та прохань.",
+        "full": "Ми використовуємо модальне дієслово **will** (або скорочено **'ll**) з повною формою дієслова (інфінітив без 'to') для таких ситуацій:\n\n- **Спонтанні рішення** (прийняті в момент мовлення):\n  *I'm cold. I'll close the window.* (Мені холодно. Я закрию вікно.)\n\n- **Передбачення майбутнього на основі думок, вірувань чи припущень** (часто після слів *think, believe, expect, perhaps*):\n  *I think it will rain tomorrow.* (Думаю, завтра буде дощ.)\n\n- **Обіцянки, погрози та пропозиції допомоги**:\n  *I will help you with your homework.* (Я допоможу тобі з домашньою роботою.)\n  *I will never do it again!* (Я ніколи більше цього не зроблю!)\n\nДля заперечення використовуємо **will not** або скорочено **won't**:\n*She won't come to the party.* (Вона не прийде на вечірку.)"
+      },
+      "Going to": {
+        "formula": "S + am/is/are + going to + V1",
+        "short": "Конструкція 'going to' використовується для вираження запланованих дій на майбутнє та для передбачень на основі теперішніх очевидних доказів.",
+        "full": "Конструкція **'going to'** (спільно з дієсловом to be у відповідній формі та основною формою дієслова) вживається у таких випадках:\n\n- **Плани та наміри:** Коли ми вже вирішили щось зробити в майбутньому.\n*Приклад:* I am going to visit my grandparents this weekend.\n\n- **Передбачення на основі очевидних доказів:** Коли ми бачимо ситуацію в теперішньому моменті, яка вказує на те, що станеться в майбутньому.\n*Приклад:* Look at those dark clouds! It is going to rain.\n\n**Утворення:**\nПісля підмета стоїть **am/is/are + going to** та основне дієслово; у запереченні додається **not**, а в запитанні am/is/are виноситься на початок."
+      },
+      "Present Continuous for Future": {
+        "formula": "S + am/is/are + V-ing",
+        "short": "Використовуємо Present Continuous для вираження запланованих особистих дій у майбутньому, зазвичай із зазначенням часу.",
+        "full": "Present Continuous (am/is/are + V-ing) використовується для вираження майбутніх подій, які вже точно заплановані та організовані (є домовленість, квитки, час або місце).\n\n- Особисті плани та домовленості: I am meeting my friends tomorrow.\n- Заплановані поїздки: We are flying to Paris next week.\n\nМаркери часу: tomorrow, next week, at 5 PM on Monday, tonight."
+      }
+    },
+    "Modal Verbs": {
+      "Obligation and Necessity (must, have to, should)": {
+        "formula": "S + must/have to/should + V1",
+        "short": "Модальні дієслова must, have to та should використовуються для вираження обов'язку, необхідності та порад на рівні B1.",
+        "full": "Для вираження обов'язку та необхідності в англійській мові використовують такі дієслова:\n\n- **Must** зазвичай виражає внутрішній обов'язок або суворе правило, яке встановлює той, хто говорить.\n  *Приклад:* I must finish this project today.\n\n- **Have to** зазвичай виражає зовнішній обов'язок, правило або закон, на який ми не можемо вплинути.\n  *Приклад:* She has to wear a uniform at school.\n\n- **Should** використовується для надання порад або рекомендацій (що варто зробити).\n  *Приклад:* You should study harder for the exam.\n\nЗауваження: поділ на внутрішній обов'язок (must) і зовнішній (have to) є орієнтовним, а не абсолютним правилом — у реальному мовленні вони часто взаємозамінні."
+      },
+      "Permission and Probability (can, could, may, might)": {
+        "formula": "S + can/could/may/might + V1",
+        "short": "Модальні дієслова can, could, may та might використовуються для вираження дозволу та ймовірності у теперішньому або майбутньому часі.",
+        "full": "Ці модальні дієслова допомагають показати, наскільки ймовірна подія або чи є дозвіл на дію.\n\n- **Can** (найнеформальніший) та **Could** (більш ввічливий) використовуються для запиту або надання дозволу, а також для вираження загальної можливості.\n  *Приклад:* Can I use your pen? / It could rain later.\n\n- **May** (формальний) та **Might** (менша ймовірність) використовуються для припущень щодо майбутнього або теперішнього.\n  *Приклад:* It may snow tomorrow. / We might go to the cinema, but we're not sure."
+      },
+      "Prohibition and Lack of Necessity (mustn't, don't have to)": {
+        "formula": "S + mustn't/don't have to/doesn't have to + V1",
+        "short": "Використовуйте mustn't для заборони (коли щось робити не можна), а don't have to — для відсутності необхідності (коли діяти за правилами не обов'язково).",
+        "full": "Для вираження заборони та відсутності необхідності в англійській мові на рівні B1 використовуються такі модальні дієслова:\n\n- **Mustn't (must not)** — виражає сувору заборону. Це означає, що щось заборонено правилами або законом.\n  *Приклад:* You mustn't park here. (Тут не можна паркуватися / Заборонено).\n\n- **Don't have to / doesn't have to** — виражає відсутність необхідності (не обов'язково). Це означає, що ви можете це зробити, якщо хочете, але в цьому немає потреби.\n  *Приклад:* You don't have to wake up early tomorrow, it's Sunday. (Тобі не обов'язково прокидатися рано завтра, бо неділя)."
+      }
+    },
+    "Conditionals": {
+      "First Conditional": {
+        "formula": "If + S + V1, S + will + V1",
+        "short": "First Conditional використовується для вираження реальних подій у майбутньому та їхніх можливих наслідків. У частині з 'if' використовується Present Simple, а в головній частині — Future Simple (will).",
+        "full": "First Conditional (Перший тип умовних речень) застосовується для прогнозування реальних ситуацій у майбутньому.\n\nПісля **If** уживається Present Simple, а в головній частині — Future Simple (**will + дієслово**).\n\nПриклади:\n- If it rains, I will stay at home. (Якщо піде дощ, я залишуся вдома.)\n- What will you do if you pass the exam? (Що ти зробиш, якщо складеш іспит?)\n\nВажливо:\n- Порядок частин можна міняти без коми: I will stay at home if it rains.\n- Замість 'will' у головній частині можна використовувати модальні дієслова (can, must, should) або повеління."
+      },
+      "Second Conditional": {
+        "formula": "If + S + V2, S + would + V1",
+        "short": "Second Conditional використовується для вираження уявних, малоймовірних або нереальних ситуацій у теперішньому чи майбутньому часі та їхніх можливих наслідків.",
+        "full": "Ми використовуємо Second Conditional, коли говоримо про фантазії, мрії або ситуації, які навряд чи стануться в реальності.\n\nПісля **If** уживається Past Simple, а в головній частині — **would / wouldn't** та базове дієслово.\n\nОсобливість:\nЗ займенниками I, he, she, it у формальній / граматично традиційній англійській часто використовується 'were' замість 'was' (наприклад: *If I were you...*).\n\nПриклади:\n- If I won the lottery, I would buy a big house. (Якби я виграв у лотерею, я б купив великий будинок — але шанс маленький).\n- If she spoke English better, she would get the job. (Якби вона розмовляла англійською краще, вона б отримала цю роботу — але зараз вона розмовляє не дуже добре)."
+      }
+    },
+    "Passive Voice": {
+      "Present Simple Passive": {
+        "formula": "S + am/is/are + V3",
+        "short": "Present Simple Passive використовується, коли важливіша сама дія або її об'єкт, а не те, хто її виконує. Утворюється за допомогою дієслова to be (am/is/are) та третьої форми основного дієслова (V3/ed).",
+        "full": "Правило утворення:\nМи використовуємо Present Simple Passive (пасивний стан у теперішньому простому часі), коли фокус уваги спрямований на предмет чи особу, над якою виконується дія, а не на самого виконавця.\n\nСтверджувальна форма будується з **am/is/are** та третьої форми дієслова (V3).\n\nПриклади:\n- Active: People grow coffee in Brazil. (Люди вирощують каву в Бразилії.)\n- Passive: Coffee is grown in Brazil. (Кава вирощується в Бразилії.)\n- Active: They clean the rooms every day. (Вони прибирають кімнати щодня.)\n- Passive: The rooms are cleaned every day. (Кімнати прибираються щодня.)\n- Active: I don't write letters. (Я не пишу листи.)\n- Passive: Letters are not written by me. (Листи не пишуться мною.)\n\nКоли використовувати:\n- Коли виконавець дії невідомий або не має значення.\n- У наукових статтях, інструкціях, новинах та офіційних звітах."
+      },
+      "Past Simple Passive": {
+        "formula": "S + was/were + V3",
+        "short": "Past Simple Passive використовується для акценту на дії в минулому, коли важливо що сталося, а не хто це зробив.",
+        "full": "Правило утворення:\nМи утворюємо Past Simple Passive за допомогою допоміжного дієслова to be у минулому часі (was/were) та третьої форми основного дієслова (V3 / Participle II).\n\nСтверджувальна форма будується з **was/were** та третьої форми дієслова (V3); у запереченні додається **not**, а в запитанні was/were виноситься на початок.\n\nПриклади:\n- The letter was written yesterday. (Лист був написаний вчора.)\n- America was discovered in 1492. (Америка була відкрита в 1492 році.)\n- Were you invited to the party? (Тебе запросили на вечірку?)"
+      }
+    },
+    "Reported Speech": {
+      "Reported Statements": {
+        "formula": "S + reporting verb (said/told) + (that) + reported clause",
+        "short": "У непрямій мові (Reported Statements) ми передаємо чужі слова своїми, зазвичай змішуючи час назад (Backshift) та змінюючи займенники.",
+        "full": "Коли ми передаємо чиїсь стверджувальні речення (Reported Statements), дієслово зазвичай зсувається на один час у минуле (Backshift):\n- Present Simple → Past Simple (\"I like apples\" → He said (that) he liked apples).\n- Present Continuous → Past Continuous (\"I am reading\" → She said she was reading).\n- Past Simple / Present Perfect → Past Perfect (\"I went there\" → He said he had gone there).\n\nТакож змінюються займенники та слова часу і місця:\n- now → then\n- today → that day\n- here → there\n\nПриклад:\n- Direct: \"I live in Kyiv,\" Ann said.\n- Reported: Ann said (that) she lived in Kyiv.\n\nВажливо: зсув часу (backshift) не завжди обов'язковий. Якщо факт досі актуальний або контекст не вимагає зміни часу, час можна не змінювати: He said he **is** busy (якщо він і досі зайнятий)."
+      }
+    },
+    "Gerunds and Infinitives": {
+      "Gerunds (V-ing)": {
+        "formula": "S + V + V-ing / Prep + V-ing / V-ing + S",
+        "short": "Герундій (дієслово з закінченням -ing) використовується як іменник, зокрема після певних дієслів, прийменників та як підмет речення.",
+        "full": "Герундій — це форма дієслова з закінченням -ing (наприклад, swimming, reading), яка виконує роль іменника в реченні.\n\nОсновні випадки використання на рівні B1:\n- Після дієслів, що виражають вподобання або відраду (like, love, hate, enjoy, don't mind): *I enjoy reading books.* (Я люблю читати книги.)\n- Після прийменників (in, on, at, about, before, after): *She is good at playing tennis.* (Вона добре грає в теніс.)\n- Як підмет (головна дія) на початку речення: *Swimming is great for your health.* (Плавання корисне для здоров'я.)"
+      },
+      "Infinitives (to + V1)": {
+        "formula": "S + V + to + V1",
+        "short": "Інфінітив з часткою to (to + V1) використовується переважно для вираження мети дії або після певних дієслів, таких як want, hope, decide.",
+        "full": "Інфінітив (to + V1) в англійській мові має кілька основних функцій на рівні B1:\n\n1. Вираження мети (для чого щось робиться):\n- I went to the shop to buy some milk. (Я пішов у магазин, щоб купити молока.)\n\n2. Після певних дієслів (want, would like, hope, decide, plan, need, expect):\n- She wants to learn Spanish. (Вона хоче вивчити іспанську.)\n- We decided to stay at home. (Ми вирішили залишитися вдома.)\n\n3. Після прикметників (для пояснення емоцій або оцінки):\n- It is important to study every day. (Важливо вчитися щодня.)\n- I am happy to help you. (Я радий тобі допомогти.)"
+      }
+    },
+    "Relative Clauses": {
+      "Defining Relative Clauses": {
+        "formula": "N + who/which/that + S + V / N + S + V",
+        "short": "Defining Relative Clauses дають життєво необхідну інформацію про особу чи предмет, без якої речення втратить сенс. Замість займенників who, which або that у таких реченнях можна часто опускати, якщо вони не є підметом.",
+        "full": "### Defining Relative Clauses (Означальні підрядні речення)\n\nЦі речення потрібні, щоб точно пояснити, **про кого саме** або **про що саме** йдеться. Без цієї інформації речення звучить незавершеним.\n\n**Основні правила:**\n- **Who / That** — використовуються для людей. (\"That\" є більш неформальним).\n- **Which / That** — використовуються для речей та тварин.\n- Займенники (`who`, `which`, `that`) можна **опускати**, якщо вони замінюють додаток (тобто після них іде підмет).\n\n**Приклади:**\n- The man **who/that** lives next door is a doctor. (Хто живе по сусідству — важливо для розуміння, про якого чоловіка мова).\n- This is the camera **which/that** I bought yesterday. (Це камера, яку я купив учора).\n- The book [that] she gave me is fantastic. (Тут займенник 'that' можна опустити, бо далі йде підмет 'she')."
+      }
+    },
+    "Present Simple vs Present Continuous": {
+      "Contrast: Habit vs Action Now": {
+        "formula": "S + V1 (s/es) vs S + am/is/are + V-ing",
+        "short": "Present Simple використовується для регулярних звичок та постійних ситуацій, а Present Continuous — для дій, що відбуваються прямо зараз або тимчасово.",
+        "full": "Present Simple vs Present Continuous: Contrast (Habit vs Action Now)\n\n1. Present Simple (Звички та регулярність):\n- Використовується для дій, які повторюються регулярно, звичок, розпокладів та загальних фактів.\n- Маркери часу: always, usually, often, sometimes, every day/week.\n- Приклад: She usually works in the office, but today she is working from home.\n\n2. Present Continuous (Дія зараз):\n- Використовується для дій, що відбуваються в момент мовлення, або тимчасових ситуацій.\n- Маркери часу: now, at the moment, currently, today.\n- Приклад: Look! It is raining outside, so we can't go for a walk."
+      }
+    },
+    "Complex Comparatives": {
+      "The more... the better / less than": {
+        "formula": "The + Adj/Adv + S + V, the + Adj/Adv + S + V",
+        "short": "Конструкція 'The + порівняльний прикметник/прислівник, the + порівняльний прикметник/прислівник' використовується для вираження залежності між двома діями чи станами.",
+        "full": "Ця структура перекладається як 'Чим..., тим...'. Вона складається з двох частин, кожна з яких починається з артикля 'the', за яким слідує прикметник або прислівник у вищій ступені (comparative), а потім підмет і присудок.\n\nКожна з двох частин починається з **the**, за яким іде прикметник або прислівник у вищому ступені, а потім — підмет і дієслово.\n\nПриклади:\n- The more you practice, the better you speak English.\n- The less you worry, the easier life is.\n- The faster we drive, the sooner we will arrive."
+      }
+    },
+    "Passive Voice (Extended)": {
+      "Present Perfect Passive": {
+        "formula": "S + have/has + been + V3",
+        "short": "Present Perfect Passive використовується для акценту на результаті дії, яка сталася в минулому, але важлива зараз. Формується за допомогою has/have + been + V3 (третя форма дієслова або закінчення -ed).",
+        "full": "Правило утворення:\n- S + has/have + been + V3/ed\n\nВикористання:\n- Коли важливіший сам результат дії, а не те, хто її виконав.\n- Часто використовується зі словами: already, yet, just, ever, never, since, for.\n\nПриклади:\n- The report has been finished. (Звіт закінчено - результат важливий зараз).\n- Have the letters been sent yet? (Листи вже відправлені?).\n- The car hasn't been washed. (Машину не помили)."
+      },
+      "Future Passive (will be + V3)": {
+        "formula": "S + will + be + V3",
+        "short": "Future Passive використовується, коли дія в майбутньому спрямована на підмет. Утворюється за допомогою допоміжного дієслова will, be та третьої форми основного дієслова (V3/ed).",
+        "full": "Future Passive (Пасивний стан у майбутньому часі) вживається тоді, коли ми хочемо зосередитися на об'єкті, який зазнає дії у майбутньому, а не на тому, хто її виконує.\n\nУтворюється з **will be** та третьої форми дієслова (V3).\n\nПриклади:\n- The project will be finished tomorrow. (Проект буде закінчено завтра.)\n- New computers will be bought next week. (Нові комп'ютери будуть куплені наступного тижня.)\n\nЗаперечна форма (will not be / won't be + V3):\n- The test won't be cancelled. (Тест не буде скасовано.)\n\nПитальна форма (Will + subject + be + V3?):\n- Will the invitation be sent today? (Запрошення буде надіслане сьогодні?)"
+      }
+    },
+    "Relative Clauses (Extended)": {
+      "Relative Clauses with where and whose": {
+        "formula": "N + where + S + V / N + whose + N + V",
+        "short": "займенники where і whose замінюють обставину місця та виражають володіння, поєднуючись відповідно з іменниками місць та людей чи предметів.",
+        "full": "У темі Relative Clauses займенники **where** і **whose** використовуються для зв'язку підрядних речень з головними.\n\n- **Where** використовується для опису місць (places). Займенник вказує на локацію, де щось відбувається.\n  *Приклад:* This is the house **where** I was born. (Це будинок, де я народився.)\n\n- **Whose** використовується для вираження володіння (possession) і замінює прийменники типу *his, her, their, my* тощо. Він зазвичай стоїть між двома іменниками.\n  *Приклад:* I met a man **whose** car was stolen. (Я зустрів чоловіка, чию машину вкрали.)"
+      }
+    },
+    "Present Perfect vs Past Simple": {
+      "Contrast: Result vs Finished Time": {
+        "formula": "S + have/has + V3 / S + V2",
+        "short": "Використовуйте Present Perfect для подій із результатом у теперішньому, а Past Simple — коли вказано точний час у минулому.",
+        "full": "Present Perfect vs Past Simple (Result vs Finished Time)\n\nPresent Perfect:\n- Вживаємо, коли важливий сам результат у теперішньому моменті, а не коли сталася подія.\n- Приклад: I have lost my keys. (Я загубив ключі, і в мене їх немає зараз).\n\nPast Simple:\n- Вживаємо, коли дія відбулася у конкретний час у минулому (yesterday, last year, in 2010), який уже закінчився.\n- Приклад: I lost my keys yesterday. (Я загубив ключі вчора).\n\nГоловна відмінність: Present Perfect фокусується на зв'язку з теперішнім, тоді як Past Simple — на завершеному часі в минулому."
+      }
+    },
+    "Future Forms (Present Simple for Schedules)": {
+      "Present Simple for Timetables and Schedules": {
+        "formula": "S + V1 (s/es) + Adv/O",
+        "short": "Використовуйте Present Simple для вираження майбутніх подій, які відбуваються за офіційним розкладом або розкладом руху транспорту.",
+        "full": "Ми використовуємо час Present Simple (дієслово у першій формі, з закінченням -s/-es для третьої особи однини) для подій у майбутньому, які не залежать від нашої волі, а підпорядковані фіксованому розкладу, розкладу руху транспорту, кінотеатрів, концертів чи уроків.\n\nОсновні випадки використання:\n- Розклад руху транспорту (потяги, літаки, автобуси).\n- Офіційні програми заходів, уроків, конференцій.\n- Час роботи закладів (магазинів, музеїв, банків).\n\nПриклади:\n- The train leaves at 6 PM tomorrow. (Потяг вирушає о 18:00 завтра.)\n- What time does the film start tonight? (О котрій годині починається фільм сьогодні ввечері?)\n- Our English class begins at 9 AM on Monday. (Наш урок англійської починається о 9 годині ранку в понеділок.)"
+      }
+    },
+    "Reported Speech (Questions and Commands)": {
+      "Reported Questions (Yes/No and Wh-)": {
+        "formula": "S + asked (+ O) + Wh-word / if / whether + S + verb (у відповідному часі)",
+        "short": "При перетворенні запитань у непряму мову змінюються часи, займенники та порядок слів на прямий, а також використовуються слова if/whether для запитань без питального слова.",
+        "full": "Reported Questions (Питання у непрямій мові) передають зміст того, що хтось запитав.\n\nОсновні правила:\n- Порядок слів стає розповідним (підмет + дієслово), а не питальним (допоміжне дієслово + підмет).\n- Зберігається правило узгодження часів (Present Simple змінюється на Past Simple і т.д.).\n- Не використовуються допоміжні дієслова do, does, did у стверджувальній частині.\n\nТипи питань:\n1. Wh- questions (запитання з питальним словом: who, what, where, when, why, how):\n- Питальне слово залишається сполучником.\n- Приклад: He asked me, \"Where do you live?\" → He asked me where I lived.\n\n2. Yes/No questions (загальні запитання):\n- Використовуються сполучники if або whether (чи).\n- Приклад: She asked, \"Do you like coffee?\" → She asked if I liked coffee."
+      },
+      "Reported Commands and Requests": {
+        "formula": "S + asked/told + O + not/to + V1",
+        "short": "Для передачі прохань і наказу в непрямій мові використовують конструкцію 'ask/tell + хтось + to do (або not to do)'.",
+        "full": "Коли ми передаємо чиїсь прохання або накази іншій особі, ми змінюємо їх на інфінітив з часткою to.\n\nОсновні правила:\n- Накази (imperatives) перетворюються на: **told + [особа] + to do**.\n- Прохання (requests з 'please') перетворюються на: **asked + [особа] + to do**.\n- Заперечні накази та прохання утворюються за допомогою **not to do**.\n\nПриклади:\n- Direct: \"Open the window, please,\" she said to him. → Reported: She asked him to open the window.\n- Direct: \"Don't touch that button!\" he said to me. → Reported: He told me not to touch that button."
+      }
+    }
+  },
+  "B1_PLUS": {
+    "Present Perfect Continuous": {
+      "Duration with Result": {
+        "formula": "S + have/has + been + V-ing",
+        "short": "Present Perfect Continuous використовується для акценту на процесі та його тривалості, коли дія тривала якийсь час і щойно завершилася, а її результат очевидний у теперішньому.",
+        "full": "Цей час утворюється з **have/has + been** та дієслова із закінченням -ing.\n\nВикористання для теми 'Duration with Result' (Тривалість з результатом):\nМи використовуємо цей час, щоб показати, як довго тривала дія, яка привела до теперішнього результату. Часто ми бачимо наслідки цієї дії на власні очі.\n\nОсновні маркери часу:\n- for (протягом — вказує на період часу)\n- since (з якого моменту — вказує на точну точку в часі)\n- all day / all morning (весь день / увесь ранок)\n\nПриклади:\n- My hands are dirty because I have been working in the garden. (Мої руки брудні, бо я працював у саду — процес завершився, є видимий результат).\n- She is tired because she has been running for an hour. (Вона втомлена, бо бігала протягом години).\n- It has been raining all morning, so the streets are wet. (Дощило весь ранок, тож вулиці мокрі)."
+      }
+    },
+    "Past Perfect vs Past Perfect Continuous": {
+      "Contrast": {
+        "formula": "S + had + V3 / S + had + been + V-ing",
+        "short": "Past Perfect описує завершену дію до певного моменту в минулому, тоді як Past Perfect Continuous фокусується на тривалості дії, яка тривала до іншої події в минулому.",
+        "full": "Past Perfect vs Past Perfect Continuous (Contrast):\n\n1. Past Perfect (had + V3/ed): Використовується для дій, які повністю завершилися до певного моменту або іншої дії в минулому.\n- Приклад: When I arrived, she had already left. (Коли я прийшов, вона вже пішла.)\n\n2. Past Perfect Continuous (had been + V-ing): Використовується для дій, які тривали деякий час до певного моменту в минулому і могли продовжуватися в цей момент або щойно завершитися. Акцент робиться на процесі та тривалості.\n- Приклад: They had been waiting for the bus for an hour when it finally arrived. (Вони чекали на автобус цілу годину, коли він нарешті прибув.)\n\nГоловна відмінність: Past Perfect відповідає на питання «Що сталося?», а Past Perfect Continuous — на питання «Як довго тривало?»."
+      }
+    },
+    "Future Continuous and Future Perfect": {
+      "Future Continuous (will be + V-ing)": {
+        "formula": "S + will + be + V-ing",
+        "short": "Future Continuous описує дію, яка триватиме у визначений момент у майбутньому. Утворюється за допомогою will be та дієслова з закінченням -ing.",
+        "full": "Future Continuous (майбутній тривалий час)\n\n1. Суть:\nВикористовується для акценту на дії, яка буде в процесі у конкретний момент у майбутньому.\n\n2. Утворення:\nЧас будується з **will be** та дієслова із закінченням -ing; у запереченні додається **not (won't)**, а в запитанні **will** виноситься перед підметом.\n\n3. Маркери часу:\n- at 5 o'clock tomorrow (завтра о 5 годині)\n- this time next week (цього часу наступного тижня)\n- from 3 till 5 (з 3 до 5)\n\n4. Приклади:\n- This time tomorrow, I will be flying to London.\n- Don't call me at 8 PM, I will be having dinner.\n- Will you be using the car tomorrow evening?"
+      },
+      "Future Perfect (will have + V3)": {
+        "formula": "S + will + have + V3",
+        "short": "Future Perfect використовується для вираження дії, яка завершиться до певного моменту в майбутньому. Утворюється за допомогою допоміжного дієслова will have та третьої форми основного дієслова (V3).",
+        "full": "Future Perfect (майбутній завершений час) вживається тоді, коли ми хочемо підкреслити, що якась дія буде повністю виконана до визначеного часу або іншої події в майбутньому.\n\nЧас утворюється з **will have** та третьої форми дієслова (V3); у запереченні додається **not (won't)**, а в запитанні will виноситься перед підметом.\n\nМаркери часу (часто вживаються з прийменником 'by'):\n- by tomorrow (до завтра)\n- by 5 o'clock (до 5 години)\n- by the time (до того часу, як)\n- by next year (до наступного року)\n\nПриклади:\n- I will have finished this report by 6 PM. (Я закінчу цей звіт до 18:00.)\n- By next month, they will have built their new house. (До наступного місяця вони побудують свій новий будинок.)\n- Will you have read the book by Friday? (Ти прочитаєш книгу до п'ятниці?)"
+      }
+    },
+    "Modals of Deduction": {
+      "must have / might have / can't have + V3": {
+        "formula": "S + must have / might have / can't have + V3",
+        "short": "Модальні дієслова must have, might have та can't have з третьою формою дієслова (V3) використовуються для висновків про події, які сталися в минулому.",
+        "full": "Ми використовуємо структуру **Modals of Deduction (Past)**, коли хочемо припустити або зробити висновок щодо минулих подій на основі наявних доказів.\n\n- **Must have + V3** (95% впевненості) — використовуємо, коли ми майже впевнені, що щось сталося.\n  *Приклад:* She **must have left** her keys at home; I can't find them anywhere.\n\n- **Might have / Could have + V3** (50% або менше впевненості) — використовуємо для припущень про те, що могло статися, але ми не впевнені.\n  *Приклад:* He **might have missed** the bus, that's why he is late.\n\n- **Can't have + V3** (майже 100% впевненості у протилежному) — використовуємо, коли ми переконані, що щось **не** могло статися в минулому.\n  *Приклад:* They **can't have finished** the project so quickly; it's too complex!"
+      }
+    },
+    "Causative (have/get something done)": {
+      "Have / Get + object + V3": {
+        "formula": "S + have/get + O + V3",
+        "short": "Конструкція 'have/get something done' використовується, коли ми не робимо дію самі, а наймаємо когось іншого виконати її для нас.",
+        "full": "Ми використовуємо структуру **Have / Get + object + V3 (Past Participle)**, коли говоримо про послуги або дії, які для нас роблять інші люди (майстри, професіонали тощо).\n\n- **Утворення:** після **have/get** ставиться предмет (object), а далі — третя форма дієслова (V3).\n- **Приклад (Have):** I *had my hair cut* yesterday. (Я підстригся у салоні, не сам).\n- **Приклад (Get):** She *gets her car serviced* every year. (Вона віддає машину на техогляд).\n\n*Різниця:* 'Get' зазвичай використовується в розмовній мові або коли є певні труднощі чи переконання когось щось зробити."
+      }
+    },
+    "Third Conditional and Mixed Conditionals": {
+      "Third Conditional": {
+        "formula": "If + S + had + V3, S + would + have + V3",
+        "short": "Третій тип умовних речень (Third Conditional) використовується для вираження жалю про події в минулому або уявлення альтернативної історії, яка вже не може відбутися.",
+        "full": "Third Conditional (Третій тип умовних речень) описує гіпотетичні ситуації в минулому, які не сталися, та їх можливі наслідки.\n\nПісля **If** уживається Past Perfect (**had + V3**), а в головній частині — **would have + V3**.\n\nПриклади:\n- If I had studied harder, I would have passed the exam. (Якби я вчився старанніше, я б склав іспит — але я не вчився і не склав).\n- If she had left earlier, she wouldn't have missed the train. (Якби вона вийшла раніше, вона б не запізнилася на потяг).\n\nВажливо:\n- Порядок частин речення можна міняти без коми: 'I would have bought a car if I had saved enough money'."
+      },
+      "Mixed Conditional (Past → Present)": {
+        "formula": "If + S + had + V3, S + would/could/might + V1",
+        "short": "Mixed Conditional (Past → Present) використовується, коли минула подія впливає на теперішній момент. Формула: If + Past Perfect, більш ранній результат у минулому + would/could/might + V1 у теперішньому.",
+        "full": "Цей тип змішаного умовного речення поєднує минулу умову (Third Conditional) та теперішній результат (Second Conditional).\n\n- **Утворення:** після **If + Past Perfect** у головній частині вживається **would/could/might** та базова форма дієслова.\n- **Коли використовується:** Коли дія в минулому (якби щось сталося тоді) змінила б нашу ситуацію або стан у теперішньому (то ми б мали щось зараз).\n\n- **Приклади:**\n- If I had studied harder at university, I would have a better job now. (Якби я краще вчився в університеті в минулому, зараз я мав би кращу роботу).\n- If she hadn't missed her flight, she wouldn't be so stressed today. (Якби вона не запізнилася на літак учора, вона б не була такою нервовою сьогодні)."
+      }
+    },
+    "Wish / If only": {
+      "Wish + Past Simple (present)": {
+        "formula": "S + wish/if only + S + V2/were",
+        "short": "Конструкція 'wish + Past Simple' використовується для вираження жалю про теперішню ситуацію, яку ми хотіли б змінити, але не можемо.",
+        "full": "Ми використовуємо **Wish + Past Simple** (або **If only + Past Simple**), коли говоримо про бажання змінити щось у теперішньому часі, але розуміємо, що це малоймовірно або неможливо.\n\n- **Утворення:** після **wish / if only** уживається Past Simple (2-га форма або -ed); для дієслова to be зазвичай використовуємо **were** для всіх осіб.\n- **Приклад 1:** I wish I **spoke** French. (Я б хотів розмовляти французькою, але я не розмовляю).\n- **Приклад 2:** If only I **had** more free time! (Якби ж у мене було більше вільного часу! — але його немає).\n- **Приклад 3:** She wishes she **were** taller. (Вона б хотіла бути вищою)."
+      },
+      "Wish + Past Perfect (past regrets)": {
+        "formula": "S + wish/wishes + S + had + V3",
+        "short": "Конструкція 'wish + Past Perfect' використовується для вираження жалю про події, які сталися (або не сталися) у минулому.",
+        "full": "Ми використовуємо **wish + Past Perfect** (had + V3/ed), коли говоримо про дії в минулому, які ми хотіли б змінити, але вже не можемо.\n\n- Утворення: після **wish/wishes** уживається **had + V3 (Past Participle)**.\n- Приклад: I wish I had studied harder for the exam. (Я шкодую, що недостатньо старанно вчився до іспиту — але вже пізно).\n- Приклад: She wishes she hadn't bought that car. (Вона шкодує, що купила ту машину).\n\nЗамість *wish* можна використовувати *if only*, що додає більшої емоційності: \n- *If only we had left earlier!* (Якби ж ми вийшли раніше!)"
+      }
+    },
+    "Passive Voice (Advanced)": {
+      "Present Perfect Passive": {
+        "formula": "S + have/has + been + V3",
+        "short": "Present Perfect Passive використовується для акценту на результаті дії в минулому, яка має значення в теперішньому часу, коли підмет є об'єктом дії.",
+        "full": "Present Perfect Passive утворюється за допомогою допоміжних дієслів have/has + been та третьої форми основного дієслова (V3 / Past Participle).\n\nУтворюється з **have/has + been** та третьої форми дієслова (V3).\n\nВикористання на рівні B1+:\n- Коли важливіший результат дії, а не той, хто її виконав.\n- У звітах або новинах про події, що нещодавно завершилися.\n\nПриклади:\n- The report has just been finished. (Звіт щойно закінчено.)\n- Many new houses have been built in our city this year. (Цього року в нашому місті побудували багато нових будинків.)\n- Has the email been sent yet? (Лист уже надіслано?)"
+      },
+      "Future Passive": {
+        "formula": "S + will + be + V3",
+        "short": "Future Passive використовується, коли дія в майбутньому спрямована на підмет, а не виконується ним.",
+        "full": "Future Passive утворюється за допомогою допоміжного дієслова will (або shall) + be + третя форма основного дієслова (Past Participle / V3).\n\nЧас утворюється з **will be** та третьої форми дієслова (V3); у запереченні додається **not**, а в запитанні will виноситься перед підметом.\n\nВикористання:\n- Коли важливо підкреслити саму подію або результат у майбутньому, а не виконавця.\n- У формальних контекстах, новинах та оголошеннях.\n\nПриклади:\n- The new bridge will be built next year. (Новий міст збудують наступного року.)\n- Will the project be finished by Friday? (Проект буде завершено до п'ятниці?)\n- The documents won't be sent until Monday. (Документи не надішлють до понеділка.)"
+      },
+      "Modal Passive": {
+        "formula": "S + modal verb + be + V3",
+        "short": "Modal Passive використовується для вираження дії, яку необхідно, можливо чи заборонено виконати над підметом. Утворюється за схемою: модальне дієслово + be + V3 (третя форма дієслова).",
+        "full": "### Modal Passive (Модальний пасивний стан)\n\nЦя структура використовується, коли фокус робиться на об'єкті дії, а не на тому, хто її виконує, і при цьому важливо передати модальне значення (необхідність, можливість, дозвіл чи пораду).\n\n#### Утворення:\nПісля модального дієслова стоїть **be** та третя форма дієслова (V3); у запереченні додається **not**, а в запитанні модальне дієслово виноситься на початок.\n\n#### Основні модальні дієслова в пасиві:\n- **Must / Have to** (необхідність): The report *must be finished* by Friday.\n- **Should / Ought to** (порада): This rule *should be obeyed* by everyone.\n- **Can / Could** (можливість/здібність): Spanish *can be learned* easily with the right app.\n- **May / Might** (ймовірність): The meeting *might be postponed* until next week.\n\n#### Приклади:\n- Active: You must submit the documents tomorrow.\n- Passive: The documents *must be submitted* tomorrow.\n- Active: They can't solve this problem.\n- Passive: This problem *can't be solved*."
+      }
+    },
+    "Reported Speech (Advanced)": {
+      "Reporting Verbs": {
+        "formula": "S + V (Reporting) + (O) + to-V / V-ing / that-clause",
+        "short": "Для передачі чужої мови на рівні B1+ використовуйте спеціальні дієслова (Reporting Verbs) замість стандартних say, tell або ask, які точно відображають намір мовця.",
+        "full": "Advanced Reporting Verbs\n\nНа рівні B1+ ми відходимо від базових дієслів 'say', 'tell' і 'ask' та використовуємо дієслова, які детально описують функцію висловлювання (прохання, попередження, пропозиція тощо). Після них використовуються різні граматичні структури:\n\n- Verb + to-infinitive (обіцянка, пропозиція, погроза): agree, offer, promise, threaten, refuse.\n  Приклад: He promised to help me with the project.\n\n- Verb + object + to-infinitive (наказ, порада, прохання): advise, ask, encourage, invite, order, persuade, tell, warn.\n  Приклад: She advised me to apply for the scholarship.\n\n- Verb + -ing (вибачення, звинувачення, пропозиція): accuse (of), apologize (for), insist (on), suggest, admit, deny.\n  Приклад: He apologized for being late.\n\n- Verb + that-clause (ствердження, пояснення): admit, claim, explain, promise, suggest, complain.\n  Приклад: She explained that the train had been delayed."
+      }
+    },
+    "Relative Clauses (Advanced)": {
+      "Non-defining Relative Clauses": {
+        "formula": "N, who/which + V, ... / N, who/which + S + V, ... / N, whose + N + V, ...",
+        "short": "Non-defining relative clauses надають додаткову, несуттєву інформацію про іменник і завжди виділяються комами з обох боків.",
+        "full": "Non-defining relative clauses (необмежувальні відносні підрядні речення) додають додаткові деталі про людину, річ чи ситуацію, але якщо їх прибрати, основний сенс речення не зміниться.\n\nОсновні правила:\n- Завжди відокремлюються комами (якщо всередині речення — з обох боків, якщо в кінці — перед займенником).\n- Займенник **THAT** ніколи не використовується в цьому типі речень.\n- Не можна опускати відносні займенники (who, which, whose, where).\n- Займенник **WHICH** може стосуватися не лише одного слова, а й усього попереднього речення.\n\nПриклади:\n- My brother, who lives in Kyiv, is an engineer. (У мене може бути лише один брат, і те, що він живе в Києві — це додаткова інформація).\n- The hotel, which we booked online, was fantastic. (Готель, який ми забронювали онлайн, був фантастичним)."
+      }
+    },
+    "Linking Words and Cohesion": {
+      "Contrast and Consequence": {
+        "formula": "S + V + Adv / Linking word + S + V",
+        "short": "Для вираження контрасту використовуйте 'however', 'although' і 'despite', а для наслідків — 'therefore', 'as a result' та 'consequently'.",
+        "full": "linking words (слова-зв'язки) допомагають зробити ваше мовлення логічним та зв'язним на рівні B1+.\n\n- Контраст (Contrast): Використовуйте 'however' (проте), 'although' (хоча) та 'despite' / 'in spite of' (незважаючи на), щоб показати протиставлення ідей.\n  * Приклад: Although it was raining, they went for a walk.\n  * Приклад: He studied hard; however, he didn't pass the exam.\n\n- Наслідок (Consequence): Використовуйте 'therefore' (тому), 'as a result' (в результаті) та 'consequently' (отже), щоб показати результат дії.\n  * Приклад: She missed her alarm; therefore, she was late for work.\n  * Приклад: The company expanded rapidly, and as a result, they hired new staff."
+      }
+    },
+    "Linking Verbs": {
+      "Linking Verbs (seem, appear, become, turn out)": {
+        "formula": "S + seem/appear/become/turn out + Adj/N",
+        "short": "Дієслова seem, appear, become та turn out з'єднують підмет із прикметником або іменником, описуючи стан чи результат, а не дію.",
+        "full": "Linking verbs (Дієслова-зв'язки) не описують фізичну дію, а пов'язують підмет із характеристикою (іменником, прикметником або інфінітивом).\n\n- **Seem** та **appear** означають «здаватися» (на основі враження): \n  * She **seems** happy. (Вона здається щасливою.)\n  * It **appears** to be true. (Це здається правдою.)\n- **Become** означає «ставати» (процес зміни стану):\n  * He **became** a professional doctor. (Він став професійним лікарем.)\n- **Turn out** означає «виявитися» (несподіваний результат наприкінці):\n  * The weather **turned out** to be nice. (Погода виявилася чудовою.)\n\n*Увага:* Після цих дієслів зазвичай ставимо прикметник, а не прислівник (наприклад: *He became famous*, а не *famously*)."
+      }
+    }
+  },
+  "B2": {
+    "Perfect Continuous Tenses": {
+      "Past Perfect Continuous (duration before past event)": {
+        "formula": "S + had + been + V-ing",
+        "short": "Past Perfect Continuous використовується для опису дії, яка тривала певний час до певного моменту в минулому.",
+        "full": "Ми використовуємо Past Perfect Continuous (had been + V-ing), коли хочемо підкреслити тривалість дії, яка почалася в минулому і тривала до певного моменту або іншої дії в минулому.\n\nОсновні випадки використання:\n- Акцент на тривалості дії до події в минулому (часто з прийменниками *for* та *since*).\n- Дія закінчилася безпосередньо перед іншою минулою подією, і її результат був очевидним.\n\nПриклади:\n- By the time she arrived, we had been waiting for two hours. (Ми чекали дві години до її приїзду).\n- He was out of breath because he had been running. (Він задихався, бо бігав).\n\nМаркери часу: *for, since, all day, how long, before*."
+      },
+      "Future Perfect Continuous": {
+        "formula": "S + will + have + been + V-ing",
+        "short": "Future Perfect Continuous використовується для опису дії, яка триватиме певний час до певного моменту в майбутньому.",
+        "full": "Future Perfect Continuous вказує на тривалу дію, яка почнеться раніше за іншу подію чи момент у майбутньому і триватиме до цього моменту.\n\nЧас утворюється з **will have been** та дієслова із закінченням -ing.\n\nМаркери часу:\n- by ... for (до ... протягом)\n- by the time (до того часу, як)\n\nПриклади:\n- By next year, I will have been living here for five years. (До наступного року я житиму тут уже п'ять років.)\n- By 5 PM, she will have been working for 8 hours. (До 17:00 вона працюватиме вже 8 годин.)"
+      }
+    },
+    "Passive Voice (Advanced)": {
+      "Reporting Passive (It is said / He is believed)": {
+        "formula": "It + be + V3 + that + S + V / S + be + V3 + to + V1 / to + have + V3",
+        "short": "Reporting Passive використовується для передачі думок, чуток або слів багатьох людей за допомогою конструкцій 'It is [past participle]' або 'Subject is [past participle] to [infinitive]'.",
+        "full": "Reporting Passive (безособовий пасивний стан) використовується у формальному стилі (новини, офіційні звіти) для передачі загальної думки, чуток або слів без зазначення конкретного джерела.\n\nІснує два основні способи утворення:\n\n1. Конструкція 'It + passive verb + that-clause':\nВикористовується з дієсловами *say, believe, think, know, report, expect, consider*.\n- It is said that he is a millionaire. (Кажуть, що він мільйонером.)\n- It was reported that the factory had closed. (Повідомляли, що завод закрився.)\n\n2. Конструкція 'Subject + passive verb + to-infinitive':\nПідмет головного речення стає підметом пасивної конструкції, за якою йде інфінітив.\n- He is said to be a millionaire. (Вважається, що він мільйонер.)\n- The company is believed to be losing money. (Вважають, що компанія втрачає гроші.)\n\nВибір інфінітива залежить від часу події:\n- Present Infinitive (to do): для дій у теперішньому або майбутньому.\n- Perfect Infinitive (to have done): для дій у минулому.\n- She is known to have solved the problem. (Відомо, що вона розв'язала проблему.)"
+      },
+      "Passive with Modals": {
+        "formula": "S + modal + be/have been + V3",
+        "short": "Для утворення пасивного стану з модальними дієсловами використовується конструкція: модальне дієслово + be + третя форма дієслова (V3/Past Participle).",
+        "full": "У рівні B2 пасивний стан із модальними дієсловами (must, should, can, could, might, may тощо) використовується, коли фокус робиться на дії або об'єкті, що зазнає дії, а не на виконавці.\n\nКонструкція має два різновиди:\n1. **modal + be + V3** — теперішній або майбутній пасив: The report must be finished.\n2. **modal + have been + V3** — минулий пасив (модальні з have: should have, could have, might have): The issue should have been discussed.\n\nПриклади:\n- The report must be finished by tomorrow. (Звіт має бути закінчений до завтра.)\n- This issue should have been discussed earlier. (Це питання слід було обговорити раніше.)\n- The project can be completed on time. (Проект може бути завершений вчасно.)"
+      }
+    },
+    "Inversion": {
+      "Negative Adverbials at the Beginning": {
+        "formula": "Negative/restrictive adverbial + Aux + S + V",
+        "short": "Коли речення починається з негативного або обмежувального прислівника, прямий порядок слів міняється на інверсію (допоміжне дієслово стає перед підметом).",
+        "full": "Правило інверсії з негативними прислівниками (Negative Adverbials) на початку речення.\n\nКоли ми виносимо на початок речення слова з негативним або обмежувальним значенням для надання мовленню більшої емоційності, офіційності чи драматизму, ми використовуємо структуру запитання (інверсію) в основній частині речення.\n\nПорядок слів стає таким: негативний прислівник, допоміжне дієслово, підмет, основне дієслово.\n\nОсновні слова, що викликають інверсію:\n- Never (ніколи)\n- Rarely / Seldom (рідко)\n- Hardly / Scarcely / Barely (...коли, ледве)\n- Little (мало, майже не)\n- Not only ... but also (не тільки ... а й)\n- Under no circumstances (за жодних обставин)\n\nПриклади:\n- Standard: I have never seen such a beautiful sunset.\n- Inverted: Never have I seen such a beautiful sunset.\n- Standard: She rarely speaks in public.\n- Inverted: Rarely does she speak in public.\n- Standard: We had hardly left the house when it started to rain.\n- Inverted: Hardly had we left the house when it started to rain.\n\nЯкщо в реченні немає допоміжного дієслова, в інверсії з'являється do/does/did:\n- Standard: I rarely see him. → Inverted: Rarely **do I** see him.\n- Standard: She never mentioned it. → Inverted: Never **did she** mention it."
+      },
+      "Inverted Conditionals (Had / Were / Should)": {
+        "formula": "Had + S + V3, S + would have + V3 / Were + S + complement, S + would + V1 / Were + S + to + V1, S + would + V1 / Should + S + V1, S + will + V1 (або наказ)",
+        "short": "В умовних реченнях (Conditionals) можна опускати сполучник 'if', виносячи допоміжне дієслово (had, were, should) на перше місце перед підметом. Розрізняй три типи: Had + S + V3 (Third Conditional), Were + S + ... (Second Conditional / Were to), Should + S + V1 (малоймовірна умова).",
+        "full": "Inverted Conditionals (Інвертовані умовні речення)\n\nУ мовленні високого рівня (B2+) часто уникають використання слова 'if' умовних реченнях 2-го та 3-го типів, а також у випадках майбутньої малоймовірної умови. Замість цього використовується інверсія — допоміжне дієслово ставиться перед підметом.\n\nОсновні випадки:\n- Третій тип (минуле): Замість 'If I had known' використовується 'Had I known'.\n  Приклад: Had I known about the traffic, I would have taken another route.\n- Другий тип (теперішнє/майбутнє): Замість 'If I were you' використовується 'Were I you'. (Важливо: з усіма особами використовується 'were').\n  Приклад: Were she in your position, she would accept the offer.\n- Перший/Другий тип (малоймовірні події): Замість 'If you should need help' використовується 'Should you need help'.\n  Приклад: Should you have any questions, please contact our support team."
+      }
+    },
+    "Cleft Sentences": {
+      "It-cleft (It is ... that)": {
+        "formula": "It + be + [focus] + that/who",
+        "short": "It-cleft речення використовуються для виділення певної частини речення з метою акценту за допомогою конструкції It + be + [фокус] + that/who.",
+        "full": "### It-cleft Sentences (It is ... that)\n\nЦя конструкція використовується, коли ми хочемо звернути особливу увагу слухача на конкретний елемент речення (підмет, додаток, обставину).\n\n**Структура:**\nIt + to be (is/was) + [виділений елемент] + that (або who для людей) + [решта речення].\n\n**Приклади:**\n- Звичайне речення: *John broke the window yesterday.*\n- Виділяємо підмет: *- It was John who broke the window.*\n- Виділяємо обставину часу: *- It was yesterday that John broke the window.*\n\n**Важливо:**\n- Замість *that* для людей часто використовують *who*.\n- Час дієслова *to be* узгоджується з часом основного речення (is/was)."
+      },
+      "Wh-cleft (What ... is)": {
+        "formula": "What + S + V + is/was + O/N/Adj",
+        "short": "Wh-cleft речення (з 'What') використовуються для виділення певної інформації у реченні шляхом поділу його на дві частини.",
+        "full": "Структура Wh-cleft (What-cleft) використовується, коли ми хочемо акцентувати увагу на конкретній частині речення (зазвичай на підметі або прямій доповненні).\n\nСтруктура така: **What** + підмет і дієслово + **is/was** + акцентована інформація.\n\nПриклади:\n- Звичайне речення: I need a cup of coffee.\n- Wh-cleft речення: What I need is a cup of coffee.\n\n- Звичайне речення: They stole my red car.\n- Wh-cleft речення: What they stole was my red car.\n\nВажливо:\n- Замість 'is' у минулому часі використовуємо 'was'.\n- Акцентована інформація найчастіше стоїть наприкінці речення."
+      }
+    },
+    "Participle Clauses": {
+      "Present Participle (V-ing)": {
+        "formula": "V-ing + O, S + V",
+        "short": "Дієприкметник теперішнього часу (Present Participle / V-ing) використовується для скорочення підрядних речень часу, причини або наслідку, коли дві дії виконуються одночасно однією особою.",
+        "full": "Повне правило:\n\nPresent Participle (дієприкметник на -ing) у підрядних конструкціях (Participle Clauses) замінює активні дієслова у підрядних реченнях і вказує на те, що дії відбуваються одночасно.\n\nОсновні випадки використання:\n- Одночасність дій: Виражає дію, яка відбувається паралельно з основною дією (наприклад, читаючи, слухаючи).\n- Причина: Пояснює, чому сталася основна дія (замінює конструкції з *because* або *since*).\n- Наслідок: Показує результат основної дії.\n\nГоловна умова: у типових обставинних дієприкметникових конструкціях підмет головного речення має збігатися з виконавцем дії. Окремо існують результативні конструкції (resultative), де дієприкметник описує наслідок усієї головної події, а не дію підмета (наприклад, *He dropped his phone, shattering the screen* — екран розбився внаслідок падіння, а не тому що чоловік його розбивав).\n\nПриклади:\n- Одночасність: *Waiting for the bus, I met my old friend.* (Чекаючи на автобус, я зустрів старого друга = *While I was waiting...*)\n- Причина: *Not knowing the language, she found it hard to communicate.* (Не знаючи мови, їй було важко спілкуватися = *Because she didn't know...*)\n- Наслідок: *He dropped his phone, shattering the screen.* (Він упустив телефон, розбивши екран = *...and shattered the screen.*)\n\nСпільний виконавець дії:\n- Правильно: *Walking down the street, I saw an old friend.*\n- Неправильно: *Walking down the street, the trees looked beautiful.* (граматично виходить, ніби вулицею йшли дерева)."
+      },
+      "Perfect Participle (Having + V3)": {
+        "formula": "Having + V3",
+        "short": "Perfect Participle (Having + V3) використовується для вираження дії, яка повністю завершилася перед тим, як почалася дія в головному реченні.",
+        "full": "Perfect Participle (Having + V3 / Past Participle) показує послідовність дій і часто замінює підрядні речення часу з післясловами *after*, *when* або причини *because*.\n\nОсновні правила:\n- Утворюється за допомогою допоміжного дієслова *having* та третьої форми основного дієслова (*V3* або *-ed*).\n- Дія в конструкції з Perfect Participle завжи відбувається РАНІШЕ, ніж дія головного речення.\n- У звичайних дієприкметникових конструкціях підмет в обох частинах речення зазвичай має бути однаковим. Виняток — абсолютні конструкції з власним підметом: *The weather being fine, we went for a walk.*\n\nПриклади:\n- Having finished his homework, he went to play football. (Після того, як він закінчив домашку, він пішов грати у футбол).\n- Having lived in London for five years, she spoke English flučně. (Оскільки вона прожила в Лондоні п'ять років, вона вільно розмовляла англійською).\n\nЗаперечна форма:\n- Часто частка *not* ставиться перед *having*: Not having seen her for ages, I didn't recognize her immediately."
+      }
+    },
+    "Subjunctive and Unreal Past": {
+      "Subjunctive (after suggest, recommend, insist)": {
+        "formula": "S + suggest/recommend/insist + that + S + V1",
+        "short": "Після дієслів на кшталт suggest, recommend та insist у підрядних реченнях використовується гола форма дієслова (Infinitive without 'to') або should для вираження порад і вимог.",
+        "full": "Subjunctive (Subjunctive I / Present Subjunctive) використовується в підрядних реченнях після дієслів, що виражають пораду, пропозицію, вимогу чи наполягання (suggest, recommend, insist, demand, propose, ask тощо).\n\nПісля дієслова на кшталт **suggest/recommend/insist** і сполучника **that** уживається гола форма дієслова без 'to'.\n\nОсобливості:\n- Гола форма дієслова вживається для всіх осіб (немає закінчення -s для he/she/it).\n- У заперечній формі частка 'not' ставиться перед дієсловом без 'do/does/did' (наприклад: *insist that he not go*).\n- У британській англійській часто використовується 'should + infinitive', що має те ж значення, але є менш категоричним.\n\nПриклади:\n- I suggest that she **take** a break. (Не *takes*)\n- The doctor recommended that he **stay** in bed.\n- They insisted that we **not be** late."
+      }
+    },
+    "Future in the Past": {
+      "Was going to / Was to": {
+        "formula": "S + was/were + going to / to + V1",
+        "short": "Конструкції 'was/were going to' та 'was/were to' використовуються для вираження дій, які планувалися в минулому, але часто не відбулися або були обов'язковими за розкладом.",
+        "full": "Тема: Future in the Past (Was going to / Was to)\n\n1. Was/Were going to\nВикористовується для вираження намірів, планів або подій, які мали відбутися в майбутньому з точки зору минулого, але часто були перервані або не здійснилися.\n- We were going to visit Paris last year, but flights were cancelled.\n- She was going to call you, but her phone died.\n\n2. Was/Were to\nВикористовується для вираження суворих планів, офіційних домовленостей або неминучості подій у майбутньому щодо минулого часу.\n- The train was to leave at 5 PM, but it was delayed.\n- He was never to see his hometown again."
+      }
+    },
+    "Advanced Gerunds and Infinitives": {
+      "Perfect Gerund (Having + V3)": {
+        "formula": "S + V + having + V3",
+        "short": "Perfect Gerund (Having + V3) використовується для вираження дії, яка відбулася раніше за дію у головному реченні. Він часто вказує на завершеність події в минулому.",
+        "full": "Правило: Perfect Gerund (Having + V3 / Past Participle) утворюється за допомогою допоміжного дієслова having та третьої форми смислового дієслова.\n\nОсновні випадки використання:\n- Для підкреслення того, що одна дія в минулому передувала іншій.\n- Після дієслів, що виражають звинувачення, зізнання або похвалу у скоєному (accuse of, admit, deny, praise for).\n\nПриклади:\n- She was proud of having won the competition. (Вона пишалася тим, що виграла конкурс — спочатку виграла, потім пишалася).\n- He denied having seen the document before. (Він заперечував, що бачив документ раніше)."
+      },
+      "Passive Infinitive (to be + V3)": {
+        "formula": "S + V + to be + V3",
+        "short": "Пасивний інфінітив (to be + V3) використовується тоді, коли дія спрямована на підмет, тобто підмет є об'єктом дії.",
+        "full": "Пасивний інфінітив (to be + V3) вживається після модальних дієслів, прикметників та інших дієслів, коли ми хочемо підкреслити, що над підметом виконується дія, а не він сам її виконує.\n\nОсновні випадки вживання:\n- Після модальних дієслів (must, can, should тощо): The report must be finished by tomorrow.\n- Після прикметників (happy, surprised, difficult тощо): I was glad to be invited to the party.\n- Після дієслів, що виражають бажання чи очікування (want, expect тощо): He expects to be promoted soon."
+      }
+    },
+    "Advanced Comparatives": {
+      "The more... the more / The less... the better": {
+        "formula": "The + Adj/Adv-er / more + Adj/Adv + S + V, the + Adj/Adv-er / more + Adj/Adv + S + V",
+        "short": "Конструкція 'The + comparative, the + comparative' використовується для вираження залежності, де одна дія чи стан прямо впливають на іншу.",
+        "full": "## The More... The More (Advanced Comparatives)\n\nЦя структура використовується, щоб показати, що дві зміни відбуваються паралельно: одна подія є причиною або умовою для іншої.\n\n### Утворення:\nКожна частина починається з **the**, після чого йде вищий ступінь прикметника/прислівника, а далі — підмет і присудок.\n\n### Приклади:\n- The more you practice speaking, the more fluent you become. (Чіль більше ти практикуєш розмову, тим вільніше ти володієш мовою.)\n- The less time we waste, the better results we will achieve. (Чим менше часу ми витрачаємо, тим кращих результатів ми досягнемо.)\n- The harder the challenge, the sweeter the victory. (Чим складніший виклик, тим солодша перемога.)\n\n### Важливо:\nЧасто дієслово в одній із частин (або в обох) може опускатися, якщо воно є зрозумілим з контексту."
+      }
+    },
+    "Wish / If only (Advanced)": {
+      "Wish + would (irritation and requests)": {
+        "formula": "S + wish/If only + S + would + V1",
+        "short": "Конструкція 'wish + would' використовується для вираження роздратування, скарг на поточну ситуацію або наполегливих прохань про зміни.",
+        "full": "Ми використовуємо **I / We / You / They + wish + would + verb** (або *If only + would*), коли хочемо, щоб хтось чи щось припинило робити те, що нас дратує, або почало робити те, чого ми від них вимагаємо.\n\n- Важливо: підмет перед *wish* і підмет перед *would* **мають бути різними**. Ми не можемо сказати \"I wish I would...\" для вираження власних бажань на майбутнє (для цього використовуємо *could*).\n\n**Приклади:**\n- I wish it would stop raining! (Мене дратує дощ, я хочу, щоб він припинився)\n- If only you would listen to me sometimes! (Скарга на те, що співрозмовник не слухає)\n- I wish you wouldn't leave your shoes in the middle of the hall. (Прохання/докір щодо подразливої звички)"
+      }
+    },
+    "Ellipsis and Substitution": {
+      "Ellipsis in Conversation": {
+        "formula": "(Aux) + S + V / (Aux) + V",
+        "short": "Ellipsis in conversation дозволяє опускати слова, які вже зрозумілі з контексту, щоб зробити мовлення більш природним та лаконічним.",
+        "full": "In conversational English, ми часто пропускаємо слова, які є зрозумілими з попереднього контексту чи ситуації. Це допомагає уникнути повторень і робить спілкування швидшим та більш природним.\n\n- Omitting subjects and auxiliary verbs:\n  - '(Are) You coming?' → 'Coming?' (Ти йдеш? → Йдеш?)\n  - 'I (have) got to go.' → 'Got to go.' (Мені треба йти. → Треба йти.)\n- Leaving out parts of infinitive clauses (using to):\n  - 'Would you like to join us?' → 'I'd love to.' (instead of 'I'd love to join you.') (Хочеш приєднатися до нас? → З радістю. (замість 'Я б із радістю приєднався до тебе.'))\n- Short answers and responses:\n  - 'Did it rain?' → 'Might have.' (instead of 'It might have rained.') (Дощило? → Можливо. (замість 'Мабуть, дощило.'))"
+      }
+    },
+    "Emphatic Do/Did": {
+      "Emphatic Do/Did": {
+        "formula": "S + do/does/did + V1",
+        "short": "Допоміжні дієслова do, does або did використовуються перед смисловим дієсловом у стверджувальних реченнях для підсилення емоцій, контрасту або спростування сумнівів.",
+        "full": "Emphatic Do/Did (Підсилювальне do/did) використовується у стверджувальних реченнях у Present та Past Simple, щоб додати емоційного забарвлення, підкреслити правдивість твердження або заперечити чиєсь припущення.\n\nОсновні правила:\n- Використовується лише у стверджувальних реченнях (не в питаннях чи запереченнях).\n- Дієслово do/does/did ставиться безпосередньо перед основним дієсловом у початковій формі (Infinitive без 'to').\n- Форма змінюється залежно від часу та особи: 'do' (I, you, we, they), 'does' (he, she, it), 'did' (для всіх осіб у минулому часі).\n\nПриклади:\n- I do want to help you! (Я дійсно хочу тобі допомогти!)\n- She does know the answer. (Вона таки знає відповідь.)\n- We did lock the door before leaving. (Ми таки зачинили двері перед тим, як піти.)"
+      }
+    },
+    "Advanced Linking and Cohesion": {
+      "Complex sentence connectors": {
+        "formula": "Independent Clause + semicolon + connector + comma + Independent Clause / Connector + comma + S + V",
+        "short": "Complex sentence connectors (складні сполучники речення, такі як 'whereas', 'consequently', 'notwithstanding') elevate B2 writing by showing sophisticated logical relationships between clauses (підвищують рівень письмової англійської мови на рівні B2, демонструючи складні логічні зв'язки між підрядними та головними реченнями).",
+        "full": "Complex sentence connectors (з'єднувачі складних речень) — це вдосконалені сполучники та прислівникові фрази (adverbial phrases), які використовуються для встановлення точних логічних зв'язків — таких як contrast (контраст), concession (ступка), cause and effect (причина і наслідковий зв'язок) та condition (умова) — між реченнями у формальному письмі та мовленні.\n\nKey categories (ключові категорії) включають:\n- **Contrast & Concession (Контраст і поступка):** *whereas*, *while*, *notwithstanding*, *albeit*, *conversely* (наприклад, *The policy succeeded in the short term; notwithstanding, it caused long-term issues.* — *Політика мала успіх у короткостроковій перспективі; попри це, вона спричинила довгострокові проблеми.*)\n- **Cause & Effect / Result (Причина і наслідок / Результат):** *consequently*, *hence*, *thus*, *accordingly*, *owing to* (наприклад, *Production was delayed; consequently, the launch date was postponed.* — *Виробництво було затримано; в результаті дату запуску відклали.*)\n- **Addition & Emphasis (Додавання та акцентування):** *moreover*, *furthermore*, *indeed*, *not to mention* (наприклад, *The venue is stunning; moreover, it is centrally located.* — *Місце проведення приголомшливе; до того ж воно розташоване в центрі.*)\n\nUsage tip (порада щодо використання): Забезпечуйте правильну punctuation (пунктуацію). Adverbial connectors (прислівникові з'єднувачі) зазвичай вимагають крапки з комою або крапки перед ними та коми після них, коли вони з'єднують незалежні речення (independent clauses)."
+      }
+    }
+  },
+  "C1": {
+    "Inversion (Advanced)": {
+      "So / Such inversion": {
+        "formula": "So + Adj/Adv + Aux + S + V1 / Such + N + Aux + S + V1",
+        "short": "Конструкції з So/Such мають два значення: (1) емфатичний ступінь — So + Adj/Adv + Aux + S + V (So cold was the weather that...), Such + N + Aux + S + V; (2) погодження — So + Aux + S (So do I). Обидва випадки вимагають інверсії.",
+        "full": "Інверсія зі словами 'So' та 'Such' використовується для підкреслення ступеня ознаки або для погодження зі сказаним.\n\n- **So + прикметник/прислівник... that...**: Використовується для підкреслення ступеня.\n  Приклад: *So cold was the weather that we stayed indoors.* (Такою холодною була погода, що ми залишилися вдома.)\n\n- **So + допоміжне дієслово + підмет**: Використовується для погодження з стверджувальним твердженням у значенні «також / і я теж».\n  Приклад: *— I love classical music. — So do I.* (— Я люблю класичну музику. — Я теж.)\n\n- **Such + (іменник) ... that...**: Використовується перед іменником (з артиклем чи без).\n  Приклад: *Such a mess was the room that it took hours to clean.* (Таким безладом була кімната, що на прибирання пішли години.)"
+      },
+      "Only when / No sooner / Hardly": {
+        "formula": "No sooner/Hardly + Aux + S + V3 + ... + than/when + S + V2",
+        "short": "Після обмежувальних прислівників та фраз (Only when, No sooner... than, Hardly... when) у на початку речення відбувається інверсія: допоміжне дієслово ставиться перед підметом.",
+        "full": "Коли негативні або обмежувальні конструкції виносяться на початок речення для емфази, прямий порядок слів змінюється на інвертований (допоміжне дієслово + підмет + основне дієслово).\n\n- **No sooner... than** (щойно... як) та **Hardly / Scarcely... when** (ледве... як) вимагають Past Perfect у головній частині з інверсією та Past Simple у підрядній.\n- **Only when...** вимагає інверсії у головній частині речення, а не в уводній.\n\nПриклади:\n- No sooner had we arrived at the station than the train left. (Щойно ми прибули на вокзал, як потяг рушив.)\n- Hardly had she opened the door when the phone started ringing. (Ледве вона відчинила двері, як почав дзвонити телефон.)\n- Only when the meeting was over did I realize the mistake. (Лише коли зустріч закінчилася, я зрозумів помилку.)"
+      }
+    },
+    "Subjunctive (Advanced)": {
+      "Mandative Subjunctive": {
+        "formula": "S1 + V (mandative) + that + S2 + V1",
+        "short": "Mandative Subjunctive — це вживання базової форми дієслова (голий інфінітив) у підрядних реченнях після слів, що виражають волевиявлення, вимогу чи рекомендацію.",
+        "full": "Mandative Subjunctive (безособовий суб'юнктив) використовується у підрядних реченнях після певних дієслів, іменників та прикметників, які виражають наказ, пораду, прохання чи вимогу (наприклад: *insist, demand, recommend, crucial, imperative*).\n\nОсобливості:\n- Вживається базова форма дієслова (bare infinitive) для ВСІХ осіб (навіть у 3-й особі однини немає закінчення -s).\n- У заперечній формі частка 'not' ставиться перед дієсловом без допоміжного 'do'.\n\nПриклади:\n- She insisted that he *be* present at the meeting.\n- It is crucial that she *not miss* the deadline."
+      },
+      "Formulaic Subjunctive": {
+        "formula": "S + V (demand/suggest/etc.) + that + S + V1",
+        "short": "Formulaic Subjunctive — це використання базової форми дієслова (bare infinitive) у сталих виразах та підрядних реченнях для вираження побажань, вимог або благань на високому рівні формальності.",
+        "full": "Formulaic Subjunctive — це суб'юнктив у застиглих, усталених конструкціях. Його варто відрізняти від mandative subjunctive: це споріднені, але не тотожні явища.\n\n1. Mandative Subjunctive — після дієслів (demand, insist, suggest, recommend, require) та прикметників (vital, crucial, essential, imperative), що виражають волевиявлення, наказ, прохання чи пораду:\n- *He insisted that she be present at the meeting.*\n- *It is crucial that every candidate submit their CV on time.*\n\n2. Formulaic Subjunctive — застиглі вирази та побажання архаїчного походження: God save the Queen, Long live the King, Come what may, Be that as it may, Suffice it to say.\n\nСпільна особливість: базова форма дієслова не змінюється залежно від особи та числа (немає закінчення -s для he/she/it, а для дієслова to be завжди використовується *be*)."
+      }
+    },
+    "Mixed Conditionals": {
+      "Past condition → Present result": {
+        "formula": "If + S + had + V3, S + would/could/might + V1",
+        "short": "Mixed Conditionals (Past condition → Present result) використовуються для вираження того, як минула подія чи стан впливають на теперішній момент.",
+        "full": "Цей тип змішаних умовних речень поєднує в собі структуру третього і другого типів (Third/Second Conditionals).\n\n- **Утворення:** після **If + Past Perfect** у головній частині вживається **would/could/might** та інфінітив (теперішній результат).\n- **Вживання:** Коли гіпотетична ситуація в минулому змінилася б, це вплинуло б на наше теперішнє життя чи стан.\n\n**Приклади:**\n- If I had studied harder at university, I would have a better job now. (Я не вчився старанно в минулому — тому зараз не маю кращої роботи).\n- If she hadn't missed her flight, she would be here with us today. (Вона спізнилася на літак у минулому — тому її немає з нами зараз).\n\nКлючова ідея: умова — гіпотетична (нереальна) подія в минулому, а результат — її вплив на теперішній стан (часто з маркером now/today)."
+      },
+      "Present condition → Past result": {
+        "formula": "If + S + V2/were, would + have + V3",
+        "short": "Змішані умовні речення типу 'Present condition → Past result' поєднують теперішню умову (If + Past Simple) з минулим результатом (would have + V3). Вони описують, як постійний стан або загальна риса характеру в теперішньому вплинули на подію в минулому.",
+        "full": "### Mixed Conditionals: Present Condition → Past Result (C1)\n\nЦей тип змішаних умовних речень використовується, коли тривала ситуація, стан або звичка в теперішньому (Present) мали б вплинути на ситуацію в минулому (Past), але цього не сталося.\n\nУмова будується з **If + Past Simple** (або Past Continuous для процесу), а результат — з **would have + Past Participle (V3)**.\n\n**Особливості:**\n- Головна частина часто містить слова-маркери теперішнього часу (як-от *now*, *today*, *these days*), які підкреслюють постійність ситуації.\n- Зазвичай використовується форма *were* для всіх осіб у підрядному реченні з *if* (формальна мова).\n\n**Приклади:**\n- If I **were** more adventurous, I **would have gone** on that trek last year. *(Якби я був більш пригодницьким за характером [загалом, тепер], я б пішов у той похід минулого року).* \n- If she **spoke** French, she **would have translated** the document for you yesterday. *(Якби вона володіла французькою [тепер], вона б переклала для тебе документ учора).* \n- If he **liked** social events, he **would have attended** the party last night. *(Якби він любив вечірки [взагалі], він би пішов на вечірку вчора ввечері).*\n\nКлючова ідея: умова — постійний стан, риса характеру чи звичка в теперішньому, а результат — подія, яка могла б статися в минулому."
+      }
+    },
+    "Hedging and Distancing": {
+      "Tentative Language": {
+        "formula": "S + modal (might/could/may) + V1 / S + tends/appears + to + V1 / It + passive (could be argued/said/suggested) + that + S + V",
+        "short": "Tentative language використовується для пом'якшення категоричних тверджень та уникнення категоричності за допомогою модальних дієслів, прислівників та обережних виразів.",
+        "full": "Tentative language (обережна мова) є ключовим елементом академічного та професійного дискурсу на рівні C1. Вона дозволяє висловлювати припущення, гіпотези та висновки, не звучачи при цьому занадто категорично або самовпевнено.\n\nОсновні засоби:\n- Модальні дієслова (might, could, may, would):\n  - Приклад: *This policy might lead to unexpected economic consequences.*\n- Прислівники й обмежувачі (arguably, seemingly, relatively, arguably, apparently):\n  - Приклад: *The results are, arguably, the most significant of the decade.*\n- Фрази з прикметниками та дієсловами стану (tends to, appears to, it seems that):\n  - Приклад: *The organization appears to be struggling with internal communication.*\n- Вводні конструкції для пом'якшення думок (to a certain extent, from my perspective, it could be argued that):\n  - Приклад: *It could be argued that traditional methods are no longer sufficient.*"
+      }
+    },
+    "Nominalization": {
+      "Turning verbs into nouns": {
+        "formula": "V + suffix (-al/-ance/-ency/-ure) → N",
+        "short": "На рівні C1 номіналізація дієслів часто вимагає використання специфічних суфіксів (-al, -ance, -ency, -ure) або переходу в незмінювані іменники для досягнення академічного та офіційного стилю.",
+        "full": "Nominalization (номіналізація) на рівні C1 є ключовим інструментом для створення академічного, наукового чи формального дискурсу. Вона дозволяє змінити фокус із того, *хто що робить* (action), на саму *подію чи концепт* (state/concept).\n\nОсновні патерни перетворення дієслів на іменники:\n- Використання менш продуктивних або складних суфіксів: -al (refuse → refusal), -ance (assist → assistance), -ency (tend → tendency), -ure (depart → departure).\n- Зміна кореня або нульова деривація (zero-derivation): fly → flight, prove → proof.\n- Використання герундія для збереження дієслівного керування у складних структурах.\n\nПриклади в контексті:\n- Розмовний: *We decided to postpone the meeting because we lacked funds.* → Академічний: *The decision to postpone the meeting was due to a lack of funds.*\n- Розмовний: *The committee evaluated the proposal and concluded it was unviable.* → Академічний: *Evaluation of the proposal led to the conclusion that it was not viable.*"
+      }
+    },
+    "Advanced Modals": {
+      "Past Criticism (should/could/might have + V3)": {
+        "formula": "S + should/could/might + have + V3",
+        "short": "Для вираження докору, жалю або втраченої можливості в минулому використовують структури should have, could have та might have з третьою формою дієслова (V3).",
+        "full": "Тема: Past Criticism (Минулий докір та оцінка ситуації)\n\nЦі модальні конструкції використовуються для аналізу подій, які вже відбулися, та вираження емоцій щодо них:\n\n- **Should have + V3**: Виражає докір собі чи іншим або жаль про те, що дія не була виконана (хоча варто було б).\n  * Приклад: You should have warned me about the traffic.\n\n- **Could have + V3**: Вказує на те, що теоретична можливість була присутня в минулому, але не була реалізована (часто з відтінком докору).\n  * Приклад: You could have helped me with the project.\n\n- **Might have + V3**: Висловлює припущення про малоймовірну можливість у минулому або докір за відсутність спроби.\n  * Приклад: You might have called to let me know you'd be late."
+      },
+      "Unfulfilled Obligation (needn't have + V3)": {
+        "formula": "S + needn't + have + V3",
+        "short": "Конструкція needn't have + V3 використовується для вираження непотрібної дії, яка була виконана в минулому.",
+        "full": "Тема: Unfulfilled Obligation (needn't have + V3)\n\nКонструкція утворюється з **needn't have** та третьої форми дієслова (V3).\n\nЗначення: Ця структура використовується, коли суб'єкт виконав певну дію у минулому, але згодом стало зрозуміло, що вона була абсолютно непотрібною чи марною. Тобто, обов'язку виконувати цю дію не було, хоча вона і відбулася.\n\nВажливо (Contrast):\n- needn't have done — дія була зроблена, але вона була непотрібною.\n- didn't need to do — дія не була потрібною, і ми не знаємо, чи була вона виконана взагалі.\n\nПриклади:\n- You needn't have bought so much food; we already have plenty. (Ти даремно купив стільки їжі, у нас і так повно).\n- She needn't have translated the whole article, as it was optional. (Їй не потрібно було перекладати всю статтю, оскільки це було за бажанням)."
+      }
+    },
+    "Participle Clauses (Advanced)": {
+      "Perfect Participle (Having + V3)": {
+        "formula": "Having + V3, S + V (у відповідному часі) / Having been + V3, S + V (у відповідному часі)",
+        "short": "Perfect Participle (Having + V3) використовується для вираження дії, яка повністю завершилася до початку дії в головному реченні, підкреслюючи причинно-наслідковий зв'язок.",
+        "full": "### Perfect Participle (Advanced C1)\n\n**Суть правила:**\nКонструкція *Having + V3* (Active) або *Having been + V3* (Passive) замінює підрядне речення часу (Time clause) або причини (Reason clause), коли дія в цьому реченні відбулася **раніше** за дію головного речення.\n\n**Основні випадки вживання:**\n- **Послідовність дій (Час):** Замінює сполучники *after*, *when*, *once*.\n- **Причина:** Замінює сполучники *because*, *since*, *as*.\n\n**Приклади:**\n- *Active:* Having finished his homework, he went out to play. (Після того, як він закінчив домашку...)\n- *Passive:* Having been warned several times, she finally changed her behavior. (Оскільки її попереджали кілька разів...)\n\n**Важливо:** у звичайних дієприкметникових конструкціях підмет головного речення та дієприкметника має бути однаковим. Виняток — абсолютні конструкції з власним підметом: *The weather being fine, we went for a walk.*"
+      },
+      "Reduced Relative Clauses": {
+        "formula": "N + who/which/that + aux + V3/V-ing → N + V3/V-ing",
+        "short": "Reduced Relative Clauses дозволяють скорочувати підрядні означальні речення до дієприкметникових знеособлених конструкцій (Participle Clauses) шляхом видалення займенника та дієслова to be, зберігаючи вихідний сенс.",
+        "full": "Reduced Relative Clauses (Скорочені означальні речення) на рівні C1 використовуються для надання мовленню більшої лаконічності та академічного стилю.\n\nОсновні правила:\n- Повну форму (наприклад, 'The scientist who is conducting the research...') можна скоротити до 'The scientist conducting the research...', якщо займенник стоїть у називному відмінку і є підметом.\n- Активна конструкція часто скорочується до Present Participle (V-ing): 'The scientist who is conducting research...' → 'The scientist conducting research...'.\n- Пасивна конструкція може скорочуватися до Past Participle (V3): 'The manuscript which was discovered...' → 'The manuscript discovered...'.\n- Скорочення можливе, коли відносний займенник є підметом підрядної частини; якщо займенник є додатком, скорочення до Participle неможливе.\n- Конструкції з 'being + V3' використовуються для дій, що відбуваються прямо зараз (наприклад, 'The bridge being built right now...').\n\nПриклади:\n- Full: 'Students who submit their essays late will lose marks.' → Reduced: 'Students submitting their essays late will lose marks.'\n- Full: 'The manuscript, which was discovered in Rome, dates back to the 2nd century.' → Reduced: 'The manuscript, discovered in Rome, dates back to the 2nd century.'"
+      }
+    },
+    "Cleft Sentences (Advanced)": {
+      "Reversed Wh-cleft": {
+        "formula": "What + S + V + is/was + N / V-ing / V1",
+        "short": "Reversed Wh-cleft sentences інвертують звичну структуру: темою стає результат або дія (What-clause), а ключова інформація виноситься в кінець після дієслова to be.",
+        "full": "Reversed Wh-cleft sentences (зворотні займенникові виділення) використовуються для акцентування певної інформації, але на відміну від звичайних Wh-cleft, фокус уваги зміщується в кінець речення.\n\nСтруктура:\n- Підмет (результат/дія через What) + to be (is/was) + виділена інформація (іменник, інфінитив або герундій)\n\nПриклади:\n- Що нам зараз потрібно, так це відпочинок. → What we need right now is a long holiday.\n- Чого вона хотіла, то це пояснень. → What she wanted was an explanation.\n- Що він зробив, так це розбив вазу. → What he did was (to) break the vase.\n\nПісля дієслова to be (is/was) вживається або голий інфінітив (bare infinitive), або інфінітив із to — а не довільна форма V1. Вибір залежить від того, що саме виділяється в реченні."
+      },
+      "It-cleft with emphasis": {
+        "formula": "It + is/was + [Focused Element] + that/who + S/V/O",
+        "short": "Конструкція 'It-cleft' (It + to be + підкреслений елемент + that/who) використовується на рівні C1 для фокусування уваги на конкретній частині речення та посилення емоційного акценту.",
+        "full": "Конструкції **It-cleft sentences** використовуються для того, щоб виділити певну частину речення (підмет, додаток, обставину) і привернути до неї особливу увагу.\n\n### Утворення:\nРечення починається з **It + to be (is/was)**, далі йде фокусований елемент, а потім — **that/who** і решта речення.\n\n### Основні правила:\n- Підкреслювати можна майже будь-який член речення, окрім дієслова.\n- Замість *that* для людей часто використовується *who* або *whom*.\n- На рівні C1 ця структура допомагає керувати інформаційним фокусом у формальному чи дискурсивному мовленні.\n\n### Приклади:\n- Базове речення: *John stole the documents yesterday.*\n- Фокус на підметі: *It was John who stole the documents yesterday.*\n- Фокус на додатку: *It was the documents that John stole yesterday.*\n- Фокус на обставині часу: *It was yesterday that John stole the documents.*"
+      }
+    },
+    "Idiomatic and Colloquial": {
+      "Idioms in context": {
+        "formula": "S + Aux + idiom (fixed/flexible) + context",
+        "short": "На рівні C1 ідіоми є не просто прикрасою мовлення, а природним інструментом для точної передачі нюансів, емоцій та контекстуального підтексту в розмовній та академічній англійській.",
+        "full": "At the C1 level, mastering idioms in context requires understanding not only their literal and figurative meanings, but also their pragmatic register, stylistic tone, and collocational range.\n\nKey principles for C1 learners:\n- Register & Appropriateness: Many idioms are informal (e.g., 'spill the beans'), while others are more sophisticated or academic (e.g., 'draw the line'). Using them in the wrong context sounds unnatural.\n- Fixed vs. Flexible structure: Most idioms have fixed forms, but some allow variations in tense, pronouns, or modifiers without losing meaning.\n- Lexical chunks: Learn idioms as complete units embedded in typical collocations rather than isolated phrases.\n\nExamples:\n- 'When the project failed, the manager decided to bite the bullet and take full responsibility.' (Зіткнутися з важкою ситуацією та проявити мужність.)\n- 'The new marketing strategy really hit the nail on the head, boosting our sales by 40%.' (Влучити в саму точку, абсолютно точно описати чи зробити щось.)\n- 'We are skating on thin ice with this client; one more delay and we'll lose the contract.' (Ходити по тонкому льоду, бути в ризикованій або непевній ситуації.)"
+      },
+      "Collocations": {
+        "formula": "Adj + N / V + N / Adv + Adj",
+        "short": "На рівні C1 володіння колокаціями передбачає використання природних для носіїв мови поєднань слів (Verb+Noun, Adjective+Noun, Adverb+Adjective), які виходять за межі базової синонімії та надають мовленню академічної чи стилістичної точеності.",
+        "full": "Усунення неприродних поєднань є ключовим аспектом мовлення на рівні C1. На відміну від B2, де акцент робиться на загальну влучність, C1 вимагає володіння міцними (strong) та фіксованими колокаціями, де заміна одного компонента змінює сенс або звучить штучно.\n\nОсновні типи колокацій на рівні C1:\n- Adjective + Noun: *blatant disregard* (відверте зневажання), *dire consequences* (жахливі наслідки), *sporadic outbursts* (спорадичні спалахи).\n- Verb + Noun: *to garner support* (здобути підтримку), *to instigate a change* (ініціювати зміни), *to shoulder responsibility* (взяти на себе відповідальність).\n- Adverb + Adjective: *painfully aware* (болісно усвідомлюючи), *wildly inaccurate* (скажено неточний), *richly deserved* (цілком заслужений).\n\nПриклади в контексті:\n- The government is facing **dire consequences** due to its **blatant disregard** for environmental regulations.\n- She managed to **garner enough support** to push the bill through parliament."
+      }
+    },
+    "Discourse and Cohesion": {
+      "Advanced Linking": {
+        "formula": "Advanced_Linker + , + S + V",
+        "short": "Advanced linking devices (розширені засоби зв'язку) (e.g., 'notwithstanding', 'consequently', 'conversely') elevate C1 discourse (підносять дискурс рівня C1), встановлюючи тонкі логічні, допустові (concessive) та структурні зв'язки між складними реченнями (complex clauses).",
+        "full": "На рівні C1 когезія (cohesion) спирається на складні discourse markers, які виходять за межі базових з'єднувачів (як-от 'however' чи 'because'). Вони сигналізують про точні аргументативні зрушення, ступені ймовірності та логічні наслідки.\n\nKey Categories of Advanced Linkers:\n- Concession and Contrast: 'Notwithstanding', 'Be that as it may', 'Conversely', 'Albeit'.\n- Cause and Effect: 'Consequently', 'As a consequence', 'Hence', 'Thus', 'Owing to'.\n- Addition and Amplification: 'Furthermore', 'Moreover', 'In addition to which', 'Not only... but also'.\n- Reformulation and Clarification: 'In other words', 'To put it another way', 'That is to say'.\n\nExamples:\n- *Notwithstanding the inclement weather, the outdoor event was a resounding success.* (Незважаючи на негоду, подія на свіжому повітрі мала оглушливий успіх.)\n- *Sales figures plummeted in Q3; consequently, the marketing strategy had to be overhauled.* (Показники продажів стрімко впали в третьому кварталі; як наслідок, маркетингову стратегію довелося докорінно переглянути.)\n- *She was determined to finish the thesis, albeit exhausted from weeks of sleepless nights.* (Вона була сповнена рішучості завершити дисертацію, хоч і була виснажена тижнями безсонних ночей.)"
+      },
+      "Discourse markers": {
+        "formula": "Adv, + S + V",
+        "short": "Discourse markers у мові рівня C1 структуренно організовують текст, виражаючи логічні зв'язки, ставлення мовця до інформації та керуючи потоком розмови на високому рівні.",
+        "full": "Discourse markers (дискурсивні маркери) на рівні C1 слугують для досягнення максимальної когезії та когерентності у складних текстах. Вони не змінюють граматичне значення речення, а скеровують інтерпретацію слухача чи читача.\n\nОсновні функції на рівні C1:\n- Контраст і поступка (наприклад: *conversely, nonetheless, notwithstanding*)\n- Причинно-наслідкові зв'язки (наприклад: *consequently, as a consequence, hence*)\n- Переформулювання та уточнений фокус (наприклад: *to put it another way, specifically, predominantly*)\n\nПриклади використання:\n- *The economic forecast appeared bleak; nonetheless, several start-ups managed to thrive.*\n- *Predominantly, the research focuses on urban migration, notwithstanding a few rural case studies.*\n- *To put it another way, the policy is fundamentally flawed.*"
+      }
+    },
+    "Ellipsis and Substitution (Advanced)": {
+      "Ellipsis in formal writing": {
+        "formula": "S + Aux + ... , Conj + [Aux/Be] + Adj/V3",
+        "short": "У формальному письмовому мовленні еліпсис (пропуск слів) часто використовується для уникнення тавтології після таких дієслів, як 'be', 'have', 'do', а також у підрядних реченнях із порівнянням і поступкою.",
+        "full": "У формальному стилі та академічному письмі еліпсис допомагає уникнути повторень, зберігаючи лаконічність і точність.\n\nОсновні випадки використання:\n- Пропуск дієслова або цілої дієслівної групи після допоміжних дієслів (do, be, have) або модальних дієслів.\n- Еліпсис у порівняльних і поступкових підрядних реченнях (наприклад, з 'if possible', 'when necessary', 'though reluctant').\n- Опущення займенників або сполучників (що часто вимагає інверсії або стилістичної єдності).\n\nПриклади:\n- The committee approved the budget, as was expected. (замість: as it was expected)\n- Researchers should analyze the data carefully, and if necessary, repeat the experiment. (замість: if it is necessary)\n- While reluctant at first, the director finally agreed to the proposal. (замість: While she was reluctant)"
+      }
+    }
+  },
+  "C2": {
+    "Literary Inversion": {
+      "Fronted Adverbials with Inversion": {
+        "formula": "Емфатична інверсія: Negative/restrictive adverbial + Aux/Modal + S + V. Просторова інверсія: Place/direction phrase + V + S (без допоміжного дієслова).",
+        "short": "Фронтування обставин з інверсією на рівні C2 використовується для досягнення стилістичного ефекту, виразності та драматизму. Розрізняй два шаблони: емфатичну інверсію після негативних/обмежувальних прислівників (Seldom have I...) та просторову інверсію (On the hilltop stood...). Формула нижче — спрощена.",
+        "full": "Що таке Fronted Adverbials with Inversion?\nЦе стилістичний прийом, при якому обставина (adverbial) або обставинна зворотно-прийменникова конструкція переноситься на початок речення для досягнення емфази, контрасту чи урочистості, що вимагає зміни звичайного порядку слів на інвертований (допоміжне дієслово або модальне дієслово ставиться перед підметом).\n\nОсновні умови застосування на рівні C2:\n- Інверсія виникає не після будь-якої обставини, а лише після:\n  - негативних або обмежувальних слів (*never, seldom, rarely, hardly, only, not only*);\n  - просторових обставин місця чи напрямку (*on the hill stood..., here comes..., there goes...*).\n- Звичайні обставини часу та способу дії інверсії не викликають: *Yesterday I went to the cinema.* (а не *Yesterday went I...*), *Slowly he opened the door.* (прямий порядок).\n- Інверсія відбувається лише тоді, коли обставина стоїть на першому місці в реченні.\n- Дієслово зазвичай узгоджується у часі з підметом за стандартними правилами утворення питальних конструкцій (або прямий порядок, якщо це стосується повнозначних дієслів у певних просторових інверсіях).\n\nПриклади:\n- *On the hilltop stood an imposing castle.* (Просторова інверсія з повнозначним дієсловом)\n- *Seldom have I witnessed such a display of sheer brilliance.* (Емфатична інверсія з негативним прислівником)\n- *Here comes the moment we have all been waiting for.* (Інверсія з прислівником місця та часу)"
+      }
+    },
+    "Archaic and Formal Registers": {
+      "Formal Subjunctive and Formulaic Structures": {
+        "formula": "Adj/V (mandative) + that + S + V1 (bare infinitive) / Formulaic: застиглі структури без єдиного шаблону (God save the Queen, Long live the King, Be that as it may, Suffice it to say)",
+        "short": "Формальний суб'юнктив (Mandative Subjunctive) та формульні конструкції використовуються у високому реєстрі для вираження вимог, прохань або застарілих побажань у застиглих фразах.",
+        "full": "Formal Subjunctive та Formulaic Structures є маркерами найвищого (C2) рівня володіння англійською мовою, які зустрічаються в юридичних, академічних та офіційних текстах.\n\n1. Mandative Subjunctive (Вимогливий суб'юнктив):\nВикористовується після дієслів (demand, insist, propose, recommend) та прикметників (crucial, imperative, vital), що виражають необхідність. Він складається з базової форми дієслова (bare infinitive) для всіх осіб.\n- Приклад: *It is imperative that he submit the report by noon.* (Не *submits*).\n- Приклад: *The board recommended that the policy be revised immediately.*\n\n2. Formulaic Subjunctive Structures (Формульні структури):\nЦе застиглі вирази та ідіоматичні конструкції, часто архаїчного походження, які передають побажання, гіпотези або поступки.\n- У застиглих побажаннях: *God save the Queen*, *Long live the King*, *Heaven forbid*.\n- У юридичних та офіційних умовах: *Be that as it may*, *Suffice it to say*, *Come what may*.\n- У вираженні поступок (inverted structure): *Be he friend or foe, he must obey the law.*"
+      }
+    },
+    "Absolute Constructions and Participle Clauses": {
+      "Absolute Construction (with no conjunction)": {
+        "formula": "N/Pronoun + V-ing/V3/Perfect Participle + comma + S + V",
+        "short": "**Absolute constructions** (абсолютні конструкції) — це складні syntactic structures (синтаксичні структури), що складаються з noun phrase (іменної фрази) та participle (дієприкметника), які модифікують увесь головний речення без будь-яких conjunctions (сполучників), виконуючи роль detached adverbial modifier (відокремленої обставини).",
+        "full": "### Absolute Construction (абсолютна конструкція) (with no conjunction)\n\nНа рівні C2 Absolute Construction є вкрай стислим і формальним способом вираження часу, причини, умови чи обставини.\n\n- **Structure:** Noun/Pronoun + Participle (Present, Past, or Perfect), діючи як незалежна одиниця, граматично відокремлена від головного речення.\n- **Absence of conjunctions:** На відміну від стандартних підрядних речень, Absolute Construction не використовують сполучники (like *because, although, when*), покладаючись виключно на контекст для передачі логічного зв'язку.\n\n**Examples:**\n- *Weather permitting, the expedition will set off at dawn.* (За сприятливої погоди експедиція вирушить на світанку. / Condition)\n- *All the tickets having been sold out, we had to watch the live stream.* (Оскільки всі квитки були розпродані, нам довелося дивитися пряму трансляцію. / Cause / Perfect Participle)\n- *He stood by the window, his eyes fixed on the horizon.* (Він стояв біля вікна, а його очі були прикуті до горизонту. / Circumstance / Present Participle)"
+      },
+      "Perfect Participle in Literary Style": {
+        "formula": "(N/S + having + V3 / Having + V3 + O), S + V",
+        "short": "Perfect Participle (Having + V3) у вищому літературному стилі використовується для вираження дії, що передує іншій дії, надаючи розповіді архаїчного, формального чи піднесеного відтінку, часто у поєднанні з інверсією або складними абсолютними конструкціями.",
+        "full": "У просунутому літературному стилі (C2) Perfect Participle (`Having + V3` або пасивне `Having been + V3`) вживається для досягнення стилістичної виразності, створення ритму та економії синтаксичного простору.\n\nОсновні особливості вживання на рівні C2:\n- **Попередність дії:** Підкреслює завершеність першої дії перед початком другої у головній реченні.\n- **Літературний емфатичний тон:** Часто зустрічається в художній літературі та публіцистиці високого рівня замість конструкцій з `after`, `when` або `because`.\n- **Абсолютні конструкції:** Має власний підмет, відмінний від підмета головного речення.\n\nПриклади:\n- *Having traversed the desolate wasteland for weeks, the exhausted explorers finally sighted the distant mountains.* (Пройшовши через пустельну пустку протягом тижнів...)\n- *The treaty having been signed, a fragile peace descended upon the war-torn continent.* (Після того, як договір було підписано...)\n- *Having failed to secure the patronage of the aristocracy, the visionary artist sank into obscurity.*"
+      }
+    },
+    "Rhetorical Devices": {
+      "Anaphora (repetition at beginning)": {
+        "formula": "Phrase_A + [Phrase] + Phrase_A + [Phrase] + Phrase_A + [Phrase]",
+        "short": "Анафора — це стилістична фігура, яка полягає у повторенні слова чи фрази на початку послідовних речень або віршових рядків для створення сильного емоційного акценту та ритмічності на рівні C2.",
+        "full": "На рівні C2 анафора (Anaphora) використовується не лише у поезії чи риториці, а й у високому публіцистичному та академічному дискурсі для досягнення переконливості, драматизму та єдності тексту.\n\nОсновні характеристики:\n- Повторення відбувається виключно на початку (initial position) суміжних clauses, sentences чи paragraphs.\n- Служить для емфази (emphasis) та створення когезії.\n\nПриклади:\n- \"We shall fight on the beaches, we shall fight on the landing grounds, we shall fight in the fields and in the streets.\" (Winston Churchill)\n- \"It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness...\" (Charles Dickens)\n\nВикористання анафори у письмі високого рівня демонструє майстерне володіння ритмом та стилістичним впливом на читача."
+      },
+      "Chiasmus (AB / BA structure)": {
+        "formula": "A + B + B + A (мнемонічна схема AB/BA, а не універсальна граматична формула)",
+        "short": "Хіазм — це риторична фігура інверсії, побудована за симетричною схемою AB/BA, де синтаксичні елементи або семантичні поняття першої частини повторюються в оберненому порядку у другій. A і B — це синтаксичні ролі (підмет, додаток, інфінітив) або семантичні категорії, а не обов'язково окремі слова; у прикладі Кеннеді A і B — цілі клаузи.",
+        "full": "### Chiasmus\n\nChiasmus (хіазм) — це вдосконалений риторичний прийом (походить від грецької літери «chi», що має форму «X»), який характеризується інвертованим паралелізмом двочастинної фрази чи речення відповідно до структурного патерну AB/BA. На рівні C2 володіння Chiasmus передбачає як розпізнавання, так і створення складних інверсій, які змінюють синтаксичний баланс для створення глибокої художньої симетрії, пам'ятної антитези або підвищеного естетичного ефекту.\n\nKey Characteristics:\n- Inversion of grammar, concepts, or word order (Інверсія граматики, концептів або порядку слів).\n- Creation of a chiasmal 'crossing' effect (Створення ефекту хіастичного «схрещування»).\n- Often employed in political rhetoric, philosophy, and high literary style to achieve memorability and persuasive power (Часто використовується в політичній риториці, філософії та високому літературному стилі для досягнення запам'ятовуваності та переконливої сили).\n\nExamples:\n- 'Ask not what your country can do for you; ask what you can do for your country.' (John F. Kennedy) – («Не запитуй, що твоя країна може зробити для тебе; запитуй, що ти можеш зробити для своєї країни» – Джон Ф. Кеннеді) – Pronouns and verbs are mirrored (Pronoun/Verb/Object → Object/Verb/Pronoun) (Займенники та дієслова дзеркально відображені).\n- 'One should eat to live, not live to eat.' (Cicero/Socrates) – («Треба їсти, щоб жити, а не жити, щоб їсти» – Цицерон/Сократ) – Infinitive/Infinitive reversed into Infinitive/Infinitive with semantic negation (Інфінітив/Інфінітив інвертовано в Інфінітив/Інфінітив із семантичним запереченням).\n- 'Pleasure's a sin, and sometimes sin's a pleasure.' (Lord Byron) – («Задоволення — це гріх, а іноді гріх — це задоволення» – Лорд Байрон) – Noun/Verb/Complement inverted to Complement/Verb/Noun (Іменник/Дієслово/Доповнення інвертовано в Доповнення/Дієслово/Іменник)."
+      },
+      "Litotes (understatement via negation)": {
+        "formula": "not + un-/in-/less-Adj (not uncommon) / not without + N (not without consequence) / no + Adj + N (no small achievement) / no + N (no coward)",
+        "short": "Літота через заперечення (Litotes) — це стилістичний прийом, який пом'якшує висловлювання, стверджуючи певну якість через заперечення її протилежності з метою досягнення іронії або стриманого акценту.",
+        "full": "**Litotes** (літота) на рівні C2 часто функціонує як витончений риторичний інструмент understatement (пом'якшення), спираючись на подвійні заперечення або заперечені антоніми (наприклад, 'not uncommon', 'no coward'), щоб передати позитивне твердження з іронічною стриманістю або модульованою силою.\n\nKey characteristics (ключові характеристики):\n- Pragmatic understatement (прагматичне пом'якшення): Використовується для пом'якшення суворих істин або демонстрування інтелектуального контролю.\n- Litotes in hyperbole (літота в гіперболі): Може парадоксально посилювати значення через розраховану мовну стриманість.\n- Register (регістр): Часто зустрічається у формальному дискурсі, літературі та дипломатичній мові.\n\nExamples (приклади):\n- His decision to resign was not without consequence, sparking months of political turmoil. (Його рішення піти у відставку мало неабиякі наслідки, спричинивши місяці політичної турбулентності)\n- She is not unacquainted with the complexities of quantum physics. (Вона добре обізнана зі складнощами квантової фізики)\n- It is no small achievement to successfully mediate such a volatile dispute. (Успішно врегулювати такий вибухонебезпечний конфликт — це чимале досягнення)"
+      }
+    },
+    "Advanced Modals and Speculation": {
+      "Hypothetical Past (needn't have / might have / could have)": {
+        "formula": "S + might/could/needn't + have + V3",
+        "short": "Модальні дієслова у поєднанні з перфектним інфінітивом (have + V3) виражають припущення, докори або критику щодо подій у минулому, які вже не можна змінити.",
+        "full": "Для вираження спекуляцій та гіпотетичних ситуацій у минулому на рівні C2 використовують такі конструкції з перфектним інфінітивом:\n\n- **Might have + V3**: Виражає слабке припущення про те, що дія могла статися, але ми не впевнені.\n  *Приклад:* She might have left her keys at the office, but I'm not certain.\n- **Could have + V3**: Вказує на теоретичну можливість у минулому, яка не реалізувалася, або використовується для докору.\n  *Приклад:* You could have warned me about the traffic!\n- **Needn't have + V3**: Позначає дію, яка була виконана, але виявилася непотрібною чи марною.\n  *Приклад:* We needn't have bought extra food; nobody came."
+      }
+    },
+    "Idioms and High-Register Lexis": {
+      "Idioms in literary context": {
+        "formula": "S + V1 + Adj/Adv + Idiom",
+        "short": "Використання ідіом у літературному контексті вимагає розуміння їхніх стилістичних нюансів, підтексту та авторської іронії на рівні C2.",
+        "full": "На рівні володіння мовою C2 літературні ідіоми не просто прикрашають текст; вони функціонують як щільні семантичні одиниці, які передають складні психологічні стани, соціокультурну критику або атмосферні описи. Письменники часто руйнують традиційні ідіоматичні значення заради стилістичного ефекту, вимагаючи від читача інтерпретувати їх виходить за межі їхніх буквальних або стандартних фігуративних визначень.\n\nКлючові принципи літературних ідіом:\n- **Nuance and Subtlety** (Нюанси та тонкість): Літературні ідіоми значною мірою спираються на конотацію, а не на пряму денотацію.\n- **Subversion** (Субверсія / руйнування очікувань): Автори часто перекручують або розширюють фіксовані ідіоматичні вирази заради художньої оригінальності.\n- **Characterization** (Характеристика персонажів): Ідіоматичне вживання часто відображає соціально-економічне походження, епоху або психологічну глибину персонажа.\n\nПриклади:\n- *\"He was walking a tightrope between sanity and the abyss.\"* (Він балансував на канаті між здоровим глуздом і прірвою — передає надзвичайну непевність у драматичному, літературному тоні).\n- *\"The old manor held skeletons in its closet that refused to stay buried.\"* (У старому маєтку були свої скелети в шафі, які ніяк не хотіли ховатися — поєднує стандартну ідіому з готичними літературними образами).\n- *\"She wore her disillusionment like a second skin.\"* (Вона носила своє розчарування як другу шкіру — ідіоматичне поєднання, що означає абсолютну інтерналізацію почуття)."
+      },
+      "Collocations of high register": {
+        "formula": "Adj + N / V1 + N / Adv + Adj",
+        "short": "Колокації високого реєстру на рівні C2 вимагають бездоганного поєднання лексичних одиниць, що створюють стилістичну єдність у академічному чи офіційному дискурсі.",
+        "full": "На рівні C2 володіння мовою передбачає використання не просто складних слів, а їх природних академічних поєднань (collocations).\n\n- Такі сполучення є фіксованими або напівфіксованими у високому реєстрі.\n- Заміна хоча б одного компонента руйнує стилістичний баланс.\n\nПриклади:\n- **Mitigating circumstances** (пом'якшувальні обставини) замість *softening conditions*.\n- **To incur wrath** (накликати на себе гнів) замість *to get anger*.\n- **Far-reaching implications** (далекосяжні наслідки) замість *big consequences*."
+      }
+    },
+    "Discourse and Cohesion (Literary)": {
+      "Advanced Linking and Digression": {
+        "formula": "Adv + S + V + O / S + Aux + Adv + V3",
+        "short": "Advanced linking і digression у літературних текстах рівня C2 передбачають складні markers, які плавно зміщують narrative focus, вводять tangents або відновлюють main storyline без порушення artistic flow.",
+        "full": "At the C2 proficiency level, mastering advanced linking and digression allows writers and speakers to navigate complex narrative structures and nuanced arguments in literary discourse.\n\n### 1. Digression Markers (Відхилення від теми)\nThese phrases signal a deliberate departure from the main narrative thread to introduce backstory, philosophical reflections, or secondary subplots.\n- **By the same token:** Introduces an analogous argument or a parallel point (за аналогією).\n- **Be that as it may:** Expresses concession — 'як би там не було' (поступка); це не взаємозамінні сполучники.\n- **To digress momentarily / Parenthetically speaking:** Explicitly signals a temporary departure from the plot.\n\n*Examples:*\n- \"Parenthetically speaking, the origins of the watchmaker's craft remained shrouded in local folklore.\"\n- \"Be that as it may, the protagonist's inner turmoil demanded immediate attention.\"\n\n### 2. Resuming the Main Thread (Повернення до основного сюжету)\nAfter a digression, advanced cohesion requires seamless transition back to the central theme.\n- **To return to the matter at hand / Be that as it may, to resume:** Re-establishes the primary narrative.\n- **Suffice it to say / Be that as it may:** Bridges the gap between the tangent and the core plot.\n\n*Examples:*\n- \"To return to the matter at hand, the letter on the mahogany desk had not aged a day.\"\n- \"Suffice it to say, the digression served only to heighten the suspense of the final chapter.\""
+      }
+    },
+    "Ellipsis and Substitution (Literary)": {
+      "Literary ellipsis": {
+        "formula": "S + V + ... / [вилучений O/Adv/Adj] (умовна схема, не граматична формула)",
+        "short": "У художній літературі ellipsis (пропуск) використовується для створення напруги, емфази або передачі живої розмовної мови шляхом вилучення слів, які легко відновлюються з контексту.",
+        "full": "Literary ellipsis (літературна ellipsis) передбачає навмисний пропуск слів, фраз або речень, які є граматично необхідними, але контекстуально надлишковими.\n\nНа рівні C2 цей стилістичний прийом використовується для того, щоб:\n- Створити драматичну напругу або різкість у темпі розповіді.\n- Імітувати природне, поспішне або емоційно заряджене людське мовлення.\n- Покращити поетичну економічність та естетичний вплив.\n\nExamples (Приклади):\n- \"Some lucky people born with a 'gift'—special talent, rare skill—can achieve greatness effortlessly; others, not so [gifted].\" *(Деякі щасливчики, народжені з «дарком» — особливим талантом, рідкісною навичкою, — можуть досягти величі без зусиль; інші — не так [обдаровані].)*\n- \"He looked at her with disbelief, then—with pure rage.\" *(Він подивився на неї з недовірою, потім — із чистим лютом.)*\n- \"Beg to be excused? Certainly not. [I] Refuse? On what grounds?\" *(Просити про звільнення? Звісно ні. [Я] Відмовитися? На яких підставах?)*\n\nNote (Примітка): На відміну від граматичної ellipsis у діалозі, літературна ellipsis часто стирає межу між синтаксисом та стилістичною фрагментацією."
       }
     }
   }
