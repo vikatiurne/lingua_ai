@@ -83,7 +83,7 @@
 - [х] 28 — PDF generation (для режиму друку)
 - [x] 29 — Exercise UI (Інпути для введення відповідей у додатку)
 - [x] 29.1 — Fix Plan Subtopics UI (chore: клікабельні підтеми на /plan)
-- [ ] 30 — Exercise state persistence
+- [x] 30 — Exercise state persistence
 
 ## E8 — Evaluation
 - [ ] 31 — Answer evaluation (AI + обробка `...` для пропущених слів)
