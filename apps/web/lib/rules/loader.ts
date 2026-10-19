@@ -3,6 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 export type RuleContent = {
+  formula: string;
   short: string;
   full: string;
 };
@@ -28,6 +29,7 @@ function resolveDataDir(): string {
 const DATA_DIR = resolveDataDir();
 
 const FALLBACK_RULE: RuleContent = {
+  formula: "—",
   short: "Правило генерується...",
   full: "Повне правило буде доступне незабаром.",
 };
@@ -52,7 +54,11 @@ export async function loadRule(
   const rules = await loadRulesFile();
   const rule = rules[level]?.[topic]?.[subtopic];
   if (rule && typeof rule.short === "string" && typeof rule.full === "string") {
-    return rule;
+    return {
+      formula: typeof rule.formula === "string" ? rule.formula : "",
+      short: rule.short,
+      full: rule.full,
+    };
   }
   return FALLBACK_RULE;
 }

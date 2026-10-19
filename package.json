@@ -11,10 +11,14 @@
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",
-    "seed": "pnpm --filter @lingua/scripts seed"
+    "seed": "pnpm --filter @lingua/scripts seed",
+    "generate:rules": "tsx scripts/generate-rules.ts",
+    "translate:rules": "tsx scripts/translate-rules.ts",
+    "fix:formulas": "tsx scripts/fix-formulas.ts"
   },
   "devDependencies": {
     "turbo": "^2.0.0",
+    "tsx": "^4.0.0",
     "typescript": "^5.4.0"
   }
 }

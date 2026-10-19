@@ -61,6 +61,9 @@
 ### Додатково (не було в тасці)
 - `apps/web/components/ui/tabs.tsx` — shadcn Tabs (у проєкті не існував, обов'язковий за AC)
 - `@radix-ui/react-tabs` — залежність shadcn Tabs
+- `apps/web/components/ui/markdown.tsx` — рендер Markdown для `short`/`full` (react-markdown + remark-gfm)
+- `react-markdown`, `remark-gfm` — залежності для рендеру розмітки правила
+- `apps/web/lib/level.ts` — `parseLevel()` (спільний для сторінок library та exercise/new)
 
 ### Не чіпати
 - `apps/web/lib/slots/**`
@@ -156,3 +159,5 @@ feat(exercise): add setup page with mode selection and local rules
 1. **Next.js 14, а не 15.** У тасці «`const params = await searchParams` (Next.js 15)», але у проєкті `next@14.2.35` — там `searchParams` це plain object (`string | string[] | undefined`), не Promise. Залишено `await` (безпечний у обох версіях, готує до апгрейду) + типізація та обробка `string | string[]` під Next 14.
 2. **Додано shadcn `Tabs`.** У `components/ui/` не існувало `tabs.tsx` (AC вимагає Tabs з shadcn). Створено `apps/web/components/ui/tabs.tsx` через shadcn CLI 2.10.0 + залежність `@radix-ui/react-tabs` у `apps/web/package.json`.
 3. **Двоколонкова верстка (після завершення, за запитом).** Замість `max-w-3xl` — сітка `lg:grid-cols-3`: `RuleAccordion` ліворуч (`lg:col-span-1`, sticky), `ExerciseSetup` праворуч (`lg:col-span-2`). 
+4. **Markdown-рендеринг правил (після завершення, за запитом).** Поля `short` і `full` містять Markdown (`**жирний**`, списки, `\n\n`, `###`), але рендерились як plain text. Додано `components/ui/markdown.tsx` (обгортка над `react-markdown` + `remark-gfm`) зі стилями Tailwind для `p`, `ul/ol/li`, `strong`, `em`, `code`, `a`, `h1–h3`, `blockquote`. У `rule-accordion.tsx` вивід `short`/`full` замінено на `<Markdown>`, прибрано `whitespace-pre-line`.
+5. **Бейдж рівня біля заголовка (після завершення, за запитом).** У шапці сторінки поруч із «Тема: {topic} → {subtopic}» додано бейдж рівня. Рівень визначається через `parseLevel(level)` + `formatLevelCode()`, бейдж (`components/ui/badge.tsx`) обгорнутий у `Link` на `/library?level={level}` — клік веде на сторінку бібліотеки з активним табом відповідного рівня. Контейнер заголовка — `flex flex-wrap items-center gap-2`, щоб довгі назви не ламали верстку на мобільних.
