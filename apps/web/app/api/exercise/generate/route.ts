@@ -14,12 +14,12 @@ const generateExerciseSchema = z
     level: z.enum(CEFR_LEVELS),
     topic: z.string().min(1),
     subtopic: z.string().min(1),
-    uaEnCount: z.number().int().min(0).max(MAX_SENTENCES),
-    enUaCount: z.number().int().min(0).max(MAX_SENTENCES),
+    ukEnCount: z.number().int().min(0).max(MAX_SENTENCES),
+    enUkCount: z.number().int().min(0).max(MAX_SENTENCES),
   })
   .refine(
-    (data) => data.uaEnCount + data.enUaCount >= 1 &&
-      data.uaEnCount + data.enUaCount <= MAX_SENTENCES,
+    (data) => data.ukEnCount + data.enUkCount >= 1 &&
+      data.ukEnCount + data.enUkCount <= MAX_SENTENCES,
     {
       message: `Total sentence count must be between 1 and ${MAX_SENTENCES}`,
     }
@@ -46,7 +46,7 @@ async function generateHandler(req: NextRequest): Promise<Response> {
     );
   }
 
-  const { level, topic, subtopic, uaEnCount, enUaCount } = parsed.data;
+  const { level, topic, subtopic, ukEnCount, enUkCount } = parsed.data;
 
   let result;
   try {
@@ -54,8 +54,8 @@ async function generateHandler(req: NextRequest): Promise<Response> {
       level,
       topic,
       subtopic,
-      uaEnCount,
-      enUaCount,
+      ukEnCount,
+      enUkCount,
     });
   } catch {
     return Response.json(
@@ -83,6 +83,7 @@ async function generateHandler(req: NextRequest): Promise<Response> {
 
   return Response.json({
     exerciseId: exercise.id,
+    sentences: result.sentences,
     isFallback: result.isFallback,
   });
 }

@@ -43,8 +43,8 @@
 - [x] Має два інпути (Number): «Скільки речень укр → англ» та «Скільки речень англ → укр» (за замовчуванням 5 і 5, мін 1, макс 20).
 - [x] Якщо обрано режим `app`, показує підказку: «Якщо не знаєте переклад слова, поставте `...`».
 - [x] Кнопка «Почати» веде на:
-  - Для PDF: `/exercise/pdf?level=...&topic=...&subtopic=...&uaEn=5&enUa=5`
-  - Для App: `/exercise/app?level=...&topic=...&subtopic=...&uaEn=5&enUa=5`
+  - Для PDF: `/exercise/pdf?level=...&topic=...&subtopic=...&ukEn=5&enUk=5`
+  - Для App: `/exercise/app?level=...&topic=...&subtopic=...&ukEn=5&enUk=5`
 - [x] `pnpm typecheck` і `pnpm build` проходять.
 
 ---
@@ -122,11 +122,11 @@ export function loadRule(
 2. `Accordion` з заголовком «Показати повне правило», всередині — `full` текст.
 
 ### 4. `components/exercise/exercise-setup.tsx` (Client)
-1. Стан: `mode` ("pdf" | "app"), `uaEnCount` (5), `enUaCount` (5).
+1. Стан: `mode` ("pdf" | "app"), `ukEnCount` (5), `enUkCount` (5).
 2. `Tabs` для вибору режиму.
 3. `<Input type="number" />` для кількості.
 4. Якщо `mode === "app"`, показати підказку про `...`.
-5. Кнопка «Почати» → `router.push(\`/exercise/${mode}?level=\${level}&topic=\${encodeURIComponent(topic)}&subtopic=\${encodeURIComponent(subtopic)}&uaEn=\${uaEnCount}&enUa=\${enUaCount}\`)`.
+5. Кнопка «Почати» → `router.push(\`/exercise/${mode}?level=\${level}&topic=\${encodeURIComponent(topic)}&subtopic=\${encodeURIComponent(subtopic)}&ukEn=\${ukEnCount}&enUk=\${enUkCount}\`)`.
 
 ---
 
@@ -160,4 +160,5 @@ feat(exercise): add setup page with mode selection and local rules
 2. **Додано shadcn `Tabs`.** У `components/ui/` не існувало `tabs.tsx` (AC вимагає Tabs з shadcn). Створено `apps/web/components/ui/tabs.tsx` через shadcn CLI 2.10.0 + залежність `@radix-ui/react-tabs` у `apps/web/package.json`.
 3. **Двоколонкова верстка (після завершення, за запитом).** Замість `max-w-3xl` — сітка `lg:grid-cols-3`: `RuleAccordion` ліворуч (`lg:col-span-1`, sticky), `ExerciseSetup` праворуч (`lg:col-span-2`). 
 4. **Markdown-рендеринг правил (після завершення, за запитом).** Поля `short` і `full` містять Markdown (`**жирний**`, списки, `\n\n`, `###`), але рендерились як plain text. Додано `components/ui/markdown.tsx` (обгортка над `react-markdown` + `remark-gfm`) зі стилями Tailwind для `p`, `ul/ol/li`, `strong`, `em`, `code`, `a`, `h1–h3`, `blockquote`. У `rule-accordion.tsx` вивід `short`/`full` замінено на `<Markdown>`, прибрано `whitespace-pre-line`.
-5. **Бейдж рівня біля заголовка (після завершення, за запитом).** У шапці сторінки поруч із «Тема: {topic} → {subtopic}» додано бейдж рівня. Рівень визначається через `parseLevel(level)` + `formatLevelCode()`, бейдж (`components/ui/badge.tsx`) обгорнутий у `Link` на `/library?level={level}` — клік веде на сторінку бібліотеки з активним табом відповідного рівня. Контейнер заголовка — `flex flex-wrap items-center gap-2`, щоб довгі назви не ламали верстку на мобільних.
+5. **`uaEn`/`enUa` → `ukEn`/`enUk` (після завершення, за запитом до задачі 29).** Стандарт ISO для України — `uk`, не `ua`. URL-параметри (`uaEn`, `enUa`), стани (`uaEnCount`, `enUaCount`) та відповідні id інпутів перейменовано на `ukEn`, `enUk`, `ukEnCount`, `enUkCount`. Тепер узгоджено з API генерації (задача 27).
+6. **Бейдж рівня біля заголовка (після завершення, за запитом).** У шапці сторінки поруч із «Тема: {topic} → {subtopic}» додано бейдж рівня. Рівень визначається через `parseLevel(level)` + `formatLevelCode()`, бейдж (`components/ui/badge.tsx`) обгорнутий у `Link` на `/library?level={level}` — клік веде на сторінку бібліотеки з активним табом відповідного рівня. Контейнер заголовка — `flex flex-wrap items-center gap-2`, щоб довгі назви не ламали верстку на мобільних.

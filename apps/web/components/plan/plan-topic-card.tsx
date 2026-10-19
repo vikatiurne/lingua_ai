@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import type { ProgressStatus } from "@prisma/client";
+import type { CEFRLevel } from "@lingua/shared";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -10,11 +12,13 @@ import { cn } from "@/lib/utils";
 
 export function PlanTopicCard({
   topic,
+  level,
   status,
   isCurrent,
   onToggle,
 }: {
   topic: PlanTopic;
+  level: CEFRLevel;
   status: ProgressStatus;
   isCurrent: boolean;
   onToggle: (topicName: string, nextStatus: ProgressStatus) => void;
@@ -56,10 +60,7 @@ export function PlanTopicCard({
               {topic.subtopics.map((subtopic) => (
                 <li
                   key={subtopic.name}
-                  className={cn(
-                    "flex items-center gap-1.5 text-xs",
-                    isMastered ? "text-inherit" : "text-muted-foreground"
-                  )}
+                  className="flex items-center gap-1.5 text-xs"
                 >
                   <span
                     aria-hidden
@@ -68,9 +69,12 @@ export function PlanTopicCard({
                       isMastered ? "bg-completed-text/40" : "bg-muted-foreground/50"
                     )}
                   />
-                  <span className="truncate line-through decoration-completed-text/40">
+                  <Link
+                    href={`/exercise/new?level=${level}&topic=${encodeURIComponent(topic.name)}&subtopic=${encodeURIComponent(subtopic.name)}`}
+                    className="min-w-0 truncate transition-colors hover:text-primary"
+                  >
                     {subtopic.name}
-                  </span>
+                  </Link>
                 </li>
               ))}
             </ul>
