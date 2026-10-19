@@ -16,11 +16,11 @@ export function getClientIp(req: NextRequest): string {
   return "unknown";
 }
 
-export function withRateLimit(
-  handler: (req: NextRequest) => Promise<Response>,
+export function withRateLimit<Args extends unknown[]>(
+  handler: (req: NextRequest, ...args: Args) => Promise<Response>,
   options: RateLimitOptions
-): (req: NextRequest) => Promise<Response> {
-  return async (req: NextRequest) => {
+): (req: NextRequest, ...args: Args) => Promise<Response> {
+  return async (req: NextRequest, ...args: Args) => {
     const identifier = options.identifier?.(req) ?? getClientIp(req);
     const key = `ratelimit:${options.keyPrefix}:${identifier}`;
     const result = await checkRateLimit(
@@ -39,7 +39,7 @@ export function withRateLimit(
       return new Response("Too Many Requests", { status: 429, headers });
     }
 
-    const response = await handler(req);
+    const response = await handler(req, ...args);
     const merged = new Headers(response.headers);
     headers.forEach((value, name) => merged.set(name, value));
 
