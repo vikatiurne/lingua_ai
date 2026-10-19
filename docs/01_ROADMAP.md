@@ -78,8 +78,8 @@
 
 ## E7 — Exercise
 - [х] 25 — Exercise Setup (вибір режиму: PDF або в додатку + вибір кількості речень)  ← ТЕКУЩАЯ
-- [ ] 26 — Topic explanation (AI) + Rule Accordion
-- [ ] 27 — Sentence generation (AI + Error recycling)
+- [x] 26 — Topic explanation (AI) + Rule Accordion
+- [x] 27 — Sentence generation (AI + Error recycling)
 - [ ] 28 — PDF generation (для режиму друку)
 - [ ] 29 — Exercise UI (Інпути для введення відповідей у додатку)
 - [ ] 30 — Exercise state persistence
