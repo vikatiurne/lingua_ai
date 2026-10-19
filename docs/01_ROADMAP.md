@@ -86,9 +86,9 @@
 - [x] 30 — Exercise state persistence
 
 ## E8 — Evaluation
-- [ ] 31 — Answer evaluation (AI + обробка `...` для пропущених слів)
-- [ ] 32 — Double score (topic + grammar)
-- [ ] 33 — Error breakdown
+- [x] 31 — Answer evaluation (AI + обробка `...` для пропущених слів)
+- [х] 32 — Double score logic (об'єднано з задачею 31 на бекенді)
+- [ ] 33 — Results UI (Відображення оцінок та розбору помилок)
 ...
 
 ## E9 — Review & Exports
