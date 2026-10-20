@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { AlertCircle, Loader2 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -36,24 +38,52 @@ export function ExerciseForm({
   exerciseId: string;
   sentences: ExerciseAppSentence[];
 }) {
+  const router = useRouter();
   const [answers, setAnswers] = useState<UserAnswers>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const allFilled = sentences.every(
     (sentence) => (answers[sentence.id] ?? "").trim().length > 0
   );
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!allFilled) return;
+    if (!allFilled || isSubmitting) return;
 
-    const payload: SubmitPayload = {
-      exerciseId,
-      answers: sentences.map((sentence) => ({
-        sentenceId: sentence.id,
-        userAnswer: (answers[sentence.id] ?? "").trim(),
-      })),
-    };
-    console.log(payload);
+    setError(null);
+    setIsSubmitting(true);
+
+    try {
+      const payload: SubmitPayload = {
+        exerciseId,
+        answers: sentences.map((sentence) => ({
+          sentenceId: sentence.id,
+          userAnswer: (answers[sentence.id] ?? "").trim(),
+        })),
+      };
+
+      const answersResponse = await fetch(`/api/exercise/${exerciseId}/answers`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answers: payload.answers }),
+      });
+      if (!answersResponse.ok) {
+        throw new Error(`Save answers failed with status ${answersResponse.status}`);
+      }
+
+      const evaluateResponse = await fetch(`/api/exercise/${exerciseId}/evaluate`, {
+        method: "POST",
+      });
+      if (!evaluateResponse.ok) {
+        throw new Error(`Evaluate failed with status ${evaluateResponse.status}`);
+      }
+
+      router.push(`/exercise/${exerciseId}/result`);
+    } catch {
+      setError("Не вдалося перевірити відповіді. Спробуйте ще раз.");
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -103,9 +133,27 @@ export function ExerciseForm({
         </CardContent>
       </Card>
 
-      <Button type="submit" disabled={!allFilled} className="w-full sm:w-auto">
-        Перевірити
+      <Button
+        type="submit"
+        disabled={!allFilled || isSubmitting}
+        className="w-full sm:w-auto"
+      >
+        {isSubmitting ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Перевіряємо...
+          </>
+        ) : (
+          "Перевірити"
+        )}
       </Button>
+
+      {error ? (
+        <div className="flex items-start gap-2 rounded-md border border-destructive/50 bg-destructive/10 p-3 text-sm font-medium text-destructive">
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>{error}</span>
+        </div>
+      ) : null}
     </form>
   );
 }
