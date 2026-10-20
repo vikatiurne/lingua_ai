@@ -15,6 +15,7 @@ export * from "./types/slot";
 export * from "./types/template";
 export * from "./types/exercise";
 export * from "./types/error";
+export * from "./types/evaluation";
 
 // Constants
 export * from "./constants/level-meta";

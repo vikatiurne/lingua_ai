@@ -1,4 +1,4 @@
-import type { ErrorType } from "../enums/error-type";
+import type { ErrorCategory, ErrorType } from "../enums/error-type";
 import type { ErrorRecyclingStatus } from "../enums/error-recycling-status";
 
 export type UserError = {
@@ -10,7 +10,7 @@ export type UserError = {
   userAnswer: string;
   reference: string;
   explanation: string;
-  category?: string;
+  category?: ErrorCategory;
   word?: string;
   translation?: string;
 
