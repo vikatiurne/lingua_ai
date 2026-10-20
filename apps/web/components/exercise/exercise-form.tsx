@@ -79,7 +79,7 @@ export function ExerciseForm({
         throw new Error(`Evaluate failed with status ${evaluateResponse.status}`);
       }
 
-      router.push(`/exercise/${exerciseId}/result${window.location.search}`);
+      router.replace(`/exercise/${exerciseId}/result${window.location.search}`);
     } catch {
       setError("Не вдалося перевірити відповіді. Спробуйте ще раз.");
       setIsSubmitting(false);

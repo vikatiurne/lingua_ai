@@ -33,6 +33,12 @@ export async function PATCH(
   if (exercise.userId !== user.id) {
     return Response.json({ error: "Forbidden" }, { status: 403 });
   }
+  if (exercise.status === "evaluated") {
+    return Response.json(
+      { error: "Exercise already evaluated" },
+      { status: 400 }
+    );
+  }
 
   let body: unknown;
   try {

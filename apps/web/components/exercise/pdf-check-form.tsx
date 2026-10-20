@@ -132,7 +132,7 @@ export function PdfCheckForm({
         );
       }
 
-      router.push(`/exercise/${exerciseId}/result`);
+      router.replace(`/exercise/${exerciseId}/result`);
     } catch {
       setError("Не вдалося перевірити відповіді. Спробуйте ще раз.");
       setIsSubmitting(false);
