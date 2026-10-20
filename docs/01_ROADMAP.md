@@ -92,8 +92,10 @@
 - [x] 31.1 — Fix AI Evaluator Prompt (Accept Synonyms) // (якщо ти її робила окремо)
 - [x] 31.2 — Fix AI Evaluator, UI Glitches & Generation Cache
 - [х] 32 — Double score logic (об'єднано з задачею 31 на бекенді)
+- [x] 32.1 — PDF Mode Workflow & UI (/exercise/pdf → /pdf-check → оцінка)
 - [x] 33 — Results UI (Відображення оцінок та розбору помилок)
 - [x] 34 — Review exercise (Робота над помилками - те, що ми щойно зробили)
+- [x] 33.4 — Fix Back Button Navigation & Prevent Re-evaluation
 
 ## E9 — Review & Exports
 
