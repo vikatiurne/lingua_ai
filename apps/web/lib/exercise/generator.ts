@@ -64,7 +64,10 @@ export async function generateExercises(
 
   let raw: string;
   try {
-    raw = await callAI([{ role: "user", content: prompt }]);
+    raw = await callAI(
+      [{ role: "user", content: prompt }],
+      params.ukEnCount + params.enUkCount
+    );
   } catch (error) {
     logGenerationError("initial request failed", error);
     return {
@@ -80,7 +83,12 @@ export async function generateExercises(
   } catch (error) {
     logGenerationError("invalid JSON from AI, attempting self-correction", error);
     try {
-      const corrected = await callSelfCorrection(prompt, raw, error);
+      const corrected = await callSelfCorrection(
+        prompt,
+        raw,
+        error,
+        params.ukEnCount + params.enUkCount
+      );
       parsed = parseAIResponse(corrected);
     } catch (correctionError) {
       logGenerationError("self-correction failed, falling back to examples", correctionError);
@@ -150,11 +158,15 @@ function buildFallbackSentences(examples: string[]): GeneratedSentence[] {
   }));
 }
 
-async function callAI(messages: AIMessage[]): Promise<string> {
+async function callAI(
+  messages: AIMessage[],
+  sentenceCount: number
+): Promise<string> {
   const result = await completeCached(messages, {
     responseFormat: "json",
     temperature: 0.7,
     timeoutMs: AI_TIMEOUT_MS,
+    sentenceCount,
   });
   return result.text;
 }
@@ -162,19 +174,23 @@ async function callAI(messages: AIMessage[]): Promise<string> {
 async function callSelfCorrection(
   prompt: string,
   raw: string,
-  error: unknown
+  error: unknown,
+  sentenceCount: number
 ): Promise<string> {
   const message = error instanceof Error ? error.message : String(error);
-  return callAI([
-    { role: "user", content: prompt },
-    { role: "assistant", content: raw },
-    {
-      role: "user",
-      content:
-        `Your previous response was invalid JSON. Error: ${message}. ` +
-        "Return ONLY valid JSON in the requested format.",
-    },
-  ]);
+  return callAI(
+    [
+      { role: "user", content: prompt },
+      { role: "assistant", content: raw },
+      {
+        role: "user",
+        content:
+          `Your previous response was invalid JSON. Error: ${message}. ` +
+          "Return ONLY valid JSON in the requested format.",
+      },
+    ],
+    sentenceCount
+  );
 }
 
 function parseAIResponse(raw: string): z.infer<typeof aiResponseSchema> {

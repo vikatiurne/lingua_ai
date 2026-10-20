@@ -7,21 +7,21 @@
 
 ## Епіки
 
-| ID | Назва | Задач |
-|---|---|---|
-| E1 | Foundation | 5 |
-| E2 | Data & Shared | 4 |
-| E3 | AI & Cache | 5 |
-| E4 | Auth & Users | 5 |
-| E5 | Level Test | 3 |
-| E6 | Plan | 4 |
-| E7 | Exercise | 8 |
-| E8 | Evaluation | 5 |
-| E9 | Review & Exports | 6 |
-| E10 | Calendar | 3 |
-| E11 | Progress & Polish | 9 |
-| E12 | Deploy | 3 |
-| E13 | Reinforcement Stories | 6 |
+| ID  | Назва                 | Задач |
+| --- | --------------------- | ----- |
+| E1  | Foundation            | 5     |
+| E2  | Data & Shared         | 4     |
+| E3  | AI & Cache            | 5     |
+| E4  | Auth & Users          | 5     |
+| E5  | Level Test            | 3     |
+| E6  | Plan                  | 4     |
+| E7  | Exercise              | 8     |
+| E8  | Evaluation            | 5     |
+| E9  | Review & Exports      | 6     |
+| E10 | Calendar              | 3     |
+| E11 | Progress & Polish     | 9     |
+| E12 | Deploy                | 3     |
+| E13 | Reinforcement Stories | 6     |
 
 **Всього: 66 задач.**
 
@@ -67,16 +67,16 @@
 - [x] 20.2 — Fix level filtering in gap map and TestResult
 - [x] 20.3 — Dashboard show all gap topics
 
-
 ## E6 — Plan
 
 - [х] 21 — Plan generation (AI)
 - [х] 22 — Dashboard (з планом)
 - [х] 23 — Plan visualization (interactive timeline)
 - [ ] 24 — Plan editing UI
-- [х] 24.5 — Topic Library UI (Explore mode)   
+- [х] 24.5 — Topic Library UI (Explore mode)
 
 ## E7 — Exercise
+
 - [х] 25 — Exercise Setup (вибір режиму: PDF або в додатку + вибір кількості речень)
 - [x] 26 — Topic explanation (AI) + Rule Accordion
 - [x] 27 — Sentence generation (AI + Error recycling)
@@ -86,19 +86,21 @@
 - [x] 30 — Exercise state persistence
 
 ## E8 — Evaluation
+
 - [x] 31 — Answer evaluation (AI + обробка `...` для пропущених слів)
+- [x] 31.1 — Fix AI Evaluator Prompt (Accept Synonyms) // (якщо ти її робила окремо)
+- [x] 31.2 — Fix AI Evaluator, UI Glitches & Generation Cache
 - [х] 32 — Double score logic (об'єднано з задачею 31 на бекенді)
 - [x] 33 — Results UI (Відображення оцінок та розбору помилок)
-
-...
+- [x] 34 — Review exercise (Робота над помилками - те, що ми щойно зробили)
 
 ## E9 — Review & Exports
-- [ ] 36 — Review exercise
-- [ ] 37 — Recommendations
-- [ ] 38 — Curated materials DB
-- [ ] 39 — Quizlet file generator (відредагований список користувачем)
-- [ ] 39.5 — Flashcards (Quizlet-style UI)  ← НОВАЯ ЗАДАЧА
-- [ ] 39.6 — Spelling exercise (вивчення написання слів)  ← НОВАЯ ЗАДАЧА
+
+- [ ] 35 — Recommendations (Рекомендації)
+- [ ] 36 — Curated materials DB (База матеріалів)
+- [ ] 37 — Quizlet file generator (відредагований список користувачем)
+- [ ] 37.5 — Flashcards (Quizlet-style UI)
+- [ ] 37.6 — Spelling exercise (вивчення написання слів)
 
 ## E10 — Calendar
 

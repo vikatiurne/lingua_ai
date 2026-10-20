@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { CheckCircle2, ArrowLeft } from "lucide-react";
+import { AlertCircle, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { ResultCard } from "@/components/exercise/result-card";
 import { SentenceReviewList } from "@/components/exercise/sentence-review-list";
 import { requireUser } from "@/lib/auth/session";
@@ -38,6 +38,9 @@ export default async function ExerciseResultPage({ params }: PageProps) {
 
   const hasVocabulary = vocabularyList.length > 0;
 
+  const isPassed =
+    (exercise.topicScore ?? 0) >= 80 && (exercise.grammarScore ?? 0) >= 80;
+
   return (
     <div className="ml-0 flex w-full max-w-6xl flex-col gap-4 px-4 py-4 text-left md:px-6">
       <Link
@@ -51,10 +54,17 @@ export default async function ExerciseResultPage({ params }: PageProps) {
       <div className="space-y-1 text-left">
         <div className="flex flex-wrap items-center gap-3">
           <h1 className="text-xl font-semibold tracking-tight">Results</h1>
-          <span className="inline-flex items-center gap-1 rounded-full bg-success/10 px-2.5 py-1 text-xs font-medium text-success">
-            <CheckCircle2 className="h-3.5 w-3.5" />
-            Completed
-          </span>
+          {isPassed ? (
+            <span className="inline-flex items-center gap-1 rounded-full bg-success/10 px-2.5 py-1 text-xs font-medium text-success">
+              <CheckCircle2 className="h-3.5 w-3.5" />
+              Passed
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 rounded-full bg-destructive/10 px-2.5 py-1 text-xs font-medium text-destructive">
+              <AlertCircle className="h-3.5 w-3.5" />
+              Needs Practice
+            </span>
+          )}
         </div>
         <p className="text-sm text-muted-foreground">
           {exercise.topicName}

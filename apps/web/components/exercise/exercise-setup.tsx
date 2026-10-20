@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +19,17 @@ function parseCount(value: string): number {
   return Number.isNaN(parsed) ? 0 : Math.min(COUNT_MAX, parsed);
 }
 
+function readInitialMode(value: string | null): ExerciseMode {
+  return value === "pdf" ? "pdf" : "app";
+}
+
+function readInitialCount(value: string | null): string {
+  if (value === null) return COUNT_DEFAULT;
+  const parsed = Number.parseInt(value, 10);
+  if (Number.isNaN(parsed) || parsed < 0) return COUNT_DEFAULT;
+  return String(Math.min(COUNT_MAX, parsed));
+}
+
 export function ExerciseSetup({
   level,
   topic,
@@ -29,14 +40,54 @@ export function ExerciseSetup({
   subtopic: string;
 }) {
   const router = useRouter();
-  const [mode, setMode] = useState<ExerciseMode>("pdf");
-  const [ukEn, setUkEn] = useState(COUNT_DEFAULT);
-  const [enUk, setEnUk] = useState(COUNT_DEFAULT);
+  const searchParams = useSearchParams();
+  const [mode, setMode] = useState<ExerciseMode>(() =>
+    readInitialMode(searchParams.get("mode"))
+  );
+  const [ukEn, setUkEn] = useState(() =>
+    readInitialCount(searchParams.get("ukEn"))
+  );
+  const [enUk, setEnUk] = useState(() =>
+    readInitialCount(searchParams.get("enUk"))
+  );
 
   const ukEnCount = parseCount(ukEn);
   const enUkCount = parseCount(enUk);
   const totalCount = ukEnCount + enUkCount;
   const isCountValid = totalCount >= 1 && totalCount <= COUNT_MAX;
+
+  function persistState(patch: {
+    mode?: ExerciseMode;
+    ukEn?: string;
+    enUk?: string;
+  }) {
+    const next = {
+      mode: patch.mode ?? mode,
+      ukEn: patch.ukEn ?? ukEn,
+      enUk: patch.enUk ?? enUk,
+    };
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("mode", next.mode);
+    params.set("ukEn", next.ukEn);
+    params.set("enUk", next.enUk);
+    router.replace(`?${params.toString()}`);
+  }
+
+  const handleModeChange = (value: string) => {
+    const nextMode = value as ExerciseMode;
+    setMode(nextMode);
+    persistState({ mode: nextMode });
+  };
+
+  const handleUkEnChange = (value: string) => {
+    setUkEn(value);
+    persistState({ ukEn: value });
+  };
+
+  const handleEnUkChange = (value: string) => {
+    setEnUk(value);
+    persistState({ enUk: value });
+  };
 
   const handleStart = () => {
     if (!isCountValid) return;
@@ -54,7 +105,7 @@ export function ExerciseSetup({
     <div className="space-y-6 rounded-lg border border-border bg-card p-4 sm:p-6">
       <div className="space-y-2">
         <Label className="text-sm font-medium">Режим виконання</Label>
-        <Tabs value={mode} onValueChange={(value) => setMode(value as ExerciseMode)}>
+        <Tabs value={mode} onValueChange={handleModeChange}>
           <TabsList className="grid w-full grid-cols-2 sm:w-auto">
             <TabsTrigger value="pdf">Роздрукувати PDF</TabsTrigger>
             <TabsTrigger value="app">Виконати в додатку</TabsTrigger>
@@ -80,7 +131,7 @@ export function ExerciseSetup({
             max={COUNT_MAX}
             value={ukEn}
             onChange={(event) =>
-              setUkEn(event.target.value.replace(/[^0-9]/g, ""))
+              handleUkEnChange(event.target.value.replace(/[^0-9]/g, ""))
             }
           />
         </div>
@@ -93,7 +144,7 @@ export function ExerciseSetup({
             max={COUNT_MAX}
             value={enUk}
             onChange={(event) =>
-              setEnUk(event.target.value.replace(/[^0-9]/g, ""))
+              handleEnUkChange(event.target.value.replace(/[^0-9]/g, ""))
             }
           />
         </div>

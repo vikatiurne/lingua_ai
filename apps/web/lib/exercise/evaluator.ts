@@ -73,8 +73,8 @@ export async function evaluateExercise(exerciseId: string): Promise<EvaluationRe
     sentences: sentences.map((sentence) => ({
       id: sentence.id,
       source: sentence.source,
-      reference: sentence.reference,
-      userAnswer: normalizeAnswer(sentence.userAnswer),
+      reference: normalizeText(sentence.reference),
+      userAnswer: normalizeForPrompt(sentence.userAnswer),
     })),
   });
 
@@ -156,6 +156,21 @@ export async function evaluateExercise(exerciseId: string): Promise<EvaluationRe
 function normalizeAnswer(userAnswer: string | undefined): string {
   const trimmed = userAnswer?.trim();
   return trimmed ? trimmed : SKIPPED_ANSWER;
+}
+
+function normalizeText(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[.,!?;:"()]/g, "") // Remove punctuation but KEEP apostrophes
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeForPrompt(userAnswer: string | undefined): string {
+  const answer = normalizeAnswer(userAnswer);
+  // Keep the "..." marker intact so the AI still recognizes skipped answers
+  if (answer === SKIPPED_ANSWER) return SKIPPED_ANSWER;
+  return normalizeText(answer);
 }
 
 async function callAI(messages: AIMessage[]): Promise<string> {
