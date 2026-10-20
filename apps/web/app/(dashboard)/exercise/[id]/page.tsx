@@ -11,9 +11,17 @@ import { prisma } from "@/lib/db/client";
 
 type PageProps = {
   params: { id: string };
+  searchParams?: { from?: string | string[] };
 };
 
-export default async function ExercisePage({ params }: PageProps) {
+export default async function ExercisePage({
+  params,
+  searchParams,
+}: PageProps) {
+  const fromHistory = searchParams?.from === "history";
+  const backHref = fromHistory ? "/exercises" : "/plan";
+  const backLabel = fromHistory ? "Назад до вправ" : "Назад до плану";
+
   const user = await requireUser();
   const exercise = await prisma.exercise.findFirst({
     where: {
@@ -27,7 +35,9 @@ export default async function ExercisePage({ params }: PageProps) {
   }
 
   if (exercise.status === "evaluated") {
-    redirect(`/exercise/${exercise.id}/result`);
+    redirect(
+      `/exercise/${exercise.id}/result${fromHistory ? "?from=history" : ""}`
+    );
   }
 
   const storedSentences = Array.isArray(exercise.sentences)
@@ -56,11 +66,11 @@ export default async function ExercisePage({ params }: PageProps) {
   return (
     <div className="ml-0 flex w-full max-w-6xl flex-col gap-4 px-4 py-4 text-left md:px-6">
       <Link
-        href="/exercises"
+        href={backHref}
         className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4" />
-        Back to Exercises
+        {backLabel}
       </Link>
 
       <div className="space-y-1 text-left">

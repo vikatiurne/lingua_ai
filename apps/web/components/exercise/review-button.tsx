@@ -30,7 +30,7 @@ export function ReviewButton({ exerciseId, hasMistakes }: ReviewButtonProps) {
         throw new Error(`Review failed with status ${response.status}`);
       }
       const data = (await response.json()) as { newId: string };
-      router.push(`/exercise/${data.newId}`);
+      router.push(`/exercise/${data.newId}${window.location.search}`);
     } catch {
       setError("Не вдалося створити вправу над помилками. Спробуйте ще раз.");
       setIsSubmitting(false);

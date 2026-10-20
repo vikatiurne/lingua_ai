@@ -7,9 +7,10 @@ import type { Exercise, SentenceDirection } from "@lingua/shared";
 const MARGIN = 50;
 const PAGE_BREAK_THRESHOLD = 100;
 
-const TITLE_FONT_SIZE = 16;
+const TITLE_FONT_SIZE = 14;
 const META_FONT_SIZE = 10;
-const SECTION_FONT_SIZE = 13;
+const FOOTER_FONT_SIZE = 9;
+const SECTION_FONT_SIZE = 14;
 const SENTENCE_FONT_SIZE = 12;
 
 const LINE_HEIGHT = 18;
@@ -19,8 +20,11 @@ const SECTION_GAP = 26;
 const TEXT_TO_LINES_GAP = 6;
 const ANSWER_LINE_GAP = 22;
 const ANSWER_LINES_PER_SENTENCE = 2;
-const BLOCK_SPACING = 10;
+const SENTENCE_GAP = 24;
 const ANSWER_LINE_COLOR = rgb(0.55, 0.55, 0.55);
+const META_COLOR = rgb(0.45, 0.45, 0.45);
+const HEADER_Y_OFFSET = 26;
+const FOOTER_Y_OFFSET = 28;
 
 const SECTION_TITLES: Record<SentenceDirection, string> = {
   "en-uk": "Перекладіть українською",
@@ -57,16 +61,7 @@ export async function generateExercisePdf(
     size: TITLE_FONT_SIZE,
     font: boldFont,
   });
-  y -= TITLE_GAP;
-
-  const formattedDate = new Date().toLocaleDateString("uk-UA");
-  page.drawText(`Дата: ${formattedDate}`, {
-    x: MARGIN,
-    y,
-    size: META_FONT_SIZE,
-    font: regularFont,
-  });
-  y -= META_GAP;
+  y -= TITLE_GAP + META_GAP;
 
   let number = 1;
   for (const direction of SECTION_ORDER) {
@@ -99,7 +94,7 @@ export async function generateExercisePdf(
         lines.length * LINE_HEIGHT +
         TEXT_TO_LINES_GAP +
         ANSWER_LINES_PER_SENTENCE * ANSWER_LINE_GAP +
-        BLOCK_SPACING;
+        SENTENCE_GAP;
 
       if (y - blockHeight < MARGIN) {
         page = pdfDoc.addPage();
@@ -128,10 +123,40 @@ export async function generateExercisePdf(
           y -= ANSWER_LINE_GAP;
         }
       }
-      y -= BLOCK_SPACING;
+      y -= SENTENCE_GAP;
 
       number += 1;
     }
+  }
+
+  const formattedDate = new Date().toLocaleDateString("uk-UA");
+  const dateText = `Дата: ${formattedDate}`;
+  const pages = pdfDoc.getPages();
+
+  for (const [index, pdfPage] of pages.entries()) {
+    const size = pdfPage.getSize();
+
+    const dateWidth = regularFont.widthOfTextAtSize(dateText, META_FONT_SIZE);
+    pdfPage.drawText(dateText, {
+      x: size.width - MARGIN - dateWidth,
+      y: size.height - HEADER_Y_OFFSET,
+      size: META_FONT_SIZE,
+      font: regularFont,
+      color: META_COLOR,
+    });
+
+    const footerText = `Сторінка ${index + 1} з ${pages.length}`;
+    const footerWidth = regularFont.widthOfTextAtSize(
+      footerText,
+      FOOTER_FONT_SIZE
+    );
+    pdfPage.drawText(footerText, {
+      x: (size.width - footerWidth) / 2,
+      y: FOOTER_Y_OFFSET,
+      size: FOOTER_FONT_SIZE,
+      font: regularFont,
+      color: META_COLOR,
+    });
   }
 
   return pdfDoc.save();

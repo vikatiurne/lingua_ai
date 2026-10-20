@@ -25,11 +25,18 @@ type SentenceReviewCardProps = {
   sentence: Sentence;
 };
 
+function normalize(text: string): string {
+  return text.toLowerCase().trim();
+}
+
 export function SentenceReviewCard({ sentence }: SentenceReviewCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const isCorrect = sentence.isCorrect;
   const vocab = sentence.vocabularyToAdd as VocabularyToAdd;
   const canExpand = !isCorrect && Boolean(sentence.explanation || vocab);
+
+  const differsFromReference =
+    normalize(sentence.userAnswer) !== normalize(sentence.reference);
 
   return (
     <div
@@ -60,9 +67,23 @@ export function SentenceReviewCard({ sentence }: SentenceReviewCardProps) {
         <div className="min-w-0 flex-1 space-y-0.5">
           <p className="text-sm font-medium">{sentence.source}</p>
           {isCorrect ? (
-            <p className="text-sm text-muted-foreground/90">
-              {sentence.reference}
-            </p>
+            <>
+              <div className="flex flex-wrap items-baseline gap-2">
+                {differsFromReference ? (
+                  <span className="inline-flex shrink-0 items-center text-xs font-medium text-success">
+                    Ваш варіант допустимий:
+                  </span>
+                ) : null}
+                <p className="text-sm text-muted-foreground/90">
+                  {sentence.userAnswer || sentence.reference}
+                </p>
+              </div>
+              {differsFromReference ? (
+                <p className="text-xs text-muted-foreground">
+                  Еталон: {sentence.reference}
+                </p>
+              ) : null}
+            </>
           ) : (
             <>
               <p className="text-sm font-medium text-destructive">

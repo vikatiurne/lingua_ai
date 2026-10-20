@@ -12,6 +12,15 @@ type RouteContext = {
   params: { id: string };
 };
 
+function buildPdfFileName(topicName: string): string {
+  const safeTopic =
+    topicName
+      .trim()
+      .replace(/[\\/:*?"<>|]+/g, "-")
+      .replace(/\s+/g, " ") || "exercise";
+  return `practice-${safeTopic}.pdf`;
+}
+
 export async function GET(
   _req: Request,
   { params }: RouteContext
@@ -55,10 +64,17 @@ export async function GET(
 
   const pdfBytes = await generateExercisePdf(exercise);
 
+  const fileName = buildPdfFileName(record.topicName);
+  const asciiFileName = fileName.replace(/[^\x20-\x7E]/g, "-");
+  const encodedFileName = encodeURIComponent(fileName).replace(
+    /['()*]/g,
+    (char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`
+  );
+
   return new Response(new Uint8Array(pdfBytes), {
     headers: {
       "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename="exercise-${record.id}.pdf"`,
+      "Content-Disposition": `attachment; filename="${asciiFileName}"; filename*=UTF-8''${encodedFileName}`,
     },
   });
 }
