@@ -40,6 +40,7 @@ export function getPrompt(params: EvaluatePromptParams): string {
     '- If the direction is \'uk_en\', distinguish between \'spelling\' errors (typos, e.g., \'scool\' instead of \'school\') and \'vocabulary\' errors (wrong word choice). Use \'grammar\' only for structural mistakes in English.',
     '- "explanation": 1-2 short sentences in Ukrainian explaining the mistake and stating the correct form. For skipped sentences, explain what the correct translation is.',
     '- If "errorType" is "skipped", also include "vocabularyToAdd" with the word from "source" that the student should learn and its Ukrainian translation.',
+    '- If "errorType" is "spelling", also include "vocabularyToAdd" with the correctly spelled English word (from "reference") and its Ukrainian translation.',
     '- "topicScore": integer 0-100 — percentage of sentences translated correctly with respect to this topic.',
     '- "grammarScore": integer 0-100 — percentage reflecting overall grammar and spelling accuracy across all answers. It may be higher or lower than "topicScore".',
     "- The grammarScore must be strictly derived from the evaluated sentences.",
@@ -55,7 +56,7 @@ export function getPrompt(params: EvaluatePromptParams): string {
       '{ "topicScore": 0, "grammarScore": 0, "evaluatedSentences": ' +
       '[{ "id": "1", "isCorrect": false, "errorType": "grammar", ' +
       '"explanation": "...", "vocabularyToAdd": { "word": "...", "translation": "..." } }] } ' +
-      'where "vocabularyToAdd" is optional and included only for "skipped" sentences, ' +
+      'where "vocabularyToAdd" is optional and included only for "skipped" and "spelling" sentences, ' +
       'and "evaluatedSentences" must contain exactly one entry for every sentence id from the input.',
   ];
 

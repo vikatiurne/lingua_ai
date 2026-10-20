@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AlertCircle, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ERROR_CATEGORY } from "@lingua/shared";
 import { MediaRecommendations } from "@/components/exercise/media-recommendations";
 import { ResultCard } from "@/components/exercise/result-card";
 import { SentenceReviewList } from "@/components/exercise/sentence-review-list";
@@ -47,6 +48,17 @@ export default async function ExerciseResultPage({
 
   const hasMistakes = sentences.some((s) => s?.isCorrect === false);
 
+  const reviewableErrorCount = await prisma.userError.count({
+    where: {
+      exerciseId: exercise.id,
+      category: {
+        in: [ERROR_CATEGORY.SPELLING, ERROR_CATEGORY.VOCABULARY],
+      },
+    },
+  });
+
+  const hasReviewWords = hasVocabulary || reviewableErrorCount > 0;
+
   const isPassed =
     (exercise.topicScore ?? 0) >= 80 && (exercise.grammarScore ?? 0) >= 80;
 
@@ -86,6 +98,13 @@ export default async function ExerciseResultPage({
         hasMistakes={hasMistakes}
         topicScore={exercise.topicScore}
         grammarScore={exercise.grammarScore}
+        reviewWordsHref={
+          hasReviewWords
+            ? `/exercise/${exercise.id}/vocabulary${
+                fromHistory ? "?from=history" : ""
+              }`
+            : null
+        }
       />
 
       <div className="w-full">
