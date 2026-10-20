@@ -55,7 +55,7 @@ export default async function DashboardPage() {
             <Link href="/plan">Переглянути весь план</Link>
           </Button>
           <Button asChild>
-            <Link href="/exercise">Почати вправу</Link>
+            <Link href="/exercises">Почати вправу</Link>
           </Button>
         </div>
       </div>

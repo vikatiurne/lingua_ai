@@ -114,6 +114,12 @@ export async function evaluateExercise(exerciseId: string): Promise<EvaluationRe
     };
   });
 
+  // The AI may understate grammarScore as an abstract grade.
+  // Enforce consistency with the per-sentence verdicts.
+  const grammarScore = parsed.evaluatedSentences.every((s) => s.isCorrect)
+    ? 100
+    : parsed.grammarScore;
+
   const userErrors = sentences.flatMap((sentence) => {
     const evaluation = evaluatedById.get(sentence.id)!;
     if (evaluation.isCorrect) return [];
@@ -140,7 +146,7 @@ export async function evaluateExercise(exerciseId: string): Promise<EvaluationRe
       data: {
         sentences: updatedSentences,
         topicScore: parsed.topicScore,
-        grammarScore: parsed.grammarScore,
+        grammarScore,
         status: "evaluated",
       },
     }),
@@ -148,7 +154,7 @@ export async function evaluateExercise(exerciseId: string): Promise<EvaluationRe
 
   return {
     topicScore: parsed.topicScore,
-    grammarScore: parsed.grammarScore,
+    grammarScore,
     evaluatedSentences: parsed.evaluatedSentences,
   };
 }

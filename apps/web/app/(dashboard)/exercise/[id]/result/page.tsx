@@ -38,17 +38,19 @@ export default async function ExerciseResultPage({ params }: PageProps) {
 
   const hasVocabulary = vocabularyList.length > 0;
 
+  const hasMistakes = sentences.some((s) => s?.isCorrect === false);
+
   const isPassed =
     (exercise.topicScore ?? 0) >= 80 && (exercise.grammarScore ?? 0) >= 80;
 
   return (
     <div className="ml-0 flex w-full max-w-6xl flex-col gap-4 px-4 py-4 text-left md:px-6">
       <Link
-        href="/plan"
+        href="/exercises"
         className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4" />
-        Back to Plan
+        Back to Exercises
       </Link>
 
       <div className="space-y-1 text-left">
@@ -73,6 +75,8 @@ export default async function ExerciseResultPage({ params }: PageProps) {
       </div>
 
       <ResultCard
+        exerciseId={exercise.id}
+        hasMistakes={hasMistakes}
         topicScore={exercise.topicScore}
         grammarScore={exercise.grammarScore}
       />
