@@ -65,7 +65,7 @@ export function SentenceReviewCard({ sentence }: SentenceReviewCardProps) {
             </p>
           ) : (
             <>
-              <p className="text-sm text-muted-foreground line-through">
+              <p className="text-sm font-medium text-destructive">
                 Ваша відповідь: {sentence.userAnswer || "..."}
               </p>
               <p className="text-sm font-semibold text-success">

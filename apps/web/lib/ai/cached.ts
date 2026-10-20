@@ -24,6 +24,7 @@ function buildCacheKey(
     model: options?.model,
     temperature: options?.temperature,
     responseFormat: options?.responseFormat,
+    sentenceCount: options?.sentenceCount,
   };
   return `ai:${hashPrompt(JSON.stringify(relevant))}`;
 }

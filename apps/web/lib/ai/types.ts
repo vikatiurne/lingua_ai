@@ -10,6 +10,7 @@ export type AICompletionOptions = {
   timeoutMs?: number;
   responseFormat?: "text" | "json";
   signal?: AbortSignal;
+  sentenceCount?: number;
 };
 
 export type AICompletionResult = {
