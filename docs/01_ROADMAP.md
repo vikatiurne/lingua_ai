@@ -102,7 +102,7 @@
 
 - [x] 35 — Recommendations (Рекомендації)
 - [ ] 36 — Curated materials DB (База матеріалів)
-- [ ] 37 — Quizlet file generator (відредагований список користувачем)
+- [x] 37 — Vocabulary Review & Training Hub (Spelling/Vocabulary + Save to Training)
 - [ ] 37.5 — Flashcards (Quizlet-style UI)
 - [ ] 37.6 — Spelling exercise (вивчення написання слів)
 - [x] 38 — Exercises History (сторінка /exercises, таби, фільтр, пагінація)

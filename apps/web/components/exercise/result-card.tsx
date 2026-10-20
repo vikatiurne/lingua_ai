@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { ReviewButton } from "@/components/exercise/review-button";
 import { cn } from "@/lib/utils";
 
@@ -6,6 +9,7 @@ type ResultCardProps = {
   hasMistakes: boolean;
   topicScore?: number | null;
   grammarScore?: number | null;
+  reviewWordsHref?: string | null;
 };
 
 function getScoreColor(score: number) {
@@ -43,6 +47,7 @@ export function ResultCard({
   hasMistakes,
   topicScore,
   grammarScore,
+  reviewWordsHref,
 }: ResultCardProps) {
   return (
     <div className="flex w-full flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-card/60 px-4 py-3">
@@ -50,7 +55,22 @@ export function ResultCard({
         <ScorePill label="Topic Score" score={topicScore} />
         <ScorePill label="Grammar Score" score={grammarScore} />
       </div>
-      <ReviewButton exerciseId={exerciseId} hasMistakes={hasMistakes} />
+      <div className="flex w-full items-center gap-2 sm:w-auto sm:justify-end">
+        <ReviewButton exerciseId={exerciseId} hasMistakes={hasMistakes} />
+        {reviewWordsHref ? (
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="w-full bg-accent text-accent-foreground shadow-sm hover:bg-accent/80 sm:w-auto"
+          >
+            <Link href={reviewWordsHref}>
+              <BookOpen className="mr-2 h-4 w-4" />
+              Review Words
+            </Link>
+          </Button>
+        ) : null}
+      </div>
     </div>
   );
 }
