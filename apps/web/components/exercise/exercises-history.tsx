@@ -105,13 +105,16 @@ function ExerciseCard({ exercise }: { exercise: ExerciseHistoryItem }) {
         </div>
         {isEvaluated ? (
           <IconLinkButton
-            href={`/exercise/${exercise.id}/result`}
+            href={`/exercise/${exercise.id}/result?from=history`}
             label="Дивитись результат"
           >
             <Info className="h-4 w-4" />
           </IconLinkButton>
         ) : (
-          <IconLinkButton href={`/exercise/${exercise.id}`} label="Продовжити">
+          <IconLinkButton
+            href={`/exercise/${exercise.id}?from=history`}
+            label="Продовжити"
+          >
             <Play className="h-4 w-4" />
           </IconLinkButton>
         )}

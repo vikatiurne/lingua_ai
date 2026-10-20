@@ -123,7 +123,7 @@ export function ExerciseSetup({
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="ukEnCount">Скільки речень укр → англ</Label>
+          <Label htmlFor="ukEnCount">Скільки речень UA/EN</Label>
           <Input
             id="ukEnCount"
             type="number"
@@ -136,7 +136,7 @@ export function ExerciseSetup({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="enUkCount">Скільки речень англ → укр</Label>
+          <Label htmlFor="enUkCount">Скільки речень EN/UA</Label>
           <Input
             id="enUkCount"
             type="number"

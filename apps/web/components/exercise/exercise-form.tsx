@@ -27,8 +27,8 @@ export type SubmitPayload = {
 };
 
 const DIRECTION_LABELS: Record<ExerciseAppSentence["direction"], string> = {
-  uk_en: "укр → англ",
-  en_uk: "англ → укр",
+  uk_en: "UA/EN",
+  en_uk: "EN/UA",
 };
 
 export function ExerciseForm({
@@ -79,7 +79,7 @@ export function ExerciseForm({
         throw new Error(`Evaluate failed with status ${evaluateResponse.status}`);
       }
 
-      router.push(`/exercise/${exerciseId}/result`);
+      router.push(`/exercise/${exerciseId}/result${window.location.search}`);
     } catch {
       setError("Не вдалося перевірити відповіді. Спробуйте ще раз.");
       setIsSubmitting(false);
@@ -111,7 +111,10 @@ export function ExerciseForm({
                   </span>
                   {sentence.source}
                 </p>
-                <Badge variant="secondary" className="shrink-0">
+                <Badge
+                  variant="secondary"
+                  className="shrink-0 border-primary/30 bg-primary/10 text-primary"
+                >
                   {DIRECTION_LABELS[sentence.direction]}
                 </Badge>
               </div>
