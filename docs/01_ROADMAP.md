@@ -84,6 +84,7 @@
 - [x] 29 — Exercise UI (Інпути для введення відповідей у додатку)
 - [x] 29.1 — Fix Plan Subtopics UI (chore: клікабельні підтеми на /plan)
 - [x] 30 — Exercise state persistence
+- [x] 32.1 — PDF Mode Workflow & UI (/exercise/pdf → /pdf-check → оцінка)
 
 ## E8 — Evaluation
 
