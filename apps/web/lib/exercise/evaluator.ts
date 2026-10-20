@@ -1,4 +1,10 @@
 import { z } from "zod";
+import {
+  ERROR_CATEGORY,
+  SENTENCE_ERROR_TYPE_VALUES,
+  type ErrorCategory,
+  type EvaluatedSentence,
+} from "@lingua/shared";
 import { prisma } from "@/lib/db/client";
 import { completeCached } from "@/lib/ai/cached";
 import { logAIRequest } from "@/lib/ai/logger";
@@ -12,7 +18,7 @@ const SKIPPED_ANSWER = "...";
 const evaluatedSentenceSchema = z.object({
   id: z.string().min(1),
   isCorrect: z.boolean(),
-  errorType: z.enum(["topic", "grammar", "skipped", "none"]),
+  errorType: z.enum(SENTENCE_ERROR_TYPE_VALUES),
   explanation: z.string().min(1),
   vocabularyToAdd: z
     .object({
@@ -28,7 +34,7 @@ const evaluationResponseSchema = z.object({
   evaluatedSentences: z.array(evaluatedSentenceSchema).min(1),
 });
 
-export type EvaluatedSentence = z.infer<typeof evaluatedSentenceSchema>;
+export type { EvaluatedSentence };
 
 export type EvaluationResult = {
   topicScore: number;
@@ -39,7 +45,7 @@ export type EvaluationResult = {
 type StoredSentence = {
   id: string;
   source: string;
-  direction: string;
+  direction: "uk_en" | "en_uk";
   reference: string;
   userAnswer?: string;
   isCorrect?: boolean;
@@ -48,11 +54,18 @@ type StoredSentence = {
   vocabularyToAdd?: { word: string; translation: string };
 };
 
-const ERROR_TYPE_TO_DB: Record<EvaluatedSentence["errorType"], "topic" | "general"> = {
-  topic: "topic",
-  grammar: "general",
-  skipped: "general",
-  none: "general",
+// `type` drives routing (topic errors -> error correction, general -> word list).
+// `category` stores the fine-grained AI category for the Dictionary (task 37).
+const ERROR_DB_MAPPING: Record<
+  EvaluatedSentence["errorType"],
+  { type: "topic" | "general"; category: ErrorCategory | null }
+> = {
+  topic: { type: "topic", category: ERROR_CATEGORY.TOPIC },
+  spelling: { type: "general", category: ERROR_CATEGORY.SPELLING },
+  vocabulary: { type: "general", category: ERROR_CATEGORY.VOCABULARY },
+  grammar: { type: "general", category: ERROR_CATEGORY.GRAMMAR },
+  skipped: { type: "general", category: ERROR_CATEGORY.VOCABULARY },
+  none: { type: "general", category: null },
 };
 
 export async function evaluateExercise(exerciseId: string): Promise<EvaluationResult> {
@@ -73,6 +86,7 @@ export async function evaluateExercise(exerciseId: string): Promise<EvaluationRe
     sentences: sentences.map((sentence) => ({
       id: sentence.id,
       source: sentence.source,
+      direction: sentence.direction,
       reference: normalizeText(sentence.reference),
       userAnswer: normalizeForPrompt(sentence.userAnswer),
     })),
@@ -123,11 +137,13 @@ export async function evaluateExercise(exerciseId: string): Promise<EvaluationRe
   const userErrors = sentences.flatMap((sentence) => {
     const evaluation = evaluatedById.get(sentence.id)!;
     if (evaluation.isCorrect) return [];
+    const mapping = ERROR_DB_MAPPING[evaluation.errorType];
     return [
       {
         userId: exercise.userId,
         exerciseId: exercise.id,
-        type: ERROR_TYPE_TO_DB[evaluation.errorType],
+        type: mapping.type,
+        category: mapping.category,
         sentence: sentence.source,
         userAnswer: normalizeAnswer(sentence.userAnswer),
         reference: sentence.reference,

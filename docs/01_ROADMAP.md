@@ -91,6 +91,7 @@
 - [x] 31 — Answer evaluation (AI + обробка `...` для пропущених слів)
 - [x] 31.1 — Fix AI Evaluator Prompt (Accept Synonyms) // (якщо ти її робила окремо)
 - [x] 31.2 — Fix AI Evaluator, UI Glitches & Generation Cache
+- [x] 31.3 — Refine Evaluator Logic (Spelling/Vocabulary & UA Leniency)
 - [х] 32 — Double score logic (об'єднано з задачею 31 на бекенді)
 - [x] 32.1 — PDF Mode Workflow & UI (/exercise/pdf → /pdf-check → оцінка)
 - [x] 33 — Results UI (Відображення оцінок та розбору помилок)
