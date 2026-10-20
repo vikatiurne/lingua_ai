@@ -99,7 +99,7 @@
 
 ## E9 — Review & Exports
 
-- [ ] 35 — Recommendations (Рекомендації)
+- [x] 35 — Recommendations (Рекомендації)
 - [ ] 36 — Curated materials DB (База матеріалів)
 - [ ] 37 — Quizlet file generator (відредагований список користувачем)
 - [ ] 37.5 — Flashcards (Quizlet-style UI)

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AlertCircle, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { MediaRecommendations } from "@/components/exercise/media-recommendations";
 import { ResultCard } from "@/components/exercise/result-card";
 import { SentenceReviewList } from "@/components/exercise/sentence-review-list";
 import { requireUser } from "@/lib/auth/session";
@@ -106,6 +107,8 @@ export default async function ExerciseResultPage({
           </div>
         </div>
       )}
+
+      <MediaRecommendations exerciseId={exercise.id} />
     </div>
   );
 }
