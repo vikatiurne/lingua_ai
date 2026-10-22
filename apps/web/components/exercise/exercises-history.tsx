@@ -84,24 +84,35 @@ function IconLinkButton({
   );
 }
 
-function ExerciseCard({ exercise }: { exercise: ExerciseHistoryItem }) {
+function ExerciseCard({
+  exercise,
+  number,
+}: {
+  exercise: ExerciseHistoryItem;
+  number: number;
+}) {
   const isEvaluated = exercise.status === "evaluated";
 
   return (
     <Card className="flex h-full flex-col">
       <CardHeader className="flex-row items-start justify-between gap-2 space-y-0 p-3 sm:p-4">
-        <div className="min-w-0 space-y-1">
-          <CardTitle className="truncate font-display text-sm font-semibold sm:text-base">
-            {exercise.topicName}
-          </CardTitle>
-          {exercise.subtopicName ? (
-            <p className="truncate text-sm text-muted-foreground">
-              {exercise.subtopicName}
+        <div className="flex min-w-0 items-start gap-2">
+          <span className="mt-0.5 w-5 shrink-0 text-right text-xs font-semibold tabular-nums text-muted-foreground sm:text-sm">
+            {number}.
+          </span>
+          <div className="min-w-0 space-y-1">
+            <CardTitle className="truncate font-display text-sm font-semibold sm:text-base">
+              {exercise.topicName}
+            </CardTitle>
+            {exercise.subtopicName ? (
+              <p className="truncate text-sm text-muted-foreground">
+                {exercise.subtopicName}
+              </p>
+            ) : null}
+            <p className="text-xs text-muted-foreground">
+              {formatDate(exercise.createdAt)}
             </p>
-          ) : null}
-          <p className="text-xs text-muted-foreground">
-            {formatDate(exercise.createdAt)}
-          </p>
+          </div>
         </div>
         {isEvaluated ? (
           <IconLinkButton
@@ -264,7 +275,10 @@ export function ExercisesHistory({
               Немає незавершених вправ.
             </p>
           ) : (
-            <ExerciseGrid items={pageItems} />
+            <ExerciseGrid
+              items={pageItems}
+              startIndex={(safePage - 1) * PAGE_SIZE}
+            />
           )}
         </TabsContent>
 
@@ -274,7 +288,10 @@ export function ExercisesHistory({
               Немає завершених вправ.
             </p>
           ) : (
-            <ExerciseGrid items={pageItems} />
+            <ExerciseGrid
+              items={pageItems}
+              startIndex={(safePage - 1) * PAGE_SIZE}
+            />
           )}
         </TabsContent>
       </Tabs>
@@ -290,11 +307,21 @@ export function ExercisesHistory({
   );
 }
 
-function ExerciseGrid({ items }: { items: ExerciseHistoryItem[] }) {
+function ExerciseGrid({
+  items,
+  startIndex,
+}: {
+  items: ExerciseHistoryItem[];
+  startIndex: number;
+}) {
   return (
     <div className="grid grid-cols-1 items-start gap-4 grid-auto-rows-fr md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {items.map((exercise) => (
-        <ExerciseCard key={exercise.id} exercise={exercise} />
+      {items.map((exercise, index) => (
+        <ExerciseCard
+          key={exercise.id}
+          exercise={exercise}
+          number={startIndex + index + 1}
+        />
       ))}
     </div>
   );

@@ -39,10 +39,12 @@ export default async function ExerciseResultPage({
     ? (exercise.sentences as any[])
     : [];
 
-  const vocabularyList = sentences
-    .filter((s) => s?.vocabularyToAdd)
-    .map((s) => s.vocabularyToAdd)
-    .filter(Boolean);
+  const vocabularyList = sentences.flatMap((s) => {
+    const value = s?.vocabularyToAdd;
+    if (!value) return [];
+    const list = Array.isArray(value) ? value : [value];
+    return list.filter((v) => v?.word);
+  });
 
   const hasVocabulary = vocabularyList.length > 0;
 
@@ -120,7 +122,8 @@ export default async function ExerciseResultPage({
                 key={`${v.word}-${idx}`}
                 className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-sm font-medium"
               >
-                {v.word} — {v.translation}
+                {v.word}
+                {v.translation ? ` — ${v.translation}` : ""}
               </span>
             ))}
           </div>

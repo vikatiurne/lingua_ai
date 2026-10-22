@@ -4,10 +4,10 @@ import { useState } from "react";
 import { CheckCircle2, ChevronDown, Lightbulb, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export type VocabularyToAdd = {
+export type VocabularyWord = {
   word: string;
   translation: string;
-} | null | undefined;
+};
 
 export type Sentence = {
   id: string;
@@ -18,22 +18,34 @@ export type Sentence = {
   isCorrect: boolean;
   errorType?: string;
   explanation?: string;
-  vocabularyToAdd?: { word: string; translation: string };
+  vocabularyToAdd?: VocabularyWord[] | VocabularyWord;
 };
 
 type SentenceReviewCardProps = {
   sentence: Sentence;
+  number: number;
 };
 
 function normalize(text: string): string {
   return text.toLowerCase().trim();
 }
 
-export function SentenceReviewCard({ sentence }: SentenceReviewCardProps) {
+function toVocabularyWords(
+  value: Sentence["vocabularyToAdd"]
+): VocabularyWord[] {
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+export function SentenceReviewCard({
+  sentence,
+  number,
+}: SentenceReviewCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const isCorrect = sentence.isCorrect;
-  const vocab = sentence.vocabularyToAdd as VocabularyToAdd;
-  const canExpand = !isCorrect && Boolean(sentence.explanation || vocab);
+  const vocabWords = toVocabularyWords(sentence.vocabularyToAdd);
+  const canExpand =
+    !isCorrect && Boolean(sentence.explanation || vocabWords.length > 0);
 
   const differsFromReference =
     normalize(sentence.userAnswer) !== normalize(sentence.reference);
@@ -58,6 +70,10 @@ export function SentenceReviewCard({ sentence }: SentenceReviewCardProps) {
           canExpand && "cursor-pointer",
         )}
       >
+        <span className="mt-0.5 w-5 shrink-0 text-right text-sm font-semibold tabular-nums text-muted-foreground">
+          {number}.
+        </span>
+
         {isCorrect ? (
           <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success" />
         ) : (
@@ -89,9 +105,11 @@ export function SentenceReviewCard({ sentence }: SentenceReviewCardProps) {
               <p className="text-sm font-medium text-destructive">
                 Ваша відповідь: {sentence.userAnswer || "..."}
               </p>
-              <p className="text-sm font-semibold text-success">
-                Правильно: {sentence.reference}
-              </p>
+              {sentence.reference ? (
+                <p className="text-sm font-semibold text-success">
+                  Правильно: {sentence.reference}
+                </p>
+              ) : null}
             </>
           )}
         </div>
@@ -111,13 +129,23 @@ export function SentenceReviewCard({ sentence }: SentenceReviewCardProps) {
           {sentence.explanation && (
             <div className="flex items-start gap-2 rounded-md bg-accent/30 p-3">
               <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-              <p className="text-sm leading-relaxed">{sentence.explanation}</p>
+              <p className="whitespace-pre-line text-sm leading-relaxed">
+                {sentence.explanation}
+              </p>
             </div>
           )}
-          {vocab && (
-            <span className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium">
-              Word: {vocab.word} — {vocab.translation}
-            </span>
+          {vocabWords.length > 0 && (
+            <div className="flex flex-wrap gap-1.5">
+              {vocabWords.map((vocab, idx) => (
+                <span
+                  key={`${vocab.word}-${idx}`}
+                  className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium"
+                >
+                  Word: {vocab.word}
+                  {vocab.translation ? ` — ${vocab.translation}` : ""}
+                </span>
+              ))}
+            </div>
           )}
         </div>
       )}

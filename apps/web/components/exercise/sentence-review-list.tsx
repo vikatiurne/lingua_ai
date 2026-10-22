@@ -10,8 +10,12 @@ export function SentenceReviewList({ sentences }: SentenceReviewListProps) {
     <div>
       <h2 className="mb-3 text-base font-semibold">Sentence review</h2>
       <div className="space-y-2">
-        {sentences.map((sentence) => (
-          <SentenceReviewCard key={sentence.id} sentence={sentence} />
+        {sentences.map((sentence, index) => (
+          <SentenceReviewCard
+            key={sentence.id}
+            sentence={sentence}
+            number={index + 1}
+          />
         ))}
       </div>
     </div>
