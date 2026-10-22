@@ -26,7 +26,7 @@ export function UserMenu({ email }: { email: string }) {
           <User className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+      <DropdownMenuContent align="end" className="w-56 shadow-lg">
         <DropdownMenuLabel className="truncate font-normal text-muted-foreground">
           {email}
         </DropdownMenuLabel>
