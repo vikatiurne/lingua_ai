@@ -10,5 +10,5 @@ export type EvaluatedSentence = {
   isCorrect: boolean;
   errorType: SentenceErrorType;
   explanation: string;
-  vocabularyToAdd?: VocabularyToAdd;
+  vocabularyToAdd?: VocabularyToAdd[];
 };

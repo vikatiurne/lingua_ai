@@ -1,6 +1,5 @@
 import { z } from "zod";
 import type { NextRequest } from "next/server";
-import { ERROR_CATEGORY } from "@lingua/shared";
 import { getCurrentUser } from "@/lib/auth/session";
 import { prisma } from "@/lib/db/client";
 
@@ -54,19 +53,27 @@ export async function POST(
 
   try {
     await prisma.$transaction([
+      // Mark the words the user kept as ready for training (flashcards pick
+      // them up). Words removed in the UI stay in the DB with isDeleted=true.
       prisma.userError.updateMany({
-        where: { exerciseId: params.id, userId: user.id, word: { in: keptWords } },
-        data: { isSavedToTraining: true },
-      }),
-      prisma.userError.deleteMany({
         where: {
           exerciseId: params.id,
           userId: user.id,
-          category: {
-            in: [ERROR_CATEGORY.SPELLING, ERROR_CATEGORY.VOCABULARY],
-          },
-          word: { not: null, notIn: keptWords },
+          word: { in: keptWords },
+          isDeleted: false,
         },
+        data: { isSavedToTraining: true },
+      }),
+      // Soft-delete any reviewable word that is no longer in the kept list.
+      // Match any category — topic/grammar words appear in the hub too.
+      prisma.userError.updateMany({
+        where: {
+          exerciseId: params.id,
+          userId: user.id,
+          word: { not: null, notIn: keptWords },
+          isDeleted: false,
+        },
+        data: { isDeleted: true },
       }),
     ]);
   } catch {
