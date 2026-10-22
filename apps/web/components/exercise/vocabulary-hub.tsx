@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useCallback, useRef, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import {
   AlertCircle,
   ArrowLeft,
+  ArrowLeftRight,
   BookOpen,
   Loader2,
   PenLine,
@@ -22,6 +23,8 @@ type WordEntry = {
   translation: string;
 };
 
+type Column = "spelling" | "vocabulary";
+
 type VocabularyHubProps = {
   exerciseId: string;
   initialSpelling: WordEntry[];
@@ -30,6 +33,29 @@ type VocabularyHubProps = {
 };
 
 const EMPTY_MESSAGE = "Помилок немає. Чудова робота!";
+
+type Snapshot = {
+  spelling: WordEntry[];
+  vocabulary: WordEntry[];
+};
+
+async function patchWord(
+  exerciseId: string,
+  payload: {
+    word: string;
+    action: "delete" | "restore" | "move";
+    to?: Column;
+  }
+): Promise<void> {
+  const response = await fetch(`/api/exercise/${exerciseId}/vocabulary/update`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!response.ok) {
+    throw new Error(`Update failed with status ${response.status}`);
+  }
+}
 
 export function VocabularyHub({
   exerciseId,
@@ -42,13 +68,78 @@ export function VocabularyHub({
   const [vocabulary, setVocabulary] = useState<WordEntry[]>(initialVocabulary);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const snapshotRef = useRef<Snapshot | null>(null);
 
-  function removeWord(
-    category: "spelling" | "vocabulary",
-    word: string
-  ): void {
-    const setter = category === "spelling" ? setSpelling : setVocabulary;
-    setter((prev) => prev.filter((entry) => entry.word !== word));
+  const captureSnapshot = useCallback((): Snapshot => {
+    snapshotRef.current = { spelling, vocabulary };
+    return snapshotRef.current;
+  }, [spelling, vocabulary]);
+
+  const restoreSnapshot = useCallback((): void => {
+    const snapshot = snapshotRef.current;
+    if (!snapshot) return;
+    setSpelling(snapshot.spelling);
+    setVocabulary(snapshot.vocabulary);
+    snapshotRef.current = null;
+  }, []);
+
+  function removeWord(category: Column, word: string): void {
+    captureSnapshot();
+    if (category === "spelling") {
+      setSpelling((prev) => prev.filter((entry) => entry.word !== word));
+    } else {
+      setVocabulary((prev) => prev.filter((entry) => entry.word !== word));
+    }
+
+    void patchWord(exerciseId, { word, action: "delete" })
+      .then(() => {
+        toast.info(`Слово «${word}» прибрано`, {
+          action: {
+            label: "Скасувати",
+            onClick: () => {
+              void patchWord(exerciseId, { word, action: "restore" })
+                .then(() => {
+                  const snapshot = snapshotRef.current;
+                  if (snapshot) {
+                    setSpelling(snapshot.spelling);
+                    setVocabulary(snapshot.vocabulary);
+                    snapshotRef.current = null;
+                  }
+                  toast.success(`Слово «${word}» повернено`);
+                })
+                .catch(() => {
+                  toast.error("Не вдалося повернути слово. Спробуйте ще раз.");
+                });
+            },
+          },
+        });
+      })
+      .catch(() => {
+        restoreSnapshot();
+        toast.error("Не вдалося видалити слово. Спробуйте ще раз.");
+      });
+  }
+
+  function moveWord(from: Column, word: string): void {
+    const source = from === "spelling" ? spelling : vocabulary;
+    const entry = source.find((item) => item.word === word);
+    if (!entry) return;
+
+    const to: Column = from === "spelling" ? "vocabulary" : "spelling";
+    captureSnapshot();
+
+    if (from === "spelling") {
+      setSpelling((prev) => prev.filter((item) => item.word !== word));
+      setVocabulary((prev) => [...prev, entry]);
+    } else {
+      setVocabulary((prev) => prev.filter((item) => item.word !== word));
+      setSpelling((prev) => [...prev, entry]);
+    }
+
+    void patchWord(exerciseId, { word, action: "move", to }).catch(() => {
+      restoreSnapshot();
+      toast.error("Не вдалося перенести слово. Спробуйте ще раз.");
+    });
   }
 
   async function handleSave(): Promise<void> {
@@ -113,6 +204,8 @@ export function VocabularyHub({
             icon={<PenLine className="h-4 w-4" />}
             items={spelling}
             onRemove={(word) => removeWord("spelling", word)}
+            onMove={(word) => moveWord("spelling", word)}
+            moveLabel="Перенести в Vocabulary"
           />
         </TabsContent>
         <TabsContent value="vocabulary">
@@ -121,6 +214,8 @@ export function VocabularyHub({
             icon={<BookOpen className="h-4 w-4" />}
             items={vocabulary}
             onRemove={(word) => removeWord("vocabulary", word)}
+            onMove={(word) => moveWord("vocabulary", word)}
+            moveLabel="Перенести в Spelling"
           />
         </TabsContent>
       </Tabs>
@@ -132,12 +227,16 @@ export function VocabularyHub({
           icon={<PenLine className="h-4 w-4" />}
           items={spelling}
           onRemove={(word) => removeWord("spelling", word)}
+          onMove={(word) => moveWord("spelling", word)}
+          moveLabel="Перенести в Vocabulary"
         />
         <WordColumn
           title="Vocabulary"
           icon={<BookOpen className="h-4 w-4" />}
           items={vocabulary}
           onRemove={(word) => removeWord("vocabulary", word)}
+          onMove={(word) => moveWord("vocabulary", word)}
+          moveLabel="Перенести в Spelling"
         />
       </div>
 
@@ -170,11 +269,15 @@ function WordColumn({
   icon,
   items,
   onRemove,
+  onMove,
+  moveLabel,
 }: {
   title: string;
   icon: ReactNode;
   items: WordEntry[];
   onRemove: (word: string) => void;
+  onMove: (word: string) => void;
+  moveLabel: string;
 }) {
   return (
     <section className="rounded-lg border border-border bg-card/60 p-4">
@@ -204,17 +307,31 @@ function WordColumn({
                   </span>
                 ) : null}
               </span>
-              <button
-                type="button"
-                aria-label={`Delete ${entry.word}`}
-                onClick={() => onRemove(entry.word)}
-                className={cn(
-                  "rounded-md p-1.5 text-muted-foreground transition-colors",
-                  "hover:bg-destructive/10 hover:text-destructive"
-                )}
-              >
-                <Trash2 className="h-4 w-4" />
-              </button>
+              <div className="flex shrink-0 items-center gap-1">
+                <button
+                  type="button"
+                  aria-label={`${moveLabel}: ${entry.word}`}
+                  title={moveLabel}
+                  onClick={() => onMove(entry.word)}
+                  className={cn(
+                    "rounded-md p-1.5 text-muted-foreground transition-colors",
+                    "hover:bg-accent/60 hover:text-foreground"
+                  )}
+                >
+                  <ArrowLeftRight className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  aria-label={`Delete ${entry.word}`}
+                  onClick={() => onRemove(entry.word)}
+                  className={cn(
+                    "rounded-md p-1.5 text-muted-foreground transition-colors",
+                    "hover:bg-destructive/10 hover:text-destructive"
+                  )}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
             </li>
           ))}
         </ul>

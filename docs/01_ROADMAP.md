@@ -92,6 +92,7 @@
 - [x] 31.1 — Fix AI Evaluator Prompt (Accept Synonyms) // (якщо ти її робила окремо)
 - [x] 31.2 — Fix AI Evaluator, UI Glitches & Generation Cache
 - [x] 31.3 — Refine Evaluator Logic (Spelling/Vocabulary & UA Leniency)
+- [x] 31.4 — Deterministic Review Parsing & Gap Vocabulary
 - [х] 32 — Double score logic (об'єднано з задачею 31 на бекенді)
 - [x] 32.1 — PDF Mode Workflow & UI (/exercise/pdf → /pdf-check → оцінка)
 - [x] 33 — Results UI (Відображення оцінок та розбору помилок)
@@ -103,7 +104,7 @@
 - [x] 35 — Recommendations (Рекомендації)
 - [ ] 36 — Curated materials DB (База матеріалів)
 - [x] 37 — Vocabulary Review & Training Hub (Spelling/Vocabulary + Save to Training)
-- [ ] 37.5 — Flashcards (Quizlet-style UI)
+- [x] 37.5 — Flashcards (Quizlet-style UI)
 - [ ] 37.6 — Spelling exercise (вивчення написання слів)
 - [x] 38 — Exercises History (сторінка /exercises, таби, фільтр, пагінація)
 

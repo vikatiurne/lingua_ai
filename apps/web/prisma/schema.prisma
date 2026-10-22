@@ -186,6 +186,7 @@ model UserError {
   translation String?
 
   isSavedToTraining Boolean @default(false)
+  isDeleted         Boolean @default(false)
 
   // Error recycling tracking
   timesRecycled Int                   @default(0)

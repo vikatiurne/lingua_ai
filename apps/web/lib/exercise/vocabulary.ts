@@ -12,7 +12,14 @@ export type ExerciseVocabulary = {
 };
 
 type StoredSentence = {
-  vocabularyToAdd?: VocabularyWord;
+  vocabularyToAdd?: VocabularyWord | VocabularyWord[];
+};
+
+type ErrorRow = {
+  category: string | null;
+  word: string | null;
+  translation: string | null;
+  isDeleted: boolean;
 };
 
 export async function getExerciseVocabulary(
@@ -24,32 +31,67 @@ export async function getExerciseVocabulary(
     include: {
       errors: {
         where: { word: { not: null } },
-        select: { category: true, word: true, translation: true },
+        select: {
+          category: true,
+          word: true,
+          translation: true,
+          isDeleted: true,
+        },
       },
     },
   });
 
   if (!exercise) return null;
 
-  const spelling = exercise.errors
-    .filter((e) => e.category === ERROR_CATEGORY.SPELLING && e.word)
-    .map((e) => ({ word: e.word as string, translation: e.translation ?? "" }));
+  const errorRows = exercise.errors.filter((row) => row.word);
+  const knownWords = new Set(
+    errorRows.map((row) => (row.word as string).trim().toLowerCase())
+  );
 
-  const fromErrors = exercise.errors
-    .filter((e) => e.category === ERROR_CATEGORY.VOCABULARY && e.word)
-    .map((e) => ({ word: e.word as string, translation: e.translation ?? "" }));
+  const spelling: VocabularyWord[] = [];
+  const vocabulary: VocabularyWord[] = [];
+  const spellingWords = new Set<string>();
 
+  for (const row of errorRows) {
+    if (row.isDeleted) continue;
+    const entry: VocabularyWord = {
+      word: row.word as string,
+      translation: row.translation ?? "",
+    };
+    if (row.category === ERROR_CATEGORY.SPELLING) {
+      spellingWords.add(entry.word.trim().toLowerCase());
+      spelling.push(entry);
+    } else {
+      // Default bucket for vocabulary / null / unknown categories.
+      vocabulary.push(entry);
+    }
+  }
+
+  // A word already filed as a spelling mistake must not also appear
+  // under vocabulary, even if some rows carry a different category.
+  const vocabularyFiltered = vocabulary.filter(
+    (entry) => !spellingWords.has(entry.word.trim().toLowerCase())
+  );
+
+  // Words from the sentence JSON snapshot that were never written to
+  // user_errors (e.g. older exercises) go to the vocabulary column.
   const sentences = Array.isArray(exercise.sentences)
     ? (exercise.sentences as StoredSentence[])
     : [];
-
-  const fromSentences = sentences
-    .filter((s) => s?.vocabularyToAdd?.word)
-    .map((s) => s.vocabularyToAdd as VocabularyWord);
+  const fromSentences = sentences.flatMap((s) => {
+    const value = s?.vocabularyToAdd;
+    if (!value) return [];
+    const list = Array.isArray(value) ? value : [value];
+    return list.filter(
+      (entry) =>
+        entry?.word &&
+        !knownWords.has(entry.word.trim().toLowerCase())
+    );
+  });
 
   return {
     spelling: dedupeWords(spelling),
-    vocabulary: dedupeWords([...fromErrors, ...fromSentences]),
+    vocabulary: dedupeWords([...vocabularyFiltered, ...fromSentences]),
   };
 }
 
