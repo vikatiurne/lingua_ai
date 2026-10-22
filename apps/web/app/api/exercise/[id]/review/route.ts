@@ -54,8 +54,36 @@ export async function POST(
     reference: sentence.reference,
   }));
 
+  // A topic has exactly one review exercise: the existing one is overwritten
+  // with the current mistakes instead of creating a new record, otherwise every
+  // click would add another row to the history.
+  const existingReview = await prisma.exercise.findFirst({
+    where: {
+      userId: user.id,
+      isReview: true,
+      level: exercise.level,
+      topicName: exercise.topicName,
+      subtopicName: exercise.subtopicName,
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
   try {
-    const newExercise = await prisma.exercise.create({
+    if (existingReview) {
+      const updated = await prisma.exercise.update({
+        where: { id: existingReview.id },
+        data: {
+          sentences: reviewSentences,
+          status: "in_progress",
+          topicScore: null,
+          grammarScore: null,
+          completedAt: null,
+        },
+      });
+      return Response.json({ newId: updated.id });
+    }
+
+    const created = await prisma.exercise.create({
       data: {
         userId: user.id,
         level: exercise.level,
@@ -64,9 +92,10 @@ export async function POST(
         templateIds: exercise.templateIds,
         sentences: reviewSentences,
         status: "in_progress",
+        isReview: true,
       },
     });
-    return Response.json({ newId: newExercise.id });
+    return Response.json({ newId: created.id });
   } catch {
     return Response.json(
       { error: "Failed to create review exercise" },

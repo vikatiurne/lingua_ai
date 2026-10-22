@@ -14,7 +14,8 @@
     "seed": "pnpm --filter @lingua/scripts seed",
     "generate:rules": "tsx scripts/generate-rules.ts",
     "translate:rules": "tsx scripts/translate-rules.ts",
-    "fix:formulas": "tsx scripts/fix-formulas.ts"
+    "fix:formulas": "tsx scripts/fix-formulas.ts",
+    "cleanup:reviews": "tsx --env-file=apps/web/.env apps/web/scripts/cleanup-review-duplicates.ts"
   },
   "devDependencies": {
     "turbo": "^2.0.0",
