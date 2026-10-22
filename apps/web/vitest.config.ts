@@ -11,6 +11,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@lingua/shared": resolve(__dirname, "../../packages/shared/src/index.ts"),
+      "@": resolve(__dirname, "."),
     },
     conditions: ["node", "import", "module"],
   },

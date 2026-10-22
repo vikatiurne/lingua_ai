@@ -54,6 +54,11 @@ enum ErrorRecyclingStatus {
   archived_stuck
 }
 
+enum VocabularyStatus {
+  learning
+  learned
+}
+
 // ==================
 // Models
 // ==================
@@ -188,6 +193,9 @@ model UserError {
   isSavedToTraining Boolean @default(false)
   isDeleted         Boolean @default(false)
 
+  // Vocabulary learning state (unlearned / learned groups in the dashboard)
+  learningStatus VocabularyStatus @default(learning)
+
   // Error recycling tracking
   timesRecycled Int                   @default(0)
   successCount  Int                   @default(0)
@@ -200,6 +208,7 @@ model UserError {
 
   @@index([userId, type])
   @@index([userId, status])
+  @@index([userId, learningStatus])
   @@index([exerciseId])
   @@map("user_errors")
 }

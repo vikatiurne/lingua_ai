@@ -13,7 +13,7 @@ export const NAV_ITEMS = [
   { href: "/plan", label: "Plan", icon: Map },
   { href: "/library", label: "Бібліотека", icon: BookOpen },
   { href: "/exercises", label: "Exercises", icon: Dumbbell },
-  { href: "/flashcards", label: "Flashcards", icon: Layers },
+  { href: "/vocabulary", label: "Vocabulary", icon: Layers },
   { href: "/progress", label: "Progress", icon: BarChart3 },
   { href: "/calendar", label: "Calendar", icon: CalendarDays },
 ] as const;

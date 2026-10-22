@@ -9,6 +9,7 @@ export * from "./enums/progress-status";
 export * from "./enums/slot-level";
 export * from "./enums/material-type";
 export * from "./enums/locale";
+export * from "./enums/vocabulary-status";
 
 // Types
 export * from "./types/slot";
