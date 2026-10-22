@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, PartyPopper, Volume2 } from "lucide-react";
 
@@ -10,17 +10,27 @@ import type { VocabularyWord } from "@/lib/exercise/vocabulary";
 
 type FlashcardSessionProps = {
   words: VocabularyWord[];
+  onComplete?: () => void;
 };
 
-export function FlashcardSession({ words }: FlashcardSessionProps) {
+export function FlashcardSession({ words, onComplete }: FlashcardSessionProps) {
   const [queue, setQueue] = useState<VocabularyWord[]>(words);
   const [isFlipped, setIsFlipped] = useState(false);
+  const isCompletedRef = useRef(false);
 
   const current = queue[0];
   const remaining = queue.length;
   const total = words.length;
   const learned = total - remaining;
   const progressPercent = total === 0 ? 0 : Math.round((learned / total) * 100);
+
+  useEffect(() => {
+    if (total === 0 || remaining > 0) return;
+    if (isCompletedRef.current) return;
+
+    isCompletedRef.current = true;
+    onComplete?.();
+  }, [onComplete, remaining, total]);
 
   function handleFlip() {
     setIsFlipped((flipped) => !flipped);
@@ -52,7 +62,7 @@ export function FlashcardSession({ words }: FlashcardSessionProps) {
       <div className="flex flex-col items-center gap-4 rounded-xl border border-success/40 bg-success/10 px-4 py-12 text-center">
         <PartyPopper className="h-8 w-8 text-success" />
         <p className="font-display text-xl font-semibold">
-          Вітаємо! Ви вивчили всі слова на сьогодні
+          Вітаємо! Ви вивчили всі слова
         </p>
         <Button asChild>
           <Link href="/plan">
