@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Info, Play } from "lucide-react";
+import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 
+import { ExerciseModeMenu } from "@/components/exercise/exercise-mode-menu";
 import {
   Tooltip,
   TooltipContent,
@@ -122,12 +123,7 @@ function ExerciseCard({
             <Info className="h-4 w-4" />
           </IconLinkButton>
         ) : (
-          <IconLinkButton
-            href={`/exercise/${exercise.id}?from=history`}
-            label="Продовжити"
-          >
-            <Play className="h-4 w-4" />
-          </IconLinkButton>
+          <ExerciseModeMenu exerciseId={exercise.id} />
         )}
       </CardHeader>
       {isEvaluated ? (

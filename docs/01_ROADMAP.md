@@ -107,6 +107,7 @@
 - [x] 37.5 — Flashcards (Quizlet-style UI)
 - [ ] 37.6 — Spelling exercise (вивчення написання слів)
 - [x] 38 — Exercises History (сторінка /exercises, таби, фільтр, пагінація)
+- [x] 38.1 — Exercise History: PDF Mode Option (dropdown «Виконати в додатку» / «Роздрукувати PDF»)
 
 ## E10 — Calendar
 
