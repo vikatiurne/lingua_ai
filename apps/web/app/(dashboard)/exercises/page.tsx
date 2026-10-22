@@ -20,6 +20,7 @@ export default async function ExercisesPage() {
       topicName: true,
       subtopicName: true,
       status: true,
+      isReview: true,
       topicScore: true,
       grammarScore: true,
       createdAt: true,
@@ -32,7 +33,7 @@ export default async function ExercisesPage() {
   }));
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-2">
       <div className="space-y-1">
         <h1 className="font-display text-2xl font-semibold tracking-tight">
           Мої вправи

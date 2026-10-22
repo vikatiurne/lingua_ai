@@ -37,7 +37,8 @@ const config: Config = {
   			},
   			popover: {
   				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
+  				foreground: 'hsl(var(--popover-foreground))',
+  				border: 'hsl(var(--popover-border))'
   			},
   			primary: {
   				DEFAULT: 'hsl(var(--primary))',
