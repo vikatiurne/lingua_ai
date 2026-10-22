@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { AlertTriangle, Loader2 } from "lucide-react";
 
 import {
   ExerciseForm,
@@ -22,10 +22,11 @@ const COUNT_MAX = 20;
 const COUNT_DEFAULT = 5;
 
 const LOADING_STEPS = [
-  { afterMs: 0, text: "Аналізуємо ваші помилки..." },
-  { afterMs: 3000, text: "Підбираємо граматичні шаблони..." },
-  { afterMs: 6000, text: "Генеруємо унікальні речення..." },
-  { afterMs: 12000, text: "Перевіряємо переклад..." },
+  { afterMs: 0, text: "Аналізуємо тему..." },
+  { afterMs: 2000, text: "Генеруємо речення..." },
+  { afterMs: 4000, text: "Перевіряємо граматику..." },
+  { afterMs: 6000, text: "Звіряємо переклади..." },
+  { afterMs: 8000, text: "Майже готово..." },
 ] as const;
 
 function parseCount(value: string | null): number {
@@ -145,7 +146,22 @@ function ExerciseAppContent() {
       ) : null}
 
       {data ? (
-        <ExerciseForm exerciseId={data.exerciseId} sentences={data.sentences} />
+        <div className="space-y-6">
+          {data.isFallback ? (
+            <div className="flex items-start gap-2 rounded-xl border border-accent bg-accent/40 p-4 text-sm">
+              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+              <p>
+                AI тимчасово недоступний — показано приклади з шаблону.
+                Кількість і напрямки речень можуть відрізнятися від обраних
+                налаштувань.
+              </p>
+            </div>
+          ) : null}
+          <ExerciseForm
+            exerciseId={data.exerciseId}
+            sentences={data.sentences}
+          />
+        </div>
       ) : null}
     </div>
   );

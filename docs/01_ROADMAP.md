@@ -123,7 +123,9 @@
 - [ ] 43.4 — Stuck errors banner + special task CTA
 - [ ] 44 — Level transition logic
 - [ ] 45 — i18n (uk/en)
+- [ ] 45.1 — Onboarding & Tooltips
 - [ ] 46 — E2E tests (Playwright)
+
 
 ## E12 — Deploy
 

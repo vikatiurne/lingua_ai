@@ -5,17 +5,19 @@ import { completeCached } from "@/lib/ai/cached";
 import type { AIMessage } from "@/lib/ai/types";
 import { logAIRequest } from "@/lib/ai/logger";
 import { getPrompt } from "@/lib/ai/prompts/generate-exercise";
+import { normalizeAnswerText } from "@/lib/exercise/answer-match";
 import { loadTemplateFile } from "@/lib/slots/loader";
 
 const MAX_SENTENCES = 20;
 const MAX_PAST_ERRORS = 5;
 const FALLBACK_EXAMPLE_LIMIT = 6;
-const AI_TIMEOUT_MS = 8000;
+const AI_TIMEOUT_MS = 20000;
 
 const aiSentenceSchema = z.object({
   source: z.string().min(1),
   direction: z.enum(["uk_en", "en_uk"]),
   reference: z.string().min(1),
+  acceptedVariants: z.array(z.string().min(1)).max(4).optional(),
 });
 
 const aiResponseSchema = z.object({
@@ -60,14 +62,23 @@ export async function generateExercises(
     pastErrors,
   });
 
-  const fallbackSentences = buildFallbackSentences(template.examples);
+  const fallbackSentences = buildFallbackSentences(
+    template.examples,
+    params.ukEnCount,
+    params.enUkCount
+  );
+
+  const total = params.ukEnCount + params.enUkCount;
+
+  const parseAndValidate = (text: string) => {
+    const result = parseAIResponse(text);
+    validateDistribution(result, params.ukEnCount, params.enUkCount);
+    return result;
+  };
 
   let raw: string;
   try {
-    raw = await callAI(
-      [{ role: "user", content: prompt }],
-      params.ukEnCount + params.enUkCount
-    );
+    raw = await callAI([{ role: "user", content: prompt }], total);
   } catch (error) {
     logGenerationError("initial request failed", error);
     return {
@@ -79,24 +90,33 @@ export async function generateExercises(
 
   let parsed: z.infer<typeof aiResponseSchema>;
   try {
-    parsed = parseAIResponse(raw);
+    parsed = parseAndValidate(raw);
   } catch (error) {
-    logGenerationError("invalid JSON from AI, attempting self-correction", error);
+    logGenerationError("invalid AI response, attempting self-correction", error);
     try {
-      const corrected = await callSelfCorrection(
-        prompt,
-        raw,
-        error,
-        params.ukEnCount + params.enUkCount
-      );
-      parsed = parseAIResponse(corrected);
+      const corrected = await callSelfCorrection(prompt, raw, error, total);
+      parsed = parseAndValidate(corrected);
     } catch (correctionError) {
-      logGenerationError("self-correction failed, falling back to examples", correctionError);
-      return {
-        sentences: fallbackSentences,
-        templateIds: template.templateIds,
-        isFallback: true,
-      };
+      logGenerationError(
+        "self-correction failed, retrying generation once",
+        correctionError
+      );
+      try {
+        const retried = await callAI([{ role: "user", content: prompt }], total, {
+          bypassCache: true,
+        });
+        parsed = parseAndValidate(retried);
+      } catch (retryError) {
+        logGenerationError(
+          "retry failed, falling back to template examples",
+          retryError
+        );
+        return {
+          sentences: fallbackSentences,
+          templateIds: template.templateIds,
+          isFallback: true,
+        };
+      }
     }
   }
 
@@ -113,7 +133,30 @@ function withIds(
   return sentences.map((sentence) => ({
     id: crypto.randomUUID(),
     ...sentence,
+    acceptedVariants: normalizeVariants(
+      sentence.reference,
+      sentence.acceptedVariants
+    ),
   }));
+}
+
+// Keep at most 3 alternatives that differ from the reference, so a valid
+// synonym can never be flagged as a mistake during evaluation.
+function normalizeVariants(
+  reference: string,
+  variants: string[] | undefined
+): string[] {
+  const seen = new Set([normalizeAnswerText(reference)]);
+  const result: string[] = [];
+  for (const variant of variants ?? []) {
+    const trimmed = variant.trim();
+    const key = normalizeAnswerText(trimmed);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    result.push(trimmed);
+    if (result.length >= 3) break;
+  }
+  return result;
 }
 
 type ResolvedTemplate = {
@@ -149,24 +192,67 @@ async function resolveTemplate(
   };
 }
 
-function buildFallbackSentences(examples: string[]): GeneratedSentence[] {
-  return examples.slice(0, MAX_SENTENCES).map((source) => ({
-    id: crypto.randomUUID(),
-    source,
-    direction: "en_uk",
-    reference: "",
-  }));
+function validateDistribution(
+  parsed: z.infer<typeof aiResponseSchema>,
+  ukEnCount: number,
+  enUkCount: number
+): void {
+  const total = ukEnCount + enUkCount;
+  if (parsed.sentences.length !== total) {
+    throw new Error(
+      `Expected exactly ${total} sentences, got ${parsed.sentences.length}`
+    );
+  }
+  const actualUkEn = parsed.sentences.filter(
+    (sentence) => sentence.direction === "uk_en"
+  ).length;
+  const actualEnUk = parsed.sentences.length - actualUkEn;
+  if (actualUkEn !== ukEnCount || actualEnUk !== enUkCount) {
+    throw new Error(
+      `Expected ${ukEnCount} uk_en and ${enUkCount} en_uk sentences, ` +
+        `got ${actualUkEn} uk_en and ${actualEnUk} en_uk`
+    );
+  }
+}
+
+function buildFallbackSentences(
+  examples: string[],
+  ukEnCount: number,
+  enUkCount: number
+): GeneratedSentence[] {
+  if (examples.length === 0) return [];
+  const pick = (index: number) => examples[index % examples.length] ?? "";
+  const sentences: GeneratedSentence[] = [];
+  for (let i = 0; i < ukEnCount; i++) {
+    sentences.push({
+      id: crypto.randomUUID(),
+      source: pick(i),
+      direction: "uk_en",
+      reference: "",
+    });
+  }
+  for (let i = 0; i < enUkCount; i++) {
+    sentences.push({
+      id: crypto.randomUUID(),
+      source: pick(ukEnCount + i),
+      direction: "en_uk",
+      reference: "",
+    });
+  }
+  return sentences;
 }
 
 async function callAI(
   messages: AIMessage[],
-  sentenceCount: number
+  sentenceCount: number,
+  options?: { bypassCache?: boolean }
 ): Promise<string> {
   const result = await completeCached(messages, {
     responseFormat: "json",
     temperature: 0.7,
     timeoutMs: AI_TIMEOUT_MS,
     sentenceCount,
+    ...(options?.bypassCache ? { cacheTtlSeconds: 0 } : {}),
   });
   return result.text;
 }
@@ -185,11 +271,13 @@ async function callSelfCorrection(
       {
         role: "user",
         content:
-          `Your previous response was invalid JSON. Error: ${message}. ` +
-          "Return ONLY valid JSON in the requested format.",
+          `Your previous response was invalid. Error: ${message}. ` +
+          "Return ONLY valid JSON in the requested format, with EXACTLY the " +
+          "requested number of sentences and the requested direction for each.",
       },
     ],
-    sentenceCount
+    sentenceCount,
+    { bypassCache: true }
   );
 }
 
