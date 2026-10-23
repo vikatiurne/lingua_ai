@@ -6,6 +6,7 @@ import type { AIMessage } from "@/lib/ai/types";
 import { logAIRequest } from "@/lib/ai/logger";
 import { getPrompt } from "@/lib/ai/prompts/generate-exercise";
 import { normalizeAnswerText } from "@/lib/exercise/answer-match";
+import { buildFallbackSentences } from "@/lib/exercise/fallback";
 import { loadTemplateFile } from "@/lib/slots/loader";
 
 const MAX_SENTENCES = 20;
@@ -62,13 +63,9 @@ export async function generateExercises(
     pastErrors,
   });
 
-  const fallbackSentences = buildFallbackSentences(
-    template.examples,
-    params.ukEnCount,
-    params.enUkCount
-  );
-
   const total = params.ukEnCount + params.enUkCount;
+
+  const fallbackSentences = buildFallbackSentences(template.examples, total);
 
   const parseAndValidate = (text: string) => {
     const result = parseAIResponse(text);
@@ -213,33 +210,6 @@ function validateDistribution(
         `got ${actualUkEn} uk_en and ${actualEnUk} en_uk`
     );
   }
-}
-
-function buildFallbackSentences(
-  examples: string[],
-  ukEnCount: number,
-  enUkCount: number
-): GeneratedSentence[] {
-  if (examples.length === 0) return [];
-  const pick = (index: number) => examples[index % examples.length] ?? "";
-  const sentences: GeneratedSentence[] = [];
-  for (let i = 0; i < ukEnCount; i++) {
-    sentences.push({
-      id: crypto.randomUUID(),
-      source: pick(i),
-      direction: "uk_en",
-      reference: "",
-    });
-  }
-  for (let i = 0; i < enUkCount; i++) {
-    sentences.push({
-      id: crypto.randomUUID(),
-      source: pick(ukEnCount + i),
-      direction: "en_uk",
-      reference: "",
-    });
-  }
-  return sentences;
 }
 
 async function callAI(

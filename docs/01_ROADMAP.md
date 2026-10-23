@@ -66,6 +66,7 @@
 - [x] 20.1 — Split progress tables (chore)
 - [x] 20.2 — Fix level filtering in gap map and TestResult
 - [x] 20.3 — Dashboard show all gap topics
+- [x] 20.4 — Fix Level Test UX & Persistence (drafts + retry + timeouts)
 
 ## E6 — Plan
 
@@ -93,6 +94,7 @@
 - [x] 31.2 — Fix AI Evaluator, UI Glitches & Generation Cache
 - [x] 31.3 — Refine Evaluator Logic (Spelling/Vocabulary & UA Leniency)
 - [x] 31.4 — Deterministic Review Parsing & Gap Vocabulary
+- [x] 31.5 — Fallback Exercise Resilience (reference marker, draft persistence, 400/503)
 - [х] 32 — Double score logic (об'єднано з задачею 31 на бекенді)
 - [x] 32.1 — PDF Mode Workflow & UI (/exercise/pdf → /pdf-check → оцінка)
 - [x] 33 — Results UI (Відображення оцінок та розбору помилок)

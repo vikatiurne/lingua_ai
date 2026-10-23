@@ -32,6 +32,14 @@ import {
   isTopicDuplicate,
 } from "@/lib/exercise/corrections";
 import { diffAnswer, tokenize } from "@/lib/exercise/diff";
+import { isFallbackReference } from "@/lib/exercise/fallback";
+import {
+  INVALID_EXERCISE_MESSAGE,
+  UNANSWERED_EXERCISE_MESSAGE,
+  hasUnansweredSentences,
+  parseStoredSentences,
+  type StoredSentence,
+} from "@/lib/exercise/stored-sentences";
 import {
   collectGapCandidates,
   collectMissingCandidates,
@@ -171,18 +179,12 @@ export type EvaluationResult = {
   evaluatedSentences: EvaluatedSentence[];
 };
 
-type StoredSentence = {
-  id: string;
-  source: string;
-  direction: "uk_en" | "en_uk";
-  reference: string;
-  acceptedVariants?: string[];
-  userAnswer?: string;
-  isCorrect?: boolean;
-  errorType?: string;
-  explanation?: string;
-  vocabularyToAdd?: { word: string; translation: string }[];
-};
+export class ExerciseValidationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ExerciseValidationError";
+  }
+}
 
 type ParsedResponse = z.infer<typeof evaluationResponseSchema>;
 type ParsedSentence = z.infer<typeof evaluatedSentenceSchema>;
@@ -231,6 +233,16 @@ type UserErrorRow = {
   translation: string | null;
 };
 
+function normalizeLegacyDirection(sentence: StoredSentence): StoredSentence {
+  if (sentence.direction !== "uk_en" || normalizeText(sentence.reference)) {
+    return sentence;
+  }
+  if (hasCyrillic(sentence.source)) {
+    return sentence;
+  }
+  return { ...sentence, direction: "en_uk" };
+}
+
 export async function evaluateExercise(exerciseId: string): Promise<EvaluationResult> {
   const exercise = await prisma.exercise.findUnique({
     where: { id: exerciseId },
@@ -239,10 +251,23 @@ export async function evaluateExercise(exerciseId: string): Promise<EvaluationRe
     throw new Error("Exercise not found");
   }
 
-  const sentences = exercise.sentences as StoredSentence[];
-  if (sentences.length === 0) {
-    throw new Error("Exercise has no sentences");
+  const parsedSentences = parseStoredSentences(exercise.sentences);
+  if (!parsedSentences) {
+    throw new ExerciseValidationError(INVALID_EXERCISE_MESSAGE);
   }
+  if (hasUnansweredSentences(parsedSentences)) {
+    throw new ExerciseValidationError(UNANSWERED_EXERCISE_MESSAGE);
+  }
+
+  const storedSentences = parsedSentences.map(normalizeLegacyDirection);
+  const referenceById = new Map(
+    storedSentences.map((sentence) => [sentence.id, sentence.reference])
+  );
+  const sentences = storedSentences.map((sentence) =>
+    isFallbackReference(sentence.reference)
+      ? { ...sentence, reference: "" }
+      : sentence
+  );
 
   const rule = exercise.subtopicName
     ? await loadRule(exercise.level, exercise.topicName, exercise.subtopicName)
@@ -256,7 +281,9 @@ export async function evaluateExercise(exerciseId: string): Promise<EvaluationRe
       id: sentence.id,
       source: sentence.source,
       direction: sentence.direction,
-      reference: normalizeText(sentence.reference),
+      reference: isFallbackReference(sentence.reference)
+        ? ""
+        : normalizeText(sentence.reference),
       acceptedVariants: (sentence.acceptedVariants ?? []).map((variant) =>
         normalizeText(variant)
       ),
@@ -377,6 +404,7 @@ export async function evaluateExercise(exerciseId: string): Promise<EvaluationRe
     const evaluation = evaluatedById.get(sentence.id)!;
     return {
       ...sentence,
+      reference: referenceById.get(sentence.id) ?? sentence.reference,
       userAnswer: normalizeAnswer(sentence.userAnswer),
       isCorrect: evaluation.isCorrect,
       errorType: evaluation.errorType,
@@ -435,15 +463,18 @@ function normalizeEvaluation(
   // Only a truly empty answer ("..." / "не знаю") is skipped. A partial
   // answer with "..." must still be evaluated for what the student wrote.
   const skipped = isSkippedAnswer(sentence.userAnswer);
+  const reference = isFallbackReference(sentence.reference)
+    ? ""
+    : sentence.reference;
   const englishSide = normalizeText(
-    sentence.direction === "uk_en" ? sentence.reference : sentence.source
+    sentence.direction === "uk_en" ? reference : sentence.source
   );
 
   // A wording that exactly matches the reference or any accepted variant is
   // correct by definition — no AI judgment can turn it into an error.
   if (
     matchesAcceptedAnswer(sentence.userAnswer, [
-      sentence.reference,
+      reference,
       ...(sentence.acceptedVariants ?? []),
     ])
   ) {
@@ -506,7 +537,7 @@ function normalizeEvaluation(
 
   const answerDiff =
     sentence.direction === "uk_en" && aiReportedProblems && !skipped
-      ? diffAnswer(sentence.reference, sentence.userAnswer ?? "")
+      ? diffAnswer(reference, sentence.userAnswer ?? "")
       : null;
 
   const rawVocabulary: {
@@ -726,7 +757,7 @@ function normalizeEvaluation(
       })),
   ].filter((entry) => entry.word.length > 0);
 
-  const explanation = structured
+  let explanation = structured
     ? buildExplanation(
         {
           topicMastered,
@@ -741,6 +772,9 @@ function normalizeEvaluation(
         sentence.direction
       )
     : (raw.explanation ?? "").trim();
+  if (!explanation) {
+    explanation = "Оцінено без AI";
+  }
 
   return {
     id: raw.id,

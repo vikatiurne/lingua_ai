@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CheckCircle2, ChevronDown, Lightbulb, XCircle } from "lucide-react";
 import { normalizeAnswerText } from "@/lib/exercise/answer-match";
+import { isFallbackReference } from "@/lib/exercise/fallback";
 import { cn } from "@/lib/utils";
 
 export type VocabularyWord = {
@@ -43,14 +44,19 @@ export function SentenceReviewCard({
   const [isExpanded, setIsExpanded] = useState(false);
   const isCorrect = sentence.isCorrect;
   const vocabWords = toVocabularyWords(sentence.vocabularyToAdd);
+  const reference = sentence.reference?.trim() ? sentence.reference : "";
+  const fallbackReference = isFallbackReference(reference);
+  const hasReference = reference.length > 0 && !fallbackReference;
+  const explanation = sentence.explanation?.trim() ? sentence.explanation : "";
   const canExpand =
-    !isCorrect && Boolean(sentence.explanation || vocabWords.length > 0);
+    !isCorrect && Boolean(explanation || vocabWords.length > 0);
 
   // Punctuation, case and spacing are not a different translation: only real
   // wording differences deserve the "acceptable variant" note.
   const differsFromReference =
+    hasReference &&
     normalizeAnswerText(sentence.userAnswer ?? "") !==
-    normalizeAnswerText(sentence.reference);
+      normalizeAnswerText(reference);
 
   return (
     <div
@@ -93,13 +99,16 @@ export function SentenceReviewCard({
                   </span>
                 ) : null}
                 <p className="text-sm text-muted-foreground/90">
-                  {sentence.userAnswer || sentence.reference}
+                  {sentence.userAnswer || (hasReference ? reference : "")}
                 </p>
               </div>
               {differsFromReference ? (
                 <p className="text-xs text-muted-foreground">
-                  Еталон: {sentence.reference}
+                  Еталон: {reference}
                 </p>
+              ) : null}
+              {fallbackReference ? (
+                <p className="text-xs text-muted-foreground">{reference}</p>
               ) : null}
             </>
           ) : (
@@ -107,10 +116,13 @@ export function SentenceReviewCard({
               <p className="text-sm font-medium text-destructive">
                 Ваша відповідь: {sentence.userAnswer || "..."}
               </p>
-              {sentence.reference ? (
+              {hasReference ? (
                 <p className="text-sm font-semibold text-success">
-                  Правильно: {sentence.reference}
+                  Правильно: {reference}
                 </p>
+              ) : null}
+              {fallbackReference ? (
+                <p className="text-xs text-muted-foreground">{reference}</p>
               ) : null}
             </>
           )}
@@ -128,11 +140,11 @@ export function SentenceReviewCard({
 
       {isExpanded && (
         <div className="space-y-2 px-3 pb-3">
-          {sentence.explanation && (
+          {explanation && (
             <div className="flex items-start gap-2 rounded-md bg-accent/30 p-3">
               <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
               <p className="whitespace-pre-line text-sm leading-relaxed">
-                {sentence.explanation}
+                {explanation}
               </p>
             </div>
           )}
