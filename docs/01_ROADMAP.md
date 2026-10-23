@@ -97,6 +97,8 @@
 - [x] 32.1 — PDF Mode Workflow & UI (/exercise/pdf → /pdf-check → оцінка)
 - [x] 33 — Results UI (Відображення оцінок та розбору помилок)
 - [x] 34 — Review exercise (Робота над помилками - те, що ми щойно зробили)
+- [x] 34.1 — Single review exercise per topic (update instead of create + unique index)
+- [x] 34.2 — Evaluator: tolerate null fields in AI response + retry on invalid JSON
 - [x] 33.4 — Fix Back Button Navigation & Prevent Re-evaluation
 
 ## E9 — Review & Exports
@@ -106,7 +108,7 @@
 - [x] 37 — Vocabulary Review & Training Hub (Spelling/Vocabulary + Save to Training)
 - [x] 37.5 — Flashcards (Quizlet-style UI)
 - [ ] 37.6 — Spelling exercise (вивчення написання слів)
-- [x] 38 — Exercises History (сторінка /exercises, таби, фільтр, пагінація)
+- [x] 38 — Exercises History (сторінка /exercises, фільтр-панель «Стан/Тип/Тема/Дата», пагінація)
 - [x] 38.1 — Exercise History: PDF Mode Option (dropdown «Виконати в додатку» / «Роздрукувати PDF»)
 
 ## E10 — Calendar

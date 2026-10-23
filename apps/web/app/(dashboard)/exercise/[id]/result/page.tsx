@@ -61,6 +61,25 @@ export default async function ExerciseResultPage({
 
   const hasReviewWords = hasVocabulary || reviewableErrorCount > 0;
 
+  // Check if a review already exists for this specific exercise
+  const existingReview = exercise.isReview
+    ? null
+    : await prisma.exercise.findFirst({
+        where: {
+          userId: user.id,
+          isReview: true,
+          parentExerciseId: exercise.id,
+        },
+        orderBy: { createdAt: "desc" },
+      });
+
+  const reviewExists = !!existingReview;
+
+  const existingReviewIsPassed =
+    existingReview?.status === "evaluated" &&
+    (existingReview?.topicScore ?? 0) >= 80 &&
+    (existingReview?.grammarScore ?? 0) >= 80;
+
   const isPassed =
     (exercise.topicScore ?? 0) >= 80 && (exercise.grammarScore ?? 0) >= 80;
 
@@ -77,7 +96,7 @@ export default async function ExerciseResultPage({
       <div className="space-y-1 text-left">
         <div className="flex flex-wrap items-center gap-3">
           <h1 className="text-xl font-semibold tracking-tight">Results</h1>
-          {isPassed ? (
+          {exercise.isReview ? null : isPassed ? (
             <span className="inline-flex items-center gap-1 rounded-full bg-success/10 px-2.5 py-1 text-xs font-medium text-success">
               <CheckCircle2 className="h-3.5 w-3.5" />
               Passed
@@ -98,6 +117,10 @@ export default async function ExerciseResultPage({
       <ResultCard
         exerciseId={exercise.id}
         hasMistakes={hasMistakes}
+        isReview={exercise.isReview}
+        reviewExists={reviewExists}
+        existingReviewId={existingReview?.id}
+        existingReviewPassed={existingReviewIsPassed}
         topicScore={exercise.topicScore}
         grammarScore={exercise.grammarScore}
         reviewWordsHref={

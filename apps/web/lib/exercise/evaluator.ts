@@ -266,7 +266,7 @@ export async function evaluateExercise(exerciseId: string): Promise<EvaluationRe
 
   const raw = await requestEvaluation(prompt);
 
-  let parsed = parseResponse(raw);
+  let parsed = await parseEvaluationResponse(prompt, raw);
   let evaluatedById = buildEvaluatedMap(parsed, sentences);
 
   const missing = sentences.filter((sentence) => !evaluatedById.has(sentence.id));
@@ -1059,11 +1059,51 @@ async function requestEvaluation(prompt: string): Promise<string> {
 function parseResponse(raw: string): ParsedResponse {
   try {
     const json: unknown = JSON.parse(raw);
-    return evaluationResponseSchema.parse(json);
+    return evaluationResponseSchema.parse(stripNullValues(json));
   } catch (error) {
     logEvaluationError("invalid JSON from AI", error);
     throw error;
   }
+}
+
+// A malformed response must not fail the whole evaluation: ask once more and
+// hand the model the exact validation error.
+async function parseEvaluationResponse(
+  prompt: string,
+  raw: string
+): Promise<ParsedResponse> {
+  try {
+    return parseResponse(raw);
+  } catch (error) {
+    logEvaluationError("invalid AI response, retrying", error);
+    const retryRaw = await requestEvaluation(
+      `${prompt}\n\nYour previous response was rejected with this error:\n${
+        error instanceof Error ? error.message : String(error)
+      }\nReturn the full corrected JSON object only.`
+    );
+    return parseResponse(retryRaw);
+  }
+}
+
+// The model sometimes sends `null` for an optional field ("violation": null)
+// or a null element inside an array. Zod rejects both, so nulls are dropped
+// before validation — the fields are optional anyway.
+function stripNullValues(value: unknown): unknown {
+  if (value === null) return undefined;
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => stripNullValues(item))
+      .filter((item) => item !== undefined);
+  }
+  if (value && typeof value === "object") {
+    const result: Record<string, unknown> = {};
+    for (const [key, item] of Object.entries(value as Record<string, unknown>)) {
+      const cleaned = stripNullValues(item);
+      if (cleaned !== undefined) result[key] = cleaned;
+    }
+    return result;
+  }
+  return value;
 }
 
 function buildEvaluatedMap(
@@ -1233,7 +1273,7 @@ async function fillGapVocabulary(
       { role: "user", content: getGapFillPrompt(items) },
     ]);
     const parsed = gapFillSchema.parse(
-      JSON.parse(extractJsonObject(raw)) as unknown
+      stripNullValues(JSON.parse(extractJsonObject(raw))) as unknown
     );
 
     for (const entry of parsed.results) {
@@ -1371,7 +1411,7 @@ async function fillUnfilledGapVocabulary(
       { role: "user", content: getGapWordPrompt(items) },
     ]);
     const parsed = gapWordSchema.parse(
-      JSON.parse(extractJsonObject(raw)) as unknown
+      stripNullValues(JSON.parse(extractJsonObject(raw))) as unknown
     );
 
     for (const entry of parsed.results) {
@@ -1487,14 +1527,16 @@ function parseVerificationResponse(
   raw: string
 ): z.infer<typeof substitutionVerificationSchema> {
   return substitutionVerificationSchema.parse(
-    JSON.parse(extractJsonObject(raw))
+    stripNullValues(JSON.parse(extractJsonObject(raw)))
   );
 }
 
 function parseMissingVerification(
   raw: string
 ): z.infer<typeof missingWordVerificationSchema> {
-  return missingWordVerificationSchema.parse(JSON.parse(extractJsonObject(raw)));
+  return missingWordVerificationSchema.parse(
+    stripNullValues(JSON.parse(extractJsonObject(raw)))
+  );
 }
 
 function extractJsonObject(raw: string): string {

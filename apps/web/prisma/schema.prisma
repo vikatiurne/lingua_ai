@@ -164,13 +164,21 @@ model Exercise {
   grammarScore Float?
 
   status       ExerciseStatus @default(generated)
+  isReview     Boolean        @default(false)
   createdAt    DateTime       @default(now())
   completedAt  DateTime?
 
   errors       UserError[]
 
+  parentExerciseId String?
+  parentExercise Exercise? @relation("ParentExercise", fields: [parentExerciseId], references: [id])
+  reviews Exercise[] @relation("ParentExercise")
+
   @@index([userId, status])
   @@index([userId, level])
+  @@index([userId, topicName, isReview])
+  // Partial unique index "exercises_one_review_per_topic_idx" (one review
+  // exercise per topic) lives in the DB only: Prisma cannot express it.
   @@map("exercises")
 }
 

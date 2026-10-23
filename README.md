@@ -148,12 +148,17 @@ cp .env.example .env
 docker compose up -d
 
 # 5. Застосувати міграції Prisma
+# (перед міграцією автоматично створюється pg_dump у backups/)
 pnpm --filter web db:migrate
 
 # 6. Засіяти Strapi даними (8 рівнів + теми + підтеми)
 pnpm seed
 
-# 7. Запустити Next.js
+# 7. (Опційно) Створити демо-користувача B1 з планом
+# дані беруться з DEMO_EMAIL / DEMO_PASSWORD у apps/web/.env
+pnpm seed:demo
+
+# 8. Запустити Next.js
 pnpm dev:web
 ```
 

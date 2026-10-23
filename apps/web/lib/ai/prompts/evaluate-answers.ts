@@ -82,7 +82,8 @@ export function getPrompt(params: EvaluatePromptParams): string {
     "",
     "RULES FOR TOPIC:",
     '- Judge ONLY the target grammar rule above. "mastered": false ONLY when that construction is wrong.',
-    '- When mastered is false, "violation" is required and must contain the raw fragments that break the rule (e.g. wrong: "walk", correct: "walking"). Do not write a prose explanation.',
+    '- If the answer is correct for the target rule, set "mastered": true and DO NOT include a "violation" field.',
+    '- If mastered is false, "violation" is required and BOTH "wrong" and "correct" must be non-empty strings: "wrong" is the student\'s fragment from userAnswer, "correct" is the fixed fragment from the reference. Never reuse examples from these instructions. Do not write a prose explanation.',
     '- Everything else — prepositions, articles, agreement outside the target, vocabulary — must NOT make the topic fail. Put those in "corrections" only.',
     '- If the target construction is replaced by "..." and cannot be judged, set "mastered": true.',
     "",
@@ -95,10 +96,9 @@ export function getPrompt(params: EvaluatePromptParams): string {
     JSON.stringify(params.sentences, null, 2),
     "",
     "Return ONLY a valid JSON object in this exact format: " +
-      '{ "topicScore": 50, "grammarScore": 50, "evaluatedSentences": ' +
-      '[{ "id": "1", "topic": { "mastered": false, "violation": { "wrong": "walk", "correct": "walking" } }, ' +
-      '"corrections": [{ "wrong": "", "correct": "to" }, { "wrong": "at the park", "correct": "in the park" }] }] } ' +
-      "with exactly one entry for every sentence id from the input.",
+      '{ "topicScore": <0-100>, "grammarScore": <0-100>, "evaluatedSentences": ' +
+      '[{ "id": "<sentence id>", "topic": { "mastered": true }, "corrections": [{ "wrong": "<fragment>", "correct": "<fragment>", "meaning": "<uk translation>" }] }] } ' +
+      "with exactly one entry for every sentence id from the input. When mastered is false, include \"violation\": { \"wrong\": \"<fragment>\", \"correct\": \"<fragment>\" } with non-empty strings.",
   ];
 
   return lines.join("\n");

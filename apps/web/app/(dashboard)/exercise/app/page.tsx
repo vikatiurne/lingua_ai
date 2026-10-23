@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { AlertTriangle, Loader2 } from "lucide-react";
 
@@ -59,6 +59,10 @@ function ExerciseAppContent() {
   const [error, setError] = useState<string | null>(null);
   const [loadingStep, setLoadingStep] = useState(0);
   const [retryToken, setRetryToken] = useState(0);
+  const requestRef = useRef<{
+    key: string;
+    promise: Promise<GenerateResponse>;
+  } | null>(null);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -84,21 +88,34 @@ function ExerciseAppContent() {
       enUkCount: parseCount(enUk),
     });
 
+    // React Strict Mode runs effects twice in development. The request is
+    // started once per key and shared between both runs, otherwise every visit
+    // would create two identical exercises.
+    const requestKey = `${requestBody}|${retryToken}`;
+    if (requestRef.current?.key !== requestKey) {
+      requestRef.current = {
+        key: requestKey,
+        promise: fetch("/api/exercise/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: requestBody,
+        }).then((response) => {
+          if (!response.ok) {
+            throw new Error(`Generate failed with status ${response.status}`);
+          }
+          return response.json() as Promise<GenerateResponse>;
+        }),
+      };
+    }
+    const request = requestRef.current.promise;
+
     let cancelled = false;
 
     async function generateExercise() {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch("/api/exercise/generate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: requestBody,
-        });
-        if (!response.ok) {
-          throw new Error(`Generate failed with status ${response.status}`);
-        }
-        const result = (await response.json()) as GenerateResponse;
+        const result = await request;
         if (!cancelled) setData(result);
       } catch {
         if (!cancelled) {

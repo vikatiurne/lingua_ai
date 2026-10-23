@@ -101,6 +101,19 @@ describe("diffAnswer", () => {
     expect(diff.extra).toEqual(["few", "comfortable"]);
   });
 
+  it("rescues misspellings next to an explicit gap as typos", () => {
+    const diff = diffAnswer(
+      "She is trying to improve her speaking skills in English.",
+      "she is trying to improove her speaking ... in Engish"
+    );
+    expect(diff.missing).toEqual(["skills"]);
+    expect(diff.missingPhrases).toEqual(["skills"]);
+    expect(diff.typoPairs).toEqual([
+      { wrong: "engish", correct: "english" },
+      { wrong: "improove", correct: "improve" },
+    ]);
+  });
+
   it("detects a pure word-order change", () => {
     const diff = diffAnswer(
       "She always drinks coffee.",
