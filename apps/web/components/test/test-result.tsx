@@ -1,4 +1,4 @@
-import { AlertCircle, BookOpen } from "lucide-react";
+import { AlertCircle, BookOpen, Loader2, RotateCcw } from "lucide-react";
 import { CEFR_LEVELS, CEFR_LEVEL_LABELS, type CEFRLevel } from "@lingua/shared";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -16,12 +16,14 @@ export function TestResult({
   totalCount,
   weakTopics = [],
   status = "idle",
+  onRetry,
 }: {
   level: CEFRLevel;
   correctCount: number;
   totalCount: number;
   weakTopics?: WeakTopic[];
   status?: SubmitStatus;
+  onRetry?: () => void;
 }) {
   const score = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
   const levelLabel = CEFR_LEVEL_LABELS[level] || level;
@@ -48,17 +50,29 @@ export function TestResult({
           </p>
         </div>
         {status === "submitting" ? (
-          <p className="text-sm text-muted-foreground" role="status">
+          <p
+            className="flex items-center justify-center gap-2 text-sm text-muted-foreground"
+            role="status"
+          >
+            <Loader2 className="h-4 w-4 animate-spin" />
             Зберігаємо результат...
           </p>
         ) : status === "error" ? (
           <div className="space-y-3">
             <p className="text-sm text-destructive" role="alert">
-              Не вдалося зберегти результат. Спробуйте ще раз пізніше.
+              Вибачте, сталася помилка при оцінці. Ваші відповіді збережено.
             </p>
-            <Button asChild variant="outline" className="w-full sm:w-auto">
-              <Link href="/dashboard">До дашборду</Link>
-            </Button>
+            <div className="flex flex-col gap-2 sm:flex-row sm:justify-center">
+              {onRetry ? (
+                <Button onClick={onRetry} className="w-full sm:w-auto">
+                  <RotateCcw className="h-4 w-4" />
+                  Спробувати ще раз
+                </Button>
+              ) : null}
+              <Button asChild variant="outline" className="w-full sm:w-auto">
+                <Link href="/dashboard">До дашборду</Link>
+              </Button>
+            </div>
           </div>
         ) : (
           <div className="space-y-4">

@@ -8,6 +8,8 @@ import { analyzeGaps, persistGaps } from "@/lib/test/gap-map";
 import { loadTestQuestions } from "@/lib/test/loader";
 import { testSubmissionSchema } from "@/lib/validation/test";
 
+export const maxDuration = 60;
+
 async function submitHandler(req: NextRequest): Promise<Response> {
   const user = await getCurrentUser();
   if (!user) {

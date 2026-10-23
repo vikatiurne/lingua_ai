@@ -12,15 +12,19 @@ import {
   submitAnswer,
   type AdaptiveState,
 } from "@/lib/test/adaptive";
+import { clearTestState, loadTestState, saveTestState } from "@/lib/test/storage";
 import { LevelLadder } from "./level-ladder";
 import { QuestionCard } from "./question-card";
 import { TestResult, type SubmitStatus } from "./test-result";
+
+const SUBMIT_TIMEOUT_MS = 45_000;
 
 export function TestRunner({ questions }: { questions: TestQuestion[] }) {
   const [state, setState] = useState<AdaptiveState>(() => startTest(questions));
   const [currentQuestion, setCurrentQuestion] = useState<TestQuestion | null>(null);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
   const [weakTopics, setWeakTopics] = useState<WeakTopic[]>([]);
+  const [ready, setReady] = useState(false);
   const submittedRef = useRef(false);
 
   const currentLevel = useMemo<CEFRLevel>(
@@ -31,10 +35,32 @@ export function TestRunner({ questions }: { questions: TestQuestion[] }) {
   const finished = isFinished(state);
 
   useEffect(() => {
-    if (!finished || submittedRef.current) return;
-    submittedRef.current = true;
-    setSubmitStatus("submitting");
+    const saved = loadTestState();
 
+    if (saved) {
+      if (saved.finished) {
+        setState(saved);
+      } else {
+        const savedQuestion = saved.currentQuestionId
+          ? (questions.find((question) => question.id === saved.currentQuestionId) ?? null)
+          : null;
+
+        if (savedQuestion) {
+          setState(saved);
+          setCurrentQuestion(savedQuestion);
+        } else {
+          const nextQuestion = getNextQuestion(saved, questions);
+          setState(saved);
+          setCurrentQuestion(nextQuestion);
+          saveTestState(saved);
+        }
+      }
+    }
+
+    setReady(true);
+  }, [questions]);
+
+  const submitResult = useCallback(async () => {
     const result = getResult(state);
     const answers = state.history.map(({ questionId, correct, skipped }) => ({
       questionId,
@@ -42,34 +68,49 @@ export function TestRunner({ questions }: { questions: TestQuestion[] }) {
       skipped,
     }));
 
-    fetch("/api/test/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        level: result.level,
-        answers,
-        correctCount: result.correctCount,
-        totalCount: result.totalCount,
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to submit test");
-        return res.json();
-      })
-      .then((data: { weakTopics?: WeakTopic[] }) => {
-        setWeakTopics(data.weakTopics ?? []);
-        setSubmitStatus("success");
-      })
-      .catch(() => {
-        submittedRef.current = false;
-        setSubmitStatus("error");
+    setSubmitStatus("submitting");
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), SUBMIT_TIMEOUT_MS);
+
+    try {
+      const response = await fetch("/api/test/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          level: result.level,
+          answers,
+          correctCount: result.correctCount,
+          totalCount: result.totalCount,
+        }),
+        signal: controller.signal,
       });
-  }, [finished, state]);
+
+      if (!response.ok) {
+        throw new Error("Failed to submit test");
+      }
+
+      const data = (await response.json()) as { weakTopics?: WeakTopic[] };
+      setWeakTopics(data.weakTopics ?? []);
+      setSubmitStatus("success");
+      clearTestState();
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }, [state]);
+
+  useEffect(() => {
+    if (!ready || !finished || submittedRef.current) return;
+    submittedRef.current = true;
+    void submitResult();
+  }, [ready, finished, submitResult]);
 
   const handleStart = useCallback(() => {
     const initial = startTest(questions);
     setState(initial);
     setCurrentQuestion(getNextQuestion(initial, questions));
+    saveTestState(initial);
   }, [questions]);
 
   const handleAnswer = useCallback(
@@ -84,9 +125,18 @@ export function TestRunner({ questions }: { questions: TestQuestion[] }) {
       const nextQuestion = isFinished(next) ? null : getNextQuestion(next, questions);
       setState(next);
       setCurrentQuestion(nextQuestion);
+      saveTestState(next);
     },
     [currentQuestion, state, questions],
   );
+
+  const handleRetry = useCallback(() => {
+    void submitResult();
+  }, [submitResult]);
+
+  if (!ready) {
+    return null;
+  }
 
   if (state.totalAsked === 0 && !currentQuestion) {
     return (
@@ -119,6 +169,7 @@ export function TestRunner({ questions }: { questions: TestQuestion[] }) {
         totalCount={result.totalCount}
         weakTopics={weakTopics}
         status={submitStatus}
+        onRetry={handleRetry}
       />
     );
   }
