@@ -104,6 +104,26 @@ export function diffAnswer(
   }
   flushGap();
 
+  // Pairing is disabled across "..." (see above), so a misspelled word next to
+  // a gap would stay in "missing" and be reported as a word the student never
+  // wrote. Rescue fuzzy-equal leftovers into typo pairs instead.
+  if (hasEllipsis) {
+    for (let m = missing.length - 1; m >= 0; m -= 1) {
+      const expected = missing[m]!;
+      const typoIndex = extra.findIndex((actual) => isTypo(expected, actual));
+      if (typoIndex === -1) continue;
+      typoPairs.push({ wrong: extra[typoIndex]!, correct: expected });
+      missing.splice(m, 1);
+      extra.splice(typoIndex, 1);
+    }
+    const remaining = new Set(missing);
+    const keptPhrases = missingPhrases.filter((phrase) =>
+      tokenize(phrase).every((token) => remaining.has(token))
+    );
+    missingPhrases.length = 0;
+    missingPhrases.push(...keptPhrases);
+  }
+
   const onlyOrderChanged =
     !sameTokens(refTokens, answerTokens) &&
     sameMultiset(refTokens, answerTokens);

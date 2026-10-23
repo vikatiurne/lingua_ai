@@ -221,6 +221,20 @@ describe("collectMissingCandidates", () => {
     expect(candidates).toEqual([]);
   });
 
+  it("suggests a missing word when an explicit gap has no card", () => {
+    const candidates = collectMissingCandidates(
+      [
+        sentence({
+          reference:
+            "She is trying to improve her speaking skills in English.",
+          userAnswer: "she is trying to improove her speaking ... in Engish",
+        }),
+      ],
+      mapFor("s1", evaluation([], { topicMastered: false }))
+    );
+    expect(candidates.map((candidate) => candidate.word)).toEqual(["skills"]);
+  });
+
   it("ignores en_uk sentences", () => {
     const candidates = collectMissingCandidates(
       [

@@ -172,8 +172,11 @@ export function collectMissingCandidates(
     const evaluation = evaluations.get(sentence.id);
     if (!evaluation || evaluation.skipped || evaluation.isCorrect) continue;
     // A topic mistake usually explains the wording difference; adding cards
-    // for the same words on top of it only creates noise.
-    if (!evaluation.topicMastered) continue;
+    // for the same words on top of it only creates noise. An explicit "..."
+    // is different: the student marked the word as unknown, so it always
+    // deserves a card.
+    const hasExplicitGap = /\.{3,}|\u2026/.test(sentence.userAnswer ?? "");
+    if (!evaluation.topicMastered && !hasExplicitGap) continue;
 
     const diff = diffAnswer(sentence.reference, sentence.userAnswer ?? "");
     const known = new Set(

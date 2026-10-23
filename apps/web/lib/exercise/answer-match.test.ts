@@ -14,6 +14,18 @@ describe("normalizeAnswerText", () => {
   it("keeps apostrophes", () => {
     expect(normalizeAnswerText("It's fine")).toBe("it's fine");
   });
+
+  it("treats a lowercase answer without the final period as the reference", () => {
+    expect(
+      normalizeAnswerText(
+        "my brother enjoys painting pictures in his free time"
+      )
+    ).toBe(
+      normalizeAnswerText(
+        "My brother enjoys painting pictures in his free time."
+      )
+    );
+  });
 });
 
 describe("matchesAcceptedAnswer", () => {

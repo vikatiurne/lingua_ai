@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CheckCircle2, ChevronDown, Lightbulb, XCircle } from "lucide-react";
+import { normalizeAnswerText } from "@/lib/exercise/answer-match";
 import { cn } from "@/lib/utils";
 
 export type VocabularyWord = {
@@ -14,7 +15,9 @@ export type Sentence = {
   source: string;
   direction: "uk_en" | "en_uk";
   reference: string;
-  userAnswer: string;
+  // A review row can be reset (new sentences, no answer yet), so the answer
+  // is not guaranteed to be present in stored JSON.
+  userAnswer?: string;
   isCorrect: boolean;
   errorType?: string;
   explanation?: string;
@@ -25,10 +28,6 @@ type SentenceReviewCardProps = {
   sentence: Sentence;
   number: number;
 };
-
-function normalize(text: string): string {
-  return text.toLowerCase().trim();
-}
 
 function toVocabularyWords(
   value: Sentence["vocabularyToAdd"]
@@ -47,8 +46,11 @@ export function SentenceReviewCard({
   const canExpand =
     !isCorrect && Boolean(sentence.explanation || vocabWords.length > 0);
 
+  // Punctuation, case and spacing are not a different translation: only real
+  // wording differences deserve the "acceptable variant" note.
   const differsFromReference =
-    normalize(sentence.userAnswer) !== normalize(sentence.reference);
+    normalizeAnswerText(sentence.userAnswer ?? "") !==
+    normalizeAnswerText(sentence.reference);
 
   return (
     <div
