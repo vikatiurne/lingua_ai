@@ -5,7 +5,9 @@ import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
+  Check,
   Info,
+  Play,
   Repeat,
   SlidersHorizontal,
 } from "lucide-react";
@@ -139,6 +141,16 @@ function ExerciseCard({
   number: number;
 }) {
   const isEvaluated = exercise.status === "evaluated";
+  // A review has no meaningful scores on its own: it counts as done only when
+  // it is evaluated and clean, so the badge can show success.
+  const isReviewSuccess =
+    exercise.isReview &&
+    isEvaluated &&
+    (exercise.topicScore ?? 0) >= 80 &&
+    (exercise.grammarScore ?? 0) >= 80;
+  // An evaluated review that still has mistakes is reopened for practice, so
+  // it keeps the play action instead of the result link.
+  const showResult = isEvaluated && (!exercise.isReview || isReviewSuccess);
 
   return (
     <Card className="flex h-full flex-col">
@@ -163,12 +175,19 @@ function ExerciseCard({
             </div>
           </div>
         </div>
-        {isEvaluated ? (
+        {showResult ? (
           <IconLinkButton
             href={`/exercise/${exercise.id}/result?from=history`}
             label="Дивитись результат"
           >
             <Info className="h-4 w-4" />
+          </IconLinkButton>
+        ) : exercise.isReview ? (
+          <IconLinkButton
+            href={`/exercise/${exercise.id}?from=history`}
+            label="Продовжити роботу над помилками"
+          >
+            <Play className="h-4 w-4" />
           </IconLinkButton>
         ) : (
           <ExerciseModeMenu exerciseId={exercise.id} />
@@ -178,13 +197,20 @@ function ExerciseCard({
         {exercise.isReview ? (
           <Badge
             variant="secondary"
-            className="gap-1 whitespace-nowrap px-1.5 py-0 text-[10px] font-medium"
+            className={cn(
+              "gap-1 whitespace-nowrap px-1.5 py-0 text-[10px] font-medium",
+              isReviewSuccess && "bg-success/10 text-success"
+            )}
           >
-            <Repeat className="h-2.5 w-2.5 shrink-0" />
+            {isReviewSuccess ? (
+              <Check className="h-2.5 w-2.5 shrink-0" />
+            ) : (
+              <Repeat className="h-2.5 w-2.5 shrink-0" />
+            )}
             Робота над помилками
           </Badge>
         ) : null}
-        {isEvaluated ? (
+        {isEvaluated && !exercise.isReview ? (
           <div className=" flex shrink-0 items-center gap-2">
             <ScoreItem label="Topic" score={exercise.topicScore ?? 0} />
             <span aria-hidden className="text-border">

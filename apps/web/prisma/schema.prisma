@@ -170,6 +170,10 @@ model Exercise {
 
   errors       UserError[]
 
+  parentExerciseId String?
+  parentExercise Exercise? @relation("ParentExercise", fields: [parentExerciseId], references: [id])
+  reviews Exercise[] @relation("ParentExercise")
+
   @@index([userId, status])
   @@index([userId, level])
   @@index([userId, topicName, isReview])

@@ -2,16 +2,21 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { AlertCircle, Loader2, Sparkles } from "lucide-react";
+import { AlertCircle, Loader2, Play, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
 type ReviewButtonProps = {
   exerciseId: string;
   hasMistakes: boolean;
+  continueLabel?: string;
 };
 
-export function ReviewButton({ exerciseId, hasMistakes }: ReviewButtonProps) {
+export function ReviewButton({
+  exerciseId,
+  hasMistakes,
+  continueLabel,
+}: ReviewButtonProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -47,13 +52,15 @@ export function ReviewButton({ exerciseId, hasMistakes }: ReviewButtonProps) {
       >
         {isSubmitting ? (
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        ) : continueLabel ? (
+          <Play className="mr-2 h-4 w-4" />
         ) : (
           <Sparkles className="mr-2 h-4 w-4" />
         )}
         {isSubmitting
           ? "Creating..."
           : hasMistakes
-            ? "Work on Mistakes"
+            ? (continueLabel ?? "Work on Mistakes")
             : "No mistakes to review"}
       </Button>
       {error ? (
