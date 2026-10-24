@@ -84,6 +84,7 @@
 - [х] 28 — PDF generation (для режиму друку)
 - [x] 29 — Exercise UI (Інпути для введення відповідей у додатку)
 - [x] 29.1 — Fix Plan Subtopics UI (chore: клікабельні підтеми на /plan)
+- [x] 29.2 — Text-to-Speech (TTS) for English Sentences (feat: озвучка англійських речень)
 - [x] 30 — Exercise state persistence
 - [x] 32.1 — PDF Mode Workflow & UI (/exercise/pdf → /pdf-check → оцінка)
 

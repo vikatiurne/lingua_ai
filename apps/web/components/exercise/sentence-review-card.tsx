@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CheckCircle2, ChevronDown, Lightbulb, XCircle } from "lucide-react";
+import { AudioButton } from "@/components/shared/audio-button";
 import { normalizeAnswerText } from "@/lib/exercise/answer-match";
 import { isFallbackReference } from "@/lib/exercise/fallback";
 import { cn } from "@/lib/utils";
@@ -103,9 +104,14 @@ export function SentenceReviewCard({
                 </p>
               </div>
               {differsFromReference ? (
-                <p className="text-xs text-muted-foreground">
-                  Еталон: {reference}
-                </p>
+                <div className="flex items-center gap-1.5">
+                  <p className="text-xs text-muted-foreground">
+                    Еталон: {reference}
+                  </p>
+                  {hasReference && !fallbackReference && sentence.direction === "uk_en" ? (
+                    <AudioButton text={reference} lang="en-US" className="h-6 w-6" />
+                  ) : null}
+                </div>
               ) : null}
               {fallbackReference ? (
                 <p className="text-xs text-muted-foreground">{reference}</p>
@@ -117,9 +123,14 @@ export function SentenceReviewCard({
                 Ваша відповідь: {sentence.userAnswer || "..."}
               </p>
               {hasReference ? (
-                <p className="text-sm font-semibold text-success">
-                  Правильно: {reference}
-                </p>
+                <div className="flex items-center gap-1.5">
+                  <p className="text-sm font-semibold text-success">
+                    Правильно: {reference}
+                  </p>
+                  {!fallbackReference && sentence.direction === "uk_en" ? (
+                    <AudioButton text={reference} lang="en-US" className="h-6 w-6" />
+                  ) : null}
+                </div>
               ) : null}
               {fallbackReference ? (
                 <p className="text-xs text-muted-foreground">{reference}</p>

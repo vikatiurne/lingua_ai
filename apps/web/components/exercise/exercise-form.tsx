@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AlertCircle, Loader2 } from "lucide-react";
 
+import { AudioButton } from "@/components/shared/audio-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -194,12 +195,17 @@ export function ExerciseForm({
           {sentences.map((sentence, index) => (
             <div key={sentence.id} className="space-y-2">
               <div className="flex items-start justify-between gap-3">
-                <p className="min-w-0 break-words leading-relaxed">
-                  <span className="mr-2 font-medium text-muted-foreground">
-                    {index + 1}.
-                  </span>
-                  {sentence.source}
-                </p>
+                <div className="flex min-w-0 items-start gap-2">
+                  <p className="min-w-0 break-words leading-relaxed">
+                    <span className="mr-2 font-medium text-muted-foreground">
+                      {index + 1}.
+                    </span>
+                    {sentence.source}
+                  </p>
+                  {sentence.direction === "en_uk" ? (
+                    <AudioButton text={sentence.source} lang="en-US" />
+                  ) : null}
+                </div>
                 <Badge
                   variant="secondary"
                   className="shrink-0 border-primary/30 bg-primary/10 text-primary"
