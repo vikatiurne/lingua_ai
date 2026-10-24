@@ -10,6 +10,11 @@ import {
 } from "@/components/exercise/exercise-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  clearGenerationId,
+  getBrowserGenerationStorage,
+  getOrCreateGenerationId,
+} from "@/lib/exercise/generation-key";
 
 type GenerateResponse = {
   exerciseId: string;
@@ -80,12 +85,23 @@ function ExerciseAppContent() {
       return;
     }
 
-    const requestBody = JSON.stringify({
+    const generationParams = {
       level,
       topic,
       subtopic,
       ukEnCount: parseCount(ukEn),
       enUkCount: parseCount(enUk),
+    };
+    const paramsKey = JSON.stringify(generationParams);
+    const storage = getBrowserGenerationStorage();
+    const generationId = getOrCreateGenerationId(
+      storage,
+      "exercise-app",
+      paramsKey
+    );
+    const requestBody = JSON.stringify({
+      ...generationParams,
+      generationId,
     });
 
     // React Strict Mode runs effects twice in development. The request is
@@ -99,12 +115,17 @@ function ExerciseAppContent() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: requestBody,
-        }).then((response) => {
-          if (!response.ok) {
-            throw new Error(`Generate failed with status ${response.status}`);
-          }
-          return response.json() as Promise<GenerateResponse>;
-        }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`Generate failed with status ${response.status}`);
+            }
+            return response.json() as Promise<GenerateResponse>;
+          })
+          .then((result) => {
+            clearGenerationId(storage, "exercise-app", paramsKey, generationId);
+            return result;
+          }),
       };
     }
     const request = requestRef.current.promise;
