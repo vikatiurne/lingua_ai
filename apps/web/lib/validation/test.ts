@@ -12,9 +12,9 @@ export const testSubmissionSchema = z.object({
       }),
     )
     .min(5)
-    .max(30),
+    .max(80),
   correctCount: z.number().int().min(0),
-  totalCount: z.number().int().min(5).max(30),
+  totalCount: z.number().int().min(5).max(80),
 });
 
 export type TestSubmissionInput = z.infer<typeof testSubmissionSchema>;

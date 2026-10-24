@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AlertCircle, Loader2 } from "lucide-react";
 
@@ -14,6 +14,7 @@ export type ExerciseAppSentence = {
   source: string;
   direction: "uk_en" | "en_uk";
   reference: string;
+  userAnswer?: string;
 };
 
 type UserAnswers = Record<string, string>;
@@ -31,6 +32,27 @@ const DIRECTION_LABELS: Record<ExerciseAppSentence["direction"], string> = {
   en_uk: "EN/UA",
 };
 
+async function getResponseError(
+  response: Response,
+  fallback: string
+): Promise<string> {
+  try {
+    const data: unknown = await response.json();
+    if (
+      data &&
+      typeof data === "object" &&
+      "error" in data &&
+      typeof data.error === "string" &&
+      data.error.trim().length > 0
+    ) {
+      return data.error;
+    }
+  } catch {
+    // Fall back to a generic message when the body is not JSON.
+  }
+  return fallback;
+}
+
 export function ExerciseForm({
   exerciseId,
   sentences,
@@ -39,9 +61,51 @@ export function ExerciseForm({
   sentences: ExerciseAppSentence[];
 }) {
   const router = useRouter();
-  const [answers, setAnswers] = useState<UserAnswers>({});
+  const draftKey = `exercise_${exerciseId}_draft`;
+  const [answers, setAnswers] = useState<UserAnswers>(() =>
+    Object.fromEntries(
+      sentences.map((sentence) => [sentence.id, sentence.userAnswer ?? ""])
+    )
+  );
+  const [draftLoaded, setDraftLoaded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const sentenceIds = new Set(sentences.map((sentence) => sentence.id));
+    const restored: UserAnswers = {};
+
+    try {
+      const raw = window.localStorage.getItem(draftKey);
+      if (raw) {
+        const parsed: unknown = JSON.parse(raw);
+        if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+          for (const [sentenceId, value] of Object.entries(parsed)) {
+            if (sentenceIds.has(sentenceId) && typeof value === "string") {
+              restored[sentenceId] = value;
+            }
+          }
+        }
+      }
+    } catch {
+      // A broken draft must not block the form.
+    }
+
+    if (Object.keys(restored).length > 0) {
+      setAnswers((prev) => ({ ...prev, ...restored }));
+    }
+    setDraftLoaded(true);
+  }, [draftKey, sentences]);
+
+  useEffect(() => {
+    if (!draftLoaded) return;
+
+    try {
+      window.localStorage.setItem(draftKey, JSON.stringify(answers));
+    } catch {
+      // Storage may be unavailable (private mode); the form still works.
+    }
+  }, [answers, draftKey, draftLoaded]);
 
   const allFilled = sentences.every(
     (sentence) => (answers[sentence.id] ?? "").trim().length > 0
@@ -69,19 +133,44 @@ export function ExerciseForm({
         body: JSON.stringify({ answers: payload.answers }),
       });
       if (!answersResponse.ok) {
-        throw new Error(`Save answers failed with status ${answersResponse.status}`);
+        throw new Error(
+          await getResponseError(
+            answersResponse,
+            "Не вдалося зберегти відповіді. Спробуйте ще раз."
+          )
+        );
       }
 
       const evaluateResponse = await fetch(`/api/exercise/${exerciseId}/evaluate`, {
         method: "POST",
       });
       if (!evaluateResponse.ok) {
-        throw new Error(`Evaluate failed with status ${evaluateResponse.status}`);
+        throw new Error(
+          await getResponseError(
+            evaluateResponse,
+            "Не вдалося перевірити відповіді. Спробуйте ще раз."
+          )
+        );
+      }
+
+      try {
+        window.localStorage.removeItem(draftKey);
+      } catch {
+        // Ignore storage failures after a successful evaluation.
       }
 
       router.replace(`/exercise/${exerciseId}/result${window.location.search}`);
-    } catch {
-      setError("Не вдалося перевірити відповіді. Спробуйте ще раз.");
+    } catch (submitError) {
+      const message =
+        submitError instanceof Error ? submitError.message : "";
+      const isNetworkError = /failed to fetch|load failed|networkerror/i.test(
+        message
+      );
+      setError(
+        message && !isNetworkError
+          ? message
+          : "Не вдалося перевірити відповіді. Спробуйте ще раз."
+      );
       setIsSubmitting(false);
     }
   }

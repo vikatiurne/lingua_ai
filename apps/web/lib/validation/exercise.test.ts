@@ -5,7 +5,7 @@ const validBody = {
   answers: [
     { sentenceId: "abc-123", userAnswer: "Я йду додому" },
     { sentenceId: "def-456", userAnswer: "..." },
-    { sentenceId: "ghi-789", userAnswer: "" },
+    { sentenceId: "ghi-789", userAnswer: "не знаю" },
   ],
 };
 
@@ -35,6 +35,20 @@ describe("saveAnswersSchema", () => {
   it("rejects a non-string userAnswer", () => {
     const result = saveAnswersSchema.safeParse({
       answers: [{ sentenceId: "abc-123", userAnswer: 42 }],
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it("rejects an empty userAnswer", () => {
+    const result = saveAnswersSchema.safeParse({
+      answers: [{ sentenceId: "abc-123", userAnswer: "" }],
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it("rejects a whitespace-only userAnswer", () => {
+    const result = saveAnswersSchema.safeParse({
+      answers: [{ sentenceId: "abc-123", userAnswer: "   " }],
     });
     expect(result.success).toBe(false);
   });

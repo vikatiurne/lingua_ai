@@ -29,8 +29,22 @@ describe("testSubmissionSchema", () => {
     expect(result.success).toBe(false);
   });
 
-  it("rejects more than 30 answers", () => {
-    const answers = Array.from({ length: 31 }, (_, i) => ({
+  it("accepts a 35-question adaptive test", () => {
+    const answers = Array.from({ length: 35 }, (_, i) => ({
+      questionId: `q_${i}`,
+      correct: true,
+    }));
+    const result = testSubmissionSchema.safeParse({
+      ...validBody,
+      answers,
+      correctCount: 35,
+      totalCount: 35,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects more than 80 answers", () => {
+    const answers = Array.from({ length: 81 }, (_, i) => ({
       questionId: `q_${i}`,
       correct: true,
     }));

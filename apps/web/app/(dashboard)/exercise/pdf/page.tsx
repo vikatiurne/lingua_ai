@@ -1,11 +1,16 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  clearGenerationId,
+  getBrowserGenerationStorage,
+  getOrCreateGenerationId,
+} from "@/lib/exercise/generation-key";
 
 type GenerateResponse = {
   exerciseId: string;
@@ -64,6 +69,10 @@ function ExercisePdfContent() {
   const [error, setError] = useState<string | null>(null);
   const [loadingStep, setLoadingStep] = useState(0);
   const [retryToken, setRetryToken] = useState(0);
+  const requestRef = useRef<{
+    key: string;
+    promise: Promise<GenerateResponse>;
+  } | null>(null);
 
   const isLoading = phase === "generating";
 
@@ -91,13 +100,49 @@ function ExercisePdfContent() {
       return;
     }
 
-    const requestBody = JSON.stringify({
+    const generationParams = {
       level,
       topic,
       subtopic,
       ukEnCount: parseCount(ukEn),
       enUkCount: parseCount(enUk),
+    };
+    const paramsKey = JSON.stringify(generationParams);
+    const storage = getBrowserGenerationStorage();
+    const generationId = getOrCreateGenerationId(
+      storage,
+      "exercise-pdf",
+      paramsKey
+    );
+    const requestBody = JSON.stringify({
+      ...generationParams,
+      generationId,
     });
+
+    // Share one request between Strict Mode effect runs; the generation id
+    // also lets the server return the same exercise after a page reload.
+    const requestKey = `${requestBody}|${retryToken}`;
+    if (requestRef.current?.key !== requestKey) {
+      requestRef.current = {
+        key: requestKey,
+        promise: fetch("/api/exercise/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: requestBody,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`Generate failed with status ${response.status}`);
+            }
+            return response.json() as Promise<GenerateResponse>;
+          })
+          .then((data) => {
+            clearGenerationId(storage, "exercise-pdf", paramsKey, generationId);
+            return data;
+          }),
+      };
+    }
+    const request = requestRef.current.promise;
 
     let cancelled = false;
 
@@ -105,15 +150,7 @@ function ExercisePdfContent() {
       setPhase("generating");
       setError(null);
       try {
-        const response = await fetch("/api/exercise/generate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: requestBody,
-        });
-        if (!response.ok) {
-          throw new Error(`Generate failed with status ${response.status}`);
-        }
-        const data = (await response.json()) as GenerateResponse;
+        const data = await request;
         if (cancelled) return;
 
         const link = document.createElement("a");

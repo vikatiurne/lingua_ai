@@ -1,15 +1,13 @@
 import type { NextRequest } from "next/server";
 import { getCurrentUser } from "@/lib/auth/session";
 import { prisma } from "@/lib/db/client";
+import {
+  INVALID_EXERCISE_MESSAGE,
+  UNANSWERED_EXERCISE_MESSAGE,
+  hasUnansweredSentences,
+  parseStoredSentences,
+} from "@/lib/exercise/stored-sentences";
 import { saveAnswersSchema } from "@/lib/validation/exercise";
-
-type StoredSentence = {
-  id: string;
-  source: string;
-  direction: string;
-  reference: string;
-  userAnswer?: string;
-};
 
 type RouteContext = {
   params: { id: string };
@@ -55,16 +53,39 @@ export async function PATCH(
     );
   }
 
+  const sentences = parseStoredSentences(exercise.sentences);
+  if (!sentences) {
+    return Response.json(
+      { error: INVALID_EXERCISE_MESSAGE },
+      { status: 400 }
+    );
+  }
+
   const answersById = new Map(
     parsed.data.answers.map((answer) => [answer.sentenceId, answer.userAnswer])
   );
+  const sentenceIds = new Set(sentences.map((sentence) => sentence.id));
+  const hasUnknownSentence = [...answersById.keys()].some(
+    (sentenceId) => !sentenceIds.has(sentenceId)
+  );
+  if (hasUnknownSentence || answersById.size !== parsed.data.answers.length) {
+    return Response.json(
+      { error: INVALID_EXERCISE_MESSAGE },
+      { status: 400 }
+    );
+  }
 
-  const sentences = exercise.sentences as StoredSentence[];
   const updatedSentences = sentences.map((sentence) =>
     answersById.has(sentence.id)
       ? { ...sentence, userAnswer: answersById.get(sentence.id) }
       : sentence
   );
+  if (hasUnansweredSentences(updatedSentences)) {
+    return Response.json(
+      { error: UNANSWERED_EXERCISE_MESSAGE },
+      { status: 400 }
+    );
+  }
 
   await prisma.exercise.update({
     where: { id: exercise.id },

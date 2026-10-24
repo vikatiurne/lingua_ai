@@ -8,6 +8,7 @@ import {
 } from "@/components/exercise/exercise-form";
 import { requireUser } from "@/lib/auth/session";
 import { prisma } from "@/lib/db/client";
+import { parseStoredSentences } from "@/lib/exercise/stored-sentences";
 
 type PageProps = {
   params: { id: string };
@@ -40,28 +41,18 @@ export default async function ExercisePage({
     );
   }
 
-  const storedSentences = Array.isArray(exercise.sentences)
-    ? (exercise.sentences as Partial<ExerciseAppSentence>[])
-    : [];
-
-  const sentences = storedSentences
-    .filter(
-      (sentence): sentence is ExerciseAppSentence =>
-        typeof sentence.id === "string" &&
-        typeof sentence.source === "string" &&
-        typeof sentence.reference === "string" &&
-        (sentence.direction === "uk_en" || sentence.direction === "en_uk")
-    )
-    .map((sentence) => ({
-      id: sentence.id,
-      source: sentence.source,
-      direction: sentence.direction,
-      reference: sentence.reference,
-    }));
-
-  if (sentences.length === 0) {
+  const storedSentences = parseStoredSentences(exercise.sentences);
+  if (!storedSentences) {
     redirect("/exercise/app");
   }
+
+  const sentences: ExerciseAppSentence[] = storedSentences.map((sentence) => ({
+    id: sentence.id,
+    source: sentence.source,
+    direction: sentence.direction,
+    reference: sentence.reference,
+    userAnswer: sentence.userAnswer,
+  }));
 
   return (
     <div className="ml-0 flex w-full max-w-6xl flex-col gap-4 px-4 py-4 text-left md:px-6">
@@ -83,7 +74,11 @@ export default async function ExercisePage({
         </p>
       </div>
 
-      <ExerciseForm exerciseId={exercise.id} sentences={sentences} />
+      <ExerciseForm
+        key={exercise.id}
+        exerciseId={exercise.id}
+        sentences={sentences}
+      />
     </div>
   );
 }
