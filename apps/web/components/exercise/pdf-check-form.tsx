@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AlertCircle, Loader2 } from "lucide-react";
 
+import { AudioButton } from "@/components/shared/audio-button";
 import type {
   ExerciseAppSentence,
   SubmitPayload,
@@ -189,12 +190,17 @@ export function PdfCheckForm({
               return (
                 <div key={sentence.id} className="space-y-1.5">
                   <div className="flex items-start justify-between gap-3">
-                    <p className="min-w-0 break-words text-sm leading-relaxed">
-                      <span className="mr-2 font-medium text-muted-foreground">
-                        {index + 1}.
-                      </span>
-                      {sentence.source}
-                    </p>
+                    <div className="flex min-w-0 items-start gap-2">
+                      <p className="min-w-0 break-words text-sm leading-relaxed">
+                        <span className="mr-2 font-medium text-muted-foreground">
+                          {index + 1}.
+                        </span>
+                        {sentence.source}
+                      </p>
+                      {sentence.direction === "en_uk" ? (
+                        <AudioButton text={sentence.source} lang="en-US" />
+                      ) : null}
+                    </div>
                     <Badge
                       variant="secondary"
                       className={DIRECTION_BADGE_CLASSES}
@@ -203,12 +209,24 @@ export function PdfCheckForm({
                     </Badge>
                   </div>
 
-                  <Label
-                    htmlFor={`pdf-answer-${sentence.id}`}
-                    className="text-xs text-muted-foreground"
-                  >
-                    Відповідь
-                  </Label>
+                  <div className="flex items-center justify-between gap-2">
+                    <Label
+                      htmlFor={`pdf-answer-${sentence.id}`}
+                      className="text-xs text-muted-foreground"
+                    >
+                      Відповідь
+                    </Label>
+                    {sentence.direction === "uk_en" ? (
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <span>Еталон</span>
+                        <AudioButton
+                          text={sentence.reference}
+                          lang="en-US"
+                          className="h-6 w-6"
+                        />
+                      </div>
+                    ) : null}
+                  </div>
 
                   <div className="flex items-start gap-2">
                     <Tooltip>
